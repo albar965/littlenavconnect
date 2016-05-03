@@ -17,18 +17,19 @@
 
 #include "navserver.h"
 #include "navserverthread.h"
+#include "common.h"
 
 #include <QtNetwork>
 
 NavServerThread::NavServerThread(qintptr socketDescriptor, NavServer *parent)
   : QThread(parent), socket(socketDescriptor), server(parent)
 {
-  server->log("NavServerThread created " + objectName(), QtInfoMsg);
+  qDebug() << "NavServerThread created" << objectName();
 }
 
 NavServerThread::~NavServerThread()
 {
-  server->log("NavServerThread deleted " + objectName(), QtInfoMsg);
+  qDebug() << "NavServerThread deleted" << objectName();
 }
 
 void NavServerThread::run()
@@ -36,26 +37,20 @@ void NavServerThread::run()
   QTcpSocket tcpSocket;
   if(!tcpSocket.setSocketDescriptor(socket))
   {
-    server->log("Error creating socket " + tcpSocket.errorString(), QtCriticalMsg);
+    qCritical(gui) << "Error creating socket" << tcpSocket.errorString();
     return;
   }
 
-  server->log("Connection from " + tcpSocket.peerAddress().toString() +
-              " port " + QString::number(tcpSocket.peerPort()), QtInfoMsg);
+  qInfo(gui) << "Connection from" << tcpSocket.peerAddress().toString()
+           << "port" << tcpSocket.peerPort();
 
-  while(true)
+  while(!terminate)
   {
     QString msg;
     mutex.lock();
     waitCondition.wait(&mutex);
     msg = message;
     mutex.unlock();
-
-    if(terminate)
-    {
-      server->log("Termination requested", QtWarningMsg);
-      break;
-    }
 
     QByteArray block;
     QDataStream out(&block, QIODevice::WriteOnly);
@@ -67,13 +62,12 @@ void NavServerThread::run()
 
     if(!tcpSocket.isOpen())
     {
-      server->log("Connection closed by peer", QtWarningMsg);
+      qWarning(gui) << "Connection closed by peer";
       break;
     }
 
     tcpSocket.write(block);
     tcpSocket.flush();
-    sleep(1);
   }
   tcpSocket.disconnectFromHost();
 
@@ -90,6 +84,7 @@ void NavServerThread::postMessage(const QString& msg)
 
 void NavServerThread::setTerminate()
 {
+  QMutexLocker locker(&mutex);
   terminate = true;
   waitCondition.wakeAll();
 }

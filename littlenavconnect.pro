@@ -20,21 +20,23 @@ win32 {
 }
 
 # Get the current GIT revision to include it into the code
-# win32:DEFINES += GIT_REVISION='\\"$$system($${GIT_BIN} rev-parse --short HEAD)\\"'
-# unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
+win32:DEFINES += GIT_REVISION='\\"$$system($${GIT_BIN} rev-parse --short HEAD)\\"'
+unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
 
 SOURCES +=\
     src/main.cpp \
     src/mainwindow.cpp \
     src/net/navserver.cpp \
     src/net/navserverthread.cpp \
-    src/datareaderthread.cpp
+    src/datareaderthread.cpp \
+    src/common.cpp
 
 HEADERS  += \
     src/mainwindow.h \
     src/net/navserver.h \
     src/net/navserverthread.h \
-    src/datareaderthread.h
+    src/datareaderthread.h \
+    src/common.h
 
 FORMS    += mainwindow.ui
 

@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 
   // Initialize logging and force logfiles into the system or user temp directory
   LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(
-                                      ":/littlenavconnect/resources/config/logging.cfg"));
+                                      ":/littlenavconnect/resources/config/navconnectlogging.cfg"));
 
   // Print some information which can be useful for debugging
   LoggingUtil::logSystemInformation();

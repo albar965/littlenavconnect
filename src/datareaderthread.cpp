@@ -22,12 +22,12 @@
 DataReaderThread::DataReaderThread(QObject *parent, NavServer *navServer)
   : QThread(parent), server(navServer)
 {
-  server->log("Datareader started", QtInfoMsg);
+  qDebug() << "Datareader started";
 }
 
 DataReaderThread::~DataReaderThread()
 {
-  server->log("Datareader deleted", QtInfoMsg);
+  qDebug() << "Datareader deleted";
 }
 
 void DataReaderThread::run()
@@ -35,7 +35,7 @@ void DataReaderThread::run()
   int i = 0;
   while(!terminate)
   {
-    server->log("Message " + QString::number(i), QtInfoMsg);
+    qDebug() << "Message " << i;
     server->postMessage(QString::number(i));
     i++;
     QThread::sleep(1);

@@ -17,6 +17,7 @@
 
 #include "navserver.h"
 #include "navserverthread.h"
+#include "common.h"
 
 #include <QThreadPool>
 #include <stdlib.h>
@@ -24,7 +25,7 @@
 NavServer::NavServer(QObject *parent)
   : QTcpServer(parent)
 {
-  log("NavServer created", QtInfoMsg);
+  qDebug("NavServer created");
 }
 
 NavServer::~NavServer()
@@ -37,7 +38,7 @@ NavServer::~NavServer()
     thread->wait();
   }
 
-  log("NavServer deleted", QtInfoMsg);
+  qDebug("NavServer deleted");
 }
 
 bool NavServer::startServer()
@@ -45,23 +46,23 @@ bool NavServer::startServer()
   bool retval = listen(QHostAddress::AnyIPv4, 51968);
 
   if(!retval)
-    log("Unable to start the server: " + errorString(), QtCriticalMsg);
+    qCritical(gui) << "Unable to start the server:" << errorString();
   else
-    log("Server is running on IP " + serverAddress().toString() +
-        " port " + QString::number(serverPort()), QtInfoMsg);
+    qInfo(gui) << "Server is running on IP" << serverAddress().toString()
+             << "port" << QString::number(serverPort());
 
   return retval;
 }
 
 void NavServer::incomingConnection(qintptr socketDescriptor)
 {
-  log("Incoming connection", QtInfoMsg);
+  qDebug() << "Incoming connection";
 
   NavServerThread *thread = new NavServerThread(socketDescriptor, this);
   thread->setObjectName("SocketWorker-" + QString::number(socketDescriptor));
   threads.insert(thread);
 
-  log("Thread " + thread->objectName(), QtInfoMsg);
+  qDebug() << "Thread" << thread->objectName();
 
   connect(thread, &NavServerThread::finished, [ = ]()->void
           {
@@ -75,19 +76,11 @@ void NavServer::threadFinished(NavServerThread *thread)
 {
   QMutexLocker locker(&threadsMutex);
 
-  log("Thread " + thread->objectName() + " finished", QtInfoMsg);
+  qDebug() << "Thread" << thread->objectName() << "finished";
   threads.remove(thread);
 
   if(!isTerminating)
     thread->deleteLater();
-}
-
-void NavServer::log(const QString& message, int type)
-{
-  QtMsgType msgType = static_cast<QtMsgType>(type);
-  QDebug dbg(msgType);
-  dbg << message;
-  emit logMessage(message, msgType);
 }
 
 void NavServer::postMessage(const QString& message)

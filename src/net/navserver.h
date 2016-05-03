@@ -35,12 +35,7 @@ public:
 
   bool startServer();
 
-  void log(const QString& message, int type);
-
   void postMessage(const QString& message);
-
-signals:
-  void logMessage(const QString& message, int type);
 
 private:
   void incomingConnection(qintptr socketDescriptor) override;

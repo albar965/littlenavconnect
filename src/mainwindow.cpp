@@ -24,11 +24,15 @@
 
 #include <QThread>
 #include <QtConcurrent/QtConcurrentRun>
+#include <logging/logginghandler.h>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent), ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
+
+  using namespace std::placeholders;
+  atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logMessage, this, _1, _2, _3));
 
   QString aboutMessage =
     tr("<p>is the FSX Network connector for Little Navmap.</p>"
@@ -38,19 +42,18 @@ MainWindow::MainWindow(QWidget *parent) :
                "<a href=\"https://github.com/albar965\">Github</a>.</p>"
                  "<p><b>Copyright 2015-2016 Alexander Barthel (albar965@mailbox.org).</b></p>");
 
-  helpHandler = new atools::gui::HelpHandler(this, aboutMessage, "GIT_REVISION");
+  helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION);
   navServer = new NavServer(this);
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
   connect(ui->actionContents, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::help);
   connect(ui->actionAbout, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::about);
   connect(ui->actionAboutQt, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::aboutQt);
-
-  connect(navServer, &NavServer::logMessage, this, &MainWindow::logMessage);
-
+  connect(this, &MainWindow::appendLogMessage, ui->textEdit, &QTextEdit::append);
   navServer->startServer();
 
   dataReader = new DataReaderThread(this, navServer);
   dataReader->start();
+
 }
 
 MainWindow::~MainWindow()
@@ -58,31 +61,34 @@ MainWindow::~MainWindow()
   dataReader->setTerminate();
   dataReader->wait();
 
+  atools::logging::LoggingHandler::setLogFunction(nullptr);
+
   delete helpHandler;
-  delete navServer;
   delete ui;
 }
 
-void MainWindow::logMessage(const QString& message, int type)
+void MainWindow::logMessage(QtMsgType type, const QMessageLogContext& context,
+                            const QString& message)
 {
-  QtMsgType msgType = static_cast<QtMsgType>(type);
-
-  QString style = "black";
-  switch(msgType)
+  if(context.category != nullptr && QString(context.category) == "gui")
   {
-    case QtDebugMsg:
-      style = "color:darkgrey";
-      break;
-    case QtWarningMsg:
-      style = "color:orange;font-weight:bold";
-      break;
-    case QtFatalMsg:
-    case QtCriticalMsg:
-      style = "color:red;font-weight:bold";
-      break;
-    case QtInfoMsg:
-      style = "color:black";
-      break;
+    QString style = "black";
+    switch(type)
+    {
+      case QtDebugMsg:
+        style = "color:darkgrey";
+        break;
+      case QtWarningMsg:
+        style = "color:orange;font-weight:bold";
+        break;
+      case QtFatalMsg:
+      case QtCriticalMsg:
+        style = "color:red;font-weight:bold";
+        break;
+      case QtInfoMsg:
+        style = "color:black";
+        break;
+    }
+    emit appendLogMessage("<span style=\"" + style + "\">" + message + "</span>");
   }
-  ui->textEdit->append("<span style=\"" + style + "\">" + message + "</span>");
 }

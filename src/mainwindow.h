@@ -19,6 +19,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMutex>
 
 namespace Ui {
 class MainWindow;
@@ -42,13 +43,17 @@ public:
   explicit MainWindow(QWidget *parent = 0);
   ~MainWindow();
 
+signals:
+  void appendLogMessage(const QString& message);
+
 private:
   Ui::MainWindow *ui;
   NavServer *navServer;
   atools::gui::HelpHandler *helpHandler;
-  void logMessage(const QString& message, int type);
+  void logMessage(QtMsgType type, const QMessageLogContext& context, const QString& message);
 
   DataReaderThread *dataReader = nullptr;
+
 };
 
 #endif // MAINWINDOW_H
