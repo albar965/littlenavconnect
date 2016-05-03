@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/littlenavconnect">
+        <file>resources/icons/about.svg</file>
+        <file>resources/icons/application-exit.svg</file>
+        <file>resources/icons/help.svg</file>
+        <file>resources/config/logging.cfg</file>
+        <file>resources/icons/navroute.ico</file>
+        <file>resources/icons/navroute.svg</file>
+    </qresource>
+</RCC>
