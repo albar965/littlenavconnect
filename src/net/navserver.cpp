@@ -20,7 +20,9 @@
 #include "common.h"
 
 #include <QThreadPool>
+#include <QNetworkInterface>
 #include <stdlib.h>
+#include <QHostInfo>
 
 NavServer::NavServer(QObject *parent)
   : QTcpServer(parent)
@@ -45,11 +47,28 @@ bool NavServer::startServer()
 {
   bool retval = listen(QHostAddress::AnyIPv4, 51968);
 
+  QString ipAddress;
+  QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
+  for(const QHostAddress& ip : ipAddressesList)
+  {
+    if(ip != QHostAddress::LocalHost && ip.toIPv4Address() > 0)
+    {
+      ipAddress = ip.toString();
+      break;
+    }
+  }
+  // if we did not find one, use IPv4 localhost
+  if(ipAddress.isEmpty())
+    ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
+
+  QHostInfo hostInfo = QHostInfo::fromName(ipAddress);
+
   if(!retval)
     qCritical(gui) << "Unable to start the server:" << errorString();
   else
-    qInfo(gui) << "Server is running on IP" << serverAddress().toString()
-             << "port" << QString::number(serverPort());
+    qInfo(gui).noquote().nospace() << "Server is running on "
+                                   << hostInfo.hostName() << " (" << ipAddress << ") "
+                                   << "port " << serverPort();
 
   return retval;
 }

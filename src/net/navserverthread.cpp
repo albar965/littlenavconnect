@@ -40,9 +40,12 @@ void NavServerThread::run()
     qCritical(gui) << "Error creating socket" << tcpSocket.errorString();
     return;
   }
+  QString peerAddr = tcpSocket.peerAddress().toString();
+  QHostInfo hostInfo = QHostInfo::fromName(peerAddr);
 
-  qInfo(gui) << "Connection from" << tcpSocket.peerAddress().toString()
-           << "port" << tcpSocket.peerPort();
+  qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
+                                 << " (" << peerAddr << ") "
+                                 << "port " << tcpSocket.peerPort();
 
   while(!terminate)
   {
@@ -62,7 +65,8 @@ void NavServerThread::run()
 
     if(!tcpSocket.isOpen())
     {
-      qWarning(gui) << "Connection closed by peer";
+      qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
+                                     << " (" << peerAddr << ") " << " closed by peer";
       break;
     }
 

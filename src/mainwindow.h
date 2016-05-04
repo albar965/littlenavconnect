@@ -47,11 +47,11 @@ signals:
   void appendLogMessage(const QString& message);
 
 private:
+  void logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message);
+
   Ui::MainWindow *ui;
   NavServer *navServer;
   atools::gui::HelpHandler *helpHandler;
-  void logMessage(QtMsgType type, const QMessageLogContext& context, const QString& message);
-
   DataReaderThread *dataReader = nullptr;
 
 };

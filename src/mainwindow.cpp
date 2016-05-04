@@ -22,8 +22,8 @@
 
 #include <gui/helphandler.h>
 
+#include <QDateTime>
 #include <QThread>
-#include <QtConcurrent/QtConcurrentRun>
 #include <logging/logginghandler.h>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->setupUi(this);
 
   using namespace std::placeholders;
-  atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logMessage, this, _1, _2, _3));
+  atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logGuiMessage, this, _1, _2, _3));
 
   QString aboutMessage =
     tr("<p>is the FSX Network connector for Little Navmap.</p>"
@@ -67,12 +67,11 @@ MainWindow::~MainWindow()
   delete ui;
 }
 
-void MainWindow::logMessage(QtMsgType type, const QMessageLogContext& context,
-                            const QString& message)
+void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
 {
   if(context.category != nullptr && QString(context.category) == "gui")
   {
-    QString style = "black";
+    QString style;
     switch(type)
     {
       case QtDebugMsg:
@@ -86,9 +85,11 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext& context,
         style = "color:red;font-weight:bold";
         break;
       case QtInfoMsg:
-        style = "color:black";
         break;
     }
-    emit appendLogMessage("<span style=\"" + style + "\">" + message + "</span>");
+
+    QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd h:mm:ss.zzz");
+    // Use a signal to update the text edit in the main thread context
+    emit appendLogMessage("[" + now + "] <span style=\"" + style + "\">" + message + "</span>");
   }
 }
