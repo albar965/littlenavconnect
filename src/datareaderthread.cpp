@@ -41,16 +41,31 @@ void DataReaderThread::run()
   {
     QString num = QString::number(i);
 
-    data.setPacketId(static_cast<quint32>(i));
+    data.setPacketId(i);
     data.setPacketTs(QDateTime::currentDateTime().toTime_t());
 
+#if defined(Q_OS_WIN32)
+
+#else
     data.setAirplaneName("Airplane " + num);
     data.setAirplaneReg("Airplane Registration " + num);
     data.setAirplaneType("Airplane Type " + num);
 
+    // 200 kts: 0.0555 nm per second / 0.0277777 nm per cycle
+    data.getPosition().setLonX(8.f + (i * 0.0277777f / 60.f));
+    data.getPosition().setLatY(51.f + (i * 0.0277777f / 60.f));
+    data.getPosition().setAltitude(qrand() * 100.f / RAND_MAX + 10000.f);
+    data.setCourseMag(45.f);
+    data.setCourseTrue(45.5f);
+    data.setGroundSpeed(250.f);
+    data.setIndicatedSpeed(200.f);
+    data.setWindDirection(180.f);
+    data.setWindSpeed(25.f);
+#endif
+
     server->postMessage(data);
     i++;
-    QThread::sleep(1);
+    QThread::msleep(500);
   }
 }
 
