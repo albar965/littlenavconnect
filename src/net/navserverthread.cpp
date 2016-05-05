@@ -18,6 +18,7 @@
 #include "navserver.h"
 #include "navserverthread.h"
 #include "common.h"
+#include "fs/simconnectdata.h"
 
 #include <QtNetwork>
 
@@ -47,21 +48,14 @@ void NavServerThread::run()
                                  << " (" << peerAddr << ") "
                                  << "port " << tcpSocket.peerPort();
 
+  atools::fs::SimConnectData dataPacket;
+
   while(!terminate)
   {
-    QString msg;
     mutex.lock();
     waitCondition.wait(&mutex);
-    msg = message;
+    dataPacket = data;
     mutex.unlock();
-
-    QByteArray block;
-    QDataStream out(&block, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_0);
-    out << (quint16)0;
-    out << msg;
-    out.device()->seek(0);
-    out << (quint16)(block.size() - sizeof(quint16));
 
     if(!tcpSocket.isOpen())
     {
@@ -70,7 +64,7 @@ void NavServerThread::run()
       break;
     }
 
-    tcpSocket.write(block);
+    dataPacket.write(&tcpSocket);
     tcpSocket.flush();
   }
   tcpSocket.disconnectFromHost();
@@ -79,10 +73,10 @@ void NavServerThread::run()
     tcpSocket.waitForDisconnected(10000);
 }
 
-void NavServerThread::postMessage(const QString& msg)
+void NavServerThread::postMessage(const atools::fs::SimConnectData& dataPacket)
 {
   QMutexLocker locker(&mutex);
-  message = msg;
+  data = dataPacket;
   waitCondition.wakeAll();
 }
 

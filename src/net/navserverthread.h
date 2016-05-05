@@ -19,10 +19,10 @@
 #define NAVSERVERTHREAD_H
 
 #include <QThread>
-#include <QTcpSocket>
-#include <QRunnable>
 #include <QWaitCondition>
 #include <QMutex>
+
+#include "fs/simconnectdata.h"
 
 class NavServer;
 
@@ -35,7 +35,7 @@ public:
   NavServerThread(qintptr socketDescriptor, NavServer *parent);
   virtual ~NavServerThread();
 
-  void postMessage(const QString& msg);
+  void postMessage(const atools::fs::SimConnectData& dataPacket);
 
   void setTerminate();
 
@@ -45,7 +45,7 @@ private:
   bool terminate = false;
   qintptr socket;
   NavServer *server;
-  QString message;
+  atools::fs::SimConnectData data;
   QWaitCondition waitCondition;
   mutable QMutex mutex;
 

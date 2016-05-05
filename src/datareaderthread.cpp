@@ -18,6 +18,8 @@
 #include "datareaderthread.h"
 #include "logging/loggingdefs.h"
 #include <net/navserver.h>
+#include <fs/simconnectdata.h>
+#include <QDateTime>
 
 DataReaderThread::DataReaderThread(QObject *parent, NavServer *navServer)
   : QThread(parent), server(navServer)
@@ -33,10 +35,20 @@ DataReaderThread::~DataReaderThread()
 void DataReaderThread::run()
 {
   int i = 0;
+  atools::fs::SimConnectData data;
+
   while(!terminate)
   {
-    qDebug() << "Message " << i;
-    server->postMessage(QString::number(i));
+    QString num = QString::number(i);
+
+    data.setPacketId(static_cast<quint32>(i));
+    data.setPacketTs(QDateTime::currentDateTime().toTime_t());
+
+    data.setAirplaneName("Airplane " + num);
+    data.setAirplaneReg("Airplane Registration " + num);
+    data.setAirplaneType("Airplane Type " + num);
+
+    server->postMessage(data);
     i++;
     QThread::sleep(1);
   }

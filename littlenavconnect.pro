@@ -23,6 +23,8 @@ win32 {
 win32:DEFINES += GIT_REVISION='\\"$$system($${GIT_BIN} rev-parse --short HEAD)\\"'
 unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
 
+win32:DEFINES +=_USE_MATH_DEFINES
+
 SOURCES +=\
     src/main.cpp \
     src/mainwindow.cpp \
@@ -44,7 +46,10 @@ RESOURCES += \
     littlenavconnect.qrc
 
 DISTFILES += \
-    uncrustify.cfg
+    uncrustify.cfg \
+    README.txt \
+    CHANGELOG.txt \
+    LICENSE.txt
 
 # Add dependencies to atools project and its static library to ensure relinking on changes
 DEPENDPATH += $$PWD/../atools/src
@@ -58,3 +63,47 @@ CONFIG(release, debug|release) {
   LIBS += -L $$PWD/../atools/release -l atools
   PRE_TARGETDEPS += $$PWD/../atools/release/libatools.a
 }
+
+# Create additional makefile targets to copy help files
+unix {
+  copydata.commands = cp -avfu $$PWD/help $$OUT_PWD
+  cleandata.commands = rm -Rvf $$OUT_PWD/help
+}
+
+# Windows specific deploy target
+win32 {
+  RC_ICONS = resources/icons/navroute.ico
+
+  # Create backslashed path
+  WINPWD=$${PWD}
+  WINPWD ~= s,/,\\,g
+  WINOUT_PWD=$${OUT_PWD}
+  WINOUT_PWD ~= s,/,\\,g
+  DEPLOY_DIR_NAME=Little Navconnect
+  DEPLOY_DIR_WIN=\"$${WINPWD}\\deploy\\$${DEPLOY_DIR_NAME}\"
+
+  copydata.commands = xcopy /i /s /e /f /y $${WINPWD}\\help $${WINOUT_PWD}\\help &&
+  cleandata.commands = del /s /q $${WINOUT_PWD}\\help
+
+  deploy.commands = rmdir /s /q $${DEPLOY_DIR_WIN} &
+  deploy.commands += mkdir $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINOUT_PWD}\\littlenavconnect.exe $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINPWD}\\CHANGELOG.txt $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy /i /s /e /f /y $${WINPWD}\\help $${DEPLOY_DIR_WIN}\\help &&
+  deploy.commands += xcopy $${QT_BIN}\\libgcc*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_BIN}\\libstdc*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_BIN}\\libwinpthread*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += $${QT_BIN}\\windeployqt --compiler-runtime $${DEPLOY_DIR_WIN}
+}
+
+QMAKE_EXTRA_TARGETS += deploy
+
+first.depends = $(first) copydata
+QMAKE_EXTRA_TARGETS += first copydata
+
+clean.depends = $(clean) cleandata
+QMAKE_EXTRA_TARGETS += clean cleandata
+
+

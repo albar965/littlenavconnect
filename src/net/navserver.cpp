@@ -102,10 +102,10 @@ void NavServer::threadFinished(NavServerThread *thread)
     thread->deleteLater();
 }
 
-void NavServer::postMessage(const QString& message)
+void NavServer::postMessage(const atools::fs::SimConnectData& dataPacket)
 {
   QMutexLocker locker(&threadsMutex);
 
   for(NavServerThread *thread : threads)
-    thread->postMessage(message);
+    thread->postMessage(dataPacket);
 }

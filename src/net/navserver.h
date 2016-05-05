@@ -22,6 +22,12 @@
 #include <QStringList>
 #include <QTcpServer>
 
+namespace atools {
+namespace fs {
+class SimConnectData;
+}
+}
+
 class NavServerThread;
 
 class NavServer :
@@ -35,7 +41,7 @@ public:
 
   bool startServer();
 
-  void postMessage(const QString& message);
+  void postMessage(const atools::fs::SimConnectData& dataPacket);
 
 private:
   void incomingConnection(qintptr socketDescriptor) override;
