@@ -31,14 +31,16 @@ SOURCES +=\
     src/net/navserver.cpp \
     src/net/navserverthread.cpp \
     src/datareaderthread.cpp \
-    src/common.cpp
+    src/common.cpp \
+    src/simconnecthandler.cpp
 
 HEADERS  += \
     src/mainwindow.h \
     src/net/navserver.h \
     src/net/navserverthread.h \
     src/datareaderthread.h \
-    src/common.h
+    src/common.h \
+    src/simconnecthandler.h
 
 FORMS    += mainwindow.ui
 

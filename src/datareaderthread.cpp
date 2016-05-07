@@ -16,6 +16,7 @@
 *****************************************************************************/
 
 #include "datareaderthread.h"
+#include "simconnecthandler.h"
 #include "logging/loggingdefs.h"
 #include <net/navserver.h>
 #include <fs/simconnectdata.h>
@@ -34,30 +35,20 @@ DataReaderThread::~DataReaderThread()
 
 void DataReaderThread::run()
 {
+  SimConnectHandler handler;
+
+  handler.initialize();
+
   int i = 0;
-  atools::fs::SimConnectData data;
 
   while(!terminate)
   {
-    QString num = QString::number(i);
+    atools::fs::SimConnectData data;
 
     data.setPacketId(i);
     data.setPacketTs(QDateTime::currentDateTime().toTime_t());
 
-    data.setAirplaneName("Airplane " + num);
-    data.setAirplaneReg("Airplane Registration " + num);
-    data.setAirplaneType("Airplane Type " + num);
-
-    // 200 kts: 0.0555 nm per second / 0.0277777 nm per cycle
-    data.getPosition().setLonX(8.f + (i * 0.0277777f / 60.f));
-    data.getPosition().setLatY(51.f + (i * 0.0277777f / 60.f));
-    data.getPosition().setAltitude(qrand() * 100.f / RAND_MAX + 10000.f);
-    data.setCourseMag(45.f);
-    data.setCourseTrue(45.5f);
-    data.setGroundSpeed(250.f);
-    data.setIndicatedSpeed(200.f);
-    data.setWindDirection(180.f);
-    data.setWindSpeed(25.f);
+    handler.fetchData(data);
 
     server->postMessage(data);
     i++;
