@@ -44,9 +44,6 @@ void DataReaderThread::run()
     data.setPacketId(i);
     data.setPacketTs(QDateTime::currentDateTime().toTime_t());
 
-#if defined(Q_OS_WIN32)
-
-#else
     data.setAirplaneName("Airplane " + num);
     data.setAirplaneReg("Airplane Registration " + num);
     data.setAirplaneType("Airplane Type " + num);
@@ -61,7 +58,6 @@ void DataReaderThread::run()
     data.setIndicatedSpeed(200.f);
     data.setWindDirection(180.f);
     data.setWindSpeed(25.f);
-#endif
 
     server->postMessage(data);
     i++;

@@ -55,13 +55,17 @@ DISTFILES += \
 DEPENDPATH += $$PWD/../atools/src
 INCLUDEPATH += $$PWD/../atools/src $$PWD/src
 
-CONFIG(debug, debug|release) {
-  LIBS += -L $$PWD/../atools/debug -l atools
-  PRE_TARGETDEPS += $$PWD/../atools/debug/libatools.a
+CONFIG(debug, debug|release): LIBS += -L$$PWD/../atools/debug -latools
+CONFIG(release, debug|release): LIBS += -L$$PWD/../atools/release -l atools
+
+unix {
+CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../atools/debug/libatools.a
+CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../atools/release/libatools.a
 }
-CONFIG(release, debug|release) {
-  LIBS += -L $$PWD/../atools/release -l atools
-  PRE_TARGETDEPS += $$PWD/../atools/release/libatools.a
+
+win32 {
+CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../atools/debug/atools.lib
+CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../atools/release/atools.lib
 }
 
 # Create additional makefile targets to copy help files
@@ -82,7 +86,8 @@ win32 {
   DEPLOY_DIR_NAME=Little Navconnect
   DEPLOY_DIR_WIN=\"$${WINPWD}\\deploy\\$${DEPLOY_DIR_NAME}\"
 
-  copydata.commands = xcopy /i /s /e /f /y $${WINPWD}\\help $${WINOUT_PWD}\\help &&
+  copydata.commands = xcopy /i /s /e /f /y $${WINPWD}\\help $${WINOUT_PWD}\\help
+
   cleandata.commands = del /s /q $${WINOUT_PWD}\\help
 
   deploy.commands = rmdir /s /q $${DEPLOY_DIR_WIN} &
