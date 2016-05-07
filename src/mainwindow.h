@@ -54,6 +54,11 @@ private:
   atools::gui::HelpHandler *helpHandler;
   DataReaderThread *dataReader = nullptr;
 
+  virtual void closeEvent(QCloseEvent *event) override;
+
+  void readSettings();
+  void writeSettings();
+
 };
 
 #endif // MAINWINDOW_H

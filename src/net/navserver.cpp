@@ -109,3 +109,9 @@ void NavServer::postMessage(const atools::fs::SimConnectData& dataPacket)
   for(NavServerThread *thread : threads)
     thread->postMessage(dataPacket);
 }
+
+bool NavServer::hasConnections() const
+{
+  QMutexLocker locker(&threadsMutex);
+  return threads.size() > 0;
+}

@@ -43,6 +43,8 @@ public:
 
   void postMessage(const atools::fs::SimConnectData& dataPacket);
 
+  bool hasConnections() const;
+
 private:
   void incomingConnection(qintptr socketDescriptor) override;
 

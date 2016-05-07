@@ -20,8 +20,11 @@
 #include "datareaderthread.h"
 #include "ui_mainwindow.h"
 
+#include <gui/dialog.h>
 #include <gui/helphandler.h>
+#include <gui/widgetstate.h>
 
+#include <QCloseEvent>
 #include <QDateTime>
 #include <QThread>
 #include <logging/logginghandler.h>
@@ -30,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent), ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
+  readSettings();
 
   using namespace std::placeholders;
   atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logGuiMessage, this, _1, _2, _3));
@@ -53,7 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
   dataReader = new DataReaderThread(this, navServer);
   dataReader->start();
-
 }
 
 MainWindow::~MainWindow()
@@ -92,4 +95,44 @@ void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context
     // Use a signal to update the text edit in the main thread context
     emit appendLogMessage("[" + now + "] <span style=\"" + style + "\">" + message + "</span>");
   }
+}
+
+void MainWindow::readSettings()
+{
+  qDebug() << "readSettings";
+
+  atools::gui::WidgetState ws("MainWindow/Widget");
+  ws.restore(this);
+
+}
+
+void MainWindow::writeSettings()
+{
+  qDebug() << "writeSettings";
+
+  atools::gui::WidgetState ws("MainWindow/Widget");
+  ws.save(this);
+  ws.syncSettings();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+  // Catch all close events like Ctrl-Q or Menu/Exit or clicking on the
+  // close button on the window frame
+  qDebug() << "closeEvent";
+
+  if(navServer->hasConnections())
+  {
+    int result = atools::gui::Dialog(this).showQuestionMsgBox("Actions/ShowQuit",
+                                                              tr("There are still applications connected.\n"
+                                                                 "Really Quit?"),
+                                                              tr("Do not &show this dialog again."),
+                                                              QMessageBox::Yes | QMessageBox::No,
+                                                              QMessageBox::No, QMessageBox::Yes);
+
+    if(result != QMessageBox::Yes)
+      event->ignore();
+  }
+
+  writeSettings();
 }
