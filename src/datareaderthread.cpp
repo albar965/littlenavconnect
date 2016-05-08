@@ -35,7 +35,8 @@ DataReaderThread::~DataReaderThread()
 
 void DataReaderThread::run()
 {
-  SimConnectHandler handler;
+  qDebug() << "Datareader run";
+  SimConnectHandler handler(true);
 
   handler.initialize();
 
@@ -48,10 +49,11 @@ void DataReaderThread::run()
     data.setPacketId(i);
     data.setPacketTs(QDateTime::currentDateTime().toTime_t());
 
-    handler.fetchData(data);
-
-    server->postMessage(data);
-    i++;
+    if(handler.fetchData(data))
+    {
+      server->postMessage(data);
+      i++;
+    }
     QThread::msleep(500);
   }
 }

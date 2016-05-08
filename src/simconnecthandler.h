@@ -20,6 +20,14 @@
 
 #include <QtGlobal>
 
+#if defined(Q_OS_WIN32)
+#include <windows.h>
+#include <tchar.h>
+#include <stdio.h>
+#include <strsafe.h>
+#include "SimConnect.h"
+#endif
+
 namespace atools {
 namespace fs {
 class SimConnectData;
@@ -29,15 +37,20 @@ class SimConnectData;
 class SimConnectHandler
 {
 public:
-  SimConnectHandler();
+  SimConnectHandler(bool verboseLogging = false);
   virtual ~SimConnectHandler();
   void initialize();
 
-  void fetchData(atools::fs::SimConnectData& data);
+  bool fetchData(atools::fs::SimConnectData& data);
 
   struct SimData
   {
     char title[256];
+    char atcType[64];
+    char atcModel[64];
+    char atcId[64];
+    char atcAirline[64];
+    char atcFlightNumber[64];
     double altitude;
     double latitude;
     double longitude;
@@ -74,13 +87,13 @@ private:
 #if defined(Q_OS_WIN32)
   void DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData);
 
-  static void CALLBACK MyDispatchProcRD(SIMCONNECT_RECV *pData, DWORD cbData, void *pContext);
+  static void CALLBACK DispatchCallback(SIMCONNECT_RECV *pData, DWORD cbData, void *pContext);
 
   HANDLE hSimConnect = NULL;
 #endif
 
   SimData simData;
-  int dataId = 0;
+  bool simRunning = true, simPaused = false, verbose = false;
 };
 
 #endif // SIMCONNECTHANDLER_H

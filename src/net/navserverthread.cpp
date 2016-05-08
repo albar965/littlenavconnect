@@ -64,6 +64,8 @@ void NavServerThread::run()
       break;
     }
 
+    qDebug()<<dataPacket.getAirplaneName();
+
     dataPacket.write(&tcpSocket);
     tcpSocket.flush();
   }

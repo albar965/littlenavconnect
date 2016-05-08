@@ -21,33 +21,25 @@
 
 #include <fs/simconnectdata.h>
 
-#if defined(Q_OS_WIN32)
-#include <windows.h>
-#include <tchar.h>
-#include <stdio.h>
-#include <strsafe.h>
-#include "SimConnect.h"
-#endif
-
 enum EventIds
 {
-  EVENT_SIM_START,
-  EVENT_SIM_STOP,
-  EVENT_SIM_PAUSE,
-  EVENT_SIM_ONE_SEC,
+  EVENT_SIM_STATE,
+  EVENT_SIM_PAUSE
 };
 
 enum DataDefinitionId
 {
-  DEFINITION_1,
+  DATA_DEFINITION,
 };
 
 enum DataRequestId
 {
-  REQUEST_1,
+  DATA_REQUEST_ID,
+  SYS_DATA_REQUEST_ID,
 };
 
-SimConnectHandler::SimConnectHandler()
+SimConnectHandler::SimConnectHandler(bool verboseLogging)
+  : verbose(verboseLogging)
 {
 
 }
@@ -55,23 +47,40 @@ SimConnectHandler::SimConnectHandler()
 SimConnectHandler::~SimConnectHandler()
 {
 #if defined(Q_OS_WIN32)
-
   if(hSimConnect != NULL)
   {
     HRESULT hr = SimConnect_Close(hSimConnect);
+    if(hr != S_OK)
+      qWarning() << "Error closing SimConnect";
   }
 #endif
 }
 
-void SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
+bool SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
 {
 #if defined(Q_OS_WIN32)
-  SimConnect_CallDispatch(hSimConnect, MyDispatchProcRD, this);
-  data.setAirplaneName(simData.title);
-  data.setAirplaneReg("Airplane Registration " + dataId);
-  data.setAirplaneType("Airplane Type " + dataId);
+  HRESULT hr = SimConnect_RequestDataOnSimObjectType(hSimConnect, DATA_REQUEST_ID, DATA_DEFINITION, 0,
+                                                     SIMCONNECT_SIMOBJECT_TYPE_USER);
 
-  // 200 kts: 0.0555 nm per second / 0.0277777 nm per cycle
+  if(hr != S_OK)
+  {
+    qWarning() << "Error requesting data";
+    return false;
+  }
+
+  SimConnect_CallDispatch(hSimConnect, DispatchCallback, this);
+
+  if(!simRunning || simPaused)
+  {
+    if(verbose)
+      qDebug() << "No data fetched. Running" << simRunning << "paused" << simPaused;
+    return false;
+  }
+
+  data.setAirplaneName(simData.title);
+  data.setAirplaneReg(simData.atcId);
+  data.setAirplaneType(simData.atcModel);
+
   data.getPosition().setLonX(static_cast<float>(simData.longitude));
   data.getPosition().setLatY(static_cast<float>(simData.latitude));
   data.getPosition().setAltitude(static_cast<float>(simData.altitude));
@@ -83,7 +92,6 @@ void SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
   data.setWindSpeed(static_cast<float>(simData.ambientWindVelocity));
   data.setVerticalSpeed(static_cast<float>(simData.verticalSpeed));
 #else
-
   QString dataIdStr = QString::number(dataId);
   data.setAirplaneName("Airplane " + dataIdStr);
   data.setAirplaneReg("Airplane Registration " + dataIdStr);
@@ -100,9 +108,9 @@ void SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
   data.setWindDirection(180.f);
   data.setWindSpeed(25.f);
   data.setVerticalSpeed(0.1f);
-
 #endif
-  dataId++;
+
+  return true;
 }
 
 void SimConnectHandler::initialize()
@@ -110,62 +118,66 @@ void SimConnectHandler::initialize()
 #if defined(Q_OS_WIN32)
   HRESULT hr;
 
-  qDebug() << "Before open";
+  if(verbose)
+    qDebug() << "Before open";
 
   hr = SimConnect_Open(&hSimConnect, "Little Navconnect", NULL, 0, 0, 0);
   if(hr == S_OK)
   {
-    qDebug() << "Connected to Flight Simulator";
+    if(verbose)
+      qDebug() << "Connected to Flight Simulator";
 
     // Set up the data definition, but do not yet do anything with it
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Title", NULL,
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Title", NULL,
                                         SIMCONNECT_DATATYPE_STRING256);
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Plane Altitude", "feet");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Plane Latitude", "degrees");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Plane Longitude", "degrees");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "ATC Type", NULL,
+                                        SIMCONNECT_DATATYPE_STRING64);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "ATC Model", NULL,
+                                        SIMCONNECT_DATATYPE_STRING64);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "ATC Id", NULL,
+                                        SIMCONNECT_DATATYPE_STRING64);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "ATC Airline", NULL,
+                                        SIMCONNECT_DATATYPE_STRING64);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "ATC Flight Number", NULL,
+                                        SIMCONNECT_DATATYPE_STRING64);
 
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Ground Velocity", "knots");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Indicated Altitude", "feet");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Plane Alt Above Ground", "feet");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Plane Heading Degrees Magnetic",
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Altitude", "feet");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Latitude", "degrees");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Longitude", "degrees");
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ground Velocity", "knots");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Indicated Altitude", "feet");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Alt Above Ground", "feet");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Heading Degrees Magnetic",
                                         "degrees");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Plane Heading Degrees True", "degrees");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Ground Altitude", "feet");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Sim On Ground", "bool",
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Heading Degrees True", "degrees");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ground Altitude", "feet");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Sim On Ground", "bool",
                                         SIMCONNECT_DATATYPE_INT64);
 
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Airspeed True", "knots");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Airspeed Indicated", "knots");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Airspeed Mach", "mach");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Vertical Speed", "feet/second");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Airspeed True", "knots");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Airspeed Indicated", "knots");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Airspeed Mach", "mach");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Vertical Speed", "feet/second");
 
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Ambient Temperature", "celsius");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Ambient Pressure", "inches of mercury");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Ambient Wind Velocity", "knots");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Ambient Wind Direction", "degrees");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Ambient Precip State", "bool",
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Temperature", "celsius");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Pressure", "inches of mercury");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Wind Velocity", "knots");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Wind Direction", "degrees");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Precip State", "bool",
                                         SIMCONNECT_DATATYPE_INT64);
 
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Aircraft Wind X", "knots");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Aircraft Wind Y", "knots");
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Aircraft Wind Z", "knots");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Aircraft Wind X", "knots");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Aircraft Wind Y", "knots");
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Aircraft Wind Z", "knots");
 
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Ambient In Cloud", "bool",
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient In Cloud", "bool",
                                         SIMCONNECT_DATATYPE_INT64);
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DEFINITION_1, "Sea Level Pressure", "millibars");
-
-    // Struct latlonalt (SIMCONNECT_DATATYPE_LATLONALT)
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Sea Level Pressure", "millibars");
 
     // Request an event when the simulation starts
-    hr = SimConnect_SubscribeToSystemEvent(hSimConnect, EVENT_SIM_START, "SimStart");
-
-    hr = SimConnect_SubscribeToSystemEvent(hSimConnect, EVENT_SIM_STOP, "SimStop");
-
+    hr = SimConnect_SubscribeToSystemEvent(hSimConnect, EVENT_SIM_STATE, "Sim");
     hr = SimConnect_SubscribeToSystemEvent(hSimConnect, EVENT_SIM_PAUSE, "Pause");
-
-    hr = SimConnect_SubscribeToSystemEvent(hSimConnect, EVENT_SIM_ONE_SEC, "1sec");
-
-    hr = SimConnect_SetSystemEventState(hSimConnect, EVENT_SIM_ONE_SEC, SIMCONNECT_STATE_OFF);
   }
 #endif
 }
@@ -173,7 +185,7 @@ void SimConnectHandler::initialize()
 #if defined(Q_OS_WIN32)
 void SimConnectHandler::DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData)
 {
-  HRESULT hr;
+  Q_UNUSED(cbData);
 
   switch(pData->dwID)
   {
@@ -183,34 +195,16 @@ void SimConnectHandler::DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData)
 
         switch(evt->uEventID)
         {
-          case EVENT_SIM_ONE_SEC:
-            qDebug() << "EVENT_SIM_ONE_SEC";
-            // Now the sim is running, request information on the user aircraft
-            hr = SimConnect_RequestDataOnSimObjectType(hSimConnect, REQUEST_1, DEFINITION_1, 0,
-                                                       SIMCONNECT_SIMOBJECT_TYPE_USER);
-
-            break;
           case EVENT_SIM_PAUSE:
-            qDebug() << "EVENT_SIM_PAUSE" << evt->dwData;
-            if(evt->dwData == 1)
-              hr = SimConnect_SetSystemEventState(hSimConnect, EVENT_SIM_ONE_SEC, SIMCONNECT_STATE_OFF);
-            else if(evt->dwData == 0)
-              hr = SimConnect_SetSystemEventState(hSimConnect, EVENT_SIM_ONE_SEC, SIMCONNECT_STATE_ON);
+            if(verbose)
+              qDebug() << "EVENT_SIM_PAUSE" << evt->dwData;
+            simPaused = evt->dwData == 1;
             break;
 
-          case EVENT_SIM_START:
-            qDebug() << "EVENT_SIM_START";
-            hr = SimConnect_SetSystemEventState(hSimConnect, EVENT_SIM_ONE_SEC, SIMCONNECT_STATE_ON);
-
-            break;
-
-          case EVENT_SIM_STOP:
-            qDebug() << "EVENT_SIM_STOP";
-            hr = SimConnect_SetSystemEventState(hSimConnect, EVENT_SIM_ONE_SEC, SIMCONNECT_STATE_OFF);
-
-            break;
-
-          default:
+          case EVENT_SIM_STATE:
+            if(verbose)
+              qDebug() << "EVENT_SIM_STATE" << evt->dwData;
+            simRunning = evt->dwData == 1;
             break;
         }
         break;
@@ -220,42 +214,48 @@ void SimConnectHandler::DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData)
       {
         SIMCONNECT_RECV_SIMOBJECT_DATA_BYTYPE *pObjData = (SIMCONNECT_RECV_SIMOBJECT_DATA_BYTYPE *)pData;
 
-        switch(pObjData->dwRequestID)
+        if(pObjData->dwRequestID == DATA_REQUEST_ID)
         {
-          case REQUEST_1:
-            {
-              qDebug() << "REQUEST_1";
-              DWORD ObjectID = pObjData->dwObjectID;
-              SimData *pS = (SimData *)&pObjData->dwData;
-              if(SUCCEEDED(StringCbLengthA(&pS->title[0], sizeof(pS->title), NULL))) // security check
-              {
-                qDebug() << "ObjectID" << ObjectID << "Title" << pS->title
-                         << "Lat" << pS->latitude << "Lon" << pS->longitude
-                         << "Alt" << pS->altitude << "gs" << pS->groundVelocity;
-                qDebug() << "wind xyz" << pS->aircraftWindX << "," << pS->aircraftWindY << ","
-                         << pS->aircraftWindZ;
-              }
-              break;
-            }
-
-          default:
-            break;
+          if(verbose)
+            qDebug() << "DATA_REQUEST_ID";
+          DWORD objectID = pObjData->dwObjectID;
+          SimData *simDataPtr = reinterpret_cast<SimData *>(&pObjData->dwData);
+          if(SUCCEEDED(StringCbLengthA(&simDataPtr->title[0], sizeof(simDataPtr->title), NULL))) // security check
+          {
+            if(verbose)
+              qDebug() << "ObjectID" << objectID << "Title" << simDataPtr->title
+                       << "atcType" << simDataPtr->atcType
+                       << "atcModel" << simDataPtr->atcModel
+                       << "atcId" << simDataPtr->atcId
+                       << "atcAirline" << simDataPtr->atcAirline
+                       << "atcFlightNumber" << simDataPtr->atcFlightNumber
+                       << "Lat" << simDataPtr->latitude << "Lon" << simDataPtr->longitude
+                       << "Alt" << simDataPtr->altitude
+                       << "ias" << simDataPtr->airspeedIndicated << "gs" << simDataPtr->groundVelocity
+                       << "vs" << simDataPtr->verticalSpeed
+                       << "course " << simDataPtr->planeHeadingMagnetic
+                       << "M" << simDataPtr->planeHeadingTrue << "T"
+                       << "wind" << simDataPtr->ambientWindDirection
+                       << "/" << simDataPtr->ambientWindVelocity;
+            simData = *simDataPtr;
+          }
         }
         break;
       }
 
     case SIMCONNECT_RECV_ID_QUIT:
-      qDebug() << "SIMCONNECT_RECV_ID_QUIT";
-      quit = 1;
+      if(verbose)
+        qDebug() << "SIMCONNECT_RECV_ID_QUIT";
       break;
 
     default:
-      qDebug() << "Received" << pData->dwID;
+      if(verbose)
+        qDebug() << "Received" << pData->dwID;
       break;
   }
 }
 
-void CALLBACK SimConnectHandler::MyDispatchProcRD(SIMCONNECT_RECV *pData, DWORD cbData, void *pContext)
+void CALLBACK SimConnectHandler::DispatchCallback(SIMCONNECT_RECV *pData, DWORD cbData, void *pContext)
 {
   SimConnectHandler *handlerClass = static_cast<SimConnectHandler *>(pContext);
   handlerClass->DispatchProcedure(pData, cbData);

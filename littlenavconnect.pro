@@ -17,13 +17,15 @@ TEMPLATE = app
 win32 {
   QT_BIN=C:\\Qt\\5.5\\mingw492_32\\bin
   GIT_BIN='C:\\Git\\bin\\git'
+  SIMCONNECT="C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK"
 }
 
 # Get the current GIT revision to include it into the code
 win32:DEFINES += GIT_REVISION='\\"$$system($${GIT_BIN} rev-parse --short HEAD)\\"'
+win32:DEFINES +=NOMINMAX
+
 unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
 
-win32:DEFINES +=_USE_MATH_DEFINES
 
 SOURCES +=\
     src/main.cpp \
@@ -68,6 +70,8 @@ CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../atools/release/libato
 win32 {
 CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../atools/debug/atools.lib
 CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../atools/release/atools.lib
+INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
+LIBS += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\lib\SimConnect.lib"
 }
 
 # Create additional makefile targets to copy help files
