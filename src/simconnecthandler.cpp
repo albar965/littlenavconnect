@@ -70,6 +70,7 @@ bool SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
   }
 
   hr = SimConnect_CallDispatch(hSimConnect, DispatchCallback, this);
+  if(hr != S_OK)
   {
     qWarning() << "SimConnect_CallDispatch: Error";
     state = sc::FETCH_ERROR;
@@ -85,7 +86,7 @@ bool SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
     return false;
   }
 
-  data.setAirplaneTile(simData.title);
+  data.setAirplaneTitle(simData.title);
   data.setAirplaneModel(simData.atcModel);
   data.setAirplaneReg(simData.atcId);
   data.setAirplaneType(simData.atcType);

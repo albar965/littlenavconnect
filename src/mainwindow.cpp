@@ -20,6 +20,7 @@
 #include "datareaderthread.h"
 #include "ui_mainwindow.h"
 #include "settings/settings.h"
+#include "common.h"
 
 #include <gui/dialog.h>
 #include <gui/helphandler.h>
@@ -98,7 +99,7 @@ void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context
         break;
     }
 
-    QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd h:mm:ss.zzz");
+    QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd h:mm:ss");
     // Use a signal to update the text edit in the main thread context
     emit appendLogMessage("[" + now + "] <span style=\"" + style + "\">" + message + "</span>");
   }
@@ -147,6 +148,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::mainWindowShown()
 {
   qDebug() << "MainWindow::mainWindowShown()";
+
+  qInfo(gui).noquote().nospace() << QApplication::applicationName();
+  qInfo(gui).noquote().nospace() << "Version " << QApplication::applicationVersion()
+                                 << " (revision " << GIT_REVISION << ")";
+
   navServer->startServer();
 
   dataReader = new DataReaderThread(this, navServer);

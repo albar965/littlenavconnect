@@ -69,6 +69,13 @@ void DataReaderThread::run()
 
     if(handler.fetchData(data))
     {
+      data.setPacketId(i);
+      data.setPacketTs(QDateTime::currentDateTime().toTime_t());
+      server->postMessage(data);
+      i++;
+    }
+    else
+    {
       if(handler.getState() != sc::OK)
       {
         qWarning(gui) << "Error fetching data from simulator.";
@@ -76,13 +83,6 @@ void DataReaderThread::run()
         if(!handler.isSimRunning())
           tryConnect(&handler);
       }
-      if(terminate)
-        break;
-
-      data.setPacketId(i);
-      data.setPacketTs(QDateTime::currentDateTime().toTime_t());
-      server->postMessage(data);
-      i++;
     }
     QThread::msleep(atools::settings::Settings::instance().getAndStoreValue("Options/UpdateRate", 500).toUInt());
   }
