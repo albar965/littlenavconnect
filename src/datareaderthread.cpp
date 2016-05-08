@@ -15,12 +15,14 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include "common.h"
 #include "datareaderthread.h"
 #include "simconnecthandler.h"
 #include "logging/loggingdefs.h"
 #include <net/navserver.h>
 #include <fs/simconnectdata.h>
 #include <QDateTime>
+#include "settings/settings.h"
 
 DataReaderThread::DataReaderThread(QObject *parent, NavServer *navServer)
   : QThread(parent), server(navServer)
@@ -33,12 +35,31 @@ DataReaderThread::~DataReaderThread()
   qDebug() << "Datareader deleted";
 }
 
+void DataReaderThread::tryConnect(SimConnectHandler *handler)
+{
+  int counter = 0;
+  while(!terminate)
+  {
+    if((counter % 20) == 0)
+    {
+      if(handler->connect())
+        break;
+
+      qWarning(gui) << "Error connecting to simulator. Will retry in 10 seconds.";
+      counter = 0;
+    }
+    counter++;
+    QThread::msleep(500);
+  }
+  qInfo(gui) << "Connected to simulator.";
+}
+
 void DataReaderThread::run()
 {
   qDebug() << "Datareader run";
   SimConnectHandler handler(true);
 
-  handler.initialize();
+  tryConnect(&handler);
 
   int i = 0;
 
@@ -46,15 +67,24 @@ void DataReaderThread::run()
   {
     atools::fs::SimConnectData data;
 
-    data.setPacketId(i);
-    data.setPacketTs(QDateTime::currentDateTime().toTime_t());
-
     if(handler.fetchData(data))
     {
+      if(handler.getState() != sc::OK)
+      {
+        qWarning(gui) << "Error fetching data from simulator.";
+
+        if(!handler.isSimRunning())
+          tryConnect(&handler);
+      }
+      if(terminate)
+        break;
+
+      data.setPacketId(i);
+      data.setPacketTs(QDateTime::currentDateTime().toTime_t());
       server->postMessage(data);
       i++;
     }
-    QThread::msleep(500);
+    QThread::msleep(atools::settings::Settings::instance().getAndStoreValue("Options/UpdateRate", 500).toUInt());
   }
 }
 

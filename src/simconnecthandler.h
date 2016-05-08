@@ -34,53 +34,78 @@ class SimConnectData;
 }
 }
 
+namespace sc {
+enum State
+{
+  OK,
+  FETCH_ERROR,
+  OPEN_ERROR,
+  DISCONNECTED
+};
+
+}
+
 class SimConnectHandler
 {
 public:
   SimConnectHandler(bool verboseLogging = false);
   virtual ~SimConnectHandler();
-  void initialize();
+  bool connect();
 
   bool fetchData(atools::fs::SimConnectData& data);
+
+  bool isSimRunning() const
+  {
+    return simRunning;
+  }
+
+  bool isSimPaused() const
+  {
+    return simPaused;
+  }
+
+  sc::State getState() const
+  {
+    return state;
+  }
 
   struct SimData
   {
     char title[256];
-    char atcType[64];
-    char atcModel[64];
-    char atcId[64];
+    char atcType[32];
+    char atcModel[32];
+    char atcId[32];
     char atcAirline[64];
-    char atcFlightNumber[64];
-    double altitude;
-    double latitude;
-    double longitude;
+    char atcFlightNumber[32];
+    float altitude;
+    float latitude;
+    float longitude;
 
-    double groundVelocity;
-    double indicatedAltitude;
+    float groundVelocity;
+    float indicatedAltitude;
 
-    double planeAboveGround;
-    double planeHeadingMagnetic;
-    double planeHeadingTrue;
-    double groundAltitude;
-    qint64 simOnGround;
+    float planeAboveGround;
+    float planeHeadingMagnetic;
+    float planeHeadingTrue;
+    float groundAltitude;
+    qint32 simOnGround;
 
-    double airspeedTrue;
-    double airspeedIndicated;
-    double airspeedMach;
-    double verticalSpeed;
+    float airspeedTrue;
+    float airspeedIndicated;
+    float airspeedMach;
+    float verticalSpeed;
 
-    double ambientTemperture;
-    double ambientPressure;
-    double ambientWindVelocity;
-    double ambientWindDirection;
-    qint64 ambientPrecipState;
+    // float ambientTemperture;
+    // float ambientPressure;
+    float ambientWindVelocity;
+    float ambientWindDirection;
 
-    double aircraftWindX;
-    double aircraftWindY;
-    double aircraftWindZ;
-
-    qint64 ambientInCloud;
-    double seaLevelPressure;
+    // qint64 ambientPrecipState;
+    // float aircraftWindX;
+    // float aircraftWindY;
+    // float aircraftWindZ;
+    // qint64 ambientInCloud;
+    // float seaLevelPressure;
   };
 
 private:
@@ -94,6 +119,7 @@ private:
 
   SimData simData;
   bool simRunning = true, simPaused = false, verbose = false;
+  sc::State state = sc::OK;
 };
 
 #endif // SIMCONNECTHANDLER_H

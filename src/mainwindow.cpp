@@ -19,6 +19,7 @@
 #include "net/navserver.h"
 #include "datareaderthread.h"
 #include "ui_mainwindow.h"
+#include "settings/settings.h"
 
 #include <gui/dialog.h>
 #include <gui/helphandler.h>
@@ -27,6 +28,7 @@
 #include <QCloseEvent>
 #include <QDateTime>
 #include <QThread>
+#include <QSettings>
 #include <logging/logginghandler.h>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -49,14 +51,14 @@ MainWindow::MainWindow(QWidget *parent) :
   helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION);
   navServer = new NavServer(this);
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
+  connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
   connect(ui->actionContents, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::help);
   connect(ui->actionAbout, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::about);
   connect(ui->actionAboutQt, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::aboutQt);
   connect(this, &MainWindow::appendLogMessage, ui->textEdit, &QTextEdit::append);
-  navServer->startServer();
 
-  dataReader = new DataReaderThread(this, navServer);
-  dataReader->start();
+  connect(this, &MainWindow::windowShown, this, &MainWindow::mainWindowShown, Qt::QueuedConnection);
+
 }
 
 MainWindow::~MainWindow()
@@ -68,6 +70,11 @@ MainWindow::~MainWindow()
 
   delete helpHandler;
   delete ui;
+}
+
+void MainWindow::resetMessages()
+{
+  atools::settings::Settings::instance()->setValue("Actions/ShowQuit", true);
 }
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
@@ -135,4 +142,24 @@ void MainWindow::closeEvent(QCloseEvent *event)
   }
 
   writeSettings();
+}
+
+void MainWindow::mainWindowShown()
+{
+  qDebug() << "MainWindow::mainWindowShown()";
+  navServer->startServer();
+
+  dataReader = new DataReaderThread(this, navServer);
+  dataReader->start();
+}
+
+void MainWindow::showEvent(QShowEvent *event)
+{
+  if(firstStart)
+  {
+    emit windowShown();
+    firstStart = false;
+  }
+
+  event->ignore();
 }

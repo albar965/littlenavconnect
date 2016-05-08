@@ -38,7 +38,7 @@ void NavServerThread::run()
   QTcpSocket tcpSocket;
   if(!tcpSocket.setSocketDescriptor(socket))
   {
-    qCritical(gui) << "Error creating socket" << tcpSocket.errorString();
+    qCritical(gui) << "Error creating network socket " << tcpSocket.errorString() << ".";
     return;
   }
   QString peerAddr = tcpSocket.peerAddress().toString();
@@ -63,8 +63,6 @@ void NavServerThread::run()
                                      << " (" << peerAddr << ") " << " closed by peer";
       break;
     }
-
-    qDebug()<<dataPacket.getAirplaneName();
 
     dataPacket.write(&tcpSocket);
     tcpSocket.flush();

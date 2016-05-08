@@ -41,23 +41,29 @@ class MainWindow :
 
 public:
   explicit MainWindow(QWidget *parent = 0);
-  ~MainWindow();
+  virtual ~MainWindow();
 
 signals:
   void appendLogMessage(const QString& message);
 
+  /* Emitted when window is shown the first time */
+  void windowShown();
+
 private:
   void logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message);
+  virtual void showEvent(QShowEvent *event) override;
 
   Ui::MainWindow *ui;
   NavServer *navServer;
   atools::gui::HelpHandler *helpHandler;
   DataReaderThread *dataReader = nullptr;
-
+  bool firstStart = true;
   virtual void closeEvent(QCloseEvent *event) override;
 
   void readSettings();
   void writeSettings();
+  void mainWindowShown();
+  void resetMessages();
 
 };
 

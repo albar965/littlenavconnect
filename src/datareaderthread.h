@@ -21,6 +21,7 @@
 #include <QThread>
 
 class NavServer;
+class SimConnectHandler;
 
 class DataReaderThread :
   public QThread
@@ -34,6 +35,7 @@ public:
   void setTerminate();
 
 private:
+  void tryConnect(SimConnectHandler *handler);
   virtual void run() override;
 
   NavServer *server;

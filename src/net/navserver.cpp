@@ -64,11 +64,11 @@ bool NavServer::startServer()
   QHostInfo hostInfo = QHostInfo::fromName(ipAddress);
 
   if(!retval)
-    qCritical(gui) << "Unable to start the server:" << errorString();
+    qCritical(gui).noquote().nospace() << "Unable to start the server: " << errorString() << ".";
   else
     qInfo(gui).noquote().nospace() << "Server is running on "
                                    << hostInfo.hostName() << " (" << ipAddress << ") "
-                                   << "port " << serverPort();
+                                   << "port " << serverPort() << ".";
 
   return retval;
 }
