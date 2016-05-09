@@ -118,7 +118,7 @@ private:
 #endif
 
   SimData simData;
-  bool simRunning = true, simPaused = false, verbose = false;
+  bool simRunning = true, simPaused = false, verbose = false, dataFetched = false;
   sc::State state = sc::OK;
 };
 

@@ -59,6 +59,8 @@ SimConnectHandler::~SimConnectHandler()
 bool SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
 {
 #if defined(Q_OS_WIN32)
+  dataFetched = false;
+
   HRESULT hr = SimConnect_RequestDataOnSimObjectType(hSimConnect, DATA_REQUEST_ID, DATA_DEFINITION, 0,
                                                      SIMCONNECT_SIMOBJECT_TYPE_USER);
 
@@ -79,10 +81,11 @@ bool SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
 
   state = sc::OK;
 
-  if(!simRunning || simPaused)
+  if(!simRunning || simPaused || !dataFetched)
   {
     if(verbose)
-      qDebug() << "No data fetched. Running" << simRunning << "paused" << simPaused;
+      qDebug() << "No data fetched. Running" << simRunning << "paused" << simPaused
+               << "dataFetched" << dataFetched;
     return false;
   }
 
@@ -126,7 +129,6 @@ bool SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
   data.setVerticalSpeed(0.1f);
   dataId++;
 #endif
-
   return true;
 }
 
@@ -316,6 +318,7 @@ void SimConnectHandler::DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData)
                        << "wind" << simDataPtr->ambientWindDirection
                        << "/" << simDataPtr->ambientWindVelocity;
             simData = *simDataPtr;
+            dataFetched = true;
           }
         }
         break;

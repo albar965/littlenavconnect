@@ -61,13 +61,8 @@ void NavServerThread::run()
 
     if(!socket->isOpen())
     {
-      if(socket->error() == QAbstractSocket::RemoteHostClosedError)
-        qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
-                                       << " (" << peerAddr << ") " << " closed by peer.";
-      else
-        qCritical(gui).noquote().nospace() << "Connection error from " << hostInfo.hostName()
-                                           << " (" << peerAddr << ") " << ": "
-                                           << socket->errorString() << ".";
+      qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
+                                     << " (" << peerAddr << ") " << " closed.";
       break;
     }
 
