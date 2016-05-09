@@ -83,17 +83,15 @@ void NavServer::incomingConnection(qintptr socketDescriptor)
 
   qDebug() << "Thread" << thread->objectName();
 
-  connect(thread, &NavServerThread::finished, [ = ]()->void
-          {
-            threadFinished(thread);
-          });
+  connect(thread, &NavServerThread::finished, this, &NavServer::threadFinished);
 
   thread->start();
 }
 
-void NavServer::threadFinished(NavServerThread *thread)
+void NavServer::threadFinished()
 {
   QMutexLocker locker(&threadsMutex);
+  NavServerThread *thread = dynamic_cast<NavServerThread *>(sender());
 
   qDebug() << "Thread" << thread->objectName() << "finished";
   threads.remove(thread);

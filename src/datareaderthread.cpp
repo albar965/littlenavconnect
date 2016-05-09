@@ -45,7 +45,7 @@ void DataReaderThread::tryConnect(SimConnectHandler *handler)
       if(handler->connect())
         break;
 
-      qWarning(gui) << "Error connecting to simulator. Will retry in 10 seconds.";
+      qInfo(gui) << "Not connected to the simulator. Will retry in 10 seconds.";
       counter = 0;
     }
     counter++;

@@ -48,7 +48,7 @@ public:
 private:
   void incomingConnection(qintptr socketDescriptor) override;
 
-  void threadFinished(NavServerThread *thread);
+  void threadFinished();
 
   QSet<NavServerThread *> threads;
   mutable QMutex threadsMutex;

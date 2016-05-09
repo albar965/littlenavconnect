@@ -38,13 +38,9 @@ void NavServerThread::run()
   if(socket == nullptr)
     socket = new QTcpSocket();
 
-  // connect(socket,
-  // static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error),
-  // this, &NavServerThread::error);
-
   if(!socket->setSocketDescriptor(socketDescr))
   {
-    qCritical(gui) << "Error creating network socket " << socket->errorString() << ".";
+    qCritical(gui).noquote().nospace() << "Error creating network socket " << socket->errorString() << ".";
     return;
   }
   QString peerAddr = socket->peerAddress().toString();
@@ -63,20 +59,23 @@ void NavServerThread::run()
     dataPacket = data;
     mutex.unlock();
 
-    qDebug() << "waitOk" << waitOk;
-
     if(!socket->isOpen())
     {
-      qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
-                                     << " (" << peerAddr << ") " << " closed by peer";
+      if(socket->error() == QAbstractSocket::RemoteHostClosedError)
+        qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
+                                       << " (" << peerAddr << ") " << " closed by peer.";
+      else
+        qCritical(gui).noquote().nospace() << "Connection error from " << hostInfo.hostName()
+                                           << " (" << peerAddr << ") " << ": "
+                                           << socket->errorString() << ".";
       break;
     }
 
     if(waitOk)
-    {
       dataPacket.write(socket);
-      socket->flush();
-    }
+    else
+      atools::fs::SimConnectData().write(socket);
+    socket->flush();
   }
 
   if(socket != nullptr)
