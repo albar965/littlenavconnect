@@ -57,7 +57,8 @@ void DataReaderThread::tryConnect(SimConnectHandler *handler)
 void DataReaderThread::run()
 {
   qDebug() << "Datareader run";
-  SimConnectHandler handler(true);
+  SimConnectHandler handler(
+    atools::settings::Settings::instance().getAndStoreValue("Options/Verbose", false).toBool());
 
   tryConnect(&handler);
 

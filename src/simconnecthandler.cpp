@@ -242,26 +242,30 @@ void SimConnectHandler::DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData)
   switch(pData->dwID)
   {
     case SIMCONNECT_RECV_ID_OPEN:
-      // enter code to handle SimConnect version information received in a SIMCONNECT_RECV_OPEN structure.
-      SIMCONNECT_RECV_OPEN * openData = (SIMCONNECT_RECV_OPEN *)pData;
+      {
+        // enter code to handle SimConnect version information received in a SIMCONNECT_RECV_OPEN structure.
+        SIMCONNECT_RECV_OPEN *openData = (SIMCONNECT_RECV_OPEN *)pData;
 
-      qInfo() << "ApplicationName" << szApplicationName;
-      qInfo() << "ApplicationVersionMajor" << dwApplicationVersionMajor
-              << "ApplicationVersionMinor" << dwApplicationVersionMinor;
-      qInfo() << "ApplicationBuildMajor" << dwApplicationBuildMajor
-              << "ApplicationBuildMinor" << dwApplicationBuildMinor;
-      qInfo() << "SimConnectVersionMajor" << dwSimConnectVersionMajor
-              << "SimConnectVersionMinor" << dwSimConnectVersionMinor;
-      qInfo() << "SimConnectBuildMajor" << dwSimConnectBuildMajor
-              << "SimConnectBuildMinor" << dwSimConnectBuildMinor;
-      break;
+        qInfo() << "ApplicationName" << openData->szApplicationName;
+        qInfo().nospace() << "ApplicationVersion " << openData->dwApplicationVersionMajor
+                          << "." << openData->dwApplicationVersionMinor;
+        qInfo().nospace() << "ApplicationBuild " << openData->dwApplicationBuildMajor
+                          << "." << openData->dwApplicationBuildMinor;
+        qInfo().nospace() << "SimConnectVersion " << openData->dwSimConnectVersionMajor
+                          << "." << openData->dwSimConnectVersionMinor;
+        qInfo().nospace() << "SimConnectBuild " << openData->dwSimConnectBuildMajor
+                          << "." << openData->dwSimConnectBuildMinor;
+        break;
+      }
 
     case SIMCONNECT_RECV_ID_EXCEPTION:
-      // enter code to handle errors received in a SIMCONNECT_RECV_EXCEPTION structure.
-      SIMCONNECT_RECV_EXCEPTION * except = (SIMCONNECT_RECV_EXCEPTION *)pData;
-      qWarning() << "SimConnect exception" << except->dwException
-                 << "send ID" << except->dwSendId << "index" << except->dwIndex;
-      break;
+      {
+        // enter code to handle errors received in a SIMCONNECT_RECV_EXCEPTION structure.
+        SIMCONNECT_RECV_EXCEPTION *except = (SIMCONNECT_RECV_EXCEPTION *)pData;
+        qWarning() << "SimConnect exception" << except->dwException
+                   << "send ID" << except->dwSendID << "index" << except->dwIndex;
+        break;
+      }
 
     case SIMCONNECT_RECV_ID_EVENT:
       {

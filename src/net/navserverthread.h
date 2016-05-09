@@ -21,10 +21,12 @@
 #include <QThread>
 #include <QWaitCondition>
 #include <QMutex>
+#include <QAbstractSocket>
 
 #include "fs/simconnectdata.h"
 
 class NavServer;
+class QTcpSocket;
 
 class NavServerThread :
   public QThread
@@ -43,11 +45,12 @@ private:
   virtual void run() override;
 
   bool terminate = false;
-  qintptr socket;
+  qintptr socketDescr;
   NavServer *server;
   atools::fs::SimConnectData data;
   QWaitCondition waitCondition;
   mutable QMutex mutex;
+  QTcpSocket *socket = nullptr;
 
 };
 

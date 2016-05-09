@@ -23,7 +23,7 @@
 #include <QtNetwork>
 
 NavServerThread::NavServerThread(qintptr socketDescriptor, NavServer *parent)
-  : QThread(parent), socket(socketDescriptor), server(parent)
+  : QThread(parent), socketDescr(socketDescriptor), server(parent)
 {
   qDebug() << "NavServerThread created" << objectName();
 }
@@ -35,42 +35,59 @@ NavServerThread::~NavServerThread()
 
 void NavServerThread::run()
 {
-  QTcpSocket tcpSocket;
-  if(!tcpSocket.setSocketDescriptor(socket))
+  if(socket == nullptr)
+    socket = new QTcpSocket();
+
+  // connect(socket,
+  // static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error),
+  // this, &NavServerThread::error);
+
+  if(!socket->setSocketDescriptor(socketDescr))
   {
-    qCritical(gui) << "Error creating network socket " << tcpSocket.errorString() << ".";
+    qCritical(gui) << "Error creating network socket " << socket->errorString() << ".";
     return;
   }
-  QString peerAddr = tcpSocket.peerAddress().toString();
+  QString peerAddr = socket->peerAddress().toString();
   QHostInfo hostInfo = QHostInfo::fromName(peerAddr);
 
   qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
                                  << " (" << peerAddr << ") "
-                                 << "port " << tcpSocket.peerPort();
+                                 << "port " << socket->peerPort();
 
   atools::fs::SimConnectData dataPacket;
 
   while(!terminate)
   {
     mutex.lock();
-    waitCondition.wait(&mutex);
+    bool waitOk = waitCondition.wait(&mutex, 1000);
     dataPacket = data;
     mutex.unlock();
 
-    if(!tcpSocket.isOpen())
+    qDebug() << "waitOk" << waitOk;
+
+    if(!socket->isOpen())
     {
       qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
                                      << " (" << peerAddr << ") " << " closed by peer";
       break;
     }
 
-    dataPacket.write(&tcpSocket);
-    tcpSocket.flush();
+    if(waitOk)
+    {
+      dataPacket.write(socket);
+      socket->flush();
+    }
   }
-  tcpSocket.disconnectFromHost();
 
-  if(tcpSocket.state() != QAbstractSocket::UnconnectedState)
-    tcpSocket.waitForDisconnected(10000);
+  if(socket != nullptr)
+  {
+    socket->disconnectFromHost();
+
+    if(socket->state() != QAbstractSocket::UnconnectedState)
+      socket->waitForDisconnected(10000);
+    socket->deleteLater();
+    socket = nullptr;
+  }
 }
 
 void NavServerThread::postMessage(const atools::fs::SimConnectData& dataPacket)
