@@ -15,7 +15,7 @@ TEMPLATE = app
 
 # Adapt these variables to compile on Windows
 win32 {
-  QT_BIN=C:\\Qt\\5.5\\mingw492_32\\bin
+  QT_BIN=C:\\Qt\\5.5\\msvc2013\\bin
   GIT_BIN='C:\\Git\\bin\\git'
   SIMCONNECT="C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK"
 }
@@ -60,7 +60,7 @@ DEPENDPATH += $$PWD/../atools/src
 INCLUDEPATH += $$PWD/../atools/src $$PWD/src
 
 CONFIG(debug, debug|release): LIBS += -L$$PWD/../atools/debug -latools
-CONFIG(release, debug|release): LIBS += -L$$PWD/../atools/release -l atools
+CONFIG(release, debug|release): LIBS += -L$$PWD/../atools/release -latools
 
 unix {
 CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../atools/debug/libatools.a
@@ -68,8 +68,15 @@ CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../atools/release/libato
 }
 
 win32 {
-CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../atools/debug/atools.lib
-CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../atools/release/atools.lib
+CONFIG(debug, debug|release) {
+  PRE_TARGETDEPS += $$PWD/../atools/debug/atools.lib
+  WINDEPLOY_FLAGS = --no-system-d3d-compiler --debug --compiler-runtime
+}
+CONFIG(release, debug|release) {
+  PRE_TARGETDEPS += $$PWD/../atools/release/atools.lib
+  WINDEPLOY_FLAGS = --no-system-d3d-compiler --release --compiler-runtime
+}
+
 INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
 LIBS += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\lib\SimConnect.lib"
 }
@@ -103,10 +110,7 @@ win32 {
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy /i /s /e /f /y $${WINPWD}\\help $${DEPLOY_DIR_WIN}\\help &&
-  deploy.commands += xcopy $${QT_BIN}\\libgcc*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_BIN}\\libstdc*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_BIN}\\libwinpthread*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += $${QT_BIN}\\windeployqt --compiler-runtime $${DEPLOY_DIR_WIN}
+  deploy.commands += $${QT_BIN}\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
 }
 
 QMAKE_EXTRA_TARGETS += deploy
