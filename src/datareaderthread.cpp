@@ -28,6 +28,11 @@ DataReaderThread::DataReaderThread(QObject *parent, NavServer *navServer)
   : QThread(parent), server(navServer)
 {
   qDebug() << "Datareader started";
+
+  using atools::settings::Settings;
+  verbose = Settings::instance().getAndStoreValue("Options/Verbose", false).toBool();
+  updateRate = Settings::instance().getAndStoreValue("Options/UpdateRate", 500).toUInt();
+  reconnectRateSec = Settings::instance().getAndStoreValue("Options/ReconnectRate", 10).toInt();
 }
 
 DataReaderThread::~DataReaderThread()
@@ -40,16 +45,16 @@ void DataReaderThread::tryConnect(SimConnectHandler *handler)
   int counter = 0;
   while(!terminate)
   {
-    if((counter % 20) == 0)
+    if((counter % reconnectRateSec) == 0)
     {
       if(handler->connect())
         break;
 
-      qInfo(gui) << "Not connected to the simulator. Will retry in 10 seconds.";
+      qInfo(gui) << "Not connected to the simulator. Will retry in" << reconnectRateSec << "seconds.";
       counter = 0;
     }
     counter++;
-    QThread::msleep(500);
+    QThread::sleep(1);
   }
   qInfo(gui) << "Connected to simulator.";
 }
@@ -57,8 +62,8 @@ void DataReaderThread::tryConnect(SimConnectHandler *handler)
 void DataReaderThread::run()
 {
   qDebug() << "Datareader run";
-  SimConnectHandler handler(
-    atools::settings::Settings::instance().getAndStoreValue("Options/Verbose", false).toBool());
+
+  SimConnectHandler handler(verbose);
 
   tryConnect(&handler);
 
@@ -85,11 +90,18 @@ void DataReaderThread::run()
           tryConnect(&handler);
       }
     }
-    QThread::msleep(atools::settings::Settings::instance().getAndStoreValue("Options/UpdateRate", 500).toUInt());
+    QThread::msleep(updateRate);
   }
+  terminate = false; // Allow restart
+  qDebug() << "Datareader exiting run";
 }
 
-void DataReaderThread::setTerminate()
+void DataReaderThread::setUpdateRate(unsigned int updateRateMs)
 {
-  terminate = true;
+  updateRate = updateRateMs;
+}
+
+void DataReaderThread::setTerminate(bool terminateFlag)
+{
+  terminate = terminateFlag;
 }

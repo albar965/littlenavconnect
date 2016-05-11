@@ -19,19 +19,31 @@
 #include "navserverthread.h"
 #include "common.h"
 
-#include <QThreadPool>
 #include <QNetworkInterface>
-#include <stdlib.h>
 #include <QHostInfo>
+
+#include <settings/settings.h>
 
 NavServer::NavServer(QObject *parent)
   : QTcpServer(parent)
 {
   qDebug("NavServer created");
+
+  using atools::settings::Settings;
+  port = Settings::instance().getAndStoreValue("Options/DefaultPort", 51968).toInt();
 }
 
 NavServer::~NavServer()
 {
+  stopServer();
+}
+
+void NavServer::stopServer()
+{
+  qDebug() << "Navserver stopping";
+
+  close();
+
   isTerminating = true;
   QSet<NavServerThread *> threadsCopy(threads);
   for(NavServerThread *thread : threadsCopy)
@@ -45,7 +57,10 @@ NavServer::~NavServer()
 
 bool NavServer::startServer()
 {
-  bool retval = listen(QHostAddress::AnyIPv4, 51968);
+  qDebug() << "Navserver starting";
+  isTerminating = false;
+
+  bool retval = listen(QHostAddress::AnyIPv4, static_cast<quint16>(port));
 
   QString ipAddress;
   QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();

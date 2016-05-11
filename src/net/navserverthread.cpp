@@ -47,15 +47,17 @@ void NavServerThread::run()
   QHostInfo hostInfo = QHostInfo::fromName(peerAddr);
 
   qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
-                                 << " (" << peerAddr << ") "
-                                 << "port " << socket->peerPort();
+                                 << " (" << peerAddr << ")";
+  qDebug() << "Connection from " << hostInfo.hostName()
+           << " (" << peerAddr << ") "
+           << "port " << socket->peerPort();
 
   atools::fs::SimConnectData dataPacket;
 
   while(!terminate)
   {
     mutex.lock();
-    bool waitOk = waitCondition.wait(&mutex, 1000);
+    bool waitOk = waitCondition.wait(&mutex, 2000);
     dataPacket = data;
     mutex.unlock();
 

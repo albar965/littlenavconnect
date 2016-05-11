@@ -34,7 +34,8 @@ SOURCES +=\
     src/net/navserverthread.cpp \
     src/datareaderthread.cpp \
     src/common.cpp \
-    src/simconnecthandler.cpp
+    src/simconnecthandler.cpp \
+    src/optionsdialog.cpp
 
 HEADERS  += \
     src/mainwindow.h \
@@ -42,9 +43,11 @@ HEADERS  += \
     src/net/navserverthread.h \
     src/datareaderthread.h \
     src/common.h \
-    src/simconnecthandler.h
+    src/simconnecthandler.h \
+    src/optionsdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    optionsdialog.ui
 
 RESOURCES += \
     littlenavconnect.qrc

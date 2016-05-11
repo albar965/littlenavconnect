@@ -6,5 +6,6 @@
         <file>resources/icons/navroute.ico</file>
         <file>resources/icons/navroute.svg</file>
         <file>resources/config/logging.cfg</file>
+        <file>resources/icons/settings.svg</file>
     </qresource>
 </RCC>

@@ -40,10 +40,16 @@ public:
   virtual ~NavServer();
 
   bool startServer();
+  void stopServer();
 
   void postMessage(const atools::fs::SimConnectData& dataPacket);
 
   bool hasConnections() const;
+
+  void setPort(int value)
+  {
+    port = value;
+  }
 
 private:
   void incomingConnection(qintptr socketDescriptor) override;
@@ -53,7 +59,7 @@ private:
   QSet<NavServerThread *> threads;
   mutable QMutex threadsMutex;
   bool isTerminating = false;
-
+  int port = 51968;
 };
 
 #endif // NAVSERVER_H
