@@ -21,6 +21,7 @@
 #include "ui_mainwindow.h"
 #include "settings/settings.h"
 #include "common.h"
+#include "optionsdialog.h"
 
 #include <gui/dialog.h>
 #include <gui/helphandler.h>
@@ -31,6 +32,8 @@
 #include <QThread>
 #include <QSettings>
 #include <logging/logginghandler.h>
+
+using atools::settings::Settings;
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent), ui(new Ui::MainWindow)
@@ -51,8 +54,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
   helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION);
   navServer = new NavServer(this);
+
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
+  connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::options);
   connect(ui->actionContents, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::help);
   connect(ui->actionAbout, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::about);
   connect(ui->actionAboutQt, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::aboutQt);
@@ -73,9 +78,60 @@ MainWindow::~MainWindow()
   delete ui;
 }
 
+void MainWindow::options()
+{
+  OptionsDialog dialog;
+
+  Settings& settings = Settings::instance();
+  unsigned int updateRateMs = settings.getAndStoreValue("Options/UpdateRate", 500).toUInt();
+  int port = settings.getAndStoreValue("Options/DefaultPort", 51968).toInt();
+
+  dialog.setUpdateRate(updateRateMs);
+  dialog.setPort(port);
+
+  int result = dialog.exec();
+
+  if(result == QDialog::Accepted)
+  {
+    if(dialog.getUpdateRate() != updateRateMs)
+    {
+      settings->setValue("Options/UpdateRate", dialog.getUpdateRate());
+
+      dataReader->setTerminate();
+      dataReader->wait();
+      dataReader->setUpdateRate(dialog.getUpdateRate());
+      dataReader->start();
+    }
+
+    if(dialog.getPort() != port)
+    {
+      int result2 = QMessageBox::Yes;
+      if(navServer->hasConnections())
+        result2 = atools::gui::Dialog(this).showQuestionMsgBox("Actions/ShowPortChange",
+                                                               tr(
+                                                                 "There are still applications connected.\n"
+                                                                 "Really change the Network Port?"),
+                                                               tr("Do not &show this dialog again."),
+                                                               QMessageBox::Yes | QMessageBox::No,
+                                                               QMessageBox::No, QMessageBox::Yes);
+
+      if(result2 == QMessageBox::Yes)
+      {
+        settings->setValue("Options/DefaultPort", dialog.getPort());
+
+        navServer->stopServer();
+        navServer->setPort(dialog.getPort());
+        navServer->startServer();
+      }
+    }
+  }
+}
+
 void MainWindow::resetMessages()
 {
-  atools::settings::Settings::instance()->setValue("Actions/ShowQuit", true);
+  Settings& settings = Settings::instance();
+  settings->setValue("Actions/ShowQuit", true);
+  settings->setValue("Actions/Actions/ShowPortChange", true);
 }
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)

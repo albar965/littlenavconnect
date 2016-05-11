@@ -64,6 +64,7 @@ private:
   void writeSettings();
   void mainWindowShown();
   void resetMessages();
+  void options();
 
 };
 

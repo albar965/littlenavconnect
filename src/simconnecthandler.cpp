@@ -110,11 +110,11 @@ bool SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
   static int dataId = 0;
   QString dataIdStr = QString::number(dataId);
   data.setAirplaneTitle("Airplane Title " + dataIdStr);
-  data.setAirplaneModel("Airplane Model " + dataIdStr);
-  data.setAirplaneReg("Airplane Registration " + dataIdStr);
-  data.setAirplaneType("Airplane Type " + dataIdStr);
-  data.setAirplaneAirline("Airplane Airline " + dataIdStr);
-  data.setAirplaneFlightnumber("Airplane Flight Number " + dataIdStr);
+  data.setAirplaneModel("Duke");
+  data.setAirplaneReg("D-REGI");
+  data.setAirplaneType("Beech");
+  data.setAirplaneAirline("Airline");
+  data.setAirplaneFlightnumber("965");
 
   // 200 kts: 0.0555 nm per second / 0.0277777 nm per cycle
   data.getPosition().setLonX(8.f + (dataId * 0.0277777f / 60.f));

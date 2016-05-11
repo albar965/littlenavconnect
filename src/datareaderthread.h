@@ -32,7 +32,9 @@ public:
   DataReaderThread(QObject *parent, NavServer *navServer);
   virtual ~DataReaderThread();
 
-  void setTerminate();
+  void setTerminate(bool terminateFlag = true);
+
+  void setUpdateRate(unsigned int updateRateMs);
 
 private:
   void tryConnect(SimConnectHandler *handler);
@@ -40,6 +42,10 @@ private:
 
   NavServer *server;
   bool terminate = false;
+
+  bool verbose = false;
+  unsigned int updateRate = 500;
+  int reconnectRateSec = 10;
 };
 
 #endif // DATAREADERTHREAD_H
