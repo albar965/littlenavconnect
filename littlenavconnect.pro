@@ -35,7 +35,7 @@ SOURCES +=\
     src/common.cpp \
     src/simconnecthandler.cpp \
     src/optionsdialog.cpp \
-    src/net/navservertworker.cpp
+    src/net/navserverworker.cpp
 
 HEADERS  += \
     src/mainwindow.h \
