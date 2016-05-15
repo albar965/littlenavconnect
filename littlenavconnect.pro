@@ -31,20 +31,20 @@ SOURCES +=\
     src/main.cpp \
     src/mainwindow.cpp \
     src/net/navserver.cpp \
-    src/net/navserverthread.cpp \
     src/datareaderthread.cpp \
     src/common.cpp \
     src/simconnecthandler.cpp \
-    src/optionsdialog.cpp
+    src/optionsdialog.cpp \
+    src/net/navservertworker.cpp
 
 HEADERS  += \
     src/mainwindow.h \
     src/net/navserver.h \
-    src/net/navserverthread.h \
     src/datareaderthread.h \
     src/common.h \
     src/simconnecthandler.h \
-    src/optionsdialog.h
+    src/optionsdialog.h \
+    src/net/navserverworker.h
 
 FORMS    += mainwindow.ui \
     optionsdialog.ui

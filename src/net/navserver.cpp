@@ -16,7 +16,7 @@
 *****************************************************************************/
 
 #include "navserver.h"
-#include "navserverthread.h"
+#include "navserverworker.h"
 #include "common.h"
 
 #include <QNetworkInterface>
@@ -45,11 +45,11 @@ void NavServer::stopServer()
   close();
 
   isTerminating = true;
-  QSet<NavServerThread *> threadsCopy(threads);
-  for(NavServerThread *thread : threadsCopy)
+  QSet<NavServerWorker *> workersCopy(workers);
+  for(NavServerWorker *worker : workersCopy)
   {
-    thread->setTerminate();
-    thread->wait();
+    worker->setTerminate();
+    worker->thread()->wait();
   }
 
   qDebug("NavServer deleted");
@@ -92,39 +92,46 @@ void NavServer::incomingConnection(qintptr socketDescriptor)
 {
   qDebug() << "Incoming connection";
 
-  NavServerThread *thread = new NavServerThread(socketDescriptor, this);
-  thread->setObjectName("SocketWorker-" + QString::number(socketDescriptor));
-  threads.insert(thread);
+  NavServerWorker *worker = new NavServerWorker(socketDescriptor, nullptr);
+  worker->setObjectName("SocketWorker-" + QString::number(socketDescriptor));
 
-  qDebug() << "Thread" << thread->objectName();
+  QThread *workerThread = new QThread(this);
+  worker->moveToThread(workerThread);
 
-  connect(thread, &NavServerThread::finished, this, &NavServer::threadFinished);
+  connect(workerThread, &QThread::started, worker, &NavServerWorker::work);
+  connect(workerThread, &QThread::finished, [ = ]()->void {threadFinished(worker);
+          });
 
-  thread->start();
+  qDebug() << "Thread" << worker->objectName();
+  workerThread->start();
+
+  workers.insert(worker);
 }
 
-void NavServer::threadFinished()
+void NavServer::threadFinished(NavServerWorker *worker)
 {
   QMutexLocker locker(&threadsMutex);
-  NavServerThread *thread = dynamic_cast<NavServerThread *>(sender());
 
-  qDebug() << "Thread" << thread->objectName() << "finished";
-  threads.remove(thread);
+  qDebug() << "Thread" << worker->objectName() << "finished";
+  workers.remove(worker);
 
-  if(!isTerminating)
-    thread->deleteLater();
+  // if(!isTerminating)
+  {
+    worker->deleteLater();
+    worker->thread()->deleteLater();
+  }
 }
 
 void NavServer::postMessage(const atools::fs::SimConnectData& dataPacket)
 {
   QMutexLocker locker(&threadsMutex);
 
-  for(NavServerThread *thread : threads)
+  for(NavServerWorker *thread : workers)
     thread->postMessage(dataPacket);
 }
 
 bool NavServer::hasConnections() const
 {
   QMutexLocker locker(&threadsMutex);
-  return threads.size() > 0;
+  return workers.size() > 0;
 }

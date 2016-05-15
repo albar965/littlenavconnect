@@ -16,35 +16,40 @@
 *****************************************************************************/
 
 #include "navserver.h"
-#include "navserverthread.h"
+#include "navserverworker.h"
 #include "common.h"
 #include "fs/simconnectdata.h"
 
 #include <QtNetwork>
 
-NavServerThread::NavServerThread(qintptr socketDescriptor, NavServer *parent)
-  : QThread(parent), socketDescr(socketDescriptor), server(parent)
+NavServerWorker::NavServerWorker(qintptr socketDescriptor, NavServer *parent)
+  : QObject(parent), socketDescr(socketDescriptor), server(parent)
 {
   qDebug() << "NavServerThread created" << objectName();
 }
 
-NavServerThread::~NavServerThread()
+NavServerWorker::~NavServerWorker()
 {
   qDebug() << "NavServerThread deleted" << objectName();
 }
 
-void NavServerThread::run()
+void NavServerWorker::work()
 {
   if(socket == nullptr)
+  {
     socket = new QTcpSocket();
+    connect(socket, &QTcpSocket::disconnected, this, &NavServerWorker::socketDisconnected);
+    connect(socket, &QTcpSocket::readyRead, this, &NavServerWorker::readyRead);
+    connect(socket, &QTcpSocket::bytesWritten, this, &NavServerWorker::bytesWritten);
+  }
 
   if(!socket->setSocketDescriptor(socketDescr))
   {
     qCritical(gui).noquote().nospace() << "Error creating network socket " << socket->errorString() << ".";
     return;
   }
-  QString peerAddr = socket->peerAddress().toString();
-  QHostInfo hostInfo = QHostInfo::fromName(peerAddr);
+  peerAddr = socket->peerAddress().toString();
+  hostInfo = QHostInfo::fromName(peerAddr);
 
   qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
                                  << " (" << peerAddr << ")";
@@ -61,39 +66,58 @@ void NavServerThread::run()
     dataPacket = data;
     mutex.unlock();
 
-    if(!socket->isOpen())
-    {
-      qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
-                                     << " (" << peerAddr << ") " << " closed.";
+    if(socket == nullptr || !socket->isOpen())
       break;
-    }
 
     if(waitOk)
       dataPacket.write(socket);
     else
       atools::fs::SimConnectData().write(socket);
     socket->flush();
+
+    // waitReadCondition.wait(&mutexRead);
   }
 
-  if(socket != nullptr)
-  {
+  if(socket != nullptr && socket->isOpen())
     socket->disconnectFromHost();
-
-    if(socket->state() != QAbstractSocket::UnconnectedState)
-      socket->waitForDisconnected(10000);
-    socket->deleteLater();
-    socket = nullptr;
-  }
 }
 
-void NavServerThread::postMessage(const atools::fs::SimConnectData& dataPacket)
+void NavServerWorker::socketDisconnected()
+{
+  qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
+                                 << " (" << peerAddr << ") " << " closed.";
+
+  setTerminate();
+  wait();
+
+  socket->deleteLater();
+  socket = nullptr;
+  thread()->exit();
+}
+
+void NavServerWorker::readyRead()
+{
+  qDebug() << "Ready read";
+
+  QByteArray bytes = socket->readAll();
+  qDebug() << "Bytes read" << bytes.size();
+
+  // waitReadCondition.wakeAll();
+}
+
+void NavServerWorker::bytesWritten(qint64 bytes)
+{
+  qDebug() << "Bytes written" << bytes;
+}
+
+void NavServerWorker::postMessage(const atools::fs::SimConnectData& dataPacket)
 {
   QMutexLocker locker(&mutex);
   data = dataPacket;
   waitCondition.wakeAll();
 }
 
-void NavServerThread::setTerminate()
+void NavServerWorker::setTerminate()
 {
   QMutexLocker locker(&mutex);
   terminate = true;

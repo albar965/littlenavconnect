@@ -28,6 +28,7 @@ DataReaderThread::DataReaderThread(QObject *parent, NavServer *navServer)
   : QThread(parent), server(navServer)
 {
   qDebug() << "Datareader started";
+  setObjectName("DataReaderThread");
 
   using atools::settings::Settings;
   verbose = Settings::instance().getAndStoreValue("Options/Verbose", false).toBool();

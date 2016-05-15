@@ -28,7 +28,7 @@ class SimConnectData;
 }
 }
 
-class NavServerThread;
+class NavServerWorker;
 
 class NavServer :
   public QTcpServer
@@ -54,9 +54,9 @@ public:
 private:
   void incomingConnection(qintptr socketDescriptor) override;
 
-  void threadFinished();
+  void threadFinished(NavServerWorker* worker);
 
-  QSet<NavServerThread *> threads;
+  QSet<NavServerWorker *> workers;
   mutable QMutex threadsMutex;
   bool isTerminating = false;
   int port = 51968;

@@ -22,28 +22,29 @@
 #include <QWaitCondition>
 #include <QMutex>
 #include <QAbstractSocket>
+#include <QHostInfo>
 
 #include "fs/simconnectdata.h"
 
 class NavServer;
 class QTcpSocket;
 
-class NavServerThread :
-  public QThread
+class NavServerWorker :
+  public QObject
 {
   Q_OBJECT
 
 public:
-  NavServerThread(qintptr socketDescriptor, NavServer *parent);
-  virtual ~NavServerThread();
+  NavServerWorker(qintptr socketDescriptor, NavServer *parent);
+  virtual ~NavServerWorker();
 
   void postMessage(const atools::fs::SimConnectData& dataPacket);
 
   void setTerminate();
 
-private:
-  virtual void run() override;
+  void work();
 
+private:
   bool terminate = false;
   qintptr socketDescr;
   NavServer *server;
@@ -51,6 +52,16 @@ private:
   QWaitCondition waitCondition;
   mutable QMutex mutex;
   QTcpSocket *socket = nullptr;
+
+  QWaitCondition waitReadCondition;
+  mutable QMutex mutexRead;
+
+  QString peerAddr;
+  QHostInfo hostInfo;
+
+  void socketDisconnected();
+  void readyRead();
+  void bytesWritten(qint64 bytes);
 
 };
 
