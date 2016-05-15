@@ -20,12 +20,11 @@
 #include "simconnecthandler.h"
 #include "logging/loggingdefs.h"
 #include <net/navserver.h>
-#include <fs/simconnectdata.h>
 #include <QDateTime>
 #include "settings/settings.h"
 
-DataReaderThread::DataReaderThread(QObject *parent, NavServer *navServer)
-  : QThread(parent), server(navServer)
+DataReaderThread::DataReaderThread(QObject *parent)
+  : QThread(parent)
 {
   qDebug() << "Datareader started";
   setObjectName("DataReaderThread");
@@ -78,7 +77,7 @@ void DataReaderThread::run()
     {
       data.setPacketId(i);
       data.setPacketTs(QDateTime::currentDateTime().toTime_t());
-      server->postMessage(data);
+      emit postSimConnectData(data);
       i++;
     }
     else

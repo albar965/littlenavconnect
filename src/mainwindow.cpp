@@ -121,7 +121,7 @@ void MainWindow::options()
 
         navServer->stopServer();
         navServer->setPort(dialog.getPort());
-        navServer->startServer();
+        navServer->startServer(dataReader);
       }
     }
   }
@@ -209,10 +209,11 @@ void MainWindow::mainWindowShown()
   qInfo(gui).noquote().nospace() << "Version " << QApplication::applicationVersion()
                                  << " (revision " << GIT_REVISION << ")";
 
-  navServer->startServer();
-
-  dataReader = new DataReaderThread(this, navServer);
+  dataReader = new DataReaderThread(this);
   dataReader->start();
+
+  navServer->startServer(dataReader);
+
 }
 
 void MainWindow::showEvent(QShowEvent *event)

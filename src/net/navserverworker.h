@@ -23,6 +23,7 @@
 #include <QMutex>
 #include <QAbstractSocket>
 #include <QHostInfo>
+#include <QSemaphore>
 
 #include "fs/simconnectdata.h"
 
@@ -38,27 +39,21 @@ public:
   NavServerWorker(qintptr socketDescriptor, NavServer *parent);
   virtual ~NavServerWorker();
 
-  void postMessage(const atools::fs::SimConnectData& dataPacket);
+  void postSimConnectData(atools::fs::SimConnectData dataPacket);
 
-  void setTerminate();
-
-  void work();
+  void threadStarted();
 
 private:
-  bool terminate = false;
   qintptr socketDescr;
   NavServer *server;
   atools::fs::SimConnectData data;
-  QWaitCondition waitCondition;
-  mutable QMutex mutex;
   QTcpSocket *socket = nullptr;
 
-  QWaitCondition waitReadCondition;
-  mutable QMutex mutexRead;
-
+  bool inPost = false;
+  int lastPacketId = -1;
   QString peerAddr;
   QHostInfo hostInfo;
-
+  bool readReply = true;
   void socketDisconnected();
   void readyRead();
   void bytesWritten(qint64 bytes);

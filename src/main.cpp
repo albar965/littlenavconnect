@@ -20,11 +20,14 @@
 #include <logging/logginghandler.h>
 #include <logging/loggingutil.h>
 #include <settings/settings.h>
+#include "fs/simconnectdata.h"
 
 int main(int argc, char *argv[])
 {
   // Initialize the resources from atools static library
   Q_INIT_RESOURCE(atools);
+
+  qRegisterMetaType<atools::fs::SimConnectData>();
 
   QApplication app(argc, argv);
   QApplication::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navroute.svg"));
