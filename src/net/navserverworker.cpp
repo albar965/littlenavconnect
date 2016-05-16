@@ -18,12 +18,13 @@
 #include "navserver.h"
 #include "navserverworker.h"
 #include "common.h"
+#include "fs/sc/simconnectreply.h"
 
 #include <QtNetwork>
 #include <QApplication>
 
-NavServerWorker::NavServerWorker(qintptr socketDescriptor, NavServer *parent)
-  : QObject(parent), socketDescr(socketDescriptor), server(parent)
+NavServerWorker::NavServerWorker(qintptr socketDescriptor, NavServer *parent, bool verboseLog)
+  : QObject(parent), socketDescr(socketDescriptor), verbose(verboseLog)
 {
   qDebug() << "NavServerThread created" << QThread::currentThread()->objectName();
 }
@@ -72,25 +73,40 @@ void NavServerWorker::socketDisconnected()
 
 void NavServerWorker::readyRead()
 {
-  qDebug() << "Ready read" << QThread::currentThread()->objectName();
+  if(verbose)
+    qDebug() << "Ready read" << QThread::currentThread()->objectName();
 
-  QByteArray bytes = socket->readAll();
+  atools::fs::sc::SimConnectReply reply;
 
-  qDebug() << "Bytes read" << bytes.size();
-  readReply = true;
+  if(!reply.read(socket))
+    qWarning(gui).noquote().nospace() << "Dropping package due to incomplete reply. "
+                                         "Decrease number of updates per second.";
+  else
+    readReply = true;
+
+  if(reply.getStatus() != atools::fs::sc::OK)
+  {
+    qWarning(gui).noquote().nospace() << "Error reading reply: " << reply.getStatusText();
+    socket->abort();
+  }
+
 }
 
 void NavServerWorker::bytesWritten(qint64 bytes)
 {
-  qDebug() << "Bytes written" << bytes << "thread" << QThread::currentThread()->objectName();
+  if(verbose)
+    qDebug() << "Bytes written" << bytes << "thread" << QThread::currentThread()->objectName();
 }
 
-void NavServerWorker::postSimConnectData(atools::fs::SimConnectData dataPacket)
+void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPacket)
 {
-  qDebug() << "postSimConnectData" << QThread::currentThread()->objectName();
+  if(verbose)
+    qDebug() << "postSimConnectData" << QThread::currentThread()->objectName();
 
   if(!readReply)
   {
+    qWarning(gui).noquote().nospace() << "Dropping package due to missing reply. "
+                                         "Decrease number of updates per second.";
     qWarning() << "No reply - ignoring package";
     return;
   }
@@ -107,7 +123,14 @@ void NavServerWorker::postSimConnectData(atools::fs::SimConnectData dataPacket)
 
   int written;
   written = dataPacket.write(socket);
-  bool flush = socket->flush();
-  qDebug() << "written" << written << "flush" << flush;
+  if(dataPacket.getStatus() != atools::fs::sc::OK)
+    qWarning(gui).noquote().nospace() << "Error writing data: " << dataPacket.getStatusText();
+
+  if(!socket->flush())
+    qWarning() << "Reply to client not flushed";
+
+  if(verbose)
+    qDebug() << "written" << written << "flush" << flush;
+
   inPost = false;
 }

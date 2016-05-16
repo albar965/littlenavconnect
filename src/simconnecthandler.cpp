@@ -16,10 +16,9 @@
 *****************************************************************************/
 
 #include "simconnecthandler.h"
+#include "fs/sc/simconnectdata.h"
 
 #include <QDebug>
-
-#include <fs/simconnectdata.h>
 
 enum EventIds
 {
@@ -56,7 +55,7 @@ SimConnectHandler::~SimConnectHandler()
 #endif
 }
 
-bool SimConnectHandler::fetchData(atools::fs::SimConnectData& data)
+bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 {
 #if defined(Q_OS_WIN32)
   dataFetched = false;

@@ -23,14 +23,13 @@
 #include <QDateTime>
 #include "settings/settings.h"
 
-DataReaderThread::DataReaderThread(QObject *parent)
-  : QThread(parent)
+DataReaderThread::DataReaderThread(QObject *parent, bool verboseLog)
+  : QThread(parent), verbose(verboseLog)
 {
   qDebug() << "Datareader started";
   setObjectName("DataReaderThread");
 
   using atools::settings::Settings;
-  verbose = Settings::instance().getAndStoreValue("Options/Verbose", false).toBool();
   updateRate = Settings::instance().getAndStoreValue("Options/UpdateRate", 500).toUInt();
   reconnectRateSec = Settings::instance().getAndStoreValue("Options/ReconnectRate", 10).toInt();
 }
@@ -71,7 +70,7 @@ void DataReaderThread::run()
 
   while(!terminate)
   {
-    atools::fs::SimConnectData data;
+    atools::fs::sc::SimConnectData data;
 
     if(handler.fetchData(data))
     {

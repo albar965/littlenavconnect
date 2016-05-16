@@ -18,14 +18,11 @@
 #ifndef NAVSERVERTHREAD_H
 #define NAVSERVERTHREAD_H
 
+#include "fs/sc/simconnectdata.h"
+
 #include <QThread>
-#include <QWaitCondition>
-#include <QMutex>
 #include <QAbstractSocket>
 #include <QHostInfo>
-#include <QSemaphore>
-
-#include "fs/simconnectdata.h"
 
 class NavServer;
 class QTcpSocket;
@@ -36,19 +33,19 @@ class NavServerWorker :
   Q_OBJECT
 
 public:
-  NavServerWorker(qintptr socketDescriptor, NavServer *parent);
+  NavServerWorker(qintptr socketDescriptor, NavServer *parent, bool verboseLog);
   virtual ~NavServerWorker();
 
-  void postSimConnectData(atools::fs::SimConnectData dataPacket);
+  void postSimConnectData(atools::fs::sc::SimConnectData dataPacket);
 
   void threadStarted();
 
 private:
   qintptr socketDescr;
-  NavServer *server;
-  atools::fs::SimConnectData data;
+  atools::fs::sc::SimConnectData data;
   QTcpSocket *socket = nullptr;
 
+  bool verbose = false;
   bool inPost = false;
   int lastPacketId = -1;
   QString peerAddr;

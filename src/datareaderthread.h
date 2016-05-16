@@ -20,7 +20,7 @@
 
 #include <QThread>
 
-#include <fs/simconnectdata.h>
+#include "fs/sc/simconnectdata.h"
 
 class NavServer;
 class SimConnectHandler;
@@ -31,7 +31,7 @@ class DataReaderThread :
   Q_OBJECT
 
 public:
-  DataReaderThread(QObject *parent);
+  DataReaderThread(QObject *parent, bool verboseLog);
   virtual ~DataReaderThread();
 
   void setTerminate(bool terminateFlag = true);
@@ -39,7 +39,7 @@ public:
   void setUpdateRate(unsigned int updateRateMs);
 
 signals:
-  void postSimConnectData(atools::fs::SimConnectData dataPacket);
+  void postSimConnectData(atools::fs::sc::SimConnectData dataPacket);
 
 private:
   void tryConnect(SimConnectHandler *handler);

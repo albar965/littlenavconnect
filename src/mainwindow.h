@@ -60,6 +60,8 @@ private:
   bool firstStart = true;
   virtual void closeEvent(QCloseEvent *event) override;
 
+  bool verbose = false;
+
   void readSettings();
   void writeSettings();
   void mainWindowShown();

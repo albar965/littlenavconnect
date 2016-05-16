@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
                  "<p><b>Copyright 2015-2016 Alexander Barthel (albar965@mailbox.org).</b></p>");
 
   helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION);
-  navServer = new NavServer(this);
+  navServer = new NavServer(this, verbose);
 
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
@@ -165,9 +165,10 @@ void MainWindow::readSettings()
 {
   qDebug() << "readSettings";
 
+  verbose = Settings::instance().getAndStoreValue("Options/Verbose", false).toBool();
+
   atools::gui::WidgetState ws("MainWindow/Widget");
   ws.restore(this);
-
 }
 
 void MainWindow::writeSettings()
@@ -209,7 +210,7 @@ void MainWindow::mainWindowShown()
   qInfo(gui).noquote().nospace() << "Version " << QApplication::applicationVersion()
                                  << " (revision " << GIT_REVISION << ")";
 
-  dataReader = new DataReaderThread(this);
+  dataReader = new DataReaderThread(this, verbose);
   dataReader->start();
 
   navServer->startServer(dataReader);

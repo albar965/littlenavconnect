@@ -16,25 +16,27 @@
 *****************************************************************************/
 
 #include "mainwindow.h"
+#include "logging/logginghandler.h"
+#include "logging/loggingutil.h"
+#include "settings/settings.h"
+#include "fs/sc/simconnectdata.h"
+
 #include <QApplication>
-#include <logging/logginghandler.h>
-#include <logging/loggingutil.h>
-#include <settings/settings.h>
-#include "fs/simconnectdata.h"
 
 int main(int argc, char *argv[])
 {
   // Initialize the resources from atools static library
   Q_INIT_RESOURCE(atools);
 
-  qRegisterMetaType<atools::fs::SimConnectData>();
+  // Needed to send SimConnectData through queued connections
+  qRegisterMetaType<atools::fs::sc::SimConnectData>();
 
   QApplication app(argc, argv);
   QApplication::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navroute.svg"));
   QCoreApplication::setApplicationName("Little Navconnect");
   QCoreApplication::setOrganizationName("ABarthel");
   QCoreApplication::setOrganizationDomain("abarthel.org");
-  QCoreApplication::setApplicationVersion("0.5.0.develop");
+  QCoreApplication::setApplicationVersion("0.6.0.develop");
 
   using atools::logging::LoggingHandler;
   using atools::logging::LoggingUtil;

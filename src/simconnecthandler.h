@@ -30,7 +30,9 @@
 
 namespace atools {
 namespace fs {
+namespace sc {
 class SimConnectData;
+}
 }
 }
 
@@ -52,7 +54,7 @@ public:
   virtual ~SimConnectHandler();
   bool connect();
 
-  bool fetchData(atools::fs::SimConnectData& data);
+  bool fetchData(atools::fs::sc::SimConnectData& data);
 
   bool isSimRunning() const
   {

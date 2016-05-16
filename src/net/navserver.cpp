@@ -25,8 +25,8 @@
 
 #include <settings/settings.h>
 
-NavServer::NavServer(QObject *parent)
-  : QTcpServer(parent)
+NavServer::NavServer(QObject *parent, bool verboseLog)
+  : QTcpServer(parent), verbose(verboseLog)
 {
   qDebug("NavServer created");
 
@@ -92,7 +92,7 @@ void NavServer::incomingConnection(qintptr socketDescriptor)
 {
   qDebug() << "Incoming connection";
 
-  NavServerWorker *worker = new NavServerWorker(socketDescriptor, nullptr);
+  NavServerWorker *worker = new NavServerWorker(socketDescriptor, nullptr, verbose);
   worker->setObjectName("SocketWorker-" + QString::number(socketDescriptor));
 
   QThread *workerThread = new QThread(this);

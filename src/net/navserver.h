@@ -21,7 +21,7 @@
 #include <QMutex>
 #include <QStringList>
 #include <QTcpServer>
-#include "fs/simconnectdata.h"
+#include "fs/sc/simconnectdata.h"
 
 namespace atools {
 namespace fs {
@@ -38,7 +38,7 @@ class NavServer :
   Q_OBJECT
 
 public:
-  NavServer(QObject *parent);
+  NavServer(QObject *parent, bool verboseLog);
   virtual ~NavServer();
 
   bool startServer(DataReaderThread *dataReaderThread);
@@ -56,6 +56,7 @@ private:
 
   void threadFinished(NavServerWorker *worker);
 
+  bool verbose = false;
   DataReaderThread *dataReader;
   QSet<NavServerWorker *> workers;
   mutable QMutex threadsMutex;
