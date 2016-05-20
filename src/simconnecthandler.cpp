@@ -98,14 +98,27 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.getPosition().setLonX(simData.longitude);
   data.getPosition().setLatY(simData.latitude);
   data.getPosition().setAltitude(simData.altitude);
+
+  data.setGroundSpeed(simData.groundVelocity);
+  data.setIndicatedAltitude(simData.indicatedAltitude);
+  data.setAltitudeAboveGround(simData.planeAboveGround);
   data.setCourseMag(simData.planeHeadingMagnetic);
   data.setCourseTrue(simData.planeHeadingTrue);
-  data.setGroundSpeed(simData.groundVelocity);
+  data.setGroundAltitude(simData.groundAltitude);
+
+  if(simData.simOnGround > 0)
+    data.getFlags() |= atools::fs::sc::ON_GROUND;
+
+  data.setTrueSpeed(simData.airspeedTrue);
   data.setIndicatedSpeed(simData.airspeedIndicated);
+  data.setMachSpeed(simData.airspeedMach);
+  data.setVerticalSpeed(simData.verticalSpeed * 60.f);
+
   data.setWindDirection(simData.ambientWindDirection);
   data.setWindSpeed(simData.ambientWindVelocity);
-  data.setVerticalSpeed(simData.verticalSpeed);
+
 #else
+
   static int dataId = 0;
   QString dataIdStr = QString::number(dataId);
   data.setAirplaneTitle("Airplane Title " + dataIdStr);
@@ -125,7 +138,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setIndicatedSpeed(200.f);
   data.setWindDirection(180.f);
   data.setWindSpeed(25.f);
-  data.setVerticalSpeed(0.1f);
+  data.setVerticalSpeed(200.f);
   dataId++;
 #endif
   return true;
@@ -192,7 +205,7 @@ bool SimConnectHandler::connect()
                                         SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Airspeed Mach", "mach",
                                         SIMCONNECT_DATATYPE_FLOAT32);
-    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Vertical Speed", "feet/second",
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Vertical Speed", "feet per second",
                                         SIMCONNECT_DATATYPE_FLOAT32);
 
     // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Temperature", "celsius",
@@ -204,7 +217,7 @@ bool SimConnectHandler::connect()
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Wind Direction", "degrees",
                                         SIMCONNECT_DATATYPE_FLOAT32);
 
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Precip State", "bool",
+    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Precip State", "mask",
     // SIMCONNECT_DATATYPE_INT32);
     // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Aircraft Wind X", "knots",
     // SIMCONNECT_DATATYPE_FLOAT32);

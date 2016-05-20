@@ -97,7 +97,7 @@ public:
     float airspeedMach;
     float verticalSpeed;
 
-    // float ambientTemperture;
+    // float ambientTemperature;
     // float ambientPressure;
     float ambientWindVelocity;
     float ambientWindDirection;
