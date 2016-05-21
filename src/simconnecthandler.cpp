@@ -18,6 +18,11 @@
 #include "simconnecthandler.h"
 #include "fs/sc/simconnectdata.h"
 
+#if !defined(Q_OS_WIN32)
+#include "settings/settings.h"
+#include "geo/calculations.h"
+#endif
+
 #include <QDebug>
 
 enum EventIds
@@ -119,7 +124,55 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 
 #else
 
+  int updateRate =
+    atools::settings::Settings::instance().getAndStoreValue("Options/UpdateRate", 500).toInt();
   static int dataId = 0;
+  static int updatesMs = 0;
+  static atools::geo::Pos curPos(8.34239197, 54.9116364);
+  // 200 kts: 0.0555 nm per second / 0.0277777 nm per cycle - only for 500 ms updates
+  float speed = 200.f;
+  float nmPerSec = speed / 3600.f;
+  static float course = 45.f;
+  static float courseChange = 0.f;
+
+  static float alt = 0.f, altChange = 0.f;
+
+  updatesMs += updateRate;
+
+  if((updatesMs % 40000) == 0)
+    courseChange = 0.f;
+  else if((updatesMs % 30000) == 0)
+  {
+    courseChange = updateRate / 1000.f * 2.f; // 2 deg per second
+    if(course > 180.f)
+      courseChange = -courseChange;
+  }
+  course += courseChange;
+  course = atools::geo::normalizeCourse(course);
+
+  // Simulate takeoff run
+  if(updatesMs <= 10000)
+    data.setFlags(atools::fs::sc::ON_GROUND);
+
+  // Simulate takeoff
+  if(updatesMs == 10000)
+  {
+    altChange = updateRate / 1000.f * 16.6f; // 1000 ft per min
+    data.setFlags(atools::fs::sc::NONE);
+  }
+
+  if((updatesMs % 120000) == 0)
+    altChange = 0.f;
+  else if((updatesMs % 60000) == 0)
+  {
+    altChange = updateRate / 1000.f * 16.6f; // 1000 ft per min
+    if(alt > 8000.f)
+      altChange = -altChange / 2.f;
+  }
+  alt += altChange;
+
+  atools::geo::Pos next = curPos.endpoint(atools::geo::nmToMeter(updateRate / 1000.f * nmPerSec), course);
+
   QString dataIdStr = QString::number(dataId);
   data.setAirplaneTitle("Airplane Title " + dataIdStr);
   data.setAirplaneModel("Duke");
@@ -128,18 +181,20 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setAirplaneAirline("Airline");
   data.setAirplaneFlightnumber("965");
 
-  // 200 kts: 0.0555 nm per second / 0.0277777 nm per cycle - only for 500 ms updates
-  data.getPosition().setLonX(8.f + (dataId * 0.0277777f / 60.f));
-  data.getPosition().setLatY(51.f + (dataId * 0.0277777f / 60.f));
-  data.getPosition().setAltitude(qrand() * 100.f / RAND_MAX + 10000.f);
-  data.setCourseMag(45.f);
-  data.setCourseTrue(45.5f);
-  data.setGroundSpeed(250.f);
-  data.setIndicatedSpeed(200.f);
+  data.setPosition(next);
+  data.getPosition().setAltitude(alt);
+  data.setVerticalSpeed(altChange * 60.f);
+
+  data.setCourseMag(course);
+  data.setCourseTrue(course + 1.f);
+
+  data.setGroundSpeed(200.f);
+  data.setIndicatedSpeed(150.f);
   data.setWindDirection(180.f);
   data.setWindSpeed(25.f);
-  data.setVerticalSpeed(200.f);
   dataId++;
+
+  curPos = next;
 #endif
   return true;
 }
