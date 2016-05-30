@@ -332,21 +332,22 @@ bool SimConnectHandler::connect()
                                         SIMCONNECT_DATATYPE_FLOAT32);
 
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow PPH:1",
-                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow PPH:2",
-                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow PPH:3",
-                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow PPH:4",
-                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
+
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:1",
-                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
+                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:2",
-                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
+                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:3",
-                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
+                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:4",
-                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
+                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
 
     // Request an event when the simulation starts
     hr = SimConnect_SubscribeToSystemEvent(hSimConnect, EVENT_SIM_STATE, "Sim");
