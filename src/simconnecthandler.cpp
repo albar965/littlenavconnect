@@ -212,6 +212,10 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setIndicatedSpeed(150.f);
   data.setWindDirection(180.f);
   data.setWindSpeed(25.f);
+  data.setSeaLevelPressure(1013.f);
+
+  data.setAmbientTemperature(10.f);
+  data.setTotalAirTemperature(20.f);
   dataId++;
 
   curPos = next;
