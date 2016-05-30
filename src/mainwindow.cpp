@@ -209,6 +209,7 @@ void MainWindow::mainWindowShown()
   qInfo(gui).noquote().nospace() << QApplication::applicationName();
   qInfo(gui).noquote().nospace() << "Version " << QApplication::applicationVersion()
                                  << " (revision " << GIT_REVISION << ")";
+  qInfo(gui).noquote().nospace() << "Protocol Version " << atools::fs::sc::SimConnectData::getDataVersion();
 
   dataReader = new DataReaderThread(this, verbose);
   dataReader->start();

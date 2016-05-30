@@ -89,6 +89,8 @@ public:
     float planeAboveGround;
     float planeHeadingMagnetic;
     float planeHeadingTrue;
+    float planeTrackMagnetic;
+    float planeTrackTrue;
     float groundAltitude;
     qint32 simOnGround;
 
@@ -97,7 +99,8 @@ public:
     float airspeedMach;
     float verticalSpeed;
 
-    // float ambientTemperature;
+    float ambientTemperature;
+    float totalAirTemperature;
     // float ambientPressure;
     float ambientWindVelocity;
     float ambientWindDirection;
@@ -107,7 +110,25 @@ public:
     // float aircraftWindY;
     // float aircraftWindZ;
     // qint64 ambientInCloud;
-    // float seaLevelPressure;
+    float seaLevelPressure;
+    float pitotIce;
+    float structuralIce;
+
+    float airplaneTotalWeight;
+    float airplaneMaxGrossWeight;
+    float airplaneEmptyWeight;
+    float fuelTotalQuantity;
+    float fuelTotalWeight;
+
+    float fuelFlowPph1;
+    float fuelFlowPph2;
+    float fuelFlowPph3;
+    float fuelFlowPph4;
+
+    float fuelFlowGph1;
+    float fuelFlowGph2;
+    float fuelFlowGph3;
+    float fuelFlowGph4;
   };
 
 private:

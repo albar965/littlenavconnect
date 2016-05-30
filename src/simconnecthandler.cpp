@@ -109,6 +109,8 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setAltitudeAboveGround(simData.planeAboveGround);
   data.setCourseMag(simData.planeHeadingMagnetic);
   data.setCourseTrue(simData.planeHeadingTrue);
+  data.setTrackMag(simData.planeTrackMagnetic);
+  data.setTrackTrue(simData.planeTrackTrue);
   data.setGroundAltitude(simData.groundAltitude);
 
   if(simData.simOnGround > 0)
@@ -118,6 +120,24 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setIndicatedSpeed(simData.airspeedIndicated);
   data.setMachSpeed(simData.airspeedMach);
   data.setVerticalSpeed(simData.verticalSpeed * 60.f);
+
+  data.setAmbientTemperature(simData.ambientTemperature);
+  data.setTotalAirTemperature(simData.totalAirTemperature);
+
+  data.setSeaLevelPressure(simData.seaLevelPressure);
+  data.setPitotIce(simData.pitotIce);
+  data.setStructuralIce(simData.structuralIce);
+  data.setAirplaneTotalWeight(simData.airplaneTotalWeight);
+  data.setAirplaneMaxGrossWeight(simData.airplaneMaxGrossWeight);
+  data.setAirplaneEmptyWeight(simData.airplaneEmptyWeight);
+  data.setFuelTotalQuantity(simData.fuelTotalQuantity);
+  data.setFuelTotalWeight(simData.fuelTotalWeight);
+
+  data.setFuelFlowPPH(
+    simData.fuelFlowPph1 + simData.fuelFlowPph2 + simData.fuelFlowPph3 + simData.fuelFlowPph4);
+
+  data.setFuelFlowGPH(
+    simData.fuelFlowGph1 + simData.fuelFlowGph2 + simData.fuelFlowGph3 + simData.fuelFlowGph4);
 
   data.setWindDirection(simData.ambientWindDirection);
   data.setWindSpeed(simData.ambientWindVelocity);
@@ -245,10 +265,16 @@ bool SimConnectHandler::connect()
                                         SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Alt Above Ground", "feet",
                                         SIMCONNECT_DATATYPE_FLOAT32);
+
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Heading Degrees Magnetic",
                                         "degrees", SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Plane Heading Degrees True", "degrees",
                                         SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "GPS Ground Magnetic Track",
+                                        "degrees", SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "GPS Ground True Track", "degrees",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ground Altitude", "feet",
                                         SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Sim On Ground", "bool",
@@ -263,8 +289,11 @@ bool SimConnectHandler::connect()
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Vertical Speed", "feet per second",
                                         SIMCONNECT_DATATYPE_FLOAT32);
 
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Temperature", "celsius",
-    // SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Temperature", "celsius",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Total Air Temperature", "celsius",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+
     // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Pressure", "inches of mercury",
     // SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Wind Velocity", "knots",
@@ -282,8 +311,42 @@ bool SimConnectHandler::connect()
     // SIMCONNECT_DATATYPE_FLOAT32);
     // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient In Cloud", "bool",
     // SIMCONNECT_DATATYPE_INT32);
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Sea Level Pressure", "millibars",
-    // SIMCONNECT_DATATYPE_FLOAT32);
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Sea Level Pressure", "millibars",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Pitot Ice Pct", "percent",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Structural Ice Pct", "percent",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Total Weight", "pounds",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Max Gross Weight", "pounds",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Empty Weight", "pounds",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Fuel Total Quantity", "gallons",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Fuel Total Quantity Weight", "pounds",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow PPH:1",
+                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow PPH:2",
+                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow PPH:3",
+                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow PPH:4",
+                                        "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:1",
+                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:2",
+                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:3",
+                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:4",
+                                        "Pounds per hour", SIMCONNECT_DATATYPE_FLOAT32);
 
     // Request an event when the simulation starts
     hr = SimConnect_SubscribeToSystemEvent(hSimConnect, EVENT_SIM_STATE, "Sim");
