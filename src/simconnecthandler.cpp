@@ -141,6 +141,10 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 
   data.setWindDirection(simData.ambientWindDirection);
   data.setWindSpeed(simData.ambientWindVelocity);
+  data.setMagVar(simData.magVar);
+
+  data.setLocalTime(simData.localTime);
+  data.setZuluTime(simData.zuluTime);
 
 #else
 
@@ -352,6 +356,15 @@ bool SimConnectHandler::connect()
                                         "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Eng Fuel Flow GPH:4",
                                         "Gallons per hour", SIMCONNECT_DATATYPE_FLOAT32);
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Magvar",
+                                        "degrees", SIMCONNECT_DATATYPE_FLOAT32);
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Local Time",
+                                        "seconds", SIMCONNECT_DATATYPE_INT32);
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Zulu Time",
+                                        "seconds", SIMCONNECT_DATATYPE_INT32);
 
     // Request an event when the simulation starts
     hr = SimConnect_SubscribeToSystemEvent(hSimConnect, EVENT_SIM_STATE, "Sim");

@@ -129,6 +129,9 @@ public:
     float fuelFlowGph2;
     float fuelFlowGph3;
     float fuelFlowGph4;
+    float magVar;
+    qint32 localTime;
+    qint32 zuluTime;
   };
 
 private:
