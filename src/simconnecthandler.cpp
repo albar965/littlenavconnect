@@ -179,6 +179,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   static float course = 45.f;
   static float courseChange = 0.f;
   static float fuelFlow = 100.f;
+  static float visibility = 0.1f;
 
   static float alt = 0.f, altChange = 0.f;
 
@@ -198,7 +199,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   // Simulate takeoff run
   if(updatesMs <= 10000)
   {
-    data.setFlags(atools::fs::sc::ON_GROUND);
+    data.setFlags(data.getFlags() | atools::fs::sc::ON_GROUND);
     fuelFlow = 200.f;
   }
 
@@ -206,7 +207,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   if(updatesMs == 10000)
   {
     altChange = updateRate / 1000.f * 16.6f; // 1000 ft per min
-    data.setFlags(atools::fs::sc::NONE);
+    data.setFlags(data.getFlags() & ~atools::fs::sc::ON_GROUND);
     fuelFlow = 150.f;
   }
 
@@ -227,7 +228,15 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   }
   alt += altChange;
 
-  atools::geo::Pos next = curPos.endpoint(atools::geo::nmToMeter(updateRate / 1000.f * nmPerSec), course);
+  if(updatesMs == 20000)
+    data.setFlags(
+      data.getFlags() | atools::fs::sc::IN_SNOW | atools::fs::sc::IN_CLOUD | atools::fs::sc::IN_RAIN);
+  else if(updatesMs == 10000)
+    data.setFlags(data.getFlags() &
+                  ~(atools::fs::sc::IN_SNOW | atools::fs::sc::IN_CLOUD | atools::fs::sc::IN_RAIN));
+
+  atools::geo::Pos next =
+    curPos.endpoint(atools::geo::nmToMeter(updateRate / 1000.f * nmPerSec), course).normalize();
 
   QString dataIdStr = QString::number(dataId);
   data.setAirplaneTitle("Airplane Title " + dataIdStr);
@@ -238,6 +247,8 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setAirplaneFlightnumber("965");
   data.setFuelFlowPPH(fuelFlow);
   data.setFuelFlowGPH(fuelFlow / 6.f);
+  data.setAmbientVisibility(visibility);
+  visibility += 1.f;
 
   data.setPosition(next);
   data.getPosition().setAltitude(alt);
@@ -255,7 +266,6 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 
   data.setAmbientTemperature(10.f);
   data.setTotalAirTemperature(20.f);
-  data.setAmbientVisibility(18000.f);
   data.setFuelTotalQuantity(1000.f / 6.f);
   data.setFuelTotalWeight(1000.f);
 
