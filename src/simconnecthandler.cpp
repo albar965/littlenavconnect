@@ -24,6 +24,9 @@
 #endif
 
 #include <QDebug>
+#include <QDate>
+#include <QTime>
+#include <QDateTime>
 
 enum EventIds
 {
@@ -113,8 +116,17 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setTrackTrue(simData.planeTrackTrue);
   data.setGroundAltitude(simData.groundAltitude);
 
+  data.setFlags(atools::fs::sc::NONE);
   if(simData.simOnGround > 0)
     data.getFlags() |= atools::fs::sc::ON_GROUND;
+
+  if(simData.ambientPrecipState & 4)
+    data.getFlags() |= atools::fs::sc::IN_RAIN;
+  if(simData.ambientPrecipState & 8)
+    data.getFlags() |= atools::fs::sc::IN_SNOW;
+
+  if(simData.ambientInCloud > 0)
+    data.getFlags() |= atools::fs::sc::IN_CLOUD;
 
   data.setTrueSpeed(simData.airspeedTrue);
   data.setIndicatedSpeed(simData.airspeedIndicated);
@@ -123,6 +135,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 
   data.setAmbientTemperature(simData.ambientTemperature);
   data.setTotalAirTemperature(simData.totalAirTemperature);
+  data.setAmbientVisibility(simData.ambientVisibility);
 
   data.setSeaLevelPressure(simData.seaLevelPressure);
   data.setPitotIce(simData.pitotIce);
@@ -143,8 +156,15 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setWindSpeed(simData.ambientWindVelocity);
   data.setMagVar(simData.magVar);
 
-  data.setLocalTime(simData.localTime);
-  data.setZuluTime(simData.zuluTime);
+  QDate localDate(simData.localYear, simData.localMonth, simData.localDay);
+  QTime localTime = QTime::fromMSecsSinceStartOfDay(simData.localTime * 1000);
+  QDateTime localDateTime(localDate, localTime, Qt::OffsetFromUTC, simData.timeZoneOffset);
+  data.setLocalTime(localDateTime);
+
+  QDate zuluDate(simData.zuluYear, simData.zuluMonth, simData.zuluDay);
+  QTime zuluTime = QTime::fromMSecsSinceStartOfDay(simData.zuluTime * 1000);
+  QDateTime zuluDateTime(zuluDate, zuluTime, Qt::UTC);
+  data.setZuluTime(zuluDateTime);
 
 #else
 
@@ -302,23 +322,18 @@ bool SimConnectHandler::connect()
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Total Air Temperature", "celsius",
                                         SIMCONNECT_DATATYPE_FLOAT32);
 
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Pressure", "inches of mercury",
-    // SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Wind Velocity", "knots",
                                         SIMCONNECT_DATATYPE_FLOAT32);
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Wind Direction", "degrees",
                                         SIMCONNECT_DATATYPE_FLOAT32);
 
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Precip State", "mask",
-    // SIMCONNECT_DATATYPE_INT32);
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Aircraft Wind X", "knots",
-    // SIMCONNECT_DATATYPE_FLOAT32);
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Aircraft Wind Y", "knots",
-    // SIMCONNECT_DATATYPE_FLOAT32);
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Aircraft Wind Z", "knots",
-    // SIMCONNECT_DATATYPE_FLOAT32);
-    // hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient In Cloud", "bool",
-    // SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Precip State", "mask",
+                                        SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient In Cloud", "bool",
+                                        SIMCONNECT_DATATYPE_INT32);
+
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Ambient Visibility", "meters",
+                                        SIMCONNECT_DATATYPE_FLOAT32);
 
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Sea Level Pressure", "millibars",
                                         SIMCONNECT_DATATYPE_FLOAT32);
@@ -362,8 +377,22 @@ bool SimConnectHandler::connect()
 
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Local Time",
                                         "seconds", SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Local Year",
+                                        "number", SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Local Month of Year",
+                                        "number", SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Local Day of Month",
+                                        "number", SIMCONNECT_DATATYPE_INT32);
 
     hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Zulu Time",
+                                        "seconds", SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Zulu Year",
+                                        "number", SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Zulu Month of Year",
+                                        "number", SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Zulu Day of Month",
+                                        "number", SIMCONNECT_DATATYPE_INT32);
+    hr = SimConnect_AddToDataDefinition(hSimConnect, DATA_DEFINITION, "Time Zone Offset",
                                         "seconds", SIMCONNECT_DATATYPE_INT32);
 
     // Request an event when the simulation starts
@@ -464,7 +493,18 @@ void SimConnectHandler::DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData)
                        << "course " << simDataPtr->planeHeadingMagnetic
                        << "M" << simDataPtr->planeHeadingTrue << "T"
                        << "wind" << simDataPtr->ambientWindDirection
-                       << "/" << simDataPtr->ambientWindVelocity;
+                       << "/" << simDataPtr->ambientWindVelocity
+                       << "/" << simDataPtr->ambientWindVelocity
+                       << "magvar" << simDataPtr->magVar
+                       << "local time" << simDataPtr->localTime
+                       << "local year" << simDataPtr->localYear
+                       << "local month" << simDataPtr->localMonth
+                       << "local day" << simDataPtr->localDay
+                       << "zulu time" << simDataPtr->zuluTime
+                       << "zulu year" << simDataPtr->zuluYear
+                       << "zulu month" << simDataPtr->zuluMonth
+                       << "zulu day" << simDataPtr->zuluDay
+              ;
             simData = *simDataPtr;
             dataFetched = true;
           }

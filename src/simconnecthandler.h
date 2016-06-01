@@ -101,15 +101,12 @@ public:
 
     float ambientTemperature;
     float totalAirTemperature;
-    // float ambientPressure;
     float ambientWindVelocity;
     float ambientWindDirection;
 
-    // qint64 ambientPrecipState;
-    // float aircraftWindX;
-    // float aircraftWindY;
-    // float aircraftWindZ;
-    // qint64 ambientInCloud;
+    qint32 ambientPrecipState;
+    qint32 ambientInCloud;
+    float ambientVisibility;
     float seaLevelPressure;
     float pitotIce;
     float structuralIce;
@@ -131,7 +128,14 @@ public:
     float fuelFlowGph4;
     float magVar;
     qint32 localTime;
+    qint32 localYear;
+    qint32 localMonth;
+    qint32 localDay;
     qint32 zuluTime;
+    qint32 zuluYear;
+    qint32 zuluMonth;
+    qint32 zuluDay;
+    qint32 timeZoneOffset;
   };
 
 private:
