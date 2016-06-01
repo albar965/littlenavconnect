@@ -178,6 +178,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   float nmPerSec = speed / 3600.f;
   static float course = 45.f;
   static float courseChange = 0.f;
+  static float fuelFlow = 100.f;
 
   static float alt = 0.f, altChange = 0.f;
 
@@ -196,22 +197,33 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 
   // Simulate takeoff run
   if(updatesMs <= 10000)
+  {
     data.setFlags(atools::fs::sc::ON_GROUND);
+    fuelFlow = 200.f;
+  }
 
   // Simulate takeoff
   if(updatesMs == 10000)
   {
     altChange = updateRate / 1000.f * 16.6f; // 1000 ft per min
     data.setFlags(atools::fs::sc::NONE);
+    fuelFlow = 150.f;
   }
 
   if((updatesMs % 120000) == 0)
+  {
     altChange = 0.f;
+    fuelFlow = 100.f;
+  }
   else if((updatesMs % 60000) == 0)
   {
     altChange = updateRate / 1000.f * 16.6f; // 1000 ft per min
+    fuelFlow = 150.f;
     if(alt > 8000.f)
+    {
       altChange = -altChange / 2.f;
+      fuelFlow = 50.f;
+    }
   }
   alt += altChange;
 
@@ -224,6 +236,8 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setAirplaneType("Beech");
   data.setAirplaneAirline("Airline");
   data.setAirplaneFlightnumber("965");
+  data.setFuelFlowPPH(fuelFlow);
+  data.setFuelFlowGPH(fuelFlow / 6.f);
 
   data.setPosition(next);
   data.getPosition().setAltitude(alt);
@@ -234,6 +248,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 
   data.setGroundSpeed(200.f);
   data.setIndicatedSpeed(150.f);
+  data.setTrueSpeed(170.f);
   data.setWindDirection(180.f);
   data.setWindSpeed(25.f);
   data.setSeaLevelPressure(1013.f);
@@ -241,6 +256,8 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   data.setAmbientTemperature(10.f);
   data.setTotalAirTemperature(20.f);
   data.setAmbientVisibility(18000.f);
+  data.setFuelTotalQuantity(1000.f / 6.f);
+  data.setFuelTotalWeight(1000.f);
 
   data.setLocalTime(QDateTime::currentDateTime());
 
