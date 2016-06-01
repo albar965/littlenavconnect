@@ -240,6 +240,15 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 
   data.setAmbientTemperature(10.f);
   data.setTotalAirTemperature(20.f);
+  data.setAmbientVisibility(18000.f);
+
+  data.setLocalTime(QDateTime::currentDateTime());
+
+  QDate zuluDate(QDate::currentDate().year(), QDate::currentDate().month(), QDate::currentDate().day());
+  QTime zuluTime = QTime::fromMSecsSinceStartOfDay(QTime::currentTime().msecsSinceStartOfDay());
+  QDateTime zuluDateTime(zuluDate, zuluTime, Qt::UTC);
+  data.setZuluTime(zuluDateTime);
+
   dataId++;
 
   curPos = next;
