@@ -79,14 +79,14 @@ void NavServerWorker::readyRead()
   atools::fs::sc::SimConnectReply reply;
 
   if(!reply.read(socket))
-    qWarning(gui).noquote().nospace() << "Dropping package due to incomplete reply. "
-                                         "Decrease number of updates per second.";
+    handleDropped("Incomplete reply");
   else
     readReply = true;
 
   if(reply.getStatus() != atools::fs::sc::OK)
   {
-    qWarning(gui).noquote().nospace() << "Error reading reply: " << reply.getStatusText();
+    qWarning(gui).noquote().nospace() << "Error reading reply: " << reply.getStatusText()
+                                      << ". Closing connection.";
     socket->abort();
   }
 
@@ -105,9 +105,7 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
 
   if(!readReply)
   {
-    qWarning(gui).noquote().nospace() << "Dropping package due to missing reply. "
-                                         "Decrease number of updates per second.";
-    qWarning() << "No reply - ignoring package";
+    handleDropped("Missing reply");
     return;
   }
 
@@ -133,4 +131,17 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
     qDebug() << "written" << written << "flush" << flush;
 
   inPost = false;
+}
+
+void NavServerWorker::handleDropped(const QString& reason)
+{
+  droppedPackages++;
+  if(droppedPackages > MAX_DROPPED_PACKAGES)
+  {
+    qWarning(gui).noquote().nospace() << "Dropped more than " << MAX_DROPPED_PACKAGES
+                                      << " packages. Reason: " << reason << "."
+                                      << "Decrease number of updates per second.";
+    droppedPackages = 0;
+  }
+  qWarning() << "No reply - ignoring package. Currently dropped" << droppedPackages << "Reason:" << reason;
 }

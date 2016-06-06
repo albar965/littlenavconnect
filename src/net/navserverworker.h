@@ -45,6 +45,8 @@ private:
   atools::fs::sc::SimConnectData data;
   QTcpSocket *socket = nullptr;
 
+  const int MAX_DROPPED_PACKAGES = 20;
+  int droppedPackages = 0;
   bool verbose = false;
   bool inPost = false;
   int lastPacketId = -1;
@@ -54,6 +56,8 @@ private:
   void socketDisconnected();
   void readyRead();
   void bytesWritten(qint64 bytes);
+
+  void handleDropped(const QString& reason);
 
 };
 
