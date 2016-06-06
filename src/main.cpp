@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
   qRegisterMetaType<atools::fs::sc::SimConnectData>();
 
   QApplication app(argc, argv);
-  QApplication::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navroute.svg"));
+  QApplication::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"));
   QCoreApplication::setApplicationName("Little Navconnect");
   QCoreApplication::setOrganizationName("ABarthel");
   QCoreApplication::setOrganizationDomain("abarthel.org");

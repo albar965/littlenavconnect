@@ -92,7 +92,7 @@ unix {
 
 # Windows specific deploy target
 win32 {
-  RC_ICONS = resources/icons/navroute.ico
+  RC_ICONS = resources/icons/navconnect.ico
 
   # Create backslashed path
   WINPWD=$${PWD}
