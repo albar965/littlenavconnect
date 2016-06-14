@@ -15,13 +15,11 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef NAVSERVERTHREAD_H
-#define NAVSERVERTHREAD_H
+#ifndef LITTLENAVCONNECT_NAVSERVERTHREAD_H
+#define LITTLENAVCONNECT_NAVSERVERTHREAD_H
 
 #include "fs/sc/simconnectdata.h"
 
-#include <QThread>
-#include <QAbstractSocket>
 #include <QHostInfo>
 
 class NavServer;
@@ -61,4 +59,4 @@ private:
 
 };
 
-#endif // NAVSERVERTHREAD_H
+#endif // LITTLENAVCONNECT_NAVSERVERTHREAD_H

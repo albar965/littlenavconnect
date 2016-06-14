@@ -30,21 +30,21 @@ unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
 SOURCES +=\
     src/main.cpp \
     src/mainwindow.cpp \
-    src/net/navserver.cpp \
     src/datareaderthread.cpp \
-    src/common.cpp \
     src/simconnecthandler.cpp \
     src/optionsdialog.cpp \
-    src/net/navserverworker.cpp
+    src/navserver.cpp \
+    src/navserverworker.cpp \
+    src/navservercommon.cpp
 
 HEADERS  += \
     src/mainwindow.h \
-    src/net/navserver.h \
     src/datareaderthread.h \
-    src/common.h \
     src/simconnecthandler.h \
     src/optionsdialog.h \
-    src/net/navserverworker.h
+    src/navservercommon.h \
+    src/navserver.h \
+    src/navserverworker.h
 
 FORMS    += mainwindow.ui \
     optionsdialog.ui

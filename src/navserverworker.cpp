@@ -16,12 +16,13 @@
 *****************************************************************************/
 
 #include "navserver.h"
+
 #include "navserverworker.h"
-#include "common.h"
+#include "navservercommon.h"
 #include "fs/sc/simconnectreply.h"
 
-#include <QtNetwork>
-#include <QApplication>
+#include <QThread>
+#include <QTcpSocket>
 
 NavServerWorker::NavServerWorker(qintptr socketDescriptor, NavServer *parent, bool verboseLog)
   : QObject(parent), socketDescr(socketDescriptor), verbose(verboseLog)

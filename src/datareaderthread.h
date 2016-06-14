@@ -15,12 +15,12 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef DATAREADERTHREAD_H
-#define DATAREADERTHREAD_H
-
-#include <QThread>
+#ifndef LITTLENAVCONNECT_DATAREADERTHREAD_H
+#define LITTLENAVCONNECT_DATAREADERTHREAD_H
 
 #include "fs/sc/simconnectdata.h"
+
+#include <QThread>
 
 class NavServer;
 class SimConnectHandler;
@@ -52,4 +52,4 @@ private:
   int reconnectRateSec = 10;
 };
 
-#endif // DATAREADERTHREAD_H
+#endif // LITTLENAVCONNECT_DATAREADERTHREAD_H

@@ -15,11 +15,10 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef LITTLENAVCONNECT_MAINWINDOW_H
+#define LITTLENAVCONNECT_MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QMutex>
 
 namespace Ui {
 class MainWindow;
@@ -70,4 +69,4 @@ private:
 
 };
 
-#endif // MAINWINDOW_H
+#endif // LITTLENAVCONNECT_MAINWINDOW_H

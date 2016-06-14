@@ -15,8 +15,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef SIMCONNECTHANDLER_H
-#define SIMCONNECTHANDLER_H
+#ifndef LITTLENAVCONNECT_SIMCONNECTHANDLER_H
+#define LITTLENAVCONNECT_SIMCONNECTHANDLER_H
 
 #include <QtGlobal>
 
@@ -152,4 +152,4 @@ private:
   sc::State state = sc::OK;
 };
 
-#endif // SIMCONNECTHANDLER_H
+#endif // LITTLENAVCONNECT_SIMCONNECTHANDLER_H

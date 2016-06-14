@@ -15,13 +15,14 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#include "common.h"
 #include "datareaderthread.h"
-#include "simconnecthandler.h"
+
 #include "logging/loggingdefs.h"
-#include <net/navserver.h>
-#include <QDateTime>
+#include "navservercommon.h"
+#include "simconnecthandler.h"
 #include "settings/settings.h"
+
+#include <QDateTime>
 
 DataReaderThread::DataReaderThread(QObject *parent, bool verboseLog)
   : QThread(parent), verbose(verboseLog)

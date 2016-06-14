@@ -15,11 +15,11 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef LITTLENAVCONNECT_COMMON_H
+#define LITTLENAVCONNECT_COMMON_H
 
 #include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(gui);
 
-#endif // COMMON_H
+#endif // LITTLENAVCONNECT_COMMON_H

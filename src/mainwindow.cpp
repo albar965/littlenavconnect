@@ -16,22 +16,21 @@
 *****************************************************************************/
 
 #include "mainwindow.h"
-#include "net/navserver.h"
+
+#include "navserver.h"
 #include "datareaderthread.h"
 #include "ui_mainwindow.h"
 #include "settings/settings.h"
-#include "common.h"
+#include "navservercommon.h"
 #include "optionsdialog.h"
 
-#include <gui/dialog.h>
-#include <gui/helphandler.h>
-#include <gui/widgetstate.h>
+#include "gui/dialog.h"
+#include "gui/helphandler.h"
+#include "gui/widgetstate.h"
+#include "logging/logginghandler.h"
 
+#include <QMessageBox>
 #include <QCloseEvent>
-#include <QDateTime>
-#include <QThread>
-#include <QSettings>
-#include <logging/logginghandler.h>
 
 using atools::settings::Settings;
 

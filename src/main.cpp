@@ -16,6 +16,7 @@
 *****************************************************************************/
 
 #include "mainwindow.h"
+
 #include "logging/logginghandler.h"
 #include "logging/loggingutil.h"
 #include "settings/settings.h"

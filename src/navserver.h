@@ -15,13 +15,11 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef NAVSERVER_H
-#define NAVSERVER_H
+#ifndef LITTLENAVCONNECT_NAVSERVER_H
+#define LITTLENAVCONNECT_NAVSERVER_H
 
 #include <QMutex>
-#include <QStringList>
 #include <QTcpServer>
-#include "fs/sc/simconnectdata.h"
 
 namespace atools {
 namespace fs {
@@ -63,4 +61,4 @@ private:
   int port = 51968;
 };
 
-#endif // NAVSERVER_H
+#endif // LITTLENAVCONNECT_NAVSERVER_H

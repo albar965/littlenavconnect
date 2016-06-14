@@ -16,14 +16,14 @@
 *****************************************************************************/
 
 #include "navserver.h"
+
+#include "navservercommon.h"
 #include "navserverworker.h"
-#include "common.h"
+#include "datareaderthread.h"
+#include "settings/settings.h"
 
 #include <QNetworkInterface>
 #include <QHostInfo>
-#include <datareaderthread.h>
-
-#include <settings/settings.h>
 
 NavServer::NavServer(QObject *parent, bool verboseLog)
   : QTcpServer(parent), verbose(verboseLog)

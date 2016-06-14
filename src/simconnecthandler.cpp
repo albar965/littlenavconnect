@@ -23,7 +23,6 @@
 #include "geo/calculations.h"
 #endif
 
-#include <QDebug>
 #include <QDate>
 #include <QTime>
 #include <QDateTime>
