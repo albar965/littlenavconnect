@@ -95,7 +95,7 @@ void MainWindow::options()
   {
     if(dialog.getUpdateRate() != updateRateMs)
     {
-      settings->setValue("Options/UpdateRate", dialog.getUpdateRate());
+      settings.setValue("Options/UpdateRate", static_cast<int>(dialog.getUpdateRate()));
 
       dataReader->setTerminate();
       dataReader->wait();
@@ -117,7 +117,7 @@ void MainWindow::options()
 
       if(result2 == QMessageBox::Yes)
       {
-        settings->setValue("Options/DefaultPort", dialog.getPort());
+        settings.setValue("Options/DefaultPort", dialog.getPort());
 
         navServer->stopServer();
         navServer->setPort(dialog.getPort());
@@ -130,8 +130,8 @@ void MainWindow::options()
 void MainWindow::resetMessages()
 {
   Settings& settings = Settings::instance();
-  settings->setValue("Actions/ShowQuit", true);
-  settings->setValue("Actions/Actions/ShowPortChange", true);
+  settings.setValue("Actions/ShowQuit", true);
+  settings.setValue("Actions/Actions/ShowPortChange", true);
 }
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
