@@ -482,7 +482,7 @@ void SimConnectHandler::DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData)
         SIMCONNECT_RECV_EXCEPTION *except = (SIMCONNECT_RECV_EXCEPTION *)pData;
         qWarning() << "SimConnect exception" << except->dwException
                    << "send ID" << except->dwSendID << "index" << except->dwIndex;
-        state = SIMCONNECT_EXCEPTION;
+        state = sc::SIMCONNECT_EXCEPTION;
         break;
       }
 
@@ -517,30 +517,29 @@ void SimConnectHandler::DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData)
             qDebug() << "DATA_REQUEST_ID";
           DWORD objectID = pObjData->dwObjectID;
           SimData *simDataPtr = reinterpret_cast<SimData *>(&pObjData->dwData);
-          if(SUCCEEDED(StringCbLengthA(&simDataPtr->title[0], sizeof(simDataPtr->title), NULL))) // security check
+          if(SUCCEEDED(StringCbLengthA(&simDataPtr->aircraftTitle[0], sizeof(simDataPtr->aircraftTitle), NULL))) // security check
           {
             if(verbose)
-              qDebug() << "ObjectID" << objectID << "Title" << simDataPtr->title
-                       << "atcType" << simDataPtr->atcType
-                       << "atcModel" << simDataPtr->atcModel
-                       << "atcId" << simDataPtr->atcId
-                       << "atcAirline" << simDataPtr->atcAirline
-                       << "atcFlightNumber" << simDataPtr->atcFlightNumber
-                       << "Lat" << simDataPtr->latitude << "Lon" << simDataPtr->longitude
-                       << "Alt" << simDataPtr->altitude
-                       << "ias" << simDataPtr->airspeedIndicated << "gs" << simDataPtr->groundVelocity
-                       << "vs" << simDataPtr->verticalSpeed
-                       << "course " << simDataPtr->planeHeadingMagnetic
-                       << "M" << simDataPtr->planeHeadingTrue << "T"
-                       << "wind" << simDataPtr->ambientWindDirection
-                       << "/" << simDataPtr->ambientWindVelocity
-                       << "/" << simDataPtr->ambientWindVelocity
-                       << "magvar" << simDataPtr->magVar
+              qDebug() << "ObjectID" << objectID << "Title" << simDataPtr->aircraftTitle
+                       << "atcType" << simDataPtr->aircraftAtcType
+                       << "atcModel" << simDataPtr->aircraftAtcModel
+                       << "atcId" << simDataPtr->aircraftAtcId
+                       << "atcAirline" << simDataPtr->aircraftAtcAirline
+                       << "atcFlightNumber" << simDataPtr->aircraftAtcFlightNumber
+                       << "Lat" << simDataPtr->latitudeDeg << "Lon" << simDataPtr->longitudeDeg
+                       << "Alt" << simDataPtr->altitudeFt
+                       << "ias" << simDataPtr->airspeedIndicatedKts << "gs" << simDataPtr->groundVelocityKts
+                       << "vs" << simDataPtr->verticalSpeedFps
+                       << "course " << simDataPtr->planeHeadingMagneticDeg
+                       << "M" << simDataPtr->planeHeadingTrueDeg << "T"
+                       << "wind" << simDataPtr->ambientWindDirectionDegT
+                       << "/" << simDataPtr->ambientWindVelocityKts
+                       << "magvar" << simDataPtr->magVarDeg
                        << "local time" << simDataPtr->localTime
                        << "local year" << simDataPtr->localYear
                        << "local month" << simDataPtr->localMonth
                        << "local day" << simDataPtr->localDay
-                       << "zulu time" << simDataPtr->zuluTime
+                       << "zulu time" << simDataPtr->zuluTimeSeconds
                        << "zulu year" << simDataPtr->zuluYear
                        << "zulu month" << simDataPtr->zuluMonth
                        << "zulu day" << simDataPtr->zuluDay

@@ -48,7 +48,7 @@ void DataReaderThread::connectToSimulator(SimConnectHandler *handler)
       if(handler->connect())
         break;
 
-      qInfo(gui) << tr("Not connected to the simulator. Will retry in %1 seconds.").arg(reconnectRateSec);
+      qInfo(gui).noquote() << tr("Not connected to the simulator. Will retry in %1 seconds.").arg(reconnectRateSec);
       counter = 0;
     }
     counter++;
@@ -83,7 +83,7 @@ void DataReaderThread::run()
     {
       if(handler.getState() != sc::OK)
       {
-        qWarning(gui) << tr("Error fetching data from simulator.");
+        qWarning(gui).noquote() << tr("Error fetching data from simulator.");
 
         if(!handler.isSimRunning())
           // Try to reconnect if we lost connection to simulator
