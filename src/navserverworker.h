@@ -25,6 +25,8 @@
 class NavServer;
 class QTcpSocket;
 
+/* Worker for threads that are spawned for each incoming connection. Worker approach is used to ensure that
+ * singals to this object are using this thread's context. */
 class NavServerWorker :
   public QObject
 {
@@ -34,16 +36,28 @@ public:
   NavServerWorker(qintptr socketDescriptor, NavServer *parent, bool verboseLog);
   virtual ~NavServerWorker();
 
+  /* Receives sim connect data from DataReader thread. */
   void postSimConnectData(atools::fs::sc::SimConnectData dataPacket);
 
+  /* Signal posted by thread to indicate it has started . */
   void threadStarted();
 
 private:
+  /* Connection closed from remote end. */
+  void socketDisconnected();
+
+  /* Read reply from remote end. */
+  void readyReadReply();
+
+  /* Count dropped packages and write a message if too many accumulated. */
+  void handleDroppedPackages(const QString& reason);
+
+  const int MAX_DROPPED_PACKAGES = 20;
+
   qintptr socketDescr;
   atools::fs::sc::SimConnectData data;
   QTcpSocket *socket = nullptr;
 
-  const int MAX_DROPPED_PACKAGES = 20;
   int droppedPackages = 0;
   bool verbose = false;
   bool inPost = false;
@@ -51,11 +65,6 @@ private:
   QString peerAddr;
   QHostInfo hostInfo;
   bool readReply = true;
-  void socketDisconnected();
-  void readyRead();
-  void bytesWritten(qint64 bytes);
-
-  void handleDropped(const QString& reason);
 
 };
 

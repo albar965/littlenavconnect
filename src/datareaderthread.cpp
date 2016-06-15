@@ -31,8 +31,6 @@ DataReaderThread::DataReaderThread(QObject *parent, bool verboseLog)
   setObjectName("DataReaderThread");
 
   using atools::settings::Settings;
-  updateRate = Settings::instance().getAndStoreValue("Options/UpdateRate", 500).toUInt();
-  reconnectRateSec = Settings::instance().getAndStoreValue("Options/ReconnectRate", 10).toInt();
 }
 
 DataReaderThread::~DataReaderThread()
@@ -40,7 +38,7 @@ DataReaderThread::~DataReaderThread()
   qDebug() << "Datareader deleted";
 }
 
-void DataReaderThread::tryConnect(SimConnectHandler *handler)
+void DataReaderThread::connectToSimulator(SimConnectHandler *handler)
 {
   int counter = 0;
   while(!terminate)
@@ -50,13 +48,13 @@ void DataReaderThread::tryConnect(SimConnectHandler *handler)
       if(handler->connect())
         break;
 
-      qInfo(gui) << "Not connected to the simulator. Will retry in" << reconnectRateSec << "seconds.";
+      qInfo(gui) << tr("Not connected to the simulator. Will retry in %1 seconds.").arg(reconnectRateSec);
       counter = 0;
     }
     counter++;
     QThread::sleep(1);
   }
-  qInfo(gui) << "Connected to simulator.";
+  qInfo(gui).noquote() << tr("Connected to simulator.");
 }
 
 void DataReaderThread::run()
@@ -65,7 +63,8 @@ void DataReaderThread::run()
 
   SimConnectHandler handler(verbose);
 
-  tryConnect(&handler);
+  // Connect to the simulator
+  connectToSimulator(&handler);
 
   int i = 0;
 
@@ -76,7 +75,7 @@ void DataReaderThread::run()
     if(handler.fetchData(data))
     {
       data.setPacketId(i);
-      data.setPacketTs(QDateTime::currentDateTime().toTime_t());
+      data.setPacketTimestamp(QDateTime::currentDateTime().toTime_t());
       emit postSimConnectData(data);
       i++;
     }
@@ -84,16 +83,22 @@ void DataReaderThread::run()
     {
       if(handler.getState() != sc::OK)
       {
-        qWarning(gui) << "Error fetching data from simulator.";
+        qWarning(gui) << tr("Error fetching data from simulator.");
 
         if(!handler.isSimRunning())
-          tryConnect(&handler);
+          // Try to reconnect if we lost connection to simulator
+          connectToSimulator(&handler);
       }
     }
     QThread::msleep(updateRate);
   }
   terminate = false; // Allow restart
   qDebug() << "Datareader exiting run";
+}
+
+void DataReaderThread::setReconnectRateSec(int reconnectSec)
+{
+  reconnectRateSec = reconnectSec;
 }
 
 void DataReaderThread::setUpdateRate(unsigned int updateRateMs)

@@ -25,6 +25,8 @@
 class NavServer;
 class SimConnectHandler;
 
+/* Actively reads flight simulator data using the simconnect interface in background and sends a
+ * signal for each data package. */
 class DataReaderThread :
   public QThread
 {
@@ -34,20 +36,24 @@ public:
   DataReaderThread(QObject *parent, bool verboseLog);
   virtual ~DataReaderThread();
 
+  /* Thread will terminate after the next iteration. */
   void setTerminate(bool terminateFlag = true);
 
+  /* Read data and send a signal every updateRateMs */
   void setUpdateRate(unsigned int updateRateMs);
 
+  /* If simulator connection is lost try to reconnect every reconnectSec seconds. */
+  void setReconnectRateSec(int reconnectSec);
+
 signals:
+  /* Send on each received data package from the simconnect interface */
   void postSimConnectData(atools::fs::sc::SimConnectData dataPacket);
 
 private:
-  void tryConnect(SimConnectHandler *handler);
+  void connectToSimulator(SimConnectHandler *handler);
   virtual void run() override;
 
-  bool terminate = false;
-
-  bool verbose = false;
+  bool terminate = false, verbose = false;
   unsigned int updateRate = 500;
   int reconnectRateSec = 10;
 };

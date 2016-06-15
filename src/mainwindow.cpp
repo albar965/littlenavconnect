@@ -17,9 +17,9 @@
 
 #include "mainwindow.h"
 
+#include "ui_mainwindow.h"
 #include "navserver.h"
 #include "datareaderthread.h"
-#include "ui_mainwindow.h"
 #include "settings/settings.h"
 #include "navservercommon.h"
 #include "optionsdialog.h"
@@ -33,13 +33,15 @@
 #include <QCloseEvent>
 
 using atools::settings::Settings;
+using atools::fs::sc::SimConnectData;
 
-MainWindow::MainWindow(QWidget *parent) :
-  QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow()
+  : ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
   readSettings();
 
+  // Bind the log function to this class for category "gui"
   using namespace std::placeholders;
   atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logGuiMessage, this, _1, _2, _3));
 
@@ -51,8 +53,12 @@ MainWindow::MainWindow(QWidget *parent) :
                "<a href=\"https://github.com/albar965\">Github</a>.</p>"
                  "<p><b>Copyright 2015-2016 Alexander Barthel (albar965@mailbox.org).</b></p>");
 
+  // Create help handler for managing the Help menu items
   helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION);
-  navServer = new NavServer(this, verbose);
+
+  // Create nav server but to not start it yet
+  navServer = new NavServer(this, verbose,
+                            Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt());
 
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
@@ -60,14 +66,18 @@ MainWindow::MainWindow(QWidget *parent) :
   connect(ui->actionContents, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::help);
   connect(ui->actionAbout, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::about);
   connect(ui->actionAboutQt, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::aboutQt);
+
+  // Log messages have to be redirected through a message so that QTextEdit::append is not called on
+  // a thread context different than main
   connect(this, &MainWindow::appendLogMessage, ui->textEdit, &QTextEdit::append);
 
+  // Once visible start server and log messagess
   connect(this, &MainWindow::windowShown, this, &MainWindow::mainWindowShown, Qt::QueuedConnection);
-
 }
 
 MainWindow::~MainWindow()
 {
+  // Terminate data reader thread
   dataReader->setTerminate();
   dataReader->wait();
 
@@ -82,8 +92,8 @@ void MainWindow::options()
   OptionsDialog dialog;
 
   Settings& settings = Settings::instance();
-  unsigned int updateRateMs = settings.getAndStoreValue("Options/UpdateRate", 500).toUInt();
-  int port = settings.getAndStoreValue("Options/DefaultPort", 51968).toInt();
+  unsigned int updateRateMs = settings.getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt();
+  int port = settings.getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
 
   dialog.setUpdateRate(updateRateMs);
   dialog.setPort(port);
@@ -94,8 +104,9 @@ void MainWindow::options()
   {
     if(dialog.getUpdateRate() != updateRateMs)
     {
-      settings.setValue("Options/UpdateRate", static_cast<int>(dialog.getUpdateRate()));
+      settings.setValue(SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
 
+      // Update rate changed - restart data readers
       dataReader->setTerminate();
       dataReader->wait();
       dataReader->setUpdateRate(dialog.getUpdateRate());
@@ -104,9 +115,10 @@ void MainWindow::options()
 
     if(dialog.getPort() != port)
     {
+      // Restart navserver on port change
       int result2 = QMessageBox::Yes;
       if(navServer->hasConnections())
-        result2 = atools::gui::Dialog(this).showQuestionMsgBox("Actions/ShowPortChange",
+        result2 = atools::gui::Dialog(this).showQuestionMsgBox(SETTINGS_ACTIONS_SHOW_PORT_CHANGE,
                                                                tr(
                                                                  "There are still applications connected.\n"
                                                                  "Really change the Network Port?"),
@@ -116,7 +128,7 @@ void MainWindow::options()
 
       if(result2 == QMessageBox::Yes)
       {
-        settings.setValue("Options/DefaultPort", dialog.getPort());
+        settings.setValue(SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
 
         navServer->stopServer();
         navServer->setPort(dialog.getPort());
@@ -129,8 +141,8 @@ void MainWindow::options()
 void MainWindow::resetMessages()
 {
   Settings& settings = Settings::instance();
-  settings.setValue("Actions/ShowQuit", true);
-  settings.setValue("Actions/Actions/ShowPortChange", true);
+  settings.setValue(SETTINGS_ACTIONS_SHOW_QUIT, true);
+  settings.setValue(SETTINGS_ACTIONS_SHOW_PORT_CHANGE, true);
 }
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
@@ -164,9 +176,9 @@ void MainWindow::readSettings()
 {
   qDebug() << "readSettings";
 
-  verbose = Settings::instance().getAndStoreValue("Options/Verbose", false).toBool();
+  verbose = Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_VERBOSE, false).toBool();
 
-  atools::gui::WidgetState ws("MainWindow/Widget");
+  atools::gui::WidgetState ws(SETTINGS_MAINWINDOW_WIDGET);
   ws.restore(this);
 }
 
@@ -174,7 +186,7 @@ void MainWindow::writeSettings()
 {
   qDebug() << "writeSettings";
 
-  atools::gui::WidgetState ws("MainWindow/Widget");
+  atools::gui::WidgetState ws(SETTINGS_MAINWINDOW_WIDGET);
   ws.save(this);
   ws.syncSettings();
 }
@@ -187,7 +199,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
   if(navServer->hasConnections())
   {
-    int result = atools::gui::Dialog(this).showQuestionMsgBox("Actions/ShowQuit",
+    int result = atools::gui::Dialog(this).showQuestionMsgBox(SETTINGS_ACTIONS_SHOW_QUIT,
                                                               tr("There are still applications connected.\n"
                                                                  "Really Quit?"),
                                                               tr("Do not &show this dialog again."),
@@ -206,11 +218,17 @@ void MainWindow::mainWindowShown()
   qDebug() << "MainWindow::mainWindowShown()";
 
   qInfo(gui).noquote().nospace() << QApplication::applicationName();
-  qInfo(gui).noquote().nospace() << "Version " << QApplication::applicationVersion()
-                                 << " (revision " << GIT_REVISION << ")";
-  qInfo(gui).noquote().nospace() << "Protocol Version " << atools::fs::sc::SimConnectData::getDataVersion();
+  qInfo(gui).noquote().nospace() << tr("Version %1 (revision %2).").
+  arg(QApplication::applicationVersion()).arg(GIT_REVISION);
+
+  qInfo(gui).noquote().nospace() << tr("Protocol Version %1.").arg(SimConnectData::getDataVersion());
 
   dataReader = new DataReaderThread(this, verbose);
+  dataReader->setReconnectRateSec(Settings::instance().
+                                  getAndStoreValue(SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
+  dataReader->setUpdateRate(Settings::instance().
+                            getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
+
   dataReader->start();
 
   navServer->startServer(dataReader);

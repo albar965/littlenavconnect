@@ -24,7 +24,8 @@ namespace Ui {
 class OptionsDialog;
 }
 
-class OptionsDialog : public QDialog
+class OptionsDialog :
+  public QDialog
 {
   Q_OBJECT
 

@@ -25,13 +25,10 @@
 #include <QNetworkInterface>
 #include <QHostInfo>
 
-NavServer::NavServer(QObject *parent, bool verboseLog)
-  : QTcpServer(parent), verbose(verboseLog)
+NavServer::NavServer(QObject *parent, bool verboseLog, int inetPort)
+  : QTcpServer(parent), verbose(verboseLog), port(inetPort)
 {
   qDebug("NavServer created");
-
-  using atools::settings::Settings;
-  port = Settings::instance().getAndStoreValue("Options/DefaultPort", 51968).toInt();
 }
 
 NavServer::~NavServer()
@@ -43,8 +40,10 @@ void NavServer::stopServer()
 {
   qDebug() << "Navserver stopping";
 
+  // Close tcp server to avoid accepting connections
   close();
 
+  // Stop all worker threads
   QSet<NavServerWorker *> workersCopy(workers);
   for(NavServerWorker *worker : workersCopy)
   {
@@ -62,6 +61,7 @@ bool NavServer::startServer(DataReaderThread *dataReaderThread)
 
   bool retval = listen(QHostAddress::AnyIPv4, static_cast<quint16>(port));
 
+  // Get an IP address of this machine that is not localhost
   QString ipAddress;
   QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
   for(const QHostAddress& ip : ipAddressesList)
@@ -76,15 +76,14 @@ bool NavServer::startServer(DataReaderThread *dataReaderThread)
   if(ipAddress.isEmpty())
     ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
 
+  // Get hostname synchronously
   QHostInfo hostInfo = QHostInfo::fromName(ipAddress);
 
   if(!retval)
-    qCritical(gui).noquote().nospace() << "Unable to start the server: " << errorString() << ".";
+    qCritical(gui).noquote().nospace() << tr("Unable to start the server: %1.").arg(errorString());
   else
-    qInfo(gui).noquote().nospace() << "Server is running on "
-                                   << hostInfo.hostName() << " (" << ipAddress << ") "
-                                   << "port " << serverPort() << ".";
-
+    qInfo(gui).noquote().nospace()
+    << tr("Server is running on %1 (%2) port %3.").arg(hostInfo.hostName()).arg(ipAddress).arg(serverPort());
   return retval;
 }
 
@@ -92,19 +91,24 @@ void NavServer::incomingConnection(qintptr socketDescriptor)
 {
   qDebug() << "Incoming connection";
 
+  // Create a worker and set name
   NavServerWorker *worker = new NavServerWorker(socketDescriptor, nullptr, verbose);
   worker->setObjectName("SocketWorker-" + QString::number(socketDescriptor));
 
+  // Create new thread and move the worker into the thread context
+  // This allows to receive signals in the thread context instead the sender's context
   QThread *workerThread = new QThread(this);
   workerThread->setObjectName("SocketWorkerThread-" + QString::number(socketDescriptor));
   worker->moveToThread(workerThread);
 
   connect(workerThread, &QThread::started, worker, &NavServerWorker::threadStarted);
-  connect(workerThread, &QThread::finished, [ = ]()->void {threadFinished(worker);
+  connect(workerThread, &QThread::finished, [ = ]()->void
+          {
+            threadFinished(worker);
           });
-  connect(dataReader, &DataReaderThread::postSimConnectData,
-          worker, &NavServerWorker::postSimConnectData /*,
-                                                        *  Qt::BlockingQueuedConnection*/);
+
+  // Data reader will send simconnect packages through this connection
+  connect(dataReader, &DataReaderThread::postSimConnectData, worker, &NavServerWorker::postSimConnectData);
 
   qDebug() << "Thread" << worker->objectName();
   workerThread->start();
@@ -114,15 +118,16 @@ void NavServer::incomingConnection(qintptr socketDescriptor)
 
 void NavServer::threadFinished(NavServerWorker *worker)
 {
-  QMutexLocker locker(&threadsMutex);
-
   qDebug() << "Thread" << worker->objectName() << "finished";
 
-  disconnect(dataReader, &DataReaderThread::postSimConnectData,
-             worker, &NavServerWorker::postSimConnectData);
+  // A thread has finished - lock the list so the thread can be removed from the list
+  QMutexLocker locker(&threadsMutex);
+
+  disconnect(dataReader, &DataReaderThread::postSimConnectData, worker, &NavServerWorker::postSimConnectData);
 
   workers.remove(worker);
 
+  // Delete once the event loop is called the next time
   worker->deleteLater();
   worker->thread()->deleteLater();
 }

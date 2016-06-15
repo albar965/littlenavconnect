@@ -43,60 +43,54 @@ void NavServerWorker::threadStarted()
   {
     socket = new QTcpSocket();
     connect(socket, &QTcpSocket::disconnected, this, &NavServerWorker::socketDisconnected);
-    connect(socket, &QTcpSocket::readyRead, this, &NavServerWorker::readyRead);
-    connect(socket, &QTcpSocket::bytesWritten, this, &NavServerWorker::bytesWritten);
+    connect(socket, &QTcpSocket::readyRead, this, &NavServerWorker::readyReadReply);
   }
 
   if(!socket->setSocketDescriptor(socketDescr, QAbstractSocket::ConnectedState, QIODevice::ReadWrite))
   {
-    qCritical(gui).noquote().nospace() << "Error creating network socket " << socket->errorString() << ".";
+    qCritical(gui).noquote().nospace() << tr("Error creating network socket: %1.").arg(socket->errorString());
     return;
   }
+
   peerAddr = socket->peerAddress().toString();
   hostInfo = QHostInfo::fromName(peerAddr);
 
-  qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
-                                 << " (" << peerAddr << ")";
-  qDebug() << "Connection from " << hostInfo.hostName()
-           << " (" << peerAddr << ") "
+  qInfo(gui).noquote().nospace() << tr("Connection from %1 (%2).").arg(hostInfo.hostName()).arg(peerAddr);
+
+  qDebug() << "Connection from " << hostInfo.hostName() << " (" << peerAddr << ") "
            << "port " << socket->peerPort();
 }
 
 void NavServerWorker::socketDisconnected()
 {
-  qInfo(gui).noquote().nospace() << "Connection from " << hostInfo.hostName()
-                                 << " (" << peerAddr << ") " << " closed.";
+  qInfo(gui).noquote().nospace() << tr("Connection from %1 (%2) closed.").
+  arg(hostInfo.hostName()).arg(peerAddr);
 
   socket->deleteLater();
   socket = nullptr;
   thread()->exit();
 }
 
-void NavServerWorker::readyRead()
+void NavServerWorker::readyReadReply()
 {
   if(verbose)
     qDebug() << "Ready read" << QThread::currentThread()->objectName();
 
+  // Read the reply from littlenavmap
   atools::fs::sc::SimConnectReply reply;
-
   if(!reply.read(socket))
-    handleDropped("Incomplete reply");
+    handleDroppedPackages(tr("Incomplete reply"));
   else
+    // Indicate that a reply was successfully read
     readReply = true;
 
   if(reply.getStatus() != atools::fs::sc::OK)
   {
-    qWarning(gui).noquote().nospace() << "Error reading reply: " << reply.getStatusText()
-                                      << ". Closing connection.";
+    // Not fully read or malformed  content
+    qWarning(gui).noquote().nospace() << tr("Error reading reply: %1. Closing connection.").
+    arg(reply.getStatusText());
     socket->abort();
   }
-
-}
-
-void NavServerWorker::bytesWritten(qint64 bytes)
-{
-  if(verbose)
-    qDebug() << "Bytes written" << bytes << "thread" << QThread::currentThread()->objectName();
 }
 
 void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPacket)
@@ -106,11 +100,13 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
 
   if(!readReply)
   {
-    handleDropped("Missing reply");
+    // No reply received in the meantime - count it as dropped package
+    handleDroppedPackages(tr("Missing reply"));
     return;
   }
 
   if(inPost)
+    // We're already posting
     qCritical() << "Nested post";
 
   if(dataPacket.getPacketId() == lastPacketId)
@@ -123,7 +119,7 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
   int written;
   written = dataPacket.write(socket);
   if(dataPacket.getStatus() != atools::fs::sc::OK)
-    qWarning(gui).noquote().nospace() << "Error writing data: " << dataPacket.getStatusText();
+    qWarning(gui).noquote().nospace() << tr("Error writing data: %1.").arg(dataPacket.getStatusText());
 
   if(!socket->flush())
     qWarning() << "Reply to client not flushed";
@@ -134,14 +130,15 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
   inPost = false;
 }
 
-void NavServerWorker::handleDropped(const QString& reason)
+void NavServerWorker::handleDroppedPackages(const QString& reason)
 {
   droppedPackages++;
   if(droppedPackages > MAX_DROPPED_PACKAGES)
   {
-    qWarning(gui).noquote().nospace() << "Dropped more than " << MAX_DROPPED_PACKAGES
-                                      << " packages. Reason: " << reason << "."
-                                      << "Decrease number of updates per second.";
+    qWarning(gui).noquote().nospace() << tr("Dropped more than %1 packages. Reason: %2. "
+                                            "Decrease number of updates per second.").
+    arg(MAX_DROPPED_PACKAGES).arg(reason);
+
     droppedPackages = 0;
   }
   qWarning() << "No reply - ignoring package. Currently dropped" << droppedPackages << "Reason:" << reason;

@@ -30,20 +30,24 @@ class SimConnectData;
 class NavServerWorker;
 class DataReaderThread;
 
+/* Tcp server that will spawn a new thread with NavServerWorker for each connection.
+ * Simulator data is send to each of these workers from DataReaderThread. */
 class NavServer :
   public QTcpServer
 {
   Q_OBJECT
 
 public:
-  NavServer(QObject *parent, bool verboseLog);
+  NavServer(QObject *parent, bool verboseLog, int inetPort);
   virtual ~NavServer();
 
   bool startServer(DataReaderThread *dataReaderThread);
   void stopServer();
 
+  /* true if any workers are in the list */
   bool hasConnections() const;
 
+  /* Need a stop/start to use new port */
   void setPort(int value)
   {
     port = value;
@@ -51,13 +55,15 @@ public:
 
 private:
   void incomingConnection(qintptr socketDescriptor) override;
-
   void threadFinished(NavServerWorker *worker);
 
   bool verbose = false;
   DataReaderThread *dataReader;
+
   QSet<NavServerWorker *> workers;
+  // Needed to lock for any modifications of the workers set
   mutable QMutex threadsMutex;
+
   int port = 51968;
 };
 

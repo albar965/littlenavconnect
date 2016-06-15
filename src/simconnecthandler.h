@@ -37,25 +37,33 @@ class SimConnectData;
 }
 
 namespace sc {
+/* Status of the last operation when fetching data. */
 enum State
 {
   OK,
   FETCH_ERROR,
   OPEN_ERROR,
-  DISCONNECTED
+  DISCONNECTED,
+  SIMCONNECT_EXCEPTION
 };
 
 }
 
+/* Reads data synchronously from Fs simconnect interfaces.
+ *  For non windows platforms contains also a simple aircraft simulation. */
 class SimConnectHandler
 {
 public:
   SimConnectHandler(bool verboseLogging = false);
   virtual ~SimConnectHandler();
+
+  /* Connect to fs.. Returns true it successful. */
   bool connect();
 
+  /* Fetch data from simulator. Returns false if no data was retrieved due to paused or not running fs. */
   bool fetchData(atools::fs::sc::SimConnectData& data);
 
+  /* true if simulator is running and not stuck in open dialogs. */
   bool isSimRunning() const
   {
     return simRunning;
@@ -66,56 +74,58 @@ public:
     return simPaused;
   }
 
+  /* Get state of last call. */
   sc::State getState() const
   {
     return state;
   }
 
+  /* Struct that will be filled with raw data from the simconnect interface. */
   struct SimData
   {
-    char title[256];
-    char atcType[32];
-    char atcModel[32];
-    char atcId[32];
-    char atcAirline[64];
-    char atcFlightNumber[32];
-    float altitude;
-    float latitude;
-    float longitude;
+    char aircraftTitle[256];
+    char aircraftAtcType[32];
+    char aircraftAtcModel[32];
+    char aircraftAtcId[32];
+    char aircraftAtcAirline[64];
+    char aircraftAtcFlightNumber[32];
+    float altitudeFt;
+    float latitudeDeg;
+    float longitudeDeg;
 
-    float groundVelocity;
-    float indicatedAltitude;
+    float groundVelocityKts;
+    float indicatedAltitudeFt;
 
-    float planeAboveGround;
-    float planeHeadingMagnetic;
-    float planeHeadingTrue;
-    float planeTrackMagnetic;
-    float planeTrackTrue;
-    float groundAltitude;
-    qint32 simOnGround;
+    float planeAboveGroundFt;
+    float planeHeadingMagneticDeg;
+    float planeHeadingTrueDeg;
+    float planeTrackMagneticDeg;
+    float planeTrackTrueDeg;
+    float groundAltitudeFt;
+    qint32 isSimOnGround;
 
-    float airspeedTrue;
-    float airspeedIndicated;
+    float airspeedTrueKts;
+    float airspeedIndicatedKts;
     float airspeedMach;
-    float verticalSpeed;
+    float verticalSpeedFps;
 
-    float ambientTemperature;
-    float totalAirTemperature;
-    float ambientWindVelocity;
-    float ambientWindDirection;
+    float ambientTemperatureC;
+    float totalAirTemperatureC;
+    float ambientWindVelocityKts;
+    float ambientWindDirectionDegT;
 
-    qint32 ambientPrecipState;
-    qint32 ambientInCloud;
-    float ambientVisibility;
-    float seaLevelPressure;
-    float pitotIce;
-    float structuralIce;
+    qint32 ambientPrecipStateFlags;
+    qint32 ambientIsInCloud;
+    float ambientVisibilityMeter;
+    float seaLevelPressureMbar;
+    float pitotIcePercent;
+    float structuralIcePercent;
 
-    float airplaneTotalWeight;
-    float airplaneMaxGrossWeight;
-    float airplaneEmptyWeight;
-    float fuelTotalQuantity;
-    float fuelTotalWeight;
+    float airplaneTotalWeightLbs;
+    float airplaneMaxGrossWeightLbs;
+    float airplaneEmptyWeightLbs;
+    float fuelTotalQuantityGallons;
+    float fuelTotalWeightLbs;
 
     float fuelFlowPph1;
     float fuelFlowPph2;
@@ -126,22 +136,24 @@ public:
     float fuelFlowGph2;
     float fuelFlowGph3;
     float fuelFlowGph4;
-    float magVar;
+    float magVarDeg;
     qint32 localTime;
     qint32 localYear;
     qint32 localMonth;
     qint32 localDay;
-    qint32 zuluTime;
+    qint32 zuluTimeSeconds;
     qint32 zuluYear;
     qint32 zuluMonth;
     qint32 zuluDay;
-    qint32 timeZoneOffset;
+    qint32 timeZoneOffsetSeconds;
   };
 
 private:
 #if defined(Q_OS_WIN32)
+  /* Callback receiving the data. */
   void DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData);
 
+  /* Static method will pass call to object which is passed in pContext. */
   static void CALLBACK DispatchCallback(SIMCONNECT_RECV *pData, DWORD cbData, void *pContext);
 
   HANDLE hSimConnect = NULL;

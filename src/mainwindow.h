@@ -39,33 +39,47 @@ class MainWindow :
   Q_OBJECT
 
 public:
-  explicit MainWindow(QWidget *parent = 0);
+  MainWindow();
   virtual ~MainWindow();
 
 signals:
+  /* Append a log message to the gui log. */
   void appendLogMessage(const QString& message);
 
   /* Emitted when window is shown the first time */
   void windowShown();
 
 private:
+  /* Loggin handler will send log messages of category gui to this method which will emit
+   * appendLogMessage to ensure that the message is appended using the main thread context. */
   void logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message);
   virtual void showEvent(QShowEvent *event) override;
 
-  Ui::MainWindow *ui;
-  NavServer *navServer;
-  atools::gui::HelpHandler *helpHandler;
-  DataReaderThread *dataReader = nullptr;
-  bool firstStart = true;
   virtual void closeEvent(QCloseEvent *event) override;
-
-  bool verbose = false;
 
   void readSettings();
   void writeSettings();
+
+  /* Window visible for the first time after startup */
   void mainWindowShown();
+
+  /* Reset all "do not show again" messages */
   void resetMessages();
+
+  /* Options dialog */
   void options();
+
+  Ui::MainWindow *ui = nullptr;
+
+  // Navserver that waits and accepts tcp connections. Starts a NavServerWorker in a thread for each connection.
+  NavServer *navServer = nullptr;
+
+  // Runs in background and fetches data from simulator - signals are send to NavServerWorker threads
+  DataReaderThread *dataReader = nullptr;
+
+  atools::gui::HelpHandler *helpHandler = nullptr;
+  bool firstStart = true; // Used to emit the first windowShown signal
+  bool verbose = false;
 
 };
 
