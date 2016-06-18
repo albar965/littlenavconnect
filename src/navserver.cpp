@@ -83,7 +83,11 @@ bool NavServer::startServer(DataReaderThread *dataReaderThread)
     qCritical(gui).noquote().nospace() << tr("Unable to start the server: %1.").arg(errorString());
   else
     qInfo(gui).noquote().nospace()
-    << tr("Server is running on %1 (%2) port %3.").arg(hostInfo.hostName()).arg(ipAddress).arg(serverPort());
+    << tr("Server is running on hostname "
+          "<span style=\"color: #0000ff; font-weight:bold\">%1</span> "
+          "(IP address <span style=\"color: #0000ff; font-weight:bold\">%2</span>) "
+          "port <span style=\"color: #ff0000; font-weight:bold\">%3</span>.").
+       arg(hostInfo.hostName()).arg(ipAddress).arg(serverPort());
   return retval;
 }
 
