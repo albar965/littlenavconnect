@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   QCoreApplication::setApplicationName("Little Navconnect");
   QCoreApplication::setOrganizationName("ABarthel");
   QCoreApplication::setOrganizationDomain("abarthel.org");
-  QCoreApplication::setApplicationVersion("0.8.0.develop");
+  QCoreApplication::setApplicationVersion("0.9.0.develop");
 
   using atools::logging::LoggingHandler;
   using atools::logging::LoggingUtil;
