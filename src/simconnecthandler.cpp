@@ -409,7 +409,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
   QString dataIdStr = QString::number(dataId);
   data.setAirplaneTitle("Airplane Title " + dataIdStr);
   data.setAirplaneModel("Duke");
-  data.setAirplaneReg("D-REGI");
+  data.setAirplaneRegistration("D-REGI");
   data.setAirplaneType("Beech");
   data.setAirplaneAirline("Airline");
   data.setAirplaneFlightnumber("965");
