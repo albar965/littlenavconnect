@@ -262,7 +262,7 @@ bool SimConnectHandler::fetchData(atools::fs::sc::SimConnectData& data)
 
   data.setAirplaneTitle(simData.aircraftTitle);
   data.setAirplaneModel(simData.aircraftAtcModel);
-  data.setAirplaneReg(simData.aircraftAtcId);
+  data.setAirplaneRegistration(simData.aircraftAtcId);
   data.setAirplaneType(simData.aircraftAtcType);
   data.setAirplaneAirline(simData.aircraftAtcAirline);
   data.setAirplaneFlightnumber(simData.aircraftAtcFlightNumber);
