@@ -17,11 +17,11 @@
 
 #include "datareaderthread.h"
 
-#include "logging/loggingdefs.h"
 #include "navservercommon.h"
 #include "simconnecthandler.h"
 #include "settings/settings.h"
 
+#include <QDebug>
 #include <QDateTime>
 
 DataReaderThread::DataReaderThread(QObject *parent, bool verboseLog)
@@ -48,7 +48,8 @@ void DataReaderThread::connectToSimulator(SimConnectHandler *handler)
       if(handler->connect())
         break;
 
-      qInfo(gui).noquote() << tr("Not connected to the simulator. Will retry in %1 seconds.").arg(reconnectRateSec);
+      qInfo(gui).noquote() << tr("Not connected to the simulator. Will retry in %1 seconds.").arg(
+        reconnectRateSec);
       counter = 0;
     }
     counter++;

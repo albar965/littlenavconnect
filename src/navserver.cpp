@@ -85,9 +85,9 @@ bool NavServer::startServer(DataReaderThread *dataReaderThread)
     qInfo(gui).noquote().nospace()
     << tr("Server is running on hostname "
           "<span style=\"color: #0000ff; font-weight:bold\">%1</span> "
-          "(IP address <span style=\"color: #0000ff; font-weight:bold\">%2</span>) "
-          "port <span style=\"color: #ff0000; font-weight:bold\">%3</span>.").
-       arg(hostInfo.hostName()).arg(ipAddress).arg(serverPort());
+            "(IP address <span style=\"color: #0000ff; font-weight:bold\">%2</span>) "
+            "port <span style=\"color: #ff0000; font-weight:bold\">%3</span>.").
+    arg(hostInfo.hostName()).arg(ipAddress).arg(serverPort());
   return retval;
 }
 
