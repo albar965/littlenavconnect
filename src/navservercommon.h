@@ -28,6 +28,7 @@ const QString SETTINGS_ACTIONS_SHOW_QUIT = "Actions/ShowQuit";
 const QString SETTINGS_OPTIONS_VERBOSE = "Options/Verbose";
 const QString SETTINGS_MAINWINDOW_WIDGET = "MainWindow/Widget";
 const QString SETTINGS_OPTIONS_RECONNECT_RATE = "Options/ReconnectRate";
+const QString SETTINGS_OPTIONS_LANGUAGE = "Options/Language";
 
 /* Declare a own logging category to append in the text edit */
 Q_DECLARE_LOGGING_CATEGORY(gui);

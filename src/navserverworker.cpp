@@ -136,7 +136,7 @@ void NavServerWorker::handleDroppedPackages(const QString& reason)
   if(droppedPackages > MAX_DROPPED_PACKAGES)
   {
     qWarning(gui).noquote().nospace() << tr("Dropped more than %1 packages. Reason: %2. "
-                                            "Decrease number of updates per second.").
+                                            "Increase update time interval.").
     arg(MAX_DROPPED_PACKAGES).arg(reason);
 
     droppedPackages = 0;

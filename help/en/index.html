@@ -7,10 +7,10 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="language" content="EN" />
     <meta name="author" content="Alexander Barthel" />
-    <meta name="date" content="2016-01-20T14:00:00+01:00" />
-    <meta content="Little Navmap Help" name="description" />
+    <meta name="date" content="2016-07-27T16:20:00+01:00" />
+    <meta content="Little Navconnect User Manual" name="description" />
     <title>
-      Little Navmap Help
+      Little Navconnect User Manual
     </title>
     <style type="text/css" xml:space="preserve">
 /*<![CDATA[*/
@@ -19,16 +19,16 @@
     margin: 4em;
     }
     * {
-    font-size: 15px;
+    font-size: 16px;
     }
-    h1, h2, h3, h4, h5 {
+    h1, h2, h3, h4, h5, h6 {
     color: #004703
     }
     h1, h2 {
     margin-top: 1em;
     margin-bottom: 0.5em;
     }
-    h3, h4 {
+    h3, h4, h5, h6 {
     margin-top: 0.3em;
     margin-bottom: 0.2em;
     }
@@ -37,6 +37,7 @@
     margin-bottom: 0.3em;
     margin-left: 0.2em;
     line-height: 1.5;
+    width:75%;
     }
     img {
     margin-top: 0.2em;
@@ -45,10 +46,10 @@
     border-top: 2px solid lightgreen;
     border-left: 2px solid lightgreen;
     border-right: 2px solid lightgreen;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
     background-color: white;
     }
     .textimg {
@@ -68,35 +69,53 @@
     margin-left: 1.5em;
     margin-top: 0.4em;
     margin-bottom: 0.4em;
+    width:75%;
     }
     code {
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Andale Mono', 'Courier New', Courier, sans-serif;
     font-weight: bold;
     color: darkgreen;
+    width:75%;
+    }
+    pre {
+    margin-left: 1.5em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    font-size: 15px;
+    font-family: 'Andale Mono', 'Courier New', Courier, sans-serif;
+    font-weight: bold;
     }
     em {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: darkgreen;
     }
 
     h1 {
-    font-size: 28px;
+    font-size: 34px;
     border-bottom: 4px solid #004703;
     width:80%;
     }
     h2 {
-    font-size: 24px;
+    font-size: 28px;
     border-bottom: 2px solid #004703;
     width:70%;
     }
     h3 {
-    font-size: 20px;
+    font-size: 24px;
     border-bottom: 1px solid #004703;
     width:60%;
     }
     h4 {
+    font-size: 20px;
+    border-bottom: 1px solid #004703;
+    width:40%;
+    }
+    h5 {
+    font-size: 18px;
+    }
+    h6 {
     font-size: 16px;
     }
 
@@ -117,65 +136,222 @@
     display: inline-block;
     }
 
-    body.c3 { color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);}
     img.gplimg {width: 166px; height: 82px;}
+    img.icon {width: 24px; height: 24px;}
     span.bold {font-weight: bold;}
+    span.capthdg {font-weight: bold; font-style: italic;}
+    span.capt {font-style: italic;}
     /*]]>*/
     </style>
   </head>
-  <body class="c3">
+  <body>
     <h1>
       Little Navconnect Help
     </h1>
+
     <p>
-      Version develop
+      <img class="textimg" style="width: 100px; height:auto" alt="Little Navconnect" title="Little Navconnect" src=
+      "images/navconnect.svg" />
     </p>
+
     <p>
-      <img class="textimg" style="width: 180px; height:auto"
-      alt="Little Navconnect"  title="Little Navconnect" src="images/navconnect.svg" />
+      <span class="bold">Version 0.9.5.develop</span>
     </p>
+
     <h2>
       Installation
     </h2>
+
     <p>
       An installer or setup program is not available.
     </p>
+
     <p>
-      <span class="bold">Do not extract the archive into the folder <code>c:\Program Files\</code>
-      or <code>c:\Program Files (x86)\</code> since you will need administrative privileges in some
-      Windows versions. Since Windows keeps control on these folders other problems might occur
-      like replaced or deleted files.</span>
+      <span class="bold">Do not extract the archive into the folder <code>c:\Program Files\</code> or <code>c:\Program
+      Files (x86)\</code> since you will need administrative privileges in some Windows versions. Since Windows keeps
+      control on these folders other problems might occur like replaced or deleted files.</span>
     </p>
+
     <p>
-      Extract the Zip archive into a folder like <code>c:\Own Programs\Little Navconnect</code>. Then
-      start the program by double-clicking <code>littlenavconnect.exe</code>.
+      Extract the Zip archive into a folder like <code>c:\Own Programs\Little Navconnect</code>. Then start the program
+      by double-clicking <code>littlenavconnect.exe</code>.
     </p>
+
     <p>
-      <em>Little Navconnect</em> is a 32-bit application and was tested with Windows XP 32-bit,
-      Windows 7 64-bit and Windows 8.1 64-bit.
+      <em>Little Navconnect</em> is a 32-bit application and was tested with Windows XP 32-bit, Windows 7 64-bit and
+      Windows 8.1 64-bit.
     </p>
-    <h2>Overview</h2>
+
+    <h2>
+      General
+    </h2>
+
     <p>
-    Little Navconnect acts as an agent that connects Little Navmap with the Flight Simulator.
-    This allows to use Little Navmap on Linux or Mac since Simconnect is only available for Windows.
+      Little Navconnect acts as an agent that connects Little Navmap with a Flight Simulator. This saves the pain of
+      setting up a remote Simconnect connection and allows using Little Navmap on Linux or Mac since Simconnect is only
+      available for Windows.
     </p>
+
+    <h2 id="bugreport">
+      How to report a Bug
+    </h2>
+
+    <p>
+      If something goes wrong send me <em>Little Navconnect</em>'s log file and configuration file which can be located
+      in the about dialog. My e-mail address is shown in the about dialog of <em>Little Navconnect</em> too.
+    </p>
+
+    <h2>
+      Usage
+    </h2>
+
+    <ol>
+      <li>Install <em>Little Navconnect</em> on the computer that is running the simulator. Start it and take note of
+      the message that is printed on the logging window. You only need the colored values. You can use the IP address
+      or the hostname.
+
+        <pre xml:space="preserve">
+[2016-07-24 17:31:40] Server is running on hostname <span style=
+"color: blue;">windows-pc</span> (IP address <span style="color: blue;">192.168.1.4</span>) port <span style=
+"color: red;">51968</span>.
+</pre><img alt="Little Navconnect" title="Little Navconnect" src="images/littlenavconnect.png" />
+        <p>
+          <span class="capthdg">Picture above:</span> <span class="capt"><em>Little Navconnect</em> is running and
+          waiting for a Flight Simulator.</span>
+        </p>
+
+        <p>
+          <span class="bold">Change the port in the <code>Options</code> dialog if you see an error message like shown
+          below:</span>
+        </p>
+
+        <pre xml:space="preserve">
+[2016-07-27 16:45:35] <span style="color: red;">Unable to start the server: The bound address is already in use.</span>
+</pre>
+      </li>
+
+      <li>Start <em>Little Navmap</em> on the flying computer or the remote client computer.
+      </li>
+
+      <li>Open the connection dialog by selecting <code>Main Menu</code> -&gt; <code>Tools</code> -&gt; <code>Connect
+      to Simulator</code>. <img alt="Little Navmap Connect Dialog" title="Little Navmap Connect Dialog" src=
+      "images/connect.png" />
+        <p>
+          <span class="capthdg">Picture above:</span> <span class="capt">Connect dialog with correct values to access
+          the <em>Little Navconnect</em> shown above.</span>
+        </p>
+      </li>
+
+      <li>Add the value for hostname. This can be either the hostname printed by <em>Little Navconnect</em> or the IP
+      address. You can use <code>localhost</code> if both programs are running on the same computer.
+      </li>
+
+      <li>Add the value for the port. <code>51968</code> is the default value. Usually this can be left default.
+      </li>
+
+      <li>Click connect. Once a flight is set up and loaded on the simulator your aircraft will show up on the map and
+      the <code>Simulator Aircraft</code> dock window.
+      </li>
+    </ol>
+
+    <h2>
+      Menu
+    </h2>
+
+    <h3>
+      File -&gt; Quit
+    </h3>
+
+    <p>
+      Exits the application. Will ask for confirmation if there are still clients connected.
+    </p>
+
+    <h3>
+      Tools -&gt; Reset Messages
+    </h3>
+
+    <p>
+      This will re-enable all dialogs that were disabled by clicking <code>Do not show this dialog again</code> or
+      similar messages.
+    </p>
+
+    <h3>
+      Tools -&gt; Options
+    </h3>
+
+    <p>
+      Opens the <code>Options</code> dialog
+    </p>
+
+    <ul>
+      <li>
+        <span class="bold">Update Time Interval:</span> Allowed range is 100 milliseconds up to 2 seconds. <em>Little
+        Navconnect</em> fetches data from Flight Simulator and sends it to all clients (i.e. <em>Little Navmap</em>)
+        using this time interval. Increase this value if you get a warning message like shown below:
+
+        <pre xml:space="preserve">
+[2016-07-27 16:45:35] <span style=
+"color: orange;">Dropped more than 20 packages. Reason: Missing reply. Increase update time interval.</span>
+</pre>
+      </li>
+
+      <li>
+        <span class="bold">Network Port:</span> This can normally be left at default. Change this value only if another
+        application occupies this port and you get an error message like shown below when starting <em>Little
+        Navconnect</em>:
+
+        <pre xml:space="preserve">
+[2016-07-27 16:45:35] <span style="color: red;">Unable to start the server: The bound address is already in use.</span>
+</pre>
+      </li>
+    </ul>
+
+    <h4>
+      Help Menu -&gt; Contents
+    </h4>
+
+    <p>
+      Shows this help in a web browser.
+    </p>
+
+    <h4>
+      Help Menu -&gt; About Little Navconnect
+    </h4>
+
+    <p>
+      Shows version and revision number for <em>Little Navconnect</em>, also contains links to the database directory,
+      configuration file, log file and the author's e-mail address.
+    </p>
+
+    <h4>
+      Help Menu -&gt; Qt
+    </h4>
+
+    <p>
+      Information about the Qt toolkit <em>Little Navconnect</em> uses.
+    </p>
+
     <h2>
       License
     </h2>
+
     <p>
-      This program is free software: you can redistribute it and/or modify it under the terms of
-      the GNU General Public License as published by the Free Software Foundation, either version 3
-      of the License, or (at your option) any later version.
+      This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
+      License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any
+      later version.
     </p>
+
     <p>
-      This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-      without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
-      the GNU General Public License for more details.
+      This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+      implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+      more details.
     </p>
+
     <p>
-      You should have received a copy of the GNU General Public License along with this program. If
-      not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.
+      You should have received a copy of the GNU General Public License along with this program. If not, see
+      &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.
     </p>
+
     <p>
       <img alt="GPL V3" title="GPL V3" class="gplimg" src="images/gpl-v3-logo.svg" />
     </p>
