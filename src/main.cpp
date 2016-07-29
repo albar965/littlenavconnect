@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
   Application::setApplicationName("Little Navconnect");
   Application::setOrganizationName("ABarthel");
   Application::setOrganizationDomain("abarthel.org");
-  Application::setApplicationVersion("0.9.5.develop");
+  Application::setApplicationVersion("0.9.6.develop");
 
   // Initialize logging and force logfiles into the system or user temp directory
   LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(

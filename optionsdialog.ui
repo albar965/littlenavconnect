@@ -44,6 +44,10 @@
      </item>
      <item row="0" column="1">
       <widget class="QSpinBox" name="spinBoxOptionsUpdateRate">
+       <property name="toolTip">
+        <string>Allowed range is 100 milliseconds up to 2 seconds. 
+Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</string>
+       </property>
        <property name="suffix">
         <string> ms</string>
        </property>
@@ -63,6 +67,11 @@
      </item>
      <item row="1" column="1">
       <widget class="QSpinBox" name="spinBoxOptionsPort">
+       <property name="toolTip">
+        <string>This can normally be left at default.
+Change this value only if another application occupies this port and 
+you get an error message like &quot;The bound address is already in use&quot;.</string>
+       </property>
        <property name="minimum">
         <number>1024</number>
        </property>
