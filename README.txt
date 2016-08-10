@@ -15,7 +15,7 @@ Do not extract the archive into the folder "c:\Program Files\" or "c:\Program Fi
 you will need administrative privileges in some Windows versions. Since Windows keeps control on
 these folders other problems might occur, like replaced or deleted files.
 Extract the Zip archive into a folder, like "c:\Own Programs\Little Navconnect".
-Then start the program by double-clicking "littlenavmap.exe".
+Then start the program by double-clicking "littlenavconnect.exe".
 
 Little Navconnect is a 32-bit application and was tested with Windows XP 32-bit,
 Windows 7 64-bit and Windows 8.1 64-bit.
@@ -24,7 +24,7 @@ This software is licensed under GPL3 or any later version.
 
 The source code for this application is available at Github:
 https://github.com/albar965/atools
-https://github.com/albar965/littlenavmap
+https://github.com/albar965/littlenavconnect
 
 Copyright 2015-2016 Alexander Barthel (albar965@mailbox.org).
 
