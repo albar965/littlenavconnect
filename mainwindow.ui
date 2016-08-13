@@ -74,7 +74,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset resource="littlenavconnect.qrc">
-     <normaloff>:/littlenavconnect/resources/icons/about.svg</normaloff>:/littlenavconnect/resources/icons/about.svg</iconset>
+     <normaloff>:/littlenavconnect/resources/icons/navconnect.svg</normaloff>:/littlenavconnect/resources/icons/navconnect.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;About Little Navconnect</string>
