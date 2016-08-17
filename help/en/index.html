@@ -76,6 +76,7 @@
     font-family: 'Andale Mono', 'Courier New', Courier, sans-serif;
     font-weight: bold;
     color: darkgreen;
+    background-color: #d0f0d0;
     width:75%;
     }
     pre {
@@ -191,14 +192,15 @@
     </p>
 
     <p>
-      You might have to install an older version of SimConnect than the most current one if you use <em>Prepar3D</em>
-      or <em>FSX Steam Edition</em>.
+      You might have to install an older version of SimConnect if you use <em>Prepar3D</em> or <em>FSX Steam
+      Edition</em>. If not sure about this simply try <em>Little Navconnect</em> out. If it fails with an error message
+      proceed as shown below.
     </p>
 
     <p>
       In the same directory as <code>Prepar3D.exe</code> is a <code>redist\Interface</code> directory (normally
-      <code>C:\Program Files (x86)\Lockheed Martin\Prepar3D v3\redist\Interface</code>). There are multiple different
-      legacy versions of SimConnect available. You have to install <code>FSX-SP2-XPACK.msi</code> for <em>Little
+      <code>C:\Program Files (x86)\Lockheed Martin\Prepar3D v3\redist\Interface</code>). There are multiple legacy
+      versions of SimConnect available. You have to install <code>FSX-SP2-XPACK.msi</code> for <em>Little
       Navconnect</em>.
     </p>
 
@@ -213,37 +215,36 @@
     </h2>
 
     <p>
-      Little Navconnect acts as an agent that connects Little Navmap with a Flight Simulator. This saves the pain of
-      setting up a remote SimConnect connection and allows using Little Navmap on Linux or Mac since SimConnect is only
-      available for Windows.
-    </p>
-
-    <h2 id="bugreport">
-      How to report a Bug
-    </h2>
-
-    <p>
-      If something goes wrong send me <em>Little Navconnect</em>'s log file and configuration file which can be located
-      in the about dialog. My e-mail address is shown in the about dialog of <em>Little Navconnect</em> too.
+      <em>Little Navconnect</em> acts as an agent that connects <em>Little Navmap</em> with a flight simulator. This
+      saves the pain of setting up a remote SimConnect link and allows using <em>Little Navmap</em> on Linux or Mac
+      computers.
     </p>
 
     <h2>
       Usage
     </h2>
 
-    <ol>
-      <li>Install <em>Little Navconnect</em> on the computer that is running the simulator. Start it and take note of
-      the message that is printed on the logging window. You only need the colored values. You can use the IP address
-      or the hostname.
+    <p>
+      The setup procedure is the same if no remote connection is needed. In this case all programs run on the same
+      computer which is both flying and client computer.
+    </p>
 
-        <pre xml:space="preserve">
+    <ol>
+      <li>Install <em>Little Navconnect</em> on the flying computer. Start it and take note of the message that is
+      printed on the logging window. You only need the colored values. You can use the IP address or the hostname. 
+      <!--        <pre xml:space="preserve">
 [2016-07-24 17:31:40] Server is running on hostname <span style=
 "color: blue;">windows-pc</span> (IP address <span style="color: blue;">192.168.1.4</span>) port <span style=
 "color: red;">51968</span>.
-</pre><img alt="Little Navconnect" title="Little Navconnect" src="images/littlenavconnect.png" />
+</pre>-->
+
+        <p>
+          <img alt="Little Navconnect" title="Little Navconnect" src="images/littlenavconnect.png" />
+        </p>
+
         <p>
           <span class="capthdg">Picture above:</span> <span class="capt"><em>Little Navconnect</em> is running and
-          waiting for a Flight Simulator.</span>
+          waiting for a flight simulator.</span>
         </p>
 
         <p>
@@ -256,12 +257,15 @@
 </pre>
       </li>
 
-      <li>Start <em>Little Navmap</em> on the flying computer or the remote client computer.
+      <li>Start <em>Little Navmap</em> on the client computer.
       </li>
 
-      <li>Open the connection dialog by selecting <code>Main Menu</code> -&gt; <code>Tools</code> -&gt; <code>Connect
-      to Simulator</code>. <img alt="Little Navmap Connect Dialog" title="Little Navmap Connect Dialog" src=
-      "images/connect.png" />
+      <li>Open the connection dialog in <em>Little Navmap</em> by selecting <code>Main Menu</code> -&gt;
+      <code>Tools</code> -&gt; <code>Connect to Simulator</code>.
+        <p>
+          <img alt="Little Navmap Connect Dialog" title="Little Navmap Connect Dialog" src="images/connect.png" />
+        </p>
+
         <p>
           <span class="capthdg">Picture above:</span> <span class="capt">Connect dialog with correct values to access
           the <em>Little Navconnect</em> shown above.</span>
@@ -269,14 +273,14 @@
       </li>
 
       <li>Add the value for hostname. This can be either the hostname printed by <em>Little Navconnect</em> or the IP
-      address. You can use <code>localhost</code> if both programs are running on the same computer.
+      address. You can use <code>localhost</code> if all programs are running on the same computer.
       </li>
 
-      <li>Add the value for the port. <code>51968</code> is the default value. Usually this can be left default.
+      <li>Add the value for the port. <code>51968</code> is the default value. Usually this can be left unchanged.
       </li>
 
-      <li>Click connect. Once a flight is set up and loaded on the simulator your aircraft will show up on the map and
-      the <code>Simulator Aircraft</code> dock window.
+      <li>Click connect. Your aircraft will show up on the map and on the <code>Simulator Aircraft</code> dock window
+      once a flight is set up and loaded on the simulator .
       </li>
     </ol>
 
@@ -354,7 +358,17 @@
     </h4>
 
     <p>
-      Information about the Qt toolkit <em>Little Navconnect</em> uses.
+      Information about the application framework that is used by <em>Little Navconnect</em>.
+    </p>
+
+    <h2 id="bugreport">
+      How to report a Bug
+    </h2>
+
+    <p>
+      If something goes wrong send me <em>Little Navconnect</em>'s log file and configuration file which can be located
+      in the about dialog. My e-mail address is shown in the about dialog of <em>Little Navconnect</em> as well. Please
+      add all steps that are neccessary to reproduce the error.
     </p>
 
     <h2>

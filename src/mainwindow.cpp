@@ -180,17 +180,16 @@ void MainWindow::readSettings()
 
   verbose = Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_VERBOSE, false).toBool();
 
-  atools::gui::WidgetState ws(SETTINGS_MAINWINDOW_WIDGET);
-  ws.restore(this);
+  atools::gui::WidgetState(SETTINGS_MAINWINDOW_WIDGET).restore(this);
 }
 
 void MainWindow::writeSettings()
 {
   qDebug() << "writeSettings";
 
-  atools::gui::WidgetState ws(SETTINGS_MAINWINDOW_WIDGET);
-  ws.save(this);
-  ws.syncSettings();
+  atools::gui::WidgetState widgetState(SETTINGS_MAINWINDOW_WIDGET);
+  widgetState.save(this);
+  widgetState.syncSettings();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
