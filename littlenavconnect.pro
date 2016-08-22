@@ -62,7 +62,8 @@ DISTFILES += \
     help/en/index.html \
     help/en/images/gpl-v3-logo.svg \
     htmltidy.cfg \
-    BUILD.txt
+    BUILD.txt \
+    help/en/css/style.css
 
 # Add dependencies to atools project and its static library to ensure relinking on changes
 DEPENDPATH += $$PWD/../atools/src
