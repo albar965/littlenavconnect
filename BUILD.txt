@@ -2,6 +2,8 @@ Build Instructions
 ------------------------------------------------------
 
 Qt development packages of Core, Widgets, XML and SQL are needed with minimum version 5.5.
+MSVC 2013 or higher is needed as a compiler.
+GIT command line tools are required.
 Additionally my atools static library is needed.
 
 - Clone atools GIT repository
@@ -15,29 +17,12 @@ Windows
 - Configure the projects and enable shadow build for release or debug versions.
 -- For atools use the build directory of e.g.: "C:\Projects\atools\release"
 -- For littlenavconnect use the build directory of e.g.: "C:\Projects\littlenavconnect\release"
-- Adapt the QT_BIN and GIT_BIN variables in "littlenavconnect.pro".
+- Adapt the QT_BIN, GIT_BIN and SIMCONNECT variables in "littlenavconnect.pro".
+- Set the build kit for atools and littlenavconnect to MSVC 2013 (or higher) 32 bit.
 - Run qmake from Qt Creator
-- Run lupdate Qt Creator
 - Build and run.
 
 It is important that the shadow build directories reside within the project directories and are
 named "release" and "debug" depending on desired build. Do not use the default shadow names, this will
 break project dependencies.
 
-Linux
-------------------------------------------------------
-Install Qt development packages. Version at least 5.5.
-
-Build atools according to instructions in BUILD.txt.
-
-To build release
-- mkdir littlenavconnect/release
-- cd littlenavconnect/release
-- qmake ../littlenavconnect.pro
-- make
-
-To build debug
-- mkdir littlenavconnect/debug
-- cd littlenavconnect/debug
-- qmake ../littlenavconnect.pro CONFIG+=debug
-- make

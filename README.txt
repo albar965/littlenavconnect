@@ -12,7 +12,7 @@ pain of setting up remote SimConnect links.
 
 See the Little Navconnect help for more information. All online here: https://albar965.github.io/
 
-Little Navconnect supports FSX, FSX Steam Edition and Prepare3d Versions 2 and 3.
+Little Navconnect supports FSX, FSX Steam Edition and Prepar3d Versions 2 and 3.
 
 ------------------------------------------------------------------------------
 
