@@ -70,21 +70,26 @@ DISTFILES += \
 DEPENDPATH += $$PWD/../atools/src
 INCLUDEPATH += $$PWD/../atools/src $$PWD/src
 
-CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-atools-debug -latools
-CONFIG(release, debug|release): LIBS += -L$$PWD/../build-atools-release -latools
-
 unix {
-CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../build-atools-debug/libatools.a
-CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../build-atools-release/libatools.a
+CONFIG(debug, debug|release) {
+  LIBS += -L$$PWD/../build-atools-debug -latools
+  PRE_TARGETDEPS += $$PWD/../build-atools-debug/libatools.a
+}
+CONFIG(release, debug|release) {
+  LIBS += -L$$PWD/../build-atools-release -latools
+  PRE_TARGETDEPS += $$PWD/../build-atools-release/libatools.a
+}
 }
 
 win32 {
 CONFIG(debug, debug|release) {
-  PRE_TARGETDEPS += $$PWD/../build-atools-debug/atools.lib
+  LIBS += -L$$PWD/../build-atools-debug/debug -latools
+  PRE_TARGETDEPS += $$PWD/../build-atools-debug/debug/atools.lib
   WINDEPLOY_FLAGS = --no-system-d3d-compiler --debug --compiler-runtime
 }
 CONFIG(release, debug|release) {
-  PRE_TARGETDEPS += $$PWD/../build-atools-release/atools.lib
+  LIBS += -L$$PWD/../build-atools-release/release -latools
+  PRE_TARGETDEPS += $$PWD/../build-atools-release/release/atools.lib
   WINDEPLOY_FLAGS = --no-system-d3d-compiler --release --compiler-runtime
 }
 
@@ -108,7 +113,7 @@ win32 {
   WINOUT_PWD=$${OUT_PWD}
   WINOUT_PWD ~= s,/,\\,g
   DEPLOY_DIR_NAME=Little Navconnect
-  DEPLOY_DIR_WIN=\"$${WINPWD}\\deploy\\$${DEPLOY_DIR_NAME}\"
+  DEPLOY_DIR_WIN=\"$${WINPWD}\\..\\deploy\\$${DEPLOY_DIR_NAME}\"
 
   copydata.commands = xcopy /i /s /e /f /y $${WINPWD}\\help $${WINOUT_PWD}\\help
 
@@ -116,7 +121,7 @@ win32 {
 
   deploy.commands = rmdir /s /q $${DEPLOY_DIR_WIN} &
   deploy.commands += mkdir $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINOUT_PWD}\\littlenavconnect.exe $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINOUT_PWD}\\release\\littlenavconnect.exe $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\CHANGELOG.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
