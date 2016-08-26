@@ -22,7 +22,8 @@ win32 {
 
 # Get the current GIT revision to include it into the code
 win32:DEFINES += GIT_REVISION='\\"$$system($${GIT_BIN} rev-parse --short HEAD)\\"'
-win32:DEFINES +=NOMINMAX
+# Disable microsofts min/max defines
+win32:DEFINES += NOMINMAX
 
 unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
 
@@ -69,21 +70,21 @@ DISTFILES += \
 DEPENDPATH += $$PWD/../atools/src
 INCLUDEPATH += $$PWD/../atools/src $$PWD/src
 
-CONFIG(debug, debug|release): LIBS += -L$$PWD/../atools/debug -latools
-CONFIG(release, debug|release): LIBS += -L$$PWD/../atools/release -latools
+CONFIG(debug, debug|release): LIBS += -L$$PWD/../build-atools-debug -latools
+CONFIG(release, debug|release): LIBS += -L$$PWD/../build-atools-release -latools
 
 unix {
-CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../atools/debug/libatools.a
-CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../atools/release/libatools.a
+CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../build-atools-debug/libatools.a
+CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../build-atools-release/libatools.a
 }
 
 win32 {
 CONFIG(debug, debug|release) {
-  PRE_TARGETDEPS += $$PWD/../atools/debug/atools.lib
+  PRE_TARGETDEPS += $$PWD/../build-atools-debug/atools.lib
   WINDEPLOY_FLAGS = --no-system-d3d-compiler --debug --compiler-runtime
 }
 CONFIG(release, debug|release) {
-  PRE_TARGETDEPS += $$PWD/../atools/release/atools.lib
+  PRE_TARGETDEPS += $$PWD/../build-atools-release/atools.lib
   WINDEPLOY_FLAGS = --no-system-d3d-compiler --release --compiler-runtime
 }
 
