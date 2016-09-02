@@ -70,31 +70,21 @@ DISTFILES += \
 DEPENDPATH += $$PWD/../atools/src
 INCLUDEPATH += $$PWD/../atools/src $$PWD/src
 
+CONFIG(debug, debug|release):CONF_TYPE=debug
+CONFIG(release, debug|release):CONF_TYPE=release
+
 unix {
-CONFIG(debug, debug|release) {
-  LIBS += -L$$PWD/../build-atools-debug -latools
-  PRE_TARGETDEPS += $$PWD/../build-atools-debug/libatools.a
-}
-CONFIG(release, debug|release) {
-  LIBS += -L$$PWD/../build-atools-release -latools
-  PRE_TARGETDEPS += $$PWD/../build-atools-release/libatools.a
-}
+  LIBS += -L$$PWD/../build-atools-$${CONF_TYPE} -latools
+  PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/libatools.a
 }
 
 win32 {
-CONFIG(debug, debug|release) {
-  LIBS += -L$$PWD/../build-atools-debug/debug -latools
-  PRE_TARGETDEPS += $$PWD/../build-atools-debug/debug/atools.lib
-  WINDEPLOY_FLAGS = --no-system-d3d-compiler --debug --compiler-runtime
-}
-CONFIG(release, debug|release) {
-  LIBS += -L$$PWD/../build-atools-release/release -latools
-  PRE_TARGETDEPS += $$PWD/../build-atools-release/release/atools.lib
-  WINDEPLOY_FLAGS = --no-system-d3d-compiler --release --compiler-runtime
-}
+  LIBS += -L$$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE} -latools
+  PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE}/atools.lib
+  WINDEPLOY_FLAGS = --no-system-d3d-compiler --$${CONF_TYPE} --compiler-runtime
 
-INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
-LIBS += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\lib\SimConnect.lib"
+  INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
+  LIBS += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\lib\SimConnect.lib"
 }
 
 # Create additional makefile targets to copy help files
@@ -121,7 +111,7 @@ win32 {
 
   deploy.commands = rmdir /s /q $${DEPLOY_DIR_WIN} &
   deploy.commands += mkdir $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINOUT_PWD}\\release\\littlenavconnect.exe $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINOUT_PWD}\\$${CONF_TYPE}\\littlenavconnect.exe $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\CHANGELOG.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
