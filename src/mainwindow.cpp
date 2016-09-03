@@ -32,6 +32,18 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 
+static QString ABOUT_MESSAGE =
+  QObject::tr("<p>is the Fligh Simulator Network agent for Little Navmap.</p>"
+                "<p>This software is licensed under "
+                  "<a href=\"http://www.gnu.org/licenses/gpl-3.0\">GPL3</a> or any later version.</p>"
+                    "<p>The source code for this application is available at "
+                      "<a href=\"https://github.com/albar965\">Github</a>.</p>"
+                        "<p>More about my projects at "
+                          "<a href=\"https://albar965.github.io\">albar965.github.io</a>.</p>"
+                            "<p><b>Copyright 2015-2016 Alexander Barthel</b></p> "
+                              "<p><a href=\"mailto:albar965@mailbox.org\">albar965@mailbox.org</a> or "
+                                "<a href=\"mailto:albar965@t-online.de\">albar965@t-online.de</a></p>");
+
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
 
@@ -45,18 +57,8 @@ MainWindow::MainWindow()
   using namespace std::placeholders;
   atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logGuiMessage, this, _1, _2, _3));
 
-  QString aboutMessage =
-    tr("<p>is the Fligh Simulator Network agent for Little Navmap.</p>"
-         "<p>This software is licensed under "
-           "<a href=\"http://www.gnu.org/licenses/gpl-3.0\">GPL3</a> or any later version.</p>"
-             "<p>The source code for this application is available at "
-               "<a href=\"https://github.com/albar965\">Github</a>.</p>"
-                 "<p><b>Copyright 2015-2016 Alexander Barthel</b></p> "
-                   "<p><a href=\"mailto:albar965@mailbox.org\">albar965@mailbox.org</a> or "
-                     "<a href=\"mailto:albar965@t-online.de\">albar965@t-online.de</a></p>");
-
   // Create help handler for managing the Help menu items
-  helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION);
+  helpHandler = new atools::gui::HelpHandler(this, ABOUT_MESSAGE, GIT_REVISION);
 
   // Create nav server but to not start it yet
   navServer = new NavServer(this, verbose,
