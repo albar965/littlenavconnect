@@ -28,6 +28,7 @@
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
 #include "logging/logginghandler.h"
+#include "fs/sc/simconnectreply.h"
 
 #include <QMessageBox>
 #include <QCloseEvent>
@@ -46,6 +47,7 @@ static QString ABOUT_MESSAGE =
 
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
+using atools::fs::sc::SimConnectReply;
 
 MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
@@ -224,7 +226,9 @@ void MainWindow::mainWindowShown()
   qInfo(gui).noquote().nospace() << tr("Version %1 (revision %2).").
   arg(QApplication::applicationVersion()).arg(GIT_REVISION);
 
-  qInfo(gui).noquote().nospace() << tr("Protocol Version %1.").arg(SimConnectData::getDataVersion());
+  qInfo(gui).noquote().nospace()
+  << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
+    SimConnectReply::getReplyVersion());
 
   dataReader = new DataReaderThread(this, verbose);
   dataReader->setReconnectRateSec(Settings::instance().
