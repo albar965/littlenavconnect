@@ -236,10 +236,15 @@ void MainWindow::mainWindowShown()
   dataReader->setUpdateRate(Settings::instance().
                             getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
 
+  qInfo(gui).noquote().nospace() << tr("Starting server ...");
+
+  QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+
   dataReader->start();
 
   navServer->startServer(dataReader);
 
+  qInfo(gui).noquote().nospace() << tr("Server running.");
 }
 
 void MainWindow::showEvent(QShowEvent *event)

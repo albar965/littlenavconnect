@@ -59,35 +59,73 @@ bool NavServer::startServer(DataReaderThread *dataReaderThread)
   dataReader = dataReaderThread;
   qDebug() << "Navserver starting";
 
+  QStringList hostNameList, hostIpList;
   bool retval = listen(QHostAddress::AnyIPv4, static_cast<quint16>(port));
 
-  // Get an IP address of this machine that is not localhost
-  QString ipAddress;
+  qDebug() << "localHostName" << QHostInfo::localHostName()
+           << "localDomainName" << QHostInfo::localDomainName();
+
+  // QHostInfo localHostInfo = QHostInfo::fromName(QHostInfo::localHostName());
+  // qDebug() << "localHostInfo.hostName" << localHostInfo.hostName();
+  // // Get all addresses of the local host name and append them to the lists
+  // for(const QHostAddress& localHostAddr : localHostInfo.addresses())
+  // {
+  // if(localHostAddr.protocol() == QAbstractSocket::IPv4Protocol && !localHostAddr.isLoopback())
+  // {
+  // QHostInfo tempHostInfo = QHostInfo::fromName(localHostAddr.toString());
+  // qDebug() << "Machine host IP" << localHostAddr.toString() << "host name" << tempHostInfo.hostName();
+  // // Try name and domain first
+  // QString name = tempHostInfo.hostName();
+  // // Otherwise use local host name
+  // if(name.isEmpty())
+  // name = QHostInfo::localHostName();
+  // // Else use IP
+  // if(name.isEmpty())
+  // name = localHostAddr.toString();
+  // hostNameList.append(name);
+  // hostIpList.append(localHostAddr.toString());
+  // }
+  // }
+
+  // Collect hostnames and IPs from all interfaces
   QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
   for(const QHostAddress& ip : ipAddressesList)
   {
     if(ip != QHostAddress::LocalHost && ip.toIPv4Address() > 0)
     {
-      ipAddress = ip.toString();
-      break;
+      QString name = QHostInfo::fromName(ip.toString()).hostName();
+      qDebug() << "Found IP" << ip.toString() << "name" << name;
+      if(!name.isEmpty() && name != ip.toString())
+        hostNameList.append(name);
+      hostIpList.append(ip.toString());
     }
   }
-  // if we did not find one, use IPv4 localhost
-  if(ipAddress.isEmpty())
-    ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
 
-  // Get hostname synchronously
-  QHostInfo hostInfo = QHostInfo::fromName(ipAddress);
+  // Add localhost if nothing was found
+  if(hostNameList.isEmpty())
+    hostNameList.append("localhost");
+
+  if(hostIpList.isEmpty())
+    hostIpList.append(QHostAddress(QHostAddress::LocalHost).toString());
+
+  QHostAddress svrAddress = serverAddress();
+  qDebug() << "Server address IP" << svrAddress.toString()
+           << "Name" << QHostInfo::fromName(svrAddress.toString()).hostName();
 
   if(!retval)
     qCritical(gui).noquote().nospace() << tr("Unable to start the server: %1.").arg(errorString());
   else
     qInfo(gui).noquote().nospace()
-    << tr("Server is running on hostname "
-          "<span style=\"color: #0000ff; font-weight:bold\">%1</span> "
-            "(IP address <span style=\"color: #0000ff; font-weight:bold\">%2</span>) "
-            "port <span style=\"color: #ff0000; font-weight:bold\">%3</span>.").
-    arg(hostInfo.hostName()).arg(ipAddress).arg(serverPort());
+    << tr("Server is listening on hostname%1 "
+          "<span style=\"color: #0000ff; font-weight:bold\">%2</span> "
+            "(IP address%3 <span style=\"color: #0000ff; font-weight:bold\">%4</span>) "
+            "port <span style=\"color: #ff0000; font-weight:bold\">%5</span>.").
+    arg(hostNameList.size() > 1 ? tr("s") : QString()).
+    arg(hostNameList.join(", ")).
+    arg(hostIpList.size() > 1 ? tr("es") : QString()).
+    arg(hostIpList.join(", ")).
+    arg(serverPort());
+
   return retval;
 }
 
