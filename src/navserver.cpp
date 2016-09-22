@@ -71,7 +71,7 @@ bool NavServer::startServer(DataReaderThread *dataReaderThread)
   QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
   for(const QHostAddress& ip : ipAddressesList)
   {
-    if(!ip.isLoopback() && !ip.isNull())
+    if(!ip.isLoopback() && !ip.isNull() && ip.protocol() == QAbstractSocket::IPv4Protocol)
     {
       QString name = QHostInfo::fromName(ip.toString()).hostName();
       qDebug() << "Found valid IP" << ip.toString() << "name" << name;
