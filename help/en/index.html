@@ -3,11 +3,10 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="language" content="EN" />
     <meta name="author" content="Alexander Barthel" />
-    <meta name="date" content="2016-07-27T16:20:00+01:00" />
+    <meta name="date" content="2016-09-22T16:20:00+01:00" />
     <meta content="Little Navconnect User Manual" name="description" />
     <title>
       Little Navconnect User Manual
@@ -106,6 +105,14 @@
     <ol>
       <li>Install <em>Little Navconnect</em> on the flying computer. Start it and take note of the message that is
       printed on the logging window. You only need the colored values. You can use the IP address or the hostname.
+        <br />
+        <em>Little Navconnect</em> can print multiple IP addresses or hostnames depending on your network
+        configuration. This can happen if you have ethernet plugged in and are connected using wireless LAN too, for
+        example. You have to try if you are unsure which one to use.
+        <br />
+        <code>localhost</code> and <code>127.0.0.1</code> or similar will be used if you are not connected to a
+        network. In this case you have to run <em>Little Navconnect</em> and <em>Little Navmap</em> on the same
+        computer.
         <p>
           <img alt="Little Navconnect" title="Little Navconnect" src="images/littlenavconnect.png" />
         </p>
@@ -141,14 +148,19 @@
       </li>
 
       <li>Add the value for hostname. This can be either the hostname printed by <em>Little Navconnect</em> or the IP
-      address. You can use <code>localhost</code> if all programs are running on the same computer.
+      address. You can use <code>localhost</code> if both programs are running on the same computer.
       </li>
 
       <li>Add the value for the port. <code>51968</code> is the default value. Usually this can be left unchanged.
       </li>
 
       <li>Click connect. Your aircraft will show up on the map and on the <code>Simulator Aircraft</code> dock window
-      once a flight is set up and loaded on the simulator .
+      once a flight is set up and loaded on the simulator.
+        <br />
+        You will see the message <code>Connected. Waiting for update.</code> in the <code>Simulator Aircraft</code>
+        dock window if no flight is loaded yet (i.e. the simulator still shows the opening screen).
+        <br />
+        Note that it sometimes can take a while until an error is shown if you used the wrong values.
       </li>
     </ol>
 
@@ -270,7 +282,7 @@
       <br />
       <br />
       <br />
-      Last update 2016-09-08
+      Last update 2016-09-22
     </p>
   </body>
 </html>
