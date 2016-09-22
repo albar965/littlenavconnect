@@ -240,9 +240,13 @@ void MainWindow::mainWindowShown()
 
   QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
+  QGuiApplication::setOverrideCursor(Qt::WaitCursor);
+
   dataReader->start();
 
   navServer->startServer(dataReader);
+
+  QGuiApplication::restoreOverrideCursor();
 
   qInfo(gui).noquote().nospace() << tr("Server running.");
 }
