@@ -1,18 +1,19 @@
 Little Navconnect
 =================
 
-Little Navconnect is a tiny free open source application that acts as an agent connecting Little Navmap
+Little Navconnect is a free open source application that acts as an agent connecting Little Navmap
 with a flight simulator. This allows to use Little Navmap on Linux or Mac and saves the the
 pain of setting up remote SimConnect links.
 
-| Windows Machine                            | Linux or Mac Machines
-| FSX <-> Simconnect <-> Little Navonnect <- | -> Little Navmap
+| Windows Machine                            | Windows, Linux or Mac Machines
+| FSX <-> Simconnect <-> Little Navonnect <- | -> Little Navmap on Computer 1
+                                          <- | -> Little Navmap on Computer 2
 
 ------------------------------------------------------------------------------
 
 See the Little Navconnect help for more information. All online here: https://albar965.github.io/
 
-Little Navconnect supports FSX, FSX Steam Edition and Prepar3d Versions 2 and 3.
+Little Navconnect supports FSX, FSX Steam Edition (untested) and Prepar3d (untested) Versions 2 and 3.
 
 ------------------------------------------------------------------------------
 
@@ -25,7 +26,7 @@ Extract the Zip archive into a folder, like "c:\Own Programs\Little Navconnect".
 Then start the program by double-clicking "littlenavconnect.exe".
 
 Little Navconnect is a 32-bit application and was tested with Windows XP 32-bit,
-Windows 7 64-bit and Windows 8.1 64-bit.
+Windows 7 64-bit and Windows 8.1 64-bit. It was not tested on Windows 10 but should work.
 
 ------------------------------------------------------------------------------
 
