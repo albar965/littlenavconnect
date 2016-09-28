@@ -236,7 +236,7 @@ void MainWindow::mainWindowShown()
   dataReader->setUpdateRate(Settings::instance().
                             getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
 
-  qInfo(gui).noquote().nospace() << tr("Starting server ...");
+  qInfo(gui).noquote().nospace() << tr("Starting server. This can take up to a minute ...");
 
   QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
