@@ -52,7 +52,7 @@ private:
   /* Count dropped packages and write a message if too many accumulated. */
   void handleDroppedPackages(const QString& reason);
 
-  const int MAX_DROPPED_PACKAGES = 20;
+  const int MAX_DROPPED_PACKAGES = 50;
 
   qintptr socketDescr;
   atools::fs::sc::SimConnectData data;
