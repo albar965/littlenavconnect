@@ -13,7 +13,7 @@ pain of setting up remote SimConnect links.
 
 See the Little Navconnect help for more information. All online here: https://albar965.github.io/
 
-Little Navconnect supports FSX, FSX Steam Edition (untested) and Prepar3d (untested) Versions 2 and 3.
+Little Navconnect supports FSX, FSX Steam Edition and Prepar3d Versions 2 and 3.
 
 ------------------------------------------------------------------------------
 
@@ -22,11 +22,18 @@ An installer or setup program is not available.
 Do not extract the archive into the folder "c:\Program Files\" or "c:\Program Files (x86)\" since
 you will need administrative privileges in some Windows versions. Since Windows keeps control on
 these folders other problems might occur, like replaced or deleted files.
-Extract the Zip archive into a folder, like "c:\Own Programs\Little Navconnect".
-Then start the program by double-clicking "littlenavconnect.exe".
 
-Little Navconnect is a 32-bit application and was tested with Windows XP 32-bit,
-Windows 7 64-bit and Windows 8.1 64-bit. It was not tested on Windows 10 but should work.
+Extract the Zip archive into a folder, like "c:\Own Programs\Little Navconnect".
+
+The zip archive contains the files vcredist_x86.exe and vcredist_x64.exe which install
+the MSVC 2013 runtime distributables. Runing both installers is recommended. The installation will
+be skipped if one of the runtime distributables is already installed.
+
+Start the program by double-clicking "littlenavconnect.exe".
+
+Little Navconnect is a 32-bit application and was tested with Windows 7, Windows 8.1 and Windows 10.
+
+Little Navconnect does not run in Windows XP.
 
 ------------------------------------------------------------------------------
 

@@ -27,9 +27,13 @@
       <span class="bold">Version 1.0.0.beta</span>
     </p>
 
-    <h2>
+    <h2 id="h2installation">
       Installation
     </h2>
+
+    <p>
+      <code>Highlighted text</code> is used to denote window, menu, button, file or directory names.
+    </p>
 
     <p>
       An installer or setup program is not available.
@@ -42,18 +46,22 @@
     </p>
 
     <p>
+      The zip archive contains the files <code>vcredist_x86.exe</code> and <code>vcredist_x64.exe</code> which install
+      the MSVC 2013 runtime distributables. Runing both installers is recommended. The installation will be skipped if
+      one of the runtime distributables is already installed.
+    </p>
+
+    <p>
       Extract the Zip archive into a folder like <code>c:\Own Programs\Little Navconnect</code>. Then start the program
       by double-clicking <code>littlenavconnect.exe</code>.
     </p>
 
     <p>
-      The zip archive contains a file <code>vcredist_x86.exe</code> which can be used to install the MSVC 2013 runtime
-      distributable if needed.
+      <em>Little Navconnect</em> is a 32-bit application and was tested with Windows 7, Windows 8.1 and Windows 10.
     </p>
 
     <p>
-      <em>Little Navconnect</em> is a 32-bit application and was tested with Windows 7 64-bit and Windows 8.1 64-bit.
-      Windows XP is not supported.
+      <span class="bold">Windows XP is not supported.</span>
     </p>
 
     <h3>
@@ -83,7 +91,7 @@
       the legacy SimConnect interfaces.
     </p>
 
-    <h2>
+    <h2 id="h2general">
       General
     </h2>
 
@@ -93,22 +101,27 @@
       link and allows using <em>Little Navmap</em> on Linux or Mac computers.
     </p>
 
-    <h2>
+    <p>
+      <span class="bold"><em>Little Navmap</em> cannot connect to the flight simulator directly. The <em>Little
+      Navconnect</em> agent is always needed, even if all programs run on the same computer.</span>
+    </p>
+
+    <h2 id="h2usage">
       Usage
     </h2>
 
     <p>
-      The setup procedure is the same if no remote connection is needed. In this case all programs run on the same
-      computer which is both flying and client computer.
+      The setup procedure is the same for both remote connections and local connections. In the latter case all
+      programs run on the same computer which is both flying and client computer.
     </p>
 
     <ol>
       <li>Install <em>Little Navconnect</em> on the flying computer. Start it and take note of the message that is
-      printed on the logging window. You only need the colored values. You can use the IP address or the hostname.
+      printed in the logging window. You only need the colored values. You can use the IP address or the hostname.
         <br />
         <em>Little Navconnect</em> can print multiple IP addresses or hostnames depending on your network
         configuration. This can happen if you have ethernet plugged in and are connected using wireless LAN too, for
-        example. You have to try if you are unsure which one to use.
+        example. You have to try all addresses if you are unsure which one to use.
         <br />
         <code>localhost</code> and <code>127.0.0.1</code> or similar will be used if you are not connected to a
         network. In this case you have to run <em>Little Navconnect</em> and <em>Little Navmap</em> on the same
@@ -154,22 +167,24 @@
       <li>Add the value for the port. <code>51968</code> is the default value. Usually this can be left unchanged.
       </li>
 
-      <li>Click connect. Your aircraft will show up on the map and on the <code>Simulator Aircraft</code> dock window
-      once a flight is set up and loaded on the simulator.
+      <li>Click connect. The dialog will close and <em>Little Navmap</em> will try to establish a connection in the
+      background which can take a few seconds. Your aircraft will show up on the map and on the <code>Simulator
+      Aircraft</code> dock window once a flight is set up and loaded on the simulator.
         <br />
         You will see the message <code>Connected. Waiting for update.</code> in the <code>Simulator Aircraft</code>
         dock window if no flight is loaded yet (i.e. the simulator still shows the opening screen).
         <br />
-        Note that it sometimes can take a while until an error is shown if you used the wrong values.
+        <span class="bold">Note that it sometimes can take a while until an error is shown if you used the wrong
+        values.</span>
       </li>
     </ol>
 
-    <h2>
+    <h2 id="h2menu">
       Menu
     </h2>
 
     <h3>
-      File -&gt; Quit
+      <img class="textimg" alt="Quit" title="Quit" src="images/icons/application-exit.png" /> File -&gt; Quit
     </h3>
 
     <p>
@@ -186,7 +201,7 @@
     </p>
 
     <h3>
-      Tools -&gt; Options
+      <img class="textimg" alt="Quit" title="Quit" src="images/icons/settings.png" /> Tools -&gt; Options
     </h3>
 
     <p>
@@ -201,8 +216,8 @@
 
         <pre xml:space="preserve">
 [2016-07-27 16:45:35] <span style=
-"color: orange;">Dropped more than 20 packages. Reason: Missing reply. Increase update time interval.</span>
-</pre>
+"color: orange;">Dropped more than 50 packages. Reason: Missing reply. Increase update time interval.</span>
+</pre>Dropped packages can also appear if the <em>Little Navmap</em> cannot respond because a dialog is open.
       </li>
 
       <li>
@@ -217,7 +232,7 @@
     </ul>
 
     <h4>
-      Help Menu -&gt; Contents
+      <img class="textimg" alt="Help" title="Help" src="images/icons/help.png" /> Help Menu -&gt; Contents
     </h4>
 
     <p>
@@ -225,7 +240,8 @@
     </p>
 
     <h4>
-      Help Menu -&gt; About Little Navconnect
+      <img class="textimg" alt="About" title="About" src="images/icons/navconnect.png" /> Help Menu -&gt; About Little
+      Navconnect
     </h4>
 
     <p>
@@ -234,7 +250,7 @@
     </p>
 
     <h4>
-      Help Menu -&gt; Qt
+      <img class="textimg" alt="About Qt" title="About Qt" src="images/icons/about.png" /> Help Menu -&gt; About Qt
     </h4>
 
     <p>
@@ -251,7 +267,7 @@
       add all steps that are neccessary to reproduce the error.
     </p>
 
-    <h2>
+    <h2 id="h2license">
       License
     </h2>
 
@@ -282,7 +298,7 @@
       <br />
       <br />
       <br />
-      Last update 2016-09-22
+      Last update 2016-10-08
     </p>
   </body>
 </html>
