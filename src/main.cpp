@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
   Application::setOrganizationName("ABarthel");
   Application::setOrganizationDomain("abarthel.org");
   Application::setApplicationVersion("1.0.0.beta");
+  Application::setEmailAddresses({"albar965@mailbox.org", "albar965@t-online.de"});
 
   // Initialize logging and force logfiles into the system or user temp directory
   LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(
