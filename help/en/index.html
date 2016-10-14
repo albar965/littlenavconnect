@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="language" content="EN" />
     <meta name="author" content="Alexander Barthel" />
-    <meta name="date" content="2016-10-12T16:20:00+01:00" />
+    <meta name="date" content="2016-10-14T16:20:00+01:00" />
     <meta content="Little Navconnect User Manual" name="description" />
     <title>
       Little Navconnect User Manual
@@ -47,8 +47,8 @@
 
     <p>
       The zip archive contains the files <code>vcredist_x86.exe</code> and <code>vcredist_x64.exe</code> which install
-      the MSVC 2013 runtime distributables. Runing both installers is recommended. The installation will be skipped if
-      one of the runtime distributables is already installed.
+      the MSVC 2013 runtime distributables. Runing both installers is recommended. The installation will provide a
+      uninstall and repair option if a runtime distributables is already installed and can be skipped in case.
     </p>
 
     <p>
@@ -75,18 +75,18 @@
     <p>
       You might have to install an older version of SimConnect if you use <em>Prepar3D</em> or <em>FSX Steam
       Edition</em>. If not sure about this simply try <em>Little Navconnect</em> out. If it fails with an error message
-      proceed as shown below.
+      follow the instructions below:
     </p>
 
     <p>
-      In the same directory as <code>Prepar3D.exe</code> is a <code>redist\Interface</code> directory (normally
-      <code>C:\Program Files (x86)\Lockheed Martin\Prepar3D v3\redist\Interface</code>). There are multiple legacy
-      versions of SimConnect available. You have to install <code>FSX-SP2-XPACK.msi</code> for <em>Little
-      Navconnect</em>.
+      <em>Prepar3D</em>: In the same directory as <code>Prepar3D.exe</code> is a <code>redist\Interface</code>
+      directory (normally <code>C:\Program Files (x86)\Lockheed Martin\Prepar3D v3\redist\Interface</code>). There are
+      multiple legacy versions of SimConnect available. You have to install <code>FSX-SP2-XPACK.msi</code> for
+      <em>Little Navconnect</em>.
     </p>
 
     <p>
-      The <em>FSX Steam Edition</em> installation adds the folder <code>C:\Program Files
+      <em>FSX Steam Edition</em>: The installation adds the folder <code>C:\Program Files
       (x86)\Steam\SteamApps\common\FSX\SDK\Core Utilities Kit\SimConnect SDK\LegacyInterfaces</code> where you can find
       the legacy SimConnect interfaces.
     </p>
@@ -98,7 +98,7 @@
     <p>
       <em>Little Navconnect</em> acts as an agent that connects <a href="https://albar965.github.io/littlenavmap.html"
       target="_blank">Little Navmap</a> with a flight simulator. This saves the pain of setting up a remote SimConnect
-      link and allows using <em>Little Navmap</em> on Linux or Mac computers.
+      link and allows using <em>Little Navmap</em> on Linux, Mac or older Windows XP computers.
     </p>
 
     <p>
@@ -111,21 +111,22 @@
     </h2>
 
     <p>
-      The setup procedure is the same for both remote connections and local connections. In the latter case all
-      programs run on the same computer which is both flying and client computer.
+      The setup and link procedure is the same for both remote connections and local connections. In the latter case
+      all programs run on the same computer which is both flying and client computer.
     </p>
 
     <ol>
       <li>Install <em>Little Navconnect</em> on the flying computer. Start it and take note of the message that is
       printed in the logging window. You only need the colored values. You can use the IP address or the hostname.
         <br />
+        The program will automatically connect to the flight simulator using SimConnect, if found. If no simulator was
+        found it will retry in 10 second intervals.
+        <br />
         <em>Little Navconnect</em> can print multiple IP addresses or hostnames depending on your network
         configuration. This can happen if you have ethernet plugged in and are connected using wireless LAN too, for
         example. You have to try all addresses if you are unsure which one to use.
         <br />
-        <code>localhost</code> and <code>127.0.0.1</code> or similar will be used if you are not connected to a
-        network. In this case you have to run <em>Little Navconnect</em> and <em>Little Navmap</em> on the same
-        computer.
+        <code>localhost</code> and <code>127.0.0.1</code> will be used if you are not connected to a network.
         <p>
           <img alt="Little Navconnect" title="Little Navconnect" src="images/littlenavconnect.png" />
         </p>
@@ -149,9 +150,9 @@
       </li>
 
       <li>Open the connection dialog in <em>Little Navmap</em> by selecting <code>Main Menu</code> -&gt;
-      <code>Tools</code> -&gt; <code>Connect to Simulator</code>.
+      <code>Tools</code> -&gt; <code>Flight Simulator Connection</code>.
         <p>
-          <img alt="Little Navmap Connect Dialog" title="Little Navmap Connect Dialog" src="images/connect.png" />
+          <img alt="Little Navmap Connect Dialog" title="Little Navmap Connect Dialog" src="images/connect.jpg" />
         </p>
 
         <p>
@@ -160,22 +161,23 @@
         </p>
       </li>
 
-      <li>Add the value for hostname. This can be either the hostname printed by <em>Little Navconnect</em> or the IP
-      address. You can use <code>localhost</code> if both programs are running on the same computer.
+      <li>Add the value for hostname. This can be either the hostname or the IP address printed by <em>Little
+      Navconnect</em>. You can use <code>localhost</code> if all programs are running on the same computer.
       </li>
 
-      <li>Add the value for the port. <code>51968</code> is the default value. Usually this can be left unchanged.
+      <li>Check the value for the port. <code>51968</code> is the default value and does not need to be changed
+      usually.
       </li>
 
       <li>Click connect. The dialog will close and <em>Little Navmap</em> will try to establish a connection in the
-      background which can take a few seconds. Your aircraft will show up on the map and on the <code>Simulator
-      Aircraft</code> dock window once a flight is set up and loaded on the simulator.
+      background which can take some time, depending on your network. Your aircraft will show up on the map and on the
+      <code>Simulator Aircraft</code> dock window once a flight is set up and loaded on the simulator.
         <br />
         You will see the message <code>Connected. Waiting for update.</code> in the <code>Simulator Aircraft</code>
         dock window if no flight is loaded yet (i.e. the simulator still shows the opening screen).
         <br />
-        <span class="bold">Note that it sometimes can take a while until an error is shown if you used the wrong
-        values.</span>
+        <span class="bold">Note that it sometimes can take a while until an error is shown if you used the wrong values
+        for hostname or port.</span>
       </li>
     </ol>
 
@@ -205,7 +207,7 @@
     </h3>
 
     <p>
-      Opens the <code>Options</code> dialog
+      Opens the <code>Options</code> dialog which has only two settings:
     </p>
 
     <ul>
@@ -236,7 +238,7 @@
     </h4>
 
     <p>
-      Shows this help in a web browser.
+      Shows this help in your default web browser.
     </p>
 
     <h4>
@@ -245,8 +247,8 @@
     </h4>
 
     <p>
-      Shows version and revision number for <em>Little Navconnect</em>, also contains links to the database directory,
-      configuration file, log file and the author's e-mail address.
+      Shows version and revision number for <em>Little Navconnect</em>, also contains links to the configuration file,
+      log file and the author's e-mail addresses.
     </p>
 
     <h4>
@@ -254,7 +256,8 @@
     </h4>
 
     <p>
-      Information about the application framework that is used by <em>Little Navconnect</em>.
+      Information about the <a href="https://www.qt.io" target="_blank">Qt application framework</a> that is used by
+      <em>Little Navconnectreco</em>.
     </p>
 
     <h2 id="bugreport">
@@ -262,18 +265,25 @@
     </h2>
 
     <p>
-      If something goes wrong send me <em>Little Navconnect</em>'s log file and configuration file which can be located
-      in the about dialog. My e-mail address is shown in the about dialog of <em>Little Navconnect</em> as well. Please
-      add all steps that are neccessary to reproduce the error.
+      If something goes wrong send me <em>Little Navconnect</em>'s log file and configuration file which both can be
+      located in the about dialog. My e-mail address is shown in the about dialog of <em>Little Navconnect</em> as
+      well.
+    </p>
+
+    <p>
+      Please add all steps that are neccessary to reproduce the error.
     </p>
 
     <p>
       <span class="bold">If you're concerned about privacy when sending log files:</span>
       <br />
       The log files will contain all paths (like your <code>Documents</code> directory) which will also include your
-      username as a part of the path. In no case file names from anything else than flight simulator scenery or
-      configuration files are included. No names or content of personal files is included in the log files. They also
-      might contain your computer's name IP address in your network.
+      username as a part of the path. They might also contain your computer's name IP address in your network.
+    </p>
+
+    <p>
+      In no case file names from anything else than flight simulator scenery or configuration files are included. No
+      names or content of personal files is included in the log files.
     </p>
 
     <p>
@@ -281,7 +291,7 @@
     </p>
 
     <p>
-      I strongly recomment to send the log files by PM or by email and not attach them to forum posts where they are
+      I strongly recommend to send the log files by PM or by email and not attach them to forum posts where they are
       publicly visible.
     </p>
 
@@ -316,6 +326,14 @@
       <code>C:\Users\YOURUSERNAME\AppData\Roaming\ABarthel</code>
     </p>
 
+    <p>
+      There are one configuration file for this program:
+    </p>
+
+    <p>
+      <code>little_navconnect.ini</code>: INI style configuration file. Text file.
+    </p>
+
     <h2 id="h2license">
       License
     </h2>
@@ -347,7 +365,7 @@
       <br />
       <br />
       <br />
-      Last update 2016-10-12
+      Last update 2016-10-14
     </p>
   </body>
 </html>
