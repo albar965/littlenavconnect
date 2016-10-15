@@ -1,3 +1,11 @@
+Version 1.0.1 - Stable Release
+
+* Added note about startup time and usage of "localhost" to log message.
+* Increased max dropped packages to 50 before error message appears.
+* Supplied email addresses for about and error handling dialogs.
+* Updated manual. Added more clarifications and program menu icons to manual.
+* Added files chapter to manual.
+
 Version 1.0.0.beta
 
 * Public beta release
