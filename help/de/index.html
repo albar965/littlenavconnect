@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="language" content="DE" />
+    <meta name="author" content="Alexander Barthel" />
+    <meta name="date" content="2016-10-25T13:00:00+01:00" />
+    <meta content="Little Navconnect Benutzerhandbuch" name="description" />
+    <title>
+      Little Navconnect Benutzerhandbuch
+    </title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+  </head>
+  <body>
+    <h1>
+      Little Navconnect Benutzerhandbuch
+    </h1>
+
+    <p>
+      <img class="textimg" style="width: 100px; height:auto" alt="Little Navconnect" title="Little Navconnect" src=
+      "images/navconnect.svg" />
+    </p>
+
+    <p>
+      <span class="bold">Version 1.1.0.devel</span>
+    </p>
+
+    <h2 id="h2installation">
+      Installation
+    </h2>
+
+    <p>
+      <code>Hervorgehobener Text</code> zeigt Fenster-, Menü-, Schaltflächen-, Datei- or Verzeichnisnamen an.
+    </p>
+
+    <p>
+      Ein Installations- oder Setupprogramm steht nicht zur Verfügung.
+    </p>
+
+    <p>
+      <span class="bold">Das Archiv sollte nicht in <code>c:\Program Files\</code> or <code>c:\Program Files
+      (x86)\</code> installiert werden, da dazu unter manchen Windows Versionen Administratorrechte nötig sind. Da
+      Windows Kontrolle über diese Ordner behält, können weitere Probleme auftreten, wie durch das System gelöschte
+      oder ersetzte Dateien..</span>
+    </p>
+
+    <p>
+      Das Zip-Archiv in einen beliebigen Ordner, wie z.B. <code>c:\Meine Programme\Little Navconnect</code>
+      extrahieren. Das Programm anschließend durch Doppelklick auf die <code>littlenavconnect.exe</code> starten.
+    </p>
+
+    <p>
+      <em>Little Navconnect</em> ist ein 32-bit Programm und wurde mit Windows 7, Windows 8 and Windows 10 getestet.
+    </p>
+
+    <p>
+      <span class="bold">Windows XP wird nicht unterstützt.</span>
+    </p>
+
+    <h3>
+      Andere Flugsimulatoren als FSX SP2
+    </h3>
+
+    <p>
+      Dieses Programm wurde für das FSX SP2 (no Acceleration) SimConnect Version 10.0.61259.0 compiliert.
+    </p>
+
+    <p>
+      Eine ältere Version von SimConnect muß möglicherweise installiert werden, wenn <em>Prepar3D</em> oder <em>FSX
+      Steam Edition</em> benutzt wird. Im Zweifelsfalle kann <em>Little Navconnect</em> einfach ausprobiert werden.
+      Falls es mit einer Fehlermeldung fehlschlägt, sollte nach den folgenden Anweisungen vorgegangen werden:
+    </p>
+
+    <p>
+      <em>Prepar3D</em>: Im gleichen Verzeichnis, wie die <code>Prepar3D.exe</code> befindet sich ein
+      <code>redist\Interface</code> Verzeichnis (normalerweise <code>C:\Program Files (x86)\Lockheed Martin\Prepar3D
+      v3\redist\Interface</code>). Dort sind mehrere alte SimConnect-Versionen verfügbar. Die
+      <code>FSX-SP2-XPACK.msi</code> muss für <em>Little Navconnect</em> installiert werden.
+    </p>
+
+    <p>
+      <em>FSX Steam Edition</em>: FSXSE für das Verzeichnis <code>C:\Program Files
+      (x86)\Steam\SteamApps\common\FSX\SDK\Core Utilities Kit\SimConnect SDK\LegacyInterfaces</code> hinzu, wo die
+      alten SimConnect-Versionen zu finden sind.
+    </p>
+
+    <h2 id="h2general">
+      Allgemeines
+    </h2>
+
+    <p>
+      <em>Little Navconnect</em> agiert als eine Art Agent, der <a href="https://albar965.github.io/littlenavmap.html"
+      target="_blank">Little Navmap</a> mit dem Flugsimulator verbindet. Dies erspart die fehlerträchtige Installation
+      von SimConnect für Netzwerkverbindungen und erlaubt es, <em>Little Navmap</em> auf Linux, macOS oder älteren
+      Windows XP Rechnern zu nutzen.
+    </p>
+
+    <p>
+      <span class="bold"><em>Little Navmap</em> kann sich nicht direkt mit dem Flugsimulator verbinden. <em>Little
+      Navconnect</em> wird immer benötigt, auch wenn alle Programme auf dem gleichen Rechner laufen.</span>
+    </p>
+
+    <h2 id="h2usage">
+      Verwendung
+    </h2>
+
+    <p>
+      Die Einrichtungsprozedur ist die gleiche für entfernte Netzwerkverbindungen, wie auch für lokale Verbindungen. In
+      letzteren Fall laufen alle Programme (Simulator, <em>Little Navmap</em> und <em>Little Navconnect</em>) auf dem
+      gleichen Rechner.
+    </p>
+
+    <ol>
+      <li>Zuerst <a href="https://albar965.github.io/littlenavconnect.html" target="_blank">Little Navconnect</a> auf
+      dem Flugrechner installieren. Das Programm starten und die Meldung merken, die im Log-Fenster ausgegeben wird.
+      Nur die farbigen Werte werden gebraucht. Es kann die IP-Adresse oder der Rechnername (Hostname) benutzt werden.
+        <br />
+        Wenn der Flugsimulator läuft, wird sich das Programm automatisch verbinden. Wenn kein Simulator gefunden wurde,
+        versucht <em>Little Navconnect</em> sich in 10-Sekunden Intervallen zu verbinden.
+        <br />
+        Abhängig von der Netzwerkkonfiguration kann <em>Little Navconnect</em> kann mehrere IP-Adressen bzw. mehrere
+        Rechnernamen ausgeben. Das ist z.B. der Fall, wenn eine Ethernet- und WLAN-Verbindung bestehen. Im
+        Zweifelsfalle alle IP-Adressen bzw. Rechnernamen ausprobieren.
+        <br />
+        <code>localhost</code> and <code>127.0.0.1</code> wird benutzt, wenn keine Verbindung zu einem Netzwerk
+        besteht.
+        <p>
+          <img alt="Little Navconnect" title="Little Navconnect" src="images/littlenavconnect.png" />
+        </p>
+
+        <p>
+          <span class="capthdg">Bild oben:</span> <span class="capt"><em>Little Navconnect</em> wurde gestartet und
+          wartet auf einen Flugsimulator.</span>
+        </p>
+
+        <p>
+          <span class="bold">Der Port muß in <em>Little Navconnect</em> s <code>Options</code> Dialog geändert werden,
+          wenn eine Fehlermeldung, wie unten erscheint:</span>
+        </p>
+
+        <pre xml:space="preserve">
+[2016-07-27 16:45:35] <span style="color: red;">Unable to start the server: The bound address is already in use.</span>
+</pre>
+      </li>
+
+      <li>
+        <em>Little Navmap</em> auf dem Netzwerkrechner starten.
+      </li>
+
+      <li>Den Verbindungsdialog in <em>Little Navmap</em> im <code>Main Menu</code> -&gt; <code>Tools</code> -&gt;
+      <code>Flight Simulator Connection</code> öffnen.
+        <p>
+          <img alt="Little Navmap Connect Dialog" title="Little Navmap Connect Dialog" src="images/connect.jpg" />
+        </p>
+
+        <p>
+          <span class="capthdg">Bild oben:</span> <span class="capt">Dialog mit den korrekten Werten, um mit der oben
+          gezeigten <a href="https://albar965.github.io/littlenavconnect.html" target="_blank">Little Navconnect</a>
+          Instanz Verbindung aufzunehmen.</span>
+        </p>
+      </li>
+
+      <li>Den Rechnernamen (Hostname) oder die IP-Adresse eingeben. Wenn alle Programme auf dem gleichen Rechner laufen
+      kann man <code>localhost</code> benutzen.
+      </li>
+
+      <li>Den Wert für Port überprüfen. <code>51968</code> ist der Standardwert und muß üblicherweise nicht geändert
+      werden.
+      </li>
+
+      <li>Jetzt <code>Connect</code> auswählen, um Verbindung aufzunehmen. Der Dialog wird nun geschlossen und
+      <em>Little Navmap</em> versucht im Hintergrund eine Verbindung aufzunehmen. Dies kann, abhängig von der
+      Netzwerkkonfiguration, eine Weile dauern. Das Simulatorflugzeug wird auf der Karte und im <code>Simulator
+      Aircraft</code> Dock-Fenster angezeigt, sobald ein Flug eingerichtet und geladen wurde.
+        <br />
+        Falls noch kein Flug geladen ist, wird eine Nachricht <code>Connected. Waiting for update.</code> im
+        <code>Simulator Aircraft</code> Dock-Fenster angezeigt. Dies z.B. kann der Fall sein, wenn der Simulator sich
+        noch im Eröffnungsbildschirm befindet.
+        <br />
+        <span class="bold">Es kann einige Zeit dauern, bis eine Fehlermeldung angezeigt wird, wenn fehlerhafte Werte
+        eingegeben wurden.</span>
+      </li>
+    </ol>
+
+    <h2 id="h2menu">
+      Menü
+    </h2>
+
+    <h3>
+      <img class="textimg" alt="Quit" title="Quit" src="images/icons/application-exit.png" /> File -&gt; Quit
+    </h3>
+
+    <p>
+      Beendet das Programm. Ein Abfragedialog erscheint, wenn noch <em>Little Navmap</em> Instanzen verbunden sind.
+    </p>
+
+    <h3>
+      Tools -&gt; Reset Messages
+    </h3>
+
+    <p>
+      Dies erlaubt wieder alle Dialoge, die mittels <code>Do not show this dialog again</code> ausgeschaltet wurden.
+    </p>
+
+    <h3>
+      <img class="textimg" alt="Quit" title="Quit" src="images/icons/settings.png" /> Tools -&gt; Options
+    </h3>
+
+    <p>
+      Öffnet den Dialog <code>Options</code>, in dem man folgende Einstellungen vornehmen kann:
+    </p>
+
+    <ul>
+      <li>
+        <span class="bold">Update Time Interval:</span> Der erlaubte Bereich ist 100 Millisekunden bis zu 2 Sekunden.
+        <em>Little Navconnect</em> holt Daten vom Flugsimulator ab und sendet die Daten an alle verbunden Programme
+        (z.B. <em>Little Navmap</em>) innerhalb diese Zeitintervalls. Diese Wert sollte erhöht werden, wenn folgende
+        Fehlermeldung auftritt:
+
+        <pre xml:space="preserve">
+[2016-07-27 16:45:35] <span style=
+"color: orange;">Dropped more than 50 packages. Reason: Missing reply. Increase update time interval.</span>
+</pre>Dropped packages can also appear if the <em>Little Navmap</em> cannot respond because a dialog is open.
+      </li>
+
+      <li>
+        <span class="bold">Network Port:</span> Dieser Wert kann normalerweise unverändert übernommen werden. Die
+        Portnummer muss geändert werden, wenn ein anderes Programm den gleichen Port benutzt, was zu folgender
+        Fehlermeldung führt, wenn <em>Little Navconnect</em> gestartet wird:
+
+        <pre xml:space="preserve">
+[2016-07-27 16:45:35] <span style="color: red;">Unable to start the server: The bound address is already in use.</span>
+</pre>
+      </li>
+    </ul>
+
+    <h4>
+      <img class="textimg" alt="Help" title="Help" src="images/icons/help.png" /> Menü Help -&gt; Contents
+    </h4>
+
+    <p>
+      Zeigt diese Hilfe in einem Web-Browser.
+    </p>
+
+    <h4>
+      <img class="textimg" alt="About" title="About" src="images/icons/navconnect.png" /> Menü Help -&gt; About Little
+      Navconnect
+    </h4>
+
+    <p>
+      Zeigt die Versions- und Revisionsnummern für <em>Little Navconnect</em>. Enthält auch Verknüpfungen zur
+      Konfigurationsdatei, der Logdatei und den E-Mail Adressen des Autors.
+    </p>
+
+    <h4>
+      <img class="textimg" alt="About Qt" title="About Qt" src="images/icons/about.png" /> Menü Help -&gt; About Qt
+    </h4>
+
+    <p>
+      Information über den <a href="https://www.qt.io" target="_blank">Qt application framework</a>, der von <em>Little
+      Navconnect</em> benutzt wird.
+    </p>
+
+    <h2 id="h2bugreport">
+      Fehler berichten
+    </h2>
+
+    <p>
+      Im Falle eines Fehlers sollten mir sämtliche involvierten Dateien, wie KML, PLN or BGL (falls das Copyright
+      erlaubt), <em>Little Navconnect</em>s Logdatei and Konfiurationsdatei geschickt werden. Der About-Dialog enthält
+      Verweise auf die Log- und Konfigurationsdateien. Mein E-mail Adresse wird ebenfallst im About-Dialog von
+      <em>Little Navconnect</em> angezeigt.
+    </p>
+
+    <p>
+      Bitte alle Schritte erklären, die notwendig sind, um den Fehler zu reproduzieren.
+    </p>
+
+    <p>
+      <span class="bold">Falls die Privatsphäre beim Verschicken der Logdateien ein Problem ist:</span>
+      <br />
+      Die Logdateien enthalten alle Systempfade, wie das <code>Dokumente</code>-Verzeichnis, wobei der Pfad auch den
+      Nutzernamen enthält. Unter Umständen können auch der Rechnername und die IP-Adresse enthalten sein.
+    </p>
+
+    <p>
+      In keinen Fall wird die Logdatei etwas andere Pfade oder Dateien, als vom Flugsimulator verwendete enthalten.
+      Keine Namen oder Inhalte von persönlichen Dateien sind in den Logdateien enthalten.
+    </p>
+
+    <p>
+      Die Informationen können auch aus der Logdatei entfernt werden, falls sie ein Problem darstellen.
+    </p>
+
+    <p>
+      Auf keinen Fall sollten die Logdateien in öffentlich einsehbaren Foren eingestellt werden, sondern per E-Mail
+      oder privater Forennachricht zugesendet werden.
+    </p>
+
+    <h2 id="h2files">
+      Dateien
+    </h2>
+
+    <p>
+      <span class="bold">Logdateien</span> von <em>Little Navconnect</em> werden unter Windows 7/8/10 typischerweise im
+      folgenden Verzeichnis gespeichert:
+    </p>
+
+    <p>
+      <code>C:\Users\YOURUSERNAME\AppData\Local\Temp</code>
+    </p>
+
+    <p>
+      <em>Little Navconnect</em> behält drei Logdateien und rotiert diese mit jeden Neustart des Programmes. Daher
+      können bis zu drei Logdateien gefunden werden:
+    </p>
+
+    <p>
+      <code>abarthel-little_navconnect.log</code>, <code>abarthel-little_navconnect.log.1</code> und
+      <code>abarthel-little_navconnect.log.2</code>.
+    </p>
+
+    <hr width="60%" align="left" />
+
+    <p>
+      Die <span class="bold">Konfigurationsdateien</span> aller meiner Programme werden unter Windows 7/8/10
+      typischerweise im folgenden Verzeichnis gespeichert:
+    </p>
+
+    <p>
+      <code>C:\Users\YOURUSERNAME\AppData\Roaming\ABarthel</code>
+    </p>
+
+    <p>
+      <em>Little Navconnect</em> speichert eine Konfigurationsdatei:
+    </p>
+
+    <ul>
+      <li>
+        <span class="bold" style="width: 18em;display: inline-block;"><code>little_navconnect.ini</code>:</span>
+        Textdatei im Windows INI-Stil.
+      </li>
+    </ul>
+
+    <hr width="60%" align="left" />
+    <!-- ===================================================================== -->
+
+    <h2 id="h2acknowlegments">
+      Danksagungen
+    </h2>
+
+    <p>
+      <span class="bold">Ein großen Dankeschön an alle, die mich während der Beta-Phase unterstützt haben, die mir ihre
+      Logdateien, Bildschirmfotos, Ideen und Verbesserungsvorschläge, freundliche Worte und mehr geschickt
+      haben.</span>
+    </p>
+
+    <p>
+      <span class="bold">Ein ganz besonderes Dankeschön an Roberto S. aus der Schweiz für seine wertvollen
+      Rückmeldungen und seine Fähigkeit noch die verborgendsten Fehler zu finden.</span>
+    </p>
+
+    <p>
+      Danke an alle in den unten genannten Foren, die mir geduldig Unterstützung, wertvolle Rückmeldungen und
+      Fehlerberichte während der Testphase zukommen ließen:
+    </p>
+
+    <p>
+      <a href="http://www.avsim.com" target="_blank"><span class="bold">AVSIM</span></a>, <a href=
+      "http://www.sim-outhouse.com" target="_blank"><span class="bold">SimOuthouse</span></a>, <a href=
+      "http://flightx.net" target="_blank"><span class="bold">FlightX.net</span></a> und <a href=
+      "http://www.fsdeveloper.com" target="_blank"><span class="bold">FSDeveloper.com</span></a>.
+    </p>
+
+    <h2 id="h2license">
+      Lizenz
+    </h2>
+
+    <p>
+      Dieses Programm ist Freie Software: Sie können es unter den Bedingungen der GNU General Public License, wie von
+      der Free Software Foundation, Version 3 der Lizenz oder (nach Ihrer Wahl) jeder neueren veröffentlichten Version,
+      weiterverbreiten und/oder modifizieren.
+    </p>
+
+    <p>
+      Dieses Programm wird in der Hoffnung, dass es nützlich sein wird, aber OHNE JEDE GEWÄHRLEISTUNG, bereitgestellt;
+      sogar ohne die implizite Gewährleistung der MARKTFÄHIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK. Siehe die GNU
+      General Public License für weitere Details.
+    </p>
+
+    <p>
+      Sie sollten eine Kopie der GNU General Public License zusammen mit diesem Programm erhalten haben. Wenn nicht,
+      siehe &lt;<a href="http://www.gnu.org/licenses/" target="_blank">http://www.gnu.org/licenses/</a>&gt;.
+    </p>
+
+    <p>
+      <img alt="GPL V3" title="GPL V3" class="gplimg" src="images/gpl-v3-logo.svg" />
+    </p>
+
+    <p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      Letzte Aktualisierung 25.10.2016
+    </p>
+  </body>
+</html>
