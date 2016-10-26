@@ -84,7 +84,10 @@ win32 {
 
 # Create additional makefile targets to copy help files
 unix {
-  copydata.commands = cp -avfu $$PWD/help $$OUT_PWD
+  copydata.commands = cp -avfu $$PWD/help $$OUT_PWD &&
+  copydata.commands += cp -vf $$PWD/desktop/littlenavconnect*.sh $$OUT_PWD &&
+  copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
+
   cleandata.commands = rm -Rvf $$OUT_PWD/help
 }
 
