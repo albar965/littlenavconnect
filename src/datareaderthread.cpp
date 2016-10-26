@@ -72,8 +72,9 @@ void DataReaderThread::run()
   while(!terminate)
   {
     atools::fs::sc::SimConnectData data;
+    QVector<atools::fs::sc::SimConnectData> dataAi;
 
-    if(handler.fetchData(data))
+    if(handler.fetchData(data, 200))
     {
       data.setPacketId(i);
       data.setPacketTimestamp(QDateTime::currentDateTime().toTime_t());

@@ -19,6 +19,7 @@
 #define LITTLENAVCONNECT_SIMCONNECTHANDLER_H
 
 #include <QtGlobal>
+#include <QVector>
 
 #if defined(Q_OS_WIN32)
 #include <windows.h>
@@ -61,7 +62,7 @@ public:
   bool connect();
 
   /* Fetch data from simulator. Returns false if no data was retrieved due to paused or not running fs. */
-  bool fetchData(atools::fs::sc::SimConnectData& data);
+  bool fetchData(atools::fs::sc::SimConnectData& data, int radiusKm);
 
   /* true if simulator is running and not stuck in open dialogs. */
   bool isSimRunning() const
@@ -81,7 +82,7 @@ public:
   }
 
   /* Struct that will be filled with raw data from the simconnect interface. */
-  struct SimData
+  struct SimDataAircraft
   {
     char aircraftTitle[256];
     char aircraftAtcType[32];
@@ -89,6 +90,9 @@ public:
     char aircraftAtcId[32];
     char aircraftAtcAirline[64];
     char aircraftAtcFlightNumber[32];
+
+    char category[32]; // "Airplane", "Helicopter", "Boat", "GroundVehicle", "ControlTower", "SimpleObject", "Viewer"
+
     float altitudeFt;
     float latitudeDeg;
     float longitudeDeg;
@@ -96,18 +100,29 @@ public:
     float groundVelocityKts;
     float indicatedAltitudeFt;
 
-    float planeAboveGroundFt;
     float planeHeadingMagneticDeg;
     float planeHeadingTrueDeg;
     float planeTrackMagneticDeg;
     float planeTrackTrueDeg;
-    float groundAltitudeFt;
     qint32 isSimOnGround;
 
     float airspeedTrueKts;
     float airspeedIndicatedKts;
     float airspeedMach;
     float verticalSpeedFps;
+
+    float magVarDeg;
+    qint32 numEngines;
+    qint32 engineType; // 0 = Piston 1 = Jet 2 = None 3 = Helo(Bell) turbine 4 = Unsupported 5 = Turboprop
+  };
+
+  /* Struct that will be filled with raw data from the simconnect interface. */
+  struct SimData
+  {
+    SimDataAircraft aircraft;
+
+    float planeAboveGroundFt;
+    float groundAltitudeFt;
 
     float ambientTemperatureC;
     float totalAirTemperatureC;
@@ -136,7 +151,6 @@ public:
     float fuelFlowGph2;
     float fuelFlowGph3;
     float fuelFlowGph4;
-    float magVarDeg;
     qint32 localTime;
     qint32 localYear;
     qint32 localMonth;
@@ -149,19 +163,32 @@ public:
   };
 
 private:
+  enum DataDefinitionId
+  {
+    DATA_DEFINITION_USER,
+    DATA_DEFINITION_AI
+  };
+
 #if defined(Q_OS_WIN32)
+
   /* Callback receiving the data. */
-  void DispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData);
+  void dispatchProcedure(SIMCONNECT_RECV *pData, DWORD cbData);
 
   /* Static method will pass call to object which is passed in pContext. */
-  static void CALLBACK DispatchCallback(SIMCONNECT_RECV *pData, DWORD cbData, void *pContext);
+  static void CALLBACK dispatchCallback(SIMCONNECT_RECV *pData, DWORD cbData, void *pContext);
+
+  void fillDataDefinitionAicraft(DataDefinitionId definitionId);
+  void copyToSimData(const SimDataAircraft& simDataUserAircraft, atools::fs::sc::SimConnectData& data);
 
   HANDLE hSimConnect = NULL;
 #endif
 
   SimData simData;
-  bool simRunning = true, simPaused = false, verbose = false, dataFetched = false;
+  QVector<SimDataAircraft> simDataAircraft;
+
+  bool simRunning = true, simPaused = false, verbose = false, dataFetched = false, userDataFetched = false;
   sc::State state = sc::OK;
+
 };
 
 #endif // LITTLENAVCONNECT_SIMCONNECTHANDLER_H
