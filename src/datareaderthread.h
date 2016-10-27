@@ -50,7 +50,7 @@ signals:
   void postSimConnectData(atools::fs::sc::SimConnectData dataPacket);
 
 private:
-  void connectToSimulator(SimConnectHandler *handler);
+  void connectToSimulator(atools::fs::sc::SimConnectHandler *handler);
   virtual void run() override;
 
   bool terminate = false, verbose = false;

@@ -32,7 +32,6 @@ SOURCES +=\
     src/main.cpp \
     src/mainwindow.cpp \
     src/datareaderthread.cpp \
-    src/simconnecthandler.cpp \
     src/optionsdialog.cpp \
     src/navserver.cpp \
     src/navserverworker.cpp \
@@ -41,7 +40,6 @@ SOURCES +=\
 HEADERS  += \
     src/mainwindow.h \
     src/datareaderthread.h \
-    src/simconnecthandler.h \
     src/optionsdialog.h \
     src/navservercommon.h \
     src/navserver.h \

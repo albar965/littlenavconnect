@@ -18,7 +18,7 @@
 #include "datareaderthread.h"
 
 #include "navservercommon.h"
-#include "simconnecthandler.h"
+#include "fs/sc/simconnecthandler.h"
 #include "settings/settings.h"
 
 #include <QDebug>
@@ -38,7 +38,7 @@ DataReaderThread::~DataReaderThread()
   qDebug() << "Datareader deleted";
 }
 
-void DataReaderThread::connectToSimulator(SimConnectHandler *handler)
+void DataReaderThread::connectToSimulator(atools::fs::sc::SimConnectHandler *handler)
 {
   int counter = 0;
   while(!terminate)
@@ -62,7 +62,7 @@ void DataReaderThread::run()
 {
   qDebug() << "Datareader run";
 
-  SimConnectHandler handler(verbose);
+  atools::fs::sc::SimConnectHandler handler(verbose);
 
   // Connect to the simulator
   connectToSimulator(&handler);
@@ -72,7 +72,6 @@ void DataReaderThread::run()
   while(!terminate)
   {
     atools::fs::sc::SimConnectData data;
-    QVector<atools::fs::sc::SimConnectData> dataAi;
 
     if(handler.fetchData(data, 200))
     {
@@ -83,7 +82,7 @@ void DataReaderThread::run()
     }
     else
     {
-      if(handler.getState() != sc::OK)
+      if(handler.getState() != atools::fs::sc::STATEOK)
       {
         qWarning(gui).noquote() << tr("Error fetching data from simulator.");
 
