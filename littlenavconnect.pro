@@ -17,14 +17,10 @@ TEMPLATE = app
 win32 {
   QT_BIN=C:\\Qt\\5.5\\msvc2013\\bin
   GIT_BIN='C:\\Git\\bin\\git'
-  SIMCONNECT="C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK"
 }
 
 # Get the current GIT revision to include it into the code
 win32:DEFINES += GIT_REVISION='\\"$$system($${GIT_BIN} rev-parse --short HEAD)\\"'
-# Disable microsofts min/max defines
-win32:DEFINES += NOMINMAX
-
 unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
 
 
