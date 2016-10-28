@@ -15,7 +15,7 @@ TEMPLATE = app
 
 # Adapt these variables to compile on Windows
 win32 {
-  QT_BIN=C:\\Qt\\5.5\\msvc2013\\bin
+  QT_BIN=C:\\Qt\\5.6\\mingw49_32\\bin
   GIT_BIN='C:\\Git\\bin\\git'
 }
 
@@ -70,7 +70,7 @@ unix {
 win32 {
   LIBS += -L$$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE} -latools
   PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE}/atools.lib
-  WINDEPLOY_FLAGS = --no-system-d3d-compiler --$${CONF_TYPE} --compiler-runtime
+  WINDEPLOY_FLAGS = --compiler-runtime
 
   INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
   LIBS += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\lib\SimConnect.lib"
@@ -107,6 +107,13 @@ win32 {
   deploy.commands += xcopy $${WINPWD}\\CHANGELOG.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINPWD}\\littlenavconnect.exe.manifest $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_BIN}\\libgcc*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_BIN}\\libstdc*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_BIN}\\libwinpthread*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_BIN}\\icudt54.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_BIN}\\icuin54.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_BIN}\\icuuc54.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy /i /s /e /f /y $${WINPWD}\\help $${DEPLOY_DIR_WIN}\\help &&
   deploy.commands += $${QT_BIN}\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
 }
