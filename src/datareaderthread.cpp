@@ -41,6 +41,9 @@ DataReaderThread::~DataReaderThread()
 void DataReaderThread::connectToSimulator(atools::fs::sc::SimConnectHandler *handler)
 {
   int counter = 0;
+
+  qInfo(gui).noquote() << tr("Not connected to the simulator. Waiting ...");
+
   while(!terminate)
   {
     if((counter % reconnectRateSec) == 0)
@@ -48,8 +51,6 @@ void DataReaderThread::connectToSimulator(atools::fs::sc::SimConnectHandler *han
       if(handler->connect())
         break;
 
-      qInfo(gui).noquote() << tr("Not connected to the simulator. Will retry in %1 seconds.").arg(
-        reconnectRateSec);
       counter = 0;
     }
     counter++;
