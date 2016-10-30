@@ -35,9 +35,11 @@ public:
 
   int getPort() const;
   unsigned int getUpdateRate() const;
+  bool isHideHostname() const;
 
   void setPort(int port);
   void setUpdateRate(unsigned int ms);
+  void setHideHostname(bool hide);
 
 private:
   Ui::OptionsDialog *ui;

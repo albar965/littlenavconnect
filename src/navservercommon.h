@@ -23,6 +23,7 @@
 /* key names for atools::settings */
 const QString SETTINGS_OPTIONS_DEFAULT_PORT = "Options/DefaultPort";
 const QString SETTINGS_OPTIONS_UPDATE_RATE = "Options/UpdateRate";
+const QString SETTINGS_OPTIONS_HIDE_HOSTNAME = "Options/HideHostname";
 const QString SETTINGS_ACTIONS_SHOW_PORT_CHANGE = "Actions/ShowPortChange";
 const QString SETTINGS_ACTIONS_SHOW_QUIT = "Actions/ShowQuit";
 const QString SETTINGS_OPTIONS_VERBOSE = "Options/Verbose";

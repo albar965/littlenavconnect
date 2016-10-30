@@ -101,17 +101,22 @@ void MainWindow::options()
   Settings& settings = Settings::instance();
   unsigned int updateRateMs = settings.getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt();
   int port = settings.getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
+  bool hideHostname = settings.getAndStoreValue(SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
 
   dialog.setUpdateRate(updateRateMs);
   dialog.setPort(port);
+  dialog.setHideHostname(hideHostname);
 
   int result = dialog.exec();
 
   if(result == QDialog::Accepted)
   {
+    settings.setValue(SETTINGS_OPTIONS_HIDE_HOSTNAME, static_cast<int>(dialog.isHideHostname()));
+    settings.setValue(SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
+    settings.setValue(SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
+
     if(dialog.getUpdateRate() != updateRateMs)
     {
-      settings.setValue(SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
 
       // Update rate changed - restart data readers
       dataReader->setTerminate();
@@ -124,6 +129,7 @@ void MainWindow::options()
 
     if(dialog.getPort() != port)
     {
+
       // Restart navserver on port change
       int result2 = QMessageBox::Yes;
       if(navServer->hasConnections())
@@ -137,8 +143,6 @@ void MainWindow::options()
 
       if(result2 == QMessageBox::Yes)
       {
-        settings.setValue(SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
-
         navServer->stopServer();
         navServer->setPort(dialog.getPort());
         navServer->startServer(dataReader);

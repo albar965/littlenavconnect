@@ -31,6 +31,8 @@ NavServer::NavServer(QObject *parent, bool verboseLog, int inetPort)
   : QTcpServer(parent), verbose(verboseLog), port(inetPort)
 {
   qDebug("NavServer created");
+  hideHostname = atools::settings::Settings::instance().
+                 valueBool(SETTINGS_OPTIONS_HIDE_HOSTNAME, false);
 }
 
 NavServer::~NavServer()
@@ -96,20 +98,25 @@ bool NavServer::startServer(atools::fs::sc::DataReaderThread *dataReaderThread)
     qCritical(gui).noquote().nospace() << tr("Unable to start the server: %1.").arg(errorString());
   else
   {
-    qInfo(gui).noquote().nospace()
-    << tr("Server is listening on hostname%1 %2 (IP address%3 %4) "
-          "port <span style=\"color: #ff0000; font-weight:bold\">%5</span>.").
-    arg(hostNameList.size() > 1 ? tr("s") : QString()).
-    arg(BLUESPAN + hostNameList.join(ENDSPAN + ", " + BLUESPAN) + ENDSPAN).
-    arg(hostIpList.size() > 1 ? tr("es") : QString()).
-    arg(BLUESPAN + hostIpList.join(ENDSPAN + ", " + BLUESPAN) + ENDSPAN).
-    arg(serverPort());
+    if(hideHostname)
+      qInfo(gui).noquote().nospace() << tr("Server is listening.");
+    else
+    {
+      qInfo(gui).noquote().nospace()
+      << tr("Server is listening on hostname%1 %2 (IP address%3 %4) "
+            "port <span style=\"color: #ff0000; font-weight:bold\">%5</span>.").
+      arg(hostNameList.size() > 1 ? tr("s") : QString()).
+      arg(BLUESPAN + hostNameList.join(ENDSPAN + ", " + BLUESPAN) + ENDSPAN).
+      arg(hostIpList.size() > 1 ? tr("es") : QString()).
+      arg(BLUESPAN + hostIpList.join(ENDSPAN + ", " + BLUESPAN) + ENDSPAN).
+      arg(serverPort());
 
-    qInfo(gui).noquote().nospace() << tr(
-      "If all programs are running on the same computer you can simply use "
-      "%1localhost%2 (IP address %3 127.0.0.1%4) "
-      "port <span style=\"color: #ff0000; font-weight:bold\">%5</span>.").
-    arg(BLUESPAN).arg(ENDSPAN).arg(BLUESPAN).arg(ENDSPAN).arg(serverPort());
+      qInfo(gui).noquote().nospace() << tr(
+        "If all programs are running on the same computer you can simply use "
+        "%1localhost%2 (IP address %3 127.0.0.1%4) "
+        "port <span style=\"color: #ff0000; font-weight:bold\">%5</span>.").
+      arg(BLUESPAN).arg(ENDSPAN).arg(BLUESPAN).arg(ENDSPAN).arg(serverPort());
+    }
   }
 
   return retval;

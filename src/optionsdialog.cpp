@@ -41,6 +41,16 @@ unsigned int OptionsDialog::getUpdateRate() const
   return static_cast<unsigned int>(ui->spinBoxOptionsUpdateRate->value());
 }
 
+bool OptionsDialog::isHideHostname() const
+{
+  return ui->checkBoxHideHostname->isChecked();
+}
+
+void OptionsDialog::setHideHostname(bool hide)
+{
+  ui->checkBoxHideHostname->setChecked(hide);
+}
+
 void OptionsDialog::setPort(int port)
 {
   ui->spinBoxOptionsPort->setValue(port);

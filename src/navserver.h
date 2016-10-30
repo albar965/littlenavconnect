@@ -60,7 +60,7 @@ private:
   void incomingConnection(qintptr socketDescriptor) override;
   void threadFinished(NavServerWorker *worker);
 
-  bool verbose = false;
+  bool verbose = false, hideHostname = false;
   atools::fs::sc::DataReaderThread *dataReader;
 
   QSet<NavServerWorker *> workers;
