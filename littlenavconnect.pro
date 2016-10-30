@@ -15,7 +15,7 @@ TEMPLATE = app
 
 # Adapt these variables to compile on Windows
 win32 {
-  QT_BIN=C:\\Qt\\5.6\\mingw49_32\\bin
+  QT_HOME=C:\\Qt\\5.6\\mingw49_32
   GIT_BIN='C:\\Git\\bin\\git'
 }
 
@@ -27,7 +27,6 @@ unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
 SOURCES +=\
     src/main.cpp \
     src/mainwindow.cpp \
-    src/datareaderthread.cpp \
     src/optionsdialog.cpp \
     src/navserver.cpp \
     src/navserverworker.cpp \
@@ -97,10 +96,6 @@ win32 {
   DEPLOY_DIR_NAME=Little Navconnect
   DEPLOY_DIR_WIN=\"$${WINPWD}\\..\\deploy\\$${DEPLOY_DIR_NAME}\"
 
-  copydata.commands = xcopy /i /s /e /f /y $${WINPWD}\\help $${WINOUT_PWD}\\help
-
-  cleandata.commands = del /s /q $${WINOUT_PWD}\\help
-
   deploy.commands = rmdir /s /q $${DEPLOY_DIR_WIN} &
   deploy.commands += mkdir $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINOUT_PWD}\\$${CONF_TYPE}\\littlenavconnect.exe $${DEPLOY_DIR_WIN} &&
@@ -108,14 +103,14 @@ win32 {
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\littlenavconnect.exe.manifest $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_BIN}\\libgcc*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_BIN}\\libstdc*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_BIN}\\libwinpthread*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_BIN}\\icudt54.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_BIN}\\icuin54.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_BIN}\\icuuc54.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_HOME}\\bin\\libgcc*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_HOME}\\bin\\libstdc*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_HOME}\\bin\\libwinpthread*.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_HOME}\\bin\\icudt54.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_HOME}\\bin\\icuin54.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${QT_HOME}\\bin\\icuuc54.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy /i /s /e /f /y $${WINPWD}\\help $${DEPLOY_DIR_WIN}\\help &&
-  deploy.commands += $${QT_BIN}\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
+  deploy.commands += $${QT_HOME}\\bin\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
 }
 
 QMAKE_EXTRA_TARGETS += deploy

@@ -28,10 +28,14 @@ namespace atools {
 namespace gui {
 class HelpHandler;
 }
+namespace fs {
+namespace sc {
+class DataReaderThread;
+}
+}
 }
 
 class NavServer;
-class DataReaderThread;
 
 class MainWindow :
   public QMainWindow
@@ -41,6 +45,8 @@ class MainWindow :
 public:
   MainWindow();
   virtual ~MainWindow();
+
+  void postLogMessage(QString message, bool warning);
 
 signals:
   /* Append a log message to the gui log. */
@@ -75,7 +81,7 @@ private:
   NavServer *navServer = nullptr;
 
   // Runs in background and fetches data from simulator - signals are send to NavServerWorker threads
-  DataReaderThread *dataReader = nullptr;
+  atools::fs::sc::DataReaderThread *dataReader = nullptr;
 
   atools::gui::HelpHandler *helpHandler = nullptr;
   bool firstStart = true; // Used to emit the first windowShown signal

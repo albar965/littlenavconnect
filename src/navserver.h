@@ -23,12 +23,15 @@
 
 namespace atools {
 namespace fs {
+namespace sc {
+
 class SimConnectData;
+class DataReaderThread;
+}
 }
 }
 
 class NavServerWorker;
-class DataReaderThread;
 
 /* Tcp server that will spawn a new thread with NavServerWorker for each connection.
  * Simulator data is send to each of these workers from DataReaderThread. */
@@ -41,7 +44,7 @@ public:
   NavServer(QObject *parent, bool verboseLog, int inetPort);
   virtual ~NavServer();
 
-  bool startServer(DataReaderThread *dataReaderThread);
+  bool startServer(atools::fs::sc::DataReaderThread *dataReaderThread);
   void stopServer();
 
   /* true if any workers are in the list */
@@ -58,7 +61,7 @@ private:
   void threadFinished(NavServerWorker *worker);
 
   bool verbose = false;
-  DataReaderThread *dataReader;
+  atools::fs::sc::DataReaderThread *dataReader;
 
   QSet<NavServerWorker *> workers;
   // Needed to lock for any modifications of the workers set

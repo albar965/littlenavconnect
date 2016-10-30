@@ -19,16 +19,16 @@
 
 #include "ui_mainwindow.h"
 #include "navserver.h"
-#include "datareaderthread.h"
-#include "settings/settings.h"
 #include "navservercommon.h"
 #include "optionsdialog.h"
 
+#include "settings/settings.h"
 #include "gui/dialog.h"
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
 #include "logging/logginghandler.h"
 #include "fs/sc/simconnectreply.h"
+#include "fs/sc/datareaderthread.h"
 
 #include <QMessageBox>
 #include <QCloseEvent>
@@ -84,8 +84,9 @@ MainWindow::MainWindow()
 MainWindow::~MainWindow()
 {
   // Terminate data reader thread
-  dataReader->setTerminate();
+  dataReader->setTerminate(true);
   dataReader->wait();
+  dataReader->setTerminate(false);
 
   atools::logging::LoggingHandler::setLogFunction(nullptr);
 
@@ -115,6 +116,8 @@ void MainWindow::options()
       // Update rate changed - restart data readers
       dataReader->setTerminate();
       dataReader->wait();
+      dataReader->setTerminate(false);
+
       dataReader->setUpdateRate(dialog.getUpdateRate());
       dataReader->start();
     }
@@ -178,6 +181,14 @@ void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context
   }
 }
 
+void MainWindow::postLogMessage(QString message, bool warning)
+{
+  if(warning)
+    qWarning(gui).noquote().nospace() << message;
+  else
+    qInfo(gui).noquote().nospace() << message;
+}
+
 void MainWindow::readSettings()
 {
   qDebug() << "readSettings";
@@ -230,11 +241,12 @@ void MainWindow::mainWindowShown()
   << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
     SimConnectReply::getReplyVersion());
 
-  dataReader = new DataReaderThread(this, verbose);
+  dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
   dataReader->setReconnectRateSec(Settings::instance().
                                   getAndStoreValue(SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
   dataReader->setUpdateRate(Settings::instance().
                             getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
+  connect(dataReader, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
 
   qInfo(gui).noquote().nospace() << tr("Starting server. This can take up to a minute ...");
 

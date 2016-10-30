@@ -19,7 +19,7 @@
 
 #include "navservercommon.h"
 #include "navserverworker.h"
-#include "datareaderthread.h"
+#include "fs/sc/datareaderthread.h"
 #include "settings/settings.h"
 
 #include <QNetworkInterface>
@@ -56,7 +56,7 @@ void NavServer::stopServer()
   qDebug("NavServer deleted");
 }
 
-bool NavServer::startServer(DataReaderThread *dataReaderThread)
+bool NavServer::startServer(atools::fs::sc::DataReaderThread *dataReaderThread)
 {
   dataReader = dataReaderThread;
   qDebug() << "Navserver starting";
@@ -136,7 +136,8 @@ void NavServer::incomingConnection(qintptr socketDescriptor)
           });
 
   // Data reader will send simconnect packages through this connection
-  connect(dataReader, &DataReaderThread::postSimConnectData, worker, &NavServerWorker::postSimConnectData);
+  connect(dataReader, &atools::fs::sc::DataReaderThread::postSimConnectData, worker,
+          &NavServerWorker::postSimConnectData);
 
   qDebug() << "Thread" << worker->objectName();
   workerThread->start();
@@ -151,7 +152,8 @@ void NavServer::threadFinished(NavServerWorker *worker)
   // A thread has finished - lock the list so the thread can be removed from the list
   QMutexLocker locker(&threadsMutex);
 
-  disconnect(dataReader, &DataReaderThread::postSimConnectData, worker, &NavServerWorker::postSimConnectData);
+  disconnect(dataReader, &atools::fs::sc::DataReaderThread::postSimConnectData, worker,
+             &NavServerWorker::postSimConnectData);
 
   workers.remove(worker);
 
