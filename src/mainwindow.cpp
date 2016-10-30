@@ -32,6 +32,7 @@
 
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QCommandLineParser>
 
 static QString ABOUT_MESSAGE =
   QObject::tr("<p>is the Fligh Simulator Network agent for Little Navmap.</p>"
@@ -54,6 +55,31 @@ MainWindow::MainWindow()
 {
   ui->setupUi(this);
   readSettings();
+
+  QCommandLineParser parser;
+  parser.addHelpOption();
+  parser.addVersionOption();
+
+  QCommandLineOption saveReplayOpt({"s", "save-replay"},
+                                   QObject::tr("Save replay data to <file>."),
+                                   QObject::tr("file"));
+  parser.addOption(saveReplayOpt);
+
+  QCommandLineOption loadReplayOpt({"l", "load-replay"},
+                                   QObject::tr("Load replay data from <file>."),
+                                   QObject::tr("file"));
+  parser.addOption(loadReplayOpt);
+
+  QCommandLineOption replaySpeedOpt({"r", "replay-speed"},
+                                    QObject::tr("Use speed factor <speed> for replay."),
+                                    QObject::tr("speed"));
+  parser.addOption(replaySpeedOpt);
+
+  // Process the actual command line arguments given by the user
+  parser.process(*QCoreApplication::instance());
+  saveReplayFile = parser.value(saveReplayOpt);
+  loadReplayFile = parser.value(loadReplayOpt);
+  replaySpeed = parser.value(replaySpeedOpt).toInt();
 
   // Bind the log function to this class for category "gui"
   using namespace std::placeholders;
@@ -114,6 +140,8 @@ void MainWindow::options()
     settings.setValue(SETTINGS_OPTIONS_HIDE_HOSTNAME, static_cast<int>(dialog.isHideHostname()));
     settings.setValue(SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
     settings.setValue(SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
+
+    settings.syncSettings();
 
     if(dialog.getUpdateRate() != updateRateMs)
     {
@@ -250,6 +278,10 @@ void MainWindow::mainWindowShown()
                                   getAndStoreValue(SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
   dataReader->setUpdateRate(Settings::instance().
                             getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
+  dataReader->setLoadReplayFilepath(loadReplayFile);
+  dataReader->setSaveReplayFilepath(saveReplayFile);
+  dataReader->setReplaySpeed(replaySpeed);
+
   connect(dataReader, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
 
   qInfo(gui).noquote().nospace() << tr("Starting server. This can take up to a minute ...");

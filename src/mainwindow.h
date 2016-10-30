@@ -87,6 +87,9 @@ private:
   bool firstStart = true; // Used to emit the first windowShown signal
   bool verbose = false;
 
+  QString saveReplayFile, loadReplayFile;
+  int replaySpeed = 1;
+
 };
 
 #endif // LITTLENAVCONNECT_MAINWINDOW_H

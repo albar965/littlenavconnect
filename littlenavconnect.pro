@@ -34,7 +34,6 @@ SOURCES +=\
 
 HEADERS  += \
     src/mainwindow.h \
-    src/datareaderthread.h \
     src/optionsdialog.h \
     src/navservercommon.h \
     src/navserver.h \

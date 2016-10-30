@@ -25,8 +25,6 @@
 #include "gui/translator.h"
 #include "navservercommon.h"
 
-#include <QApplication>
-
 #if defined(Q_OS_WIN32)
 #include <QSharedMemory>
 #include <QMessageBox>
@@ -85,8 +83,9 @@ int main(int argc, char *argv[])
   }
 #endif
 
-  MainWindow w;
-  w.show();
+  MainWindow mainWindow;
+
+  mainWindow.show();
 
   return app.exec();
 }
