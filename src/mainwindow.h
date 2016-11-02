@@ -75,6 +75,10 @@ private:
   /* Options dialog */
   void options();
 
+  void saveReplayFileTriggered();
+  void loadReplayFileTriggered();
+  void stopReplay();
+
   Ui::MainWindow *ui = nullptr;
 
   // Navserver that waits and accepts tcp connections. Starts a NavServerWorker in a thread for each connection.

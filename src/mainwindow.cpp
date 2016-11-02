@@ -93,6 +93,11 @@ MainWindow::MainWindow()
                             Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt());
 
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
+
+  connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
+  connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
+  connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
+
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
   connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::options);
   connect(ui->actionContents, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::help);
@@ -118,6 +123,55 @@ MainWindow::~MainWindow()
 
   delete helpHandler;
   delete ui;
+}
+
+void MainWindow::saveReplayFileTriggered()
+{
+  QString filepath = atools::gui::Dialog(this).saveFileDialog(
+    tr("Save Replay"), tr("Replay Files (*.replay);;All Files (*)"), "replay", "Replay/",
+    QString(), "littlenavconnect.replay");
+
+  if(!filepath.isEmpty())
+  {
+    dataReader->setTerminate();
+    dataReader->wait();
+    dataReader->setTerminate(false);
+
+    dataReader->setSaveReplayFilepath(filepath);
+    dataReader->setLoadReplayFilepath(QString());
+
+    dataReader->start();
+  }
+}
+
+void MainWindow::loadReplayFileTriggered()
+{
+  QString filepath = atools::gui::Dialog(this).openFileDialog(
+    tr("Open Replay"), tr("Replay Files (*.replay);;All Files (*)"), "Replay/", QString());
+
+  if(!filepath.isEmpty())
+  {
+    dataReader->setTerminate();
+    dataReader->wait();
+    dataReader->setTerminate(false);
+
+    dataReader->setSaveReplayFilepath(QString());
+    dataReader->setLoadReplayFilepath(filepath);
+
+    dataReader->start();
+  }
+}
+
+void MainWindow::stopReplay()
+{
+  dataReader->setTerminate();
+  dataReader->wait();
+  dataReader->setTerminate(false);
+
+  dataReader->setSaveReplayFilepath(QString());
+  dataReader->setLoadReplayFilepath(QString());
+
+  dataReader->start();
 }
 
 void MainWindow::options()

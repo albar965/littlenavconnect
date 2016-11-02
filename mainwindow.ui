@@ -52,6 +52,10 @@
     <property name="title">
      <string>&amp;Tools</string>
     </property>
+    <addaction name="actionReplayFileLoad"/>
+    <addaction name="actionReplayFileSave"/>
+    <addaction name="actionReplayStop"/>
+    <addaction name="separator"/>
     <addaction name="actionResetMessages"/>
     <addaction name="actionOptions"/>
    </widget>
@@ -110,6 +114,27 @@
    </property>
    <property name="text">
     <string>&amp;Options</string>
+   </property>
+  </action>
+  <action name="actionReplayFileSave">
+   <property name="text">
+    <string>&amp;Save Replay File ...</string>
+   </property>
+  </action>
+  <action name="actionReplayFileLoad">
+   <property name="text">
+    <string>Open Replay &amp;File ...</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Replay File</string>
+   </property>
+  </action>
+  <action name="actionReplayStop">
+   <property name="text">
+    <string>Stop Saving or Loading of Replay</string>
+   </property>
+   <property name="toolTip">
+    <string>Stop Saving or Loading of Replay</string>
    </property>
   </action>
  </widget>
