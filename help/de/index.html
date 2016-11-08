@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="language" content="DE" />
     <meta name="author" content="Alexander Barthel" />
-    <meta name="date" content="2016-10-25T13:00:00+01:00" />
+    <meta name="date" content="2016-11-08T13:00:00+01:00" />
     <meta content="Little Navconnect Benutzerhandbuch" name="description" />
     <title>
       Little Navconnect Benutzerhandbuch
@@ -24,7 +24,7 @@
     </p>
 
     <p>
-      <span class="bold">Version 1.1.0.devel</span>
+      <span class="bold">Version 1.0.5</span>
     </p>
 
     <h2 id="h2installation">
@@ -32,7 +32,7 @@
     </h2>
 
     <p>
-      <code>Hervorgehobener Text</code> zeigt Fenster-, Menü-, Schaltflächen-, Datei- or Verzeichnisnamen an.
+      <code>Hervorgehobener Text</code> zeigt Fenster-, Menü-, Schaltflächen-, Datei- oder Verzeichnisnamen an.
     </p>
 
     <p>
@@ -40,7 +40,7 @@
     </p>
 
     <p>
-      <span class="bold">Das Archiv sollte nicht in <code>c:\Program Files\</code> or <code>c:\Program Files
+      <span class="bold">Das Archiv sollte nicht in <code>c:\Program Files\</code> oder <code>c:\Program Files
       (x86)\</code> installiert werden, da dazu unter manchen Windows Versionen Administratorrechte nötig sind. Da
       Windows Kontrolle über diese Ordner behält, können weitere Probleme auftreten, wie durch das System gelöschte
       oder ersetzte Dateien..</span>
@@ -52,7 +52,7 @@
     </p>
 
     <p>
-      <em>Little Navconnect</em> ist ein 32-bit Programm und wurde mit Windows 7, Windows 8 and Windows 10 getestet.
+      <em>Little Navconnect</em> ist ein 32-bit Programm und wurde mit Windows 7, Windows 8 und Windows 10 getestet.
     </p>
 
     <p>
@@ -68,8 +68,8 @@
     </p>
 
     <p>
-      Eine ältere Version von SimConnect muß möglicherweise installiert werden, wenn <em>Prepar3D</em> oder <em>FSX
-      Steam Edition</em> benutzt wird. Im Zweifelsfalle kann <em>Little Navconnect</em> einfach ausprobiert werden.
+      Eine ältere Version von SimConnect muss möglicherweise installiert werden, wenn <em>Prepar3D</em> oder <em>FSX
+      Steam Edition</em> benutzt wird. Im Zweifelsfall kann <em>Little Navconnect</em> einfach ausprobiert werden.
       Falls es mit einer Fehlermeldung fehlschlägt, sollte nach den folgenden Anweisungen vorgegangen werden:
     </p>
 
@@ -81,7 +81,7 @@
     </p>
 
     <p>
-      <em>FSX Steam Edition</em>: FSXSE für das Verzeichnis <code>C:\Program Files
+      <em>FSX Steam Edition</em>: FSXSE fügt das Verzeichnis <code>C:\Program Files
       (x86)\Steam\SteamApps\common\FSX\SDK\Core Utilities Kit\SimConnect SDK\LegacyInterfaces</code> hinzu, wo die
       alten SimConnect-Versionen zu finden sind.
     </p>
@@ -120,11 +120,11 @@
         Wenn der Flugsimulator läuft, wird sich das Programm automatisch verbinden. Wenn kein Simulator gefunden wurde,
         versucht <em>Little Navconnect</em> sich in 10-Sekunden Intervallen zu verbinden.
         <br />
-        Abhängig von der Netzwerkkonfiguration kann <em>Little Navconnect</em> kann mehrere IP-Adressen bzw. mehrere
-        Rechnernamen ausgeben. Das ist z.B. der Fall, wenn eine Ethernet- und WLAN-Verbindung bestehen. Im
+        Abhängig von der Netzwerkkonfiguration kann <em>Little Navconnect</em> mehrere IP-Adressen bzw. mehrere
+        Rechnernamen ausgeben. Das ist z.B. der Fall, wenn eine Ethernet- und WLAN-Verbindung gleichzeitig besteht. Im
         Zweifelsfalle alle IP-Adressen bzw. Rechnernamen ausprobieren.
         <br />
-        <code>localhost</code> and <code>127.0.0.1</code> wird benutzt, wenn keine Verbindung zu einem Netzwerk
+        <code>localhost</code> und <code>127.0.0.1</code> wird benutzt, wenn keine Verbindung zu einem Netzwerk
         besteht.
         <p>
           <img alt="Little Navconnect" title="Little Navconnect" src="images/littlenavconnect.png" />
@@ -136,8 +136,8 @@
         </p>
 
         <p>
-          <span class="bold">Der Port muß in <em>Little Navconnect</em> s <code>Options</code> Dialog geändert werden,
-          wenn eine Fehlermeldung, wie unten erscheint:</span>
+          <span class="bold">Der Port muss in <em>Little Navconnect</em>s <code>Options</code> Dialog geändert werden,
+          wenn eine Fehlermeldung, wie unten aufgeführt, erscheint:</span>
         </p>
 
         <pre xml:space="preserve">
@@ -162,11 +162,11 @@
         </p>
       </li>
 
-      <li>Den Rechnernamen (Hostname) oder die IP-Adresse eingeben. Wenn alle Programme auf dem gleichen Rechner laufen
-      kann man <code>localhost</code> benutzen.
+      <li>Den Rechnernamen (Hostname) oder die IP-Adresse eingeben. Wenn alle Programme auf dem gleichen Rechner
+      laufen, kann man <code>localhost</code> benutzen.
       </li>
 
-      <li>Den Wert für Port überprüfen. <code>51968</code> ist der Standardwert und muß üblicherweise nicht geändert
+      <li>Den Wert für Port überprüfen. <code>51968</code> ist der Standardwert und muss üblicherweise nicht geändert
       werden.
       </li>
 
@@ -216,13 +216,14 @@
       <li>
         <span class="bold">Update Time Interval:</span> Der erlaubte Bereich ist 100 Millisekunden bis zu 2 Sekunden.
         <em>Little Navconnect</em> holt Daten vom Flugsimulator ab und sendet die Daten an alle verbunden Programme
-        (z.B. <em>Little Navmap</em>) innerhalb diese Zeitintervalls. Diese Wert sollte erhöht werden, wenn folgende
+        (z.B. <em>Little Navmap</em>) innerhalb dieses Zeitintervalls. Dieser Wert sollte erhöht werden, wenn folgende
         Fehlermeldung auftritt:
 
         <pre xml:space="preserve">
 [2016-07-27 16:45:35] <span style=
 "color: orange;">Dropped more than 50 packages. Reason: Missing reply. Increase update time interval.</span>
-</pre>Dropped packages can also appear if the <em>Little Navmap</em> cannot respond because a dialog is open.
+</pre>Verlorengegangene Datenpakete können auch auftreten, wenn <em>Little Navmap</em> nicht antworten kann, weil ein
+Dialog offen ist.
       </li>
 
       <li>
@@ -268,9 +269,9 @@
     </h2>
 
     <p>
-      Im Falle eines Fehlers sollten mir sämtliche involvierten Dateien, wie KML, PLN or BGL (falls das Copyright
-      erlaubt), <em>Little Navconnect</em>s Logdatei and Konfiurationsdatei geschickt werden. Der About-Dialog enthält
-      Verweise auf die Log- und Konfigurationsdateien. Mein E-mail Adresse wird ebenfallst im About-Dialog von
+      Im Falle eines Fehlers sollten mir sämtliche involvierten Dateien, wie KML, PLN oder BGL (falls das Copyright
+      erlaubt), <em>Little Navconnect</em>s Logdatei und Konfiurationsdatei geschickt werden. Der About-Dialog enthält
+      Verweise auf die Log- und Konfigurationsdateien. Meine E-mail Adresse wird ebenfallst im About-Dialog von
       <em>Little Navconnect</em> angezeigt.
     </p>
 
@@ -286,8 +287,8 @@
     </p>
 
     <p>
-      In keinen Fall wird die Logdatei etwas andere Pfade oder Dateien, als vom Flugsimulator verwendete enthalten.
-      Keine Namen oder Inhalte von persönlichen Dateien sind in den Logdateien enthalten.
+      In keinem Fall wird die Logdatei etwas anderes, als Pfade oder Dateien, die vom Flugsimulator verwendet werden,
+      enthalten. Es sind keine Namen oder Inhalte von persönlichen Dateien in den Logdateien enthalten.
     </p>
 
     <p>
@@ -295,7 +296,7 @@
     </p>
 
     <p>
-      Auf keinen Fall sollten die Logdateien in öffentlich einsehbaren Foren eingestellt werden, sondern per E-Mail
+      Auf keinem Fall sollten die Logdateien in öffentlich einsehbaren Foren eingestellt werden, sondern per E-Mail
       oder privater Forennachricht zugesendet werden.
     </p>
 
@@ -313,8 +314,8 @@
     </p>
 
     <p>
-      <em>Little Navconnect</em> behält drei Logdateien und rotiert diese mit jeden Neustart des Programmes. Daher
-      können bis zu drei Logdateien gefunden werden:
+      <em>Little Navconnect</em> behält drei Logdateien und rotiert diese mit jedem Neustart des Programmes. Daher
+      können bis zu drei Dateien gefunden werden:
     </p>
 
     <p>
@@ -350,6 +351,11 @@
     <h2 id="h2acknowlegments">
       Danksagungen
     </h2>
+
+    <p>
+      <span class="bold">Vielen Dank an meine geduldige und liebe <a href="http://www.anja-fahrner.de" target=
+      "_blank">Ehefrau und Schriftstellerin Anja</a>, für die Korrektur der deutschen Anleitung.</span>
+    </p>
 
     <p>
       <span class="bold">Ein großen Dankeschön an alle, die mich während der Beta-Phase unterstützt haben, die mir ihre
@@ -405,7 +411,7 @@
       <br />
       <br />
       <br />
-      Letzte Aktualisierung 25.10.2016
+      Letzte Aktualisierung 08.11.2016
     </p>
   </body>
 </html>
