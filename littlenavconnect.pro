@@ -16,6 +16,8 @@ TEMPLATE = app
 # Adapt these variables to compile on Windows
 win32 {
   QT_HOME=C:\\Qt\\5.6\\mingw49_32
+  QT_TOOL_HOME=C:\\Projekte\\Qt
+  OPENSSL=C:\\OpenSSL-Win32
   GIT_BIN='C:\\Git\\bin\\git'
 }
 
@@ -102,6 +104,8 @@ win32 {
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\littlenavconnect.exe.manifest $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${OPENSSL}\\bin\\libeay32.dll $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${OPENSSL}\\bin\\ssleay32.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${QT_HOME}\\bin\\libgcc*.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${QT_HOME}\\bin\\libstdc*.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${QT_HOME}\\bin\\libwinpthread*.dll $${DEPLOY_DIR_WIN} &&
@@ -109,7 +113,7 @@ win32 {
   deploy.commands += xcopy $${QT_HOME}\\bin\\icuin54.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${QT_HOME}\\bin\\icuuc54.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy /i /s /e /f /y $${WINPWD}\\help $${DEPLOY_DIR_WIN}\\help &&
-  deploy.commands += $${QT_HOME}\\bin\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
+  deploy.commands += $${QT_TOOL_HOME}\\bin\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
 }
 
 QMAKE_EXTRA_TARGETS += deploy
