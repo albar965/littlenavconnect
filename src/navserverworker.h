@@ -20,6 +20,8 @@
 
 #include "fs/sc/simconnectdata.h"
 
+#include "fs/sc/simconnectreply.h"
+
 #include <QHostInfo>
 
 class NavServer;
@@ -41,6 +43,9 @@ public:
 
   /* Signal posted by thread to indicate it has started . */
   void threadStarted();
+
+signals:
+  void postWeatherRequest(atools::fs::sc::WeatherRequest request);
 
 private:
   /* Connection closed from remote end. */

@@ -80,7 +80,7 @@ void NavServerWorker::readyReadReply()
   atools::fs::sc::SimConnectReply reply;
   if(!reply.read(socket))
     handleDroppedPackages(tr("Incomplete reply"));
-  else
+  else if(reply.getCommand() != atools::fs::sc::CMD_WEATHER_REQUEST)
     // Indicate that a reply was successfully read
     readReply = true;
 
@@ -91,12 +91,23 @@ void NavServerWorker::readyReadReply()
     arg(reply.getStatusText());
     socket->abort();
   }
+
+  if(reply.getCommand() == atools::fs::sc::CMD_WEATHER_REQUEST)
+  {
+    qDebug() << "NavServerWorker::readyReadReply got weather request";
+    emit postWeatherRequest(reply.getWeatherRequest());
+  }
+  // else
+  // TODO check package id
 }
 
 void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPacket)
 {
   if(verbose)
     qDebug() << "postSimConnectData" << QThread::currentThread()->objectName();
+
+  if(!dataPacket.getMetars().isEmpty())
+    qDebug() << "NavServerWorker::postSimConnectData metars" << dataPacket.getMetars();
 
   if(!readReply)
   {

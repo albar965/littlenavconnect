@@ -21,6 +21,7 @@
 #include "logging/loggingutil.h"
 #include "settings/settings.h"
 #include "fs/sc/simconnectdata.h"
+#include "fs/sc/simconnectreply.h"
 #include "gui/application.h"
 #include "gui/translator.h"
 #include "navservercommon.h"
@@ -28,6 +29,7 @@
 #if defined(Q_OS_WIN32)
 #include <QSharedMemory>
 #include <QMessageBox>
+
 #endif
 
 using atools::gui::Application;
@@ -46,6 +48,8 @@ int main(int argc, char *argv[])
 
   // Needed to send SimConnectData through queued connections
   qRegisterMetaType<atools::fs::sc::SimConnectData>();
+  qRegisterMetaType<atools::fs::sc::SimConnectReply>();
+  qRegisterMetaType<atools::fs::sc::WeatherRequest>();
 
   using atools::gui::Application;
   Application app(argc, argv);

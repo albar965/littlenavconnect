@@ -145,6 +145,8 @@ void NavServer::incomingConnection(qintptr socketDescriptor)
   // Data reader will send simconnect packages through this connection
   connect(dataReader, &atools::fs::sc::DataReaderThread::postSimConnectData, worker,
           &NavServerWorker::postSimConnectData);
+  connect(worker, &NavServerWorker::postWeatherRequest,
+          dataReader, &atools::fs::sc::DataReaderThread::setWeatherRequest);
 
   qDebug() << "Thread" << worker->objectName();
   workerThread->start();
@@ -161,6 +163,10 @@ void NavServer::threadFinished(NavServerWorker *worker)
 
   disconnect(dataReader, &atools::fs::sc::DataReaderThread::postSimConnectData, worker,
              &NavServerWorker::postSimConnectData);
+
+  // TODO crashes when connected
+  // disconnect(worker, &NavServerWorker::postCommand,
+  // dataReader, &atools::fs::sc::DataReaderThread::postCommand);
 
   workers.remove(worker);
 
