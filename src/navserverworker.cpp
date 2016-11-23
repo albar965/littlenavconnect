@@ -107,7 +107,7 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
     qDebug() << "postSimConnectData" << QThread::currentThread()->objectName();
 
   if(!dataPacket.getMetars().isEmpty())
-    qDebug() << "NavServerWorker::postSimConnectData metars" << dataPacket.getMetars();
+    qDebug() << "NavServerWorker::postSimConnectData metars num " << dataPacket.getMetars().size();
 
   if(!readReply)
   {
