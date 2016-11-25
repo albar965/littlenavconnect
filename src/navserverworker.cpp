@@ -27,21 +27,22 @@
 NavServerWorker::NavServerWorker(qintptr socketDescriptor, NavServer *parent, bool verboseLog)
   : QObject(parent), socketDescr(socketDescriptor), verbose(verboseLog)
 {
-  qDebug() << "NavServerThread created" << QThread::currentThread()->objectName();
+  qDebug() << "NavServerWorker created" << QThread::currentThread()->objectName();
 }
 
 NavServerWorker::~NavServerWorker()
 {
-  qDebug() << "NavServerThread deleted" << QThread::currentThread()->objectName();
+  qDebug() << "NavServerWorker deleted" << QThread::currentThread()->objectName();
 }
 
 void NavServerWorker::threadStarted()
 {
-  qDebug() << "threadStarted" << QThread::currentThread()->objectName();
+  qDebug() << "NavServerWorker threadStarted" << QThread::currentThread()->objectName();
 
   if(socket == nullptr)
   {
     socket = new QTcpSocket();
+    // socket->setReadBufferSize(512000);
     connect(socket, &QTcpSocket::disconnected, this, &NavServerWorker::socketDisconnected);
     connect(socket, &QTcpSocket::readyRead, this, &NavServerWorker::readyReadReply);
   }
@@ -57,7 +58,7 @@ void NavServerWorker::threadStarted()
 
   qInfo(gui).noquote().nospace() << tr("Connection from %1 (%2).").arg(hostInfo.hostName()).arg(peerAddr);
 
-  qDebug() << "Connection from " << hostInfo.hostName() << " (" << peerAddr << ") "
+  qDebug() << "NavServerWorker Connection from " << hostInfo.hostName() << " (" << peerAddr << ") "
            << "port " << socket->peerPort();
 }
 
@@ -74,42 +75,62 @@ void NavServerWorker::socketDisconnected()
 void NavServerWorker::readyReadReply()
 {
   if(verbose)
-    qDebug() << "Ready read" << QThread::currentThread()->objectName();
-
-  // Read the reply from littlenavmap
-  atools::fs::sc::SimConnectReply reply;
-  if(!reply.read(socket))
-    handleDroppedPackages(tr("Incomplete reply"));
-  else if(reply.getCommand() != atools::fs::sc::CMD_WEATHER_REQUEST)
-    // Indicate that a reply was successfully read
-    readReply = true;
-
-  if(reply.getStatus() != atools::fs::sc::OK)
+    qDebug() << "NavServerWorker::readyReadReply enter";
+  while(socket->bytesAvailable())
   {
-    // Not fully read or malformed  content
-    qWarning(gui).noquote().nospace() << tr("Error reading reply: %1. Closing connection.").
-    arg(reply.getStatusText());
-    socket->abort();
-  }
+    if(verbose)
+      qDebug() << "NavServerWorker Ready read" << QThread::currentThread()->objectName();
 
-  if(reply.getCommand() == atools::fs::sc::CMD_WEATHER_REQUEST)
-  {
-    qDebug() << "NavServerWorker::readyReadReply got weather request";
-    emit postWeatherRequest(reply.getWeatherRequest());
+    // Read the reply from littlenavmap
+    atools::fs::sc::SimConnectReply reply;
+    if(!reply.read(socket))
+      handleDroppedPackages(tr("Incomplete reply"));
+
+    if(reply.getStatus() != atools::fs::sc::OK)
+    {
+      // Not fully read or malformed  content
+      qWarning(gui).noquote().nospace() << tr("Error reading reply: %1. Closing connection.").
+      arg(reply.getStatusText());
+      socket->abort();
+    }
+
+    if(verbose)
+      qDebug() << "NavServerWorker readyReadReply packet id" << reply.getPacketId();
+
+    if(reply.getCommand() == atools::fs::sc::CMD_WEATHER_REQUEST)
+    {
+      if(verbose)
+        qDebug() << "NavServerWorker::readyReadReply got weather request";
+      emit postWeatherRequest(reply.getWeatherRequest());
+    }
+    else
+    {
+      if(verbose)
+        qDebug() << "NavServerWorker readyReadReply" << QThread::currentThread()->objectName()
+                 << "last ids" << lastPacketIds;
+      lastPacketIds.remove(reply.getPacketId());
+    }
   }
-  // else
-  // TODO check package id
+  if(verbose)
+    qDebug() << "NavServerWorker::readyReadReply leave";
 }
 
 void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPacket)
 {
   if(verbose)
-    qDebug() << "postSimConnectData" << QThread::currentThread()->objectName();
+    qDebug() << "NavServerWorker postSimConnectData" << QThread::currentThread()->objectName()
+             << "last ids" << lastPacketIds;
 
   if(!dataPacket.getMetars().isEmpty())
-    qDebug() << "NavServerWorker::postSimConnectData metars num " << dataPacket.getMetars().size();
+  {
+    if(verbose)
+      qDebug() << "NavServerWorker::postSimConnectData metars num " << dataPacket.getMetars().size();
 
-  if(!readReply)
+    if(dataPacket.getUserAircraft().getPosition().isValid())
+      qWarning() << "Aircraft and metar mixed";
+  }
+
+  if(lastPacketIds.size() > 1 && dataPacket.getMetars().isEmpty())
   {
     // No reply received in the meantime - count it as dropped package
     handleDroppedPackages(tr("Missing reply"));
@@ -120,12 +141,15 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
     // We're already posting
     qCritical() << "Nested post";
 
-  if(dataPacket.getPacketId() == lastPacketId)
-    qCritical() << "Duplicate packet in post";
+  if(dataPacket.getMetars().isEmpty())
+  {
+    dataPacket.setPacketId(nextPacketId++);
+    lastPacketIds.insert(dataPacket.getPacketId());
+  }
+  else
+    dataPacket.setPacketId(0);
 
-  lastPacketId = dataPacket.getPacketId();
   inPost = true;
-  readReply = false;
 
   int written;
   written = dataPacket.write(socket);
@@ -133,10 +157,10 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
     qWarning(gui).noquote().nospace() << tr("Error writing data: %1.").arg(dataPacket.getStatusText());
 
   if(!socket->flush())
-    qWarning() << "Reply to client not flushed";
+    qWarning() << "NavServerWorker Reply to client not flushed";
 
   if(verbose)
-    qDebug() << "written" << written << "flush" << flush;
+    qDebug() << "NavServerWorker written" << written << "flush" << flush << "id" << dataPacket.getPacketId();
 
   inPost = false;
 }
@@ -151,6 +175,9 @@ void NavServerWorker::handleDroppedPackages(const QString& reason)
     arg(MAX_DROPPED_PACKAGES).arg(reason);
 
     droppedPackages = 0;
+
+    if(lastPacketIds.size() > 5000)
+      lastPacketIds.clear();
   }
   qWarning() << "No reply - ignoring package. Currently dropped" << droppedPackages << "Reason:" << reason;
 }

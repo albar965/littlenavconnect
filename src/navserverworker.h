@@ -23,6 +23,7 @@
 #include "fs/sc/simconnectreply.h"
 
 #include <QHostInfo>
+#include <QSet>
 
 class NavServer;
 class QTcpSocket;
@@ -66,10 +67,10 @@ private:
   int droppedPackages = 0;
   bool verbose = false;
   bool inPost = false;
-  int lastPacketId = -1;
+  QSet<int> lastPacketIds;
+  int nextPacketId = 1;
   QString peerAddr;
   QHostInfo hostInfo;
-  bool readReply = true;
 
 };
 
