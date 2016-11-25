@@ -130,7 +130,7 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
       qWarning() << "Aircraft and metar mixed";
   }
 
-  if(lastPacketIds.size() > 1 && dataPacket.getMetars().isEmpty())
+  if(lastPacketIds.size() > 1 && dataPacket.getPacketId() > 0)
   {
     // No reply received in the meantime - count it as dropped package
     handleDroppedPackages(tr("Missing reply"));
@@ -141,13 +141,9 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
     // We're already posting
     qCritical() << "Nested post";
 
-  if(dataPacket.getMetars().isEmpty())
-  {
-    dataPacket.setPacketId(nextPacketId++);
+  // dataPacket.setPacketId(nextPacketId++);
+  if(dataPacket.getPacketId() > 0)
     lastPacketIds.insert(dataPacket.getPacketId());
-  }
-  else
-    dataPacket.setPacketId(0);
 
   inPost = true;
 

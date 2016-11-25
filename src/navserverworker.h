@@ -68,7 +68,6 @@ private:
   bool verbose = false;
   bool inPost = false;
   QSet<int> lastPacketIds;
-  int nextPacketId = 1;
   QString peerAddr;
   QHostInfo hostInfo;
 
