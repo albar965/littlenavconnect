@@ -39,13 +39,14 @@ public:
   NavServerWorker(qintptr socketDescriptor, NavServer *parent, bool verboseLog);
   virtual ~NavServerWorker();
 
-  /* Receives sim connect data from DataReader thread. */
+  /* Receives sim connect data from DataReader thread and writes to socket. */
   void postSimConnectData(atools::fs::sc::SimConnectData dataPacket);
 
   /* Signal posted by thread to indicate it has started . */
   void threadStarted();
 
 signals:
+  /* Weather received from socket. Set to data reader. */
   void postWeatherRequest(atools::fs::sc::WeatherRequest request);
 
 private:
@@ -53,7 +54,7 @@ private:
   void socketDisconnected();
 
   /* Read reply from remote end. */
-  void readyReadReply();
+  void readyReadReplyFromSocket();
 
   /* Count dropped packages and write a message if too many accumulated. */
   void handleDroppedPackages(const QString& reason);
@@ -64,9 +65,12 @@ private:
   atools::fs::sc::SimConnectData data;
   QTcpSocket *socket = nullptr;
 
+  /* Count dropped packages to give a warning to the user */
   int droppedPackages = 0;
   bool verbose = false;
   bool inPost = false;
+
+  /* Add packet id on send and remove when reply is received */
   QSet<int> lastPacketIds;
   QString peerAddr;
   QHostInfo hostInfo;

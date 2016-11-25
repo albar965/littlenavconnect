@@ -55,7 +55,7 @@ void NavServer::stopServer()
     worker->thread()->wait();
   }
 
-  qDebug("NavServer deleted");
+  qDebug() << "NavServer deleted";
 }
 
 bool NavServer::startServer(atools::fs::sc::DataReaderThread *dataReaderThread)

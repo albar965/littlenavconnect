@@ -32,7 +32,7 @@ NavServerWorker::NavServerWorker(qintptr socketDescriptor, NavServer *parent, bo
 
 NavServerWorker::~NavServerWorker()
 {
-  qDebug() << "NavServerWorker deleted" << QThread::currentThread()->objectName();
+  qDebug() << "NavServerWorker destructor" << QThread::currentThread()->objectName();
 }
 
 void NavServerWorker::threadStarted()
@@ -42,9 +42,8 @@ void NavServerWorker::threadStarted()
   if(socket == nullptr)
   {
     socket = new QTcpSocket();
-    // socket->setReadBufferSize(512000);
     connect(socket, &QTcpSocket::disconnected, this, &NavServerWorker::socketDisconnected);
-    connect(socket, &QTcpSocket::readyRead, this, &NavServerWorker::readyReadReply);
+    connect(socket, &QTcpSocket::readyRead, this, &NavServerWorker::readyReadReplyFromSocket);
   }
 
   if(!socket->setSocketDescriptor(socketDescr, QAbstractSocket::ConnectedState, QIODevice::ReadWrite))
@@ -72,18 +71,21 @@ void NavServerWorker::socketDisconnected()
   thread()->exit();
 }
 
-void NavServerWorker::readyReadReply()
+void NavServerWorker::readyReadReplyFromSocket()
 {
   if(verbose)
     qDebug() << "NavServerWorker::readyReadReply enter";
+
+  // Read while data is available
   while(socket->bytesAvailable())
   {
     if(verbose)
       qDebug() << "NavServerWorker Ready read" << QThread::currentThread()->objectName();
 
-    // Read the reply from littlenavmap
+    // Read the reply from client
     atools::fs::sc::SimConnectReply reply;
     if(!reply.read(socket))
+      // Reply not fully read
       handleDroppedPackages(tr("Incomplete reply"));
 
     if(reply.getStatus() != atools::fs::sc::OK)
@@ -101,6 +103,8 @@ void NavServerWorker::readyReadReply()
     {
       if(verbose)
         qDebug() << "NavServerWorker::readyReadReply got weather request";
+
+      // Pass weather request from client to data reader
       emit postWeatherRequest(reply.getWeatherRequest());
     }
     else
@@ -108,6 +112,8 @@ void NavServerWorker::readyReadReply()
       if(verbose)
         qDebug() << "NavServerWorker readyReadReply" << QThread::currentThread()->objectName()
                  << "last ids" << lastPacketIds;
+
+      // Normal reply - remove id from sent list
       lastPacketIds.remove(reply.getPacketId());
     }
   }
@@ -132,7 +138,7 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
 
   if(lastPacketIds.size() > 1 && dataPacket.getPacketId() > 0)
   {
-    // No reply received in the meantime - count it as dropped package
+    // No reply received in the meantime - count it as dropped package and do not send a new package
     handleDroppedPackages(tr("Missing reply"));
     return;
   }
@@ -141,8 +147,8 @@ void NavServerWorker::postSimConnectData(atools::fs::sc::SimConnectData dataPack
     // We're already posting
     qCritical() << "Nested post";
 
-  // dataPacket.setPacketId(nextPacketId++);
   if(dataPacket.getPacketId() > 0)
+    // Insert packet id in sent list if this is not a weather request
     lastPacketIds.insert(dataPacket.getPacketId());
 
   inPost = true;

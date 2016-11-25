@@ -114,15 +114,21 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
+  qDebug() << "MainWindow destructor";
+
   // Terminate data reader thread
   dataReader->setTerminate(true);
   dataReader->wait();
   dataReader->setTerminate(false);
+  qDebug() << "MainWindow destructor dataReader terminated";
 
   atools::logging::LoggingHandler::setLogFunction(nullptr);
+  qDebug() << "MainWindow destructor logging reset";
 
   delete helpHandler;
+  qDebug() << "MainWindow destructor help handler deleted";
   delete ui;
+  qDebug() << "MainWindow destructor ui deleted";
 }
 
 void MainWindow::saveReplayFileTriggered()
