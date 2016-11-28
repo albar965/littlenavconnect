@@ -52,10 +52,6 @@
     <property name="title">
      <string>&amp;Tools</string>
     </property>
-    <addaction name="actionReplayFileLoad"/>
-    <addaction name="actionReplayFileSave"/>
-    <addaction name="actionReplayStop"/>
-    <addaction name="separator"/>
     <addaction name="actionResetMessages"/>
     <addaction name="actionOptions"/>
    </widget>

@@ -53,6 +53,8 @@ using atools::fs::sc::SimConnectReply;
 MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
 {
+  qDebug() << Q_FUNC_INFO;
+
   ui->setupUi(this);
   readSettings();
 
@@ -73,13 +75,22 @@ MainWindow::MainWindow()
   QCommandLineOption replaySpeedOpt({"r", "replay-speed"},
                                     QObject::tr("Use speed factor <speed> for replay."),
                                     QObject::tr("speed"));
-  parser.addOption(replaySpeedOpt);
+
+  QCommandLineOption showGuid({"g", "replay-gui"},
+                              QObject::tr("Show replay menu items."));
+  parser.addOption(showGuid);
 
   // Process the actual command line arguments given by the user
   parser.process(*QCoreApplication::instance());
   saveReplayFile = parser.value(saveReplayOpt);
   loadReplayFile = parser.value(loadReplayOpt);
   replaySpeed = parser.value(replaySpeedOpt).toInt();
+  if(parser.isSet(showGuid))
+  {
+    ui->menuTools->insertActions(ui->actionResetMessages,
+                                 {ui->actionReplayFileLoad, ui->actionReplayFileSave, ui->actionReplayStop});
+    ui->menuTools->insertSeparator(ui->actionResetMessages);
+  }
 
   // Bind the log function to this class for category "gui"
   using namespace std::placeholders;
@@ -94,9 +105,12 @@ MainWindow::MainWindow()
 
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
 
+  if(parser.isSet(showGuid))
+  {
   connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
   connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
   connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
+  }
 
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
   connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::options);
@@ -114,7 +128,7 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
-  qDebug() << "MainWindow destructor";
+  qDebug() << Q_FUNC_INFO;
 
   // Terminate data reader thread
   dataReader->setTerminate(true);
@@ -283,7 +297,7 @@ void MainWindow::postLogMessage(QString message, bool warning)
 
 void MainWindow::readSettings()
 {
-  qDebug() << "readSettings";
+  qDebug() << Q_FUNC_INFO;
 
   verbose = Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_VERBOSE, false).toBool();
 
@@ -292,7 +306,7 @@ void MainWindow::readSettings()
 
 void MainWindow::writeSettings()
 {
-  qDebug() << "writeSettings";
+  qDebug() << Q_FUNC_INFO;
 
   atools::gui::WidgetState widgetState(SETTINGS_MAINWINDOW_WIDGET);
   widgetState.save(this);
@@ -303,7 +317,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
   // Catch all close events like Ctrl-Q or Menu/Exit or clicking on the
   // close button on the window frame
-  qDebug() << "closeEvent";
+  qDebug() << Q_FUNC_INFO;
 
   if(navServer->hasConnections())
   {
@@ -323,7 +337,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::mainWindowShown()
 {
-  qDebug() << "MainWindow::mainWindowShown()";
+  qDebug() << Q_FUNC_INFO;
 
   qInfo(gui).noquote().nospace() << QApplication::applicationName();
   qInfo(gui).noquote().nospace() << tr("Version %1 (revision %2).").
