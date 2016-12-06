@@ -78,6 +78,8 @@ private:
   void saveReplayFileTriggered();
   void loadReplayFileTriggered();
   void stopReplay();
+  void showOnlineHelp();
+  void showOfflineHelp();
 
   Ui::MainWindow *ui = nullptr;
 

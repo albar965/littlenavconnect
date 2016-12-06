@@ -44,6 +44,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionContents"/>
+    <addaction name="actionContentsOffline"/>
     <addaction name="actionAbout"/>
     <addaction name="separator"/>
     <addaction name="actionAboutQt"/>
@@ -95,7 +96,7 @@
      <normaloff>:/littlenavconnect/resources/icons/help.svg</normaloff>:/littlenavconnect/resources/icons/help.svg</iconset>
    </property>
    <property name="text">
-    <string>&amp;Contents</string>
+    <string>&amp;Contents (Online)</string>
    </property>
   </action>
   <action name="actionResetMessages">
@@ -131,6 +132,15 @@
    </property>
    <property name="toolTip">
     <string>Stop Saving or Loading of Replay</string>
+   </property>
+  </action>
+  <action name="actionContentsOffline">
+   <property name="icon">
+    <iconset resource="littlenavconnect.qrc">
+     <normaloff>:/littlenavconnect/resources/icons/help.svg</normaloff>:/littlenavconnect/resources/icons/help.svg</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Contents (Offline, PDF)</string>
    </property>
   </action>
  </widget>

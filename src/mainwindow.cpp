@@ -49,6 +49,12 @@ static QString ABOUT_MESSAGE =
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
 using atools::fs::sc::SimConnectReply;
+using atools::gui::HelpHandler;
+
+const QString HELP_ONLINE_URL(
+  "https://albar965.gitbooks.io/little-navconnect-user-manual/content/${LANG}/");
+const QString HELP_OFFLINE_URL("help/little-navconnect-user-manual-${LANG}.pdf");
+const QStringList HELP_LANGUAGES({"en", "de"}); /* Supported languages for the help system */
 
 MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
@@ -114,7 +120,8 @@ MainWindow::MainWindow()
 
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
   connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::options);
-  connect(ui->actionContents, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::help);
+  connect(ui->actionContents, &QAction::triggered, this, &MainWindow::showOnlineHelp);
+  connect(ui->actionContentsOffline, &QAction::triggered, this, &MainWindow::showOfflineHelp);
   connect(ui->actionAbout, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::about);
   connect(ui->actionAboutQt, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::aboutQt);
 
@@ -143,6 +150,16 @@ MainWindow::~MainWindow()
   qDebug() << "MainWindow destructor help handler deleted";
   delete ui;
   qDebug() << "MainWindow destructor ui deleted";
+}
+
+void MainWindow::showOnlineHelp()
+{
+  HelpHandler::openHelpUrl(this, HELP_ONLINE_URL, HELP_LANGUAGES);
+}
+
+void MainWindow::showOfflineHelp()
+{
+  HelpHandler::openHelpUrl(this, HELP_OFFLINE_URL, HELP_LANGUAGES);
 }
 
 void MainWindow::saveReplayFileTriggered()
