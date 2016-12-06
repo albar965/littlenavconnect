@@ -54,7 +54,6 @@ using atools::gui::HelpHandler;
 const QString HELP_ONLINE_URL(
   "https://albar965.gitbooks.io/little-navconnect-user-manual/content/${LANG}/");
 const QString HELP_OFFLINE_URL("help/little-navconnect-user-manual-${LANG}.pdf");
-const QStringList HELP_LANGUAGES({"en", "de"}); /* Supported languages for the help system */
 
 MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
@@ -63,6 +62,9 @@ MainWindow::MainWindow()
 
   ui->setupUi(this);
   readSettings();
+
+  supportedLanguages = atools::gui::HelpHandler::getInstalledLanguages(
+    "help", "little-navconnect-user-manual-([a-z]{2})\\.pdf");
 
   QCommandLineParser parser;
   parser.addHelpOption();
@@ -154,12 +156,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::showOnlineHelp()
 {
-  HelpHandler::openHelpUrl(this, HELP_ONLINE_URL, HELP_LANGUAGES);
+  HelpHandler::openHelpUrl(this, HELP_ONLINE_URL, supportedLanguages);
 }
 
 void MainWindow::showOfflineHelp()
 {
-  HelpHandler::openHelpUrl(this, HELP_OFFLINE_URL, HELP_LANGUAGES);
+  HelpHandler::openHelpUrl(this, HELP_OFFLINE_URL, supportedLanguages);
 }
 
 void MainWindow::saveReplayFileTriggered()

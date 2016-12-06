@@ -95,7 +95,7 @@ private:
 
   QString saveReplayFile, loadReplayFile;
   int replaySpeed = 1;
-
+  QStringList supportedLanguages;
 };
 
 #endif // LITTLENAVCONNECT_MAINWINDOW_H
