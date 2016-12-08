@@ -110,12 +110,6 @@ bool NavServer::startServer(atools::fs::sc::DataReaderThread *dataReaderThread)
       arg(hostIpList.size() > 1 ? tr("es") : QString()).
       arg(BLUESPAN + hostIpList.join(ENDSPAN + ", " + BLUESPAN) + ENDSPAN).
       arg(serverPort());
-
-      qInfo(gui).noquote().nospace() << tr(
-        "If all programs are running on the same computer you can simply use "
-        "%1localhost%2 (IP address %3 127.0.0.1%4) "
-        "port <span style=\"color: #ff0000; font-weight:bold\">%5</span>.").
-      arg(BLUESPAN).arg(ENDSPAN).arg(BLUESPAN).arg(ENDSPAN).arg(serverPort());
     }
   }
 

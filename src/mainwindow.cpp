@@ -51,8 +51,12 @@ using atools::fs::sc::SimConnectData;
 using atools::fs::sc::SimConnectReply;
 using atools::gui::HelpHandler;
 
+const QString HELP_BRANCH = "master";
+
+/* Important: keep slash at the end. Otherwise Gitbook will not display the page properly */
 const QString HELP_ONLINE_URL(
-  "https://albar965.gitbooks.io/little-navconnect-user-manual/content/${LANG}/");
+  "https://albar965.gitbooks.io/little-navconnect-user-manual/content/v/" + HELP_BRANCH + "/${LANG}/");
+
 const QString HELP_OFFLINE_URL("help/little-navconnect-user-manual-${LANG}.pdf");
 
 MainWindow::MainWindow()
