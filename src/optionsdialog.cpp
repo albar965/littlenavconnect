@@ -21,6 +21,8 @@
 OptionsDialog::OptionsDialog(QWidget *parent) :
   QDialog(parent), ui(new Ui::OptionsDialog)
 {
+  setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
   ui->setupUi(this);
   connect(ui->buttonBoxOptions, &QDialogButtonBox::accepted, this, &QDialog::accept);
   connect(ui->buttonBoxOptions, &QDialogButtonBox::rejected, this, &QDialog::reject);
