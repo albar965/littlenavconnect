@@ -1,3 +1,14 @@
+Version 1.2.1.beta
+
+Updated manual PDF.
+
+Version 1.2.0.beta
+
+Removed annoying connect message in log window.
+Added option to hide hostname.
+Added replay option (has to be enabled on command line).
+Changed manual to online and PDF.
+
 Version 1.0.1 - Stable Release
 
 * Added note about startup time and usage of "localhost" to log message.
