@@ -1,3 +1,7 @@
+Version 1.2.2.beta
+
+Optimizations to transfer protocol. Now incompatible to all older versions.
+
 Version 1.2.1.beta
 
 Updated manual PDF.
