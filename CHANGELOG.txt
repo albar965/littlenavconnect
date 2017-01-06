@@ -1,6 +1,6 @@
 Version 1.2.3
 
-No changes.
+* Fixed wrong (negated) UTC offset in SimConnect user aircraft.
 
 Version 1.2.2.beta
 
