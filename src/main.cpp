@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
   Application::setApplicationName("Little Navconnect");
   Application::setOrganizationName("ABarthel");
   Application::setOrganizationDomain("abarthel.org");
-  Application::setApplicationVersion("1.2.5.devel");
+  Application::setApplicationVersion("1.3.0.devel");
   Application::setEmailAddresses({"albar965@mailbox.org", "albar965@t-online.de"});
 
   // Initialize logging and force logfiles into the system or user temp directory
