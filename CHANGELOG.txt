@@ -1,3 +1,8 @@
+Version 1.3.2.develop
+
+* Added options to disable transfer of AI vehicles.
+* Fix for too many reconnects flooding log on simulator crash.
+
 Version 1.2.4
 
 * Fixed wrong (negated) UTC offset in SimConnect user aircraft.
