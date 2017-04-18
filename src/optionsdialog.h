@@ -36,10 +36,14 @@ public:
   int getPort() const;
   unsigned int getUpdateRate() const;
   bool isHideHostname() const;
+  bool isFetchAiAircraft() const;
+  bool isFetchAiShip() const;
 
   void setPort(int port);
   void setUpdateRate(unsigned int ms);
   void setHideHostname(bool hide);
+  void setFetchAiAircraft(bool value);
+  void setFetchAiShip(bool value);
 
 private:
   Ui::OptionsDialog *ui;

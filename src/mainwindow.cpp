@@ -226,9 +226,14 @@ void MainWindow::options()
   int port = settings.getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
   bool hideHostname = settings.getAndStoreValue(SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
 
+  bool fetchAiAircraft = settings.getAndStoreValue(SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool();
+  bool fetchAiShip = settings.getAndStoreValue(SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool();
+
   dialog.setUpdateRate(updateRateMs);
   dialog.setPort(port);
   dialog.setHideHostname(hideHostname);
+  dialog.setFetchAiAircraft(fetchAiAircraft);
+  dialog.setFetchAiShip(fetchAiShip);
 
   int result = dialog.exec();
 
@@ -237,8 +242,18 @@ void MainWindow::options()
     settings.setValue(SETTINGS_OPTIONS_HIDE_HOSTNAME, static_cast<int>(dialog.isHideHostname()));
     settings.setValue(SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
     settings.setValue(SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
+    settings.setValue(SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, dialog.isFetchAiAircraft());
+    settings.setValue(SETTINGS_OPTIONS_FETCH_AI_SHIP, dialog.isFetchAiShip());
 
     settings.syncSettings();
+
+    atools::fs::sc::Options options = atools::fs::sc::NO_OPTION;
+    if(dialog.isFetchAiAircraft())
+      options |= atools::fs::sc::FETCH_AI_AIRCRAFT;
+    if(dialog.isFetchAiShip())
+      options |= atools::fs::sc::FETCH_AI_BOAT;
+
+    dataReader->setSimconnectOptions(options);
 
     if(dialog.getUpdateRate() != updateRateMs)
     {
@@ -370,14 +385,20 @@ void MainWindow::mainWindowShown()
   << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
     SimConnectReply::getReplyVersion());
 
+  atools::settings::Settings& settings = Settings::instance();
   dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
-  dataReader->setReconnectRateSec(Settings::instance().
-                                  getAndStoreValue(SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
-  dataReader->setUpdateRate(Settings::instance().
-                            getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
+  dataReader->setReconnectRateSec(settings.getAndStoreValue(SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
+  dataReader->setUpdateRate(settings.getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
   dataReader->setLoadReplayFilepath(loadReplayFile);
   dataReader->setSaveReplayFilepath(saveReplayFile);
   dataReader->setReplaySpeed(replaySpeed);
+
+  atools::fs::sc::Options options = atools::fs::sc::NO_OPTION;
+  if(settings.getAndStoreValue(SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool())
+    options |= atools::fs::sc::FETCH_AI_AIRCRAFT;
+  if(settings.getAndStoreValue(SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool())
+    options |= atools::fs::sc::FETCH_AI_BOAT;
+  dataReader->setSimconnectOptions(options);
 
   connect(dataReader, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
 
