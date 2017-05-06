@@ -51,7 +51,8 @@ using atools::fs::sc::SimConnectData;
 using atools::fs::sc::SimConnectReply;
 using atools::gui::HelpHandler;
 
-const QString HELP_BRANCH = "master";
+// "master" or "release/1.4"
+const QString HELP_BRANCH = "release/1.4";
 
 /* Important: keep slash at the end. Otherwise Gitbook will not display the page properly */
 const QString HELP_ONLINE_URL(
