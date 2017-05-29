@@ -1,4 +1,4 @@
-Version 1.4.2.beta
+Version 1.4.3
 
 * No changes - updated version number for consistency
 
