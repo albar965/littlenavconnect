@@ -16,7 +16,6 @@ TEMPLATE = app
 # Adapt these variables to compile on Windows
 win32 {
   QT_HOME=C:\\Qt\\5.9\\mingw53_32
-  QT_TOOL_HOME=C:\\Qt\\5.9
   OPENSSL=C:\\OpenSSL-Win32
   GIT_BIN='C:\\Git\\bin\\git'
 }
@@ -110,11 +109,8 @@ win32 {
   deploy.commands += xcopy $${QT_HOME}\\bin\\libgcc*.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${QT_HOME}\\bin\\libstdc*.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${QT_HOME}\\bin\\libwinpthread*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_HOME}\\bin\\icudt54.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_HOME}\\bin\\icuin54.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_HOME}\\bin\\icuuc54.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy /i /s /e /f /y $${WINPWD}\\help $${DEPLOY_DIR_WIN}\\help &&
-  deploy.commands += $${QT_TOOL_HOME}\\bin\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
+  deploy.commands += $${QT_HOME}\\bin\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
 }
 
 QMAKE_EXTRA_TARGETS += deploy
