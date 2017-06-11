@@ -72,7 +72,6 @@ win32 {
   WINDEPLOY_FLAGS = --compiler-runtime
 
   INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
-  LIBS += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\lib\SimConnect.lib"
 }
 
 # Create additional makefile targets to copy help files
