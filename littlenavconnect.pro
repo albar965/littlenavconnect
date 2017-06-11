@@ -101,7 +101,7 @@ win32 {
   deploy.commands += xcopy $${WINPWD}\\CHANGELOG.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINPWD}\\littlenavconnect.exe.manifest $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINPWD}\\littlenavconnect.exe.simconnect $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${OPENSSL}\\bin\\libeay32.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${OPENSSL}\\bin\\ssleay32.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${OPENSSL}\\libssl32.dll $${DEPLOY_DIR_WIN} &&
