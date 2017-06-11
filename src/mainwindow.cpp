@@ -114,15 +114,16 @@ MainWindow::MainWindow()
 
   // Create nav server but to not start it yet
   navServer = new NavServer(this, verbose,
-                            Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt());
+                            Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT,
+                                                                  51968).toInt());
 
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
 
   if(parser.isSet(showGuid))
   {
-  connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
-  connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
-  connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
+    connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
+    connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
+    connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
   }
 
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
@@ -380,14 +381,26 @@ void MainWindow::mainWindowShown()
 
   qInfo(gui).noquote().nospace() << QApplication::applicationName();
   qInfo(gui).noquote().nospace() << tr("Version %1 (revision %2).").
-  arg(QApplication::applicationVersion()).arg(GIT_REVISION);
+    arg(QApplication::applicationVersion()).arg(GIT_REVISION);
 
   qInfo(gui).noquote().nospace()
-  << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
+    << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
     SimConnectReply::getReplyVersion());
 
   atools::settings::Settings& settings = Settings::instance();
   dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
+
+#if defined(Q_OS_WIN32)
+  if(!dataReader->isSimconnectAvailable())
+  {
+    QMessageBox::warning(this, QApplication::applicationName(),
+                         tr("No Flight Simulator installation found.<br/>"
+                            "Could not load SimConnect.<br/><br/>"
+                            "Exiting now."));
+    close();
+  }
+#endif
+
   dataReader->setReconnectRateSec(settings.getAndStoreValue(SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
   dataReader->setUpdateRate(settings.getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
   dataReader->setLoadReplayFilepath(loadReplayFile);
