@@ -26,6 +26,9 @@
 #include "gui/translator.h"
 #include "navservercommon.h"
 
+#include <QSslSocket>
+#include <QStyleFactory>
+
 #if defined(Q_OS_WIN32)
 #include <QSharedMemory>
 #include <QMessageBox>
@@ -71,6 +74,12 @@ int main(int argc, char *argv[])
   // Print some information which can be useful for debugging
   LoggingUtil::logSystemInformation();
   LoggingUtil::logStandardPaths();
+  qInfo() << "SSL supported" << QSslSocket::supportsSsl()
+          << "build library" << QSslSocket::sslLibraryBuildVersionString()
+          << "library" << QSslSocket::sslLibraryVersionString();
+
+  qInfo() << "Available styles" << QStyleFactory::keys();
+
   Settings::logSettingsInformation();
 
   // Load local and Qt system translations from various places
