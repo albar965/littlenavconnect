@@ -1,3 +1,9 @@
+Version 1.5.0.develop
+
+* SimConnect is now loaded dynamically. #110
+* Exiting now if simconnect could not be found on Windows platforms. #110
+* Changed to Qt 5.9
+
 Version 1.4.3
 
 * No changes - updated version number for consistency
