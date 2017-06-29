@@ -1,4 +1,4 @@
-Version 1.5.0.develop
+Version 1.4.4
 
 * SimConnect is now loaded dynamically. #110
 * Exiting now if simconnect could not be found on Windows platforms. #110
