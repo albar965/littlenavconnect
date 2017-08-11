@@ -15,7 +15,7 @@ TEMPLATE = app
 
 # Adapt these variables to compile on Windows
 win32 {
-  QT_HOME=C:\\Qt\\5.9\\mingw53_32
+  QT_HOME=C:\\Qt\\5.9.1\\mingw53_32
   OPENSSL=C:\\OpenSSL-Win32
   GIT_BIN='C:\\Git\\bin\\git'
 }
