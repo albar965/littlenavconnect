@@ -15,6 +15,4 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#include "navservercommon.h"
-
-Q_LOGGING_CATEGORY(gui, "gui")
+#include "constants.h"

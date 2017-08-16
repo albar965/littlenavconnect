@@ -24,7 +24,9 @@
 #include "fs/sc/simconnectreply.h"
 #include "gui/application.h"
 #include "gui/translator.h"
-#include "navservercommon.h"
+#include "fs/ns/navservercommon.h"
+#include "constants.h"
+#include "atools.h"
 
 #include <QSslSocket>
 #include <QStyleFactory>
@@ -73,6 +75,9 @@ int main(int argc, char *argv[])
 
   // Print some information which can be useful for debugging
   LoggingUtil::logSystemInformation();
+  qInfo().noquote().nospace() << "atools revision " << atools::gitRevision() << " "
+                              << Application::applicationName() << " revision " << GIT_REVISION;
+
   LoggingUtil::logStandardPaths();
   qInfo() << "SSL supported" << QSslSocket::supportsSsl()
           << "build library" << QSslSocket::sslLibraryBuildVersionString()
@@ -83,7 +88,7 @@ int main(int argc, char *argv[])
   Settings::logSettingsInformation();
 
   // Load local and Qt system translations from various places
-  Translator::load(Settings::instance().valueStr(SETTINGS_OPTIONS_LANGUAGE, QString()));
+  Translator::load(Settings::instance().valueStr(lnc::SETTINGS_OPTIONS_LANGUAGE, QString()));
 
 #if defined(Q_OS_WIN32)
   // Detect other running application instance - this is unsafe on Unix since shm can remain after crashes

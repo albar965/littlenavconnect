@@ -29,16 +29,12 @@ SOURCES +=\
     src/main.cpp \
     src/mainwindow.cpp \
     src/optionsdialog.cpp \
-    src/navserver.cpp \
-    src/navserverworker.cpp \
-    src/navservercommon.cpp
+    src/constants.cpp
 
 HEADERS  += \
     src/mainwindow.h \
     src/optionsdialog.h \
-    src/navservercommon.h \
-    src/navserver.h \
-    src/navserverworker.h
+    src/constants.h
 
 FORMS    += mainwindow.ui \
     optionsdialog.ui

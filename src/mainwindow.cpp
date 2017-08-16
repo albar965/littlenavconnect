@@ -18,8 +18,8 @@
 #include "mainwindow.h"
 
 #include "ui_mainwindow.h"
-#include "navserver.h"
-#include "navservercommon.h"
+#include "fs/ns/navserver.h"
+#include "fs/ns/navservercommon.h"
 #include "optionsdialog.h"
 
 #include "settings/settings.h"
@@ -29,6 +29,8 @@
 #include "logging/logginghandler.h"
 #include "fs/sc/simconnectreply.h"
 #include "fs/sc/datareaderthread.h"
+#include "constants.h"
+#include "fs/sc/simconnecthandler.h"
 
 #include <QMessageBox>
 #include <QCloseEvent>
@@ -112,10 +114,17 @@ MainWindow::MainWindow()
   // Create help handler for managing the Help menu items
   helpHandler = new atools::gui::HelpHandler(this, ABOUT_MESSAGE, GIT_REVISION);
 
+  int defaultPort = Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
+  bool hideHostname =
+    Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
   // Create nav server but to not start it yet
-  navServer = new NavServer(this, verbose,
-                            Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT,
-                                                                  51968).toInt());
+  atools::fs::ns::NavServerOptions options = atools::fs::ns::NONE;
+  if(verbose)
+    options |= atools::fs::ns::VERBOSE;
+  if(hideHostname)
+    options |= atools::fs::ns::HIDE_HOST;
+
+  navServer = new atools::fs::ns::NavServer(this, options, defaultPort);
 
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
 
@@ -145,19 +154,29 @@ MainWindow::~MainWindow()
 {
   qDebug() << Q_FUNC_INFO;
 
-  // Terminate data reader thread
-  dataReader->setTerminate(true);
-  dataReader->wait();
-  dataReader->setTerminate(false);
-  qDebug() << "MainWindow destructor dataReader terminated";
+  navServer->stopServer();
+  qDebug() << Q_FUNC_INFO << "navServer stopped";
+
+  delete navServer;
+  qDebug() << Q_FUNC_INFO << "navServer deleted";
+
+  dataReader->terminateThread();
+  qDebug() << Q_FUNC_INFO << "dataReader terminated";
+
+  delete dataReader;
+  qDebug() << Q_FUNC_INFO << "dataReader deleted";
+
+  delete connectHandler;
+  qDebug() << Q_FUNC_INFO << "connectHandler deleted";
 
   atools::logging::LoggingHandler::setLogFunction(nullptr);
-  qDebug() << "MainWindow destructor logging reset";
+  qDebug() << Q_FUNC_INFO << "logging reset";
 
   delete helpHandler;
-  qDebug() << "MainWindow destructor help handler deleted";
+  qDebug() << Q_FUNC_INFO << "help handler deleted";
+
   delete ui;
-  qDebug() << "MainWindow destructor ui deleted";
+  qDebug() << Q_FUNC_INFO << "ui deleted";
 }
 
 void MainWindow::showOnlineHelp()
@@ -178,10 +197,7 @@ void MainWindow::saveReplayFileTriggered()
 
   if(!filepath.isEmpty())
   {
-    dataReader->setTerminate();
-    dataReader->wait();
-    dataReader->setTerminate(false);
-
+    dataReader->terminateThread();
     dataReader->setSaveReplayFilepath(filepath);
     dataReader->setLoadReplayFilepath(QString());
 
@@ -196,10 +212,7 @@ void MainWindow::loadReplayFileTriggered()
 
   if(!filepath.isEmpty())
   {
-    dataReader->setTerminate();
-    dataReader->wait();
-    dataReader->setTerminate(false);
-
+    dataReader->terminateThread();
     dataReader->setSaveReplayFilepath(QString());
     dataReader->setLoadReplayFilepath(filepath);
 
@@ -209,10 +222,7 @@ void MainWindow::loadReplayFileTriggered()
 
 void MainWindow::stopReplay()
 {
-  dataReader->setTerminate();
-  dataReader->wait();
-  dataReader->setTerminate(false);
-
+  dataReader->terminateThread();
   dataReader->setSaveReplayFilepath(QString());
   dataReader->setLoadReplayFilepath(QString());
 
@@ -224,12 +234,13 @@ void MainWindow::options()
   OptionsDialog dialog;
 
   Settings& settings = Settings::instance();
-  unsigned int updateRateMs = settings.getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt();
-  int port = settings.getAndStoreValue(SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
-  bool hideHostname = settings.getAndStoreValue(SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
+  unsigned int updateRateMs =
+    settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt();
+  int port = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
+  bool hideHostname = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
 
-  bool fetchAiAircraft = settings.getAndStoreValue(SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool();
-  bool fetchAiShip = settings.getAndStoreValue(SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool();
+  bool fetchAiAircraft = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool();
+  bool fetchAiShip = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool();
 
   dialog.setUpdateRate(updateRateMs);
   dialog.setPort(port);
@@ -241,11 +252,11 @@ void MainWindow::options()
 
   if(result == QDialog::Accepted)
   {
-    settings.setValue(SETTINGS_OPTIONS_HIDE_HOSTNAME, static_cast<int>(dialog.isHideHostname()));
-    settings.setValue(SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
-    settings.setValue(SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
-    settings.setValue(SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, dialog.isFetchAiAircraft());
-    settings.setValue(SETTINGS_OPTIONS_FETCH_AI_SHIP, dialog.isFetchAiShip());
+    settings.setValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, static_cast<int>(dialog.isHideHostname()));
+    settings.setValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
+    settings.setValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
+    settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, dialog.isFetchAiAircraft());
+    settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, dialog.isFetchAiShip());
 
     settings.syncSettings();
 
@@ -259,12 +270,8 @@ void MainWindow::options()
 
     if(dialog.getUpdateRate() != updateRateMs)
     {
-
       // Update rate changed - restart data readers
-      dataReader->setTerminate();
-      dataReader->wait();
-      dataReader->setTerminate(false);
-
+      dataReader->terminateThread();
       dataReader->setUpdateRate(dialog.getUpdateRate());
       dataReader->start();
     }
@@ -275,13 +282,14 @@ void MainWindow::options()
       // Restart navserver on port change
       int result2 = QMessageBox::Yes;
       if(navServer->hasConnections())
-        result2 = atools::gui::Dialog(this).showQuestionMsgBox(SETTINGS_ACTIONS_SHOW_PORT_CHANGE,
-                                                               tr(
-                                                                 "There are still applications connected.\n"
-                                                                 "Really change the Network Port?"),
-                                                               tr("Do not &show this dialog again."),
-                                                               QMessageBox::Yes | QMessageBox::No,
-                                                               QMessageBox::No, QMessageBox::Yes);
+        result2 = atools::gui::Dialog(this).showQuestionMsgBox(
+          lnc::SETTINGS_ACTIONS_SHOW_PORT_CHANGE,
+          tr(
+            "There are still applications connected.\n"
+            "Really change the Network Port?"),
+          tr("Do not &show this dialog again."),
+          QMessageBox::Yes | QMessageBox::No,
+          QMessageBox::No, QMessageBox::Yes);
 
       if(result2 == QMessageBox::Yes)
       {
@@ -296,8 +304,8 @@ void MainWindow::options()
 void MainWindow::resetMessages()
 {
   Settings& settings = Settings::instance();
-  settings.setValue(SETTINGS_ACTIONS_SHOW_QUIT, true);
-  settings.setValue(SETTINGS_ACTIONS_SHOW_PORT_CHANGE, true);
+  settings.setValue(lnc::SETTINGS_ACTIONS_SHOW_QUIT, true);
+  settings.setValue(lnc::SETTINGS_ACTIONS_SHOW_PORT_CHANGE, true);
 }
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
@@ -330,25 +338,25 @@ void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context
 void MainWindow::postLogMessage(QString message, bool warning)
 {
   if(warning)
-    qWarning(gui).noquote().nospace() << message;
+    qWarning(atools::fs::ns::gui).noquote().nospace() << message;
   else
-    qInfo(gui).noquote().nospace() << message;
+    qInfo(atools::fs::ns::gui).noquote().nospace() << message;
 }
 
 void MainWindow::readSettings()
 {
   qDebug() << Q_FUNC_INFO;
 
-  verbose = Settings::instance().getAndStoreValue(SETTINGS_OPTIONS_VERBOSE, false).toBool();
+  verbose = Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_VERBOSE, false).toBool();
 
-  atools::gui::WidgetState(SETTINGS_MAINWINDOW_WIDGET).restore(this);
+  atools::gui::WidgetState(lnc::SETTINGS_MAINWINDOW_WIDGET).restore(this);
 }
 
 void MainWindow::writeSettings()
 {
   qDebug() << Q_FUNC_INFO;
 
-  atools::gui::WidgetState widgetState(SETTINGS_MAINWINDOW_WIDGET);
+  atools::gui::WidgetState widgetState(lnc::SETTINGS_MAINWINDOW_WIDGET);
   widgetState.save(this);
   widgetState.syncSettings();
 }
@@ -361,7 +369,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
   if(navServer->hasConnections())
   {
-    int result = atools::gui::Dialog(this).showQuestionMsgBox(SETTINGS_ACTIONS_SHOW_QUIT,
+    int result = atools::gui::Dialog(this).showQuestionMsgBox(lnc::SETTINGS_ACTIONS_SHOW_QUIT,
                                                               tr("There are still applications connected.\n"
                                                                  "Really Quit?"),
                                                               tr("Do not &show this dialog again."),
@@ -379,16 +387,19 @@ void MainWindow::mainWindowShown()
 {
   qDebug() << Q_FUNC_INFO;
 
-  qInfo(gui).noquote().nospace() << QApplication::applicationName();
-  qInfo(gui).noquote().nospace() << tr("Version %1 (revision %2).").
+  qInfo(atools::fs::ns::gui).noquote().nospace() << QApplication::applicationName();
+  qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
     arg(QApplication::applicationVersion()).arg(GIT_REVISION);
 
-  qInfo(gui).noquote().nospace()
+  qInfo(atools::fs::ns::gui).noquote().nospace()
     << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
     SimConnectReply::getReplyVersion());
 
-  atools::settings::Settings& settings = Settings::instance();
-  dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
+  atools::fs::sc::SimConnectHandler *scHandler = new atools::fs::sc::SimConnectHandler(verbose);
+  scHandler->loadSimConnect(QApplication::applicationFilePath() + ".simconnect");
+  connectHandler = scHandler;
+
+  dataReader = new atools::fs::sc::DataReaderThread(this, connectHandler, verbose);
 
 #if defined(Q_OS_WIN32)
   if(!dataReader->isSimconnectAvailable())
@@ -401,22 +412,24 @@ void MainWindow::mainWindowShown()
   }
 #endif
 
-  dataReader->setReconnectRateSec(settings.getAndStoreValue(SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
-  dataReader->setUpdateRate(settings.getAndStoreValue(SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
+  atools::settings::Settings& settings = Settings::instance();
+  dataReader->setReconnectRateSec(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_RECONNECT_RATE,
+                                                            10).toInt());
+  dataReader->setUpdateRate(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
   dataReader->setLoadReplayFilepath(loadReplayFile);
   dataReader->setSaveReplayFilepath(saveReplayFile);
   dataReader->setReplaySpeed(replaySpeed);
 
   atools::fs::sc::Options options = atools::fs::sc::NO_OPTION;
-  if(settings.getAndStoreValue(SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool())
+  if(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool())
     options |= atools::fs::sc::FETCH_AI_AIRCRAFT;
-  if(settings.getAndStoreValue(SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool())
+  if(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool())
     options |= atools::fs::sc::FETCH_AI_BOAT;
   dataReader->setSimconnectOptions(options);
 
   connect(dataReader, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
 
-  qInfo(gui).noquote().nospace() << tr("Starting server. This can take up to a minute ...");
+  qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Starting server. This can take up to a minute ...");
 
   QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
@@ -428,7 +441,7 @@ void MainWindow::mainWindowShown()
 
   QGuiApplication::restoreOverrideCursor();
 
-  qInfo(gui).noquote().nospace() << tr("Server running.");
+  qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Server running.");
 }
 
 void MainWindow::showEvent(QShowEvent *event)

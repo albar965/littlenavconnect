@@ -31,11 +31,14 @@ class HelpHandler;
 namespace fs {
 namespace sc {
 class DataReaderThread;
+class ConnectHandler;
 }
-}
-}
-
+namespace ns {
 class NavServer;
+
+}
+}
+}
 
 class MainWindow :
   public QMainWindow
@@ -84,10 +87,11 @@ private:
   Ui::MainWindow *ui = nullptr;
 
   // Navserver that waits and accepts tcp connections. Starts a NavServerWorker in a thread for each connection.
-  NavServer *navServer = nullptr;
+  atools::fs::ns::NavServer *navServer = nullptr;
 
-  // Runs in background and fetches data from simulator - signals are send to NavServerWorker threads
+  // Runs in background and fetches data from simulator - signals are sent to NavServerWorker threads
   atools::fs::sc::DataReaderThread *dataReader = nullptr;
+  atools::fs::sc::ConnectHandler *connectHandler = nullptr;
 
   atools::gui::HelpHandler *helpHandler = nullptr;
   bool firstStart = true; // Used to emit the first windowShown signal
