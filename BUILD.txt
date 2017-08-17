@@ -1,7 +1,7 @@
 Build Instructions
 ------------------------------------------------------
 
-Qt development packages of Core, Widgets, XML and SQL are needed with minimum version 5.6.
+Qt development packages of Core, Widgets, XML and SQL are needed with minimum version 5.9.
 GIT command line tools are required.
 Additionally my atools static library is needed.
 
