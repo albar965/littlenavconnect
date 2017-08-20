@@ -42,9 +42,6 @@ using atools::logging::LoggingHandler;
 using atools::logging::LoggingUtil;
 using atools::settings::Settings;
 using atools::gui::Translator;
-using atools::logging::LoggingHandler;
-using atools::logging::LoggingUtil;
-using atools::settings::Settings;
 
 int main(int argc, char *argv[])
 {

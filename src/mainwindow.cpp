@@ -399,7 +399,8 @@ void MainWindow::mainWindowShown()
   scHandler->loadSimConnect(QApplication::applicationFilePath() + ".simconnect");
   connectHandler = scHandler;
 
-  dataReader = new atools::fs::sc::DataReaderThread(this, connectHandler, verbose);
+  dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
+  dataReader->setHandler(scHandler);
 
 #if defined(Q_OS_WIN32)
   if(!dataReader->isSimconnectAvailable())
