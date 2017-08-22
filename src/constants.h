@@ -33,6 +33,7 @@ const QLatin1Literal SETTINGS_OPTIONS_VERBOSE("Options/Verbose");
 const QLatin1Literal SETTINGS_MAINWINDOW_WIDGET("MainWindow/Widget");
 const QLatin1Literal SETTINGS_OPTIONS_RECONNECT_RATE("Options/ReconnectRate");
 const QLatin1Literal SETTINGS_OPTIONS_LANGUAGE("Options/Language");
+const QLatin1Literal SETTINGS_OPTIONS_SIMULATOR_FSX("Options/Simulator");
 } // namespace lnc
 
 #endif // LITTLENAVCONNECT_CONSTANTS_H

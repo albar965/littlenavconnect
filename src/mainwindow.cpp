@@ -31,10 +31,12 @@
 #include "fs/sc/datareaderthread.h"
 #include "constants.h"
 #include "fs/sc/simconnecthandler.h"
+#include "fs/sc/xpconnecthandler.h"
 
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QCommandLineParser>
+#include <QActionGroup>
 
 static QString ABOUT_MESSAGE =
   QObject::tr("<p>is the Fligh Simulator Network agent for Little Navmap.</p>"
@@ -107,6 +109,11 @@ MainWindow::MainWindow()
     ui->menuTools->insertSeparator(ui->actionResetMessages);
   }
 
+  // Right align the help button
+  QWidget *spacerWidget = new QWidget(ui->toolBar);
+  spacerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+  ui->toolBar->insertWidget(ui->actionContents, spacerWidget);
+
   // Bind the log function to this class for category "gui"
   using namespace std::placeholders;
   atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logGuiMessage, this, _1, _2, _3));
@@ -125,6 +132,14 @@ MainWindow::MainWindow()
     options |= atools::fs::ns::HIDE_HOST;
 
   navServer = new atools::fs::ns::NavServer(this, options, defaultPort);
+
+  // Create a group to turn the simulator actions into mutual exclusive ones
+  simulatorActionGroup = new QActionGroup(ui->menuTools);
+  simulatorActionGroup->addAction(ui->actionConnectFsx);
+  simulatorActionGroup->addAction(ui->actionConnectXplane);
+
+  connect(ui->actionConnectFsx, &QAction::triggered, this, &MainWindow::simulatorSelectionTriggered);
+  connect(ui->actionConnectXplane, &QAction::triggered, this, &MainWindow::simulatorSelectionTriggered);
 
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
 
@@ -166,14 +181,20 @@ MainWindow::~MainWindow()
   delete dataReader;
   qDebug() << Q_FUNC_INFO << "dataReader deleted";
 
-  delete connectHandler;
-  qDebug() << Q_FUNC_INFO << "connectHandler deleted";
+  delete fsxConnectHandler;
+  qDebug() << Q_FUNC_INFO << "fsxConnectHandler deleted";
+
+  delete xpConnectHandler;
+  qDebug() << Q_FUNC_INFO << "xpConnectHandler deleted";
 
   atools::logging::LoggingHandler::setLogFunction(nullptr);
   qDebug() << Q_FUNC_INFO << "logging reset";
 
   delete helpHandler;
   qDebug() << Q_FUNC_INFO << "help handler deleted";
+
+  delete simulatorActionGroup;
+  qDebug() << Q_FUNC_INFO << "fsActionGroup deleted";
 
   delete ui;
   qDebug() << Q_FUNC_INFO << "ui deleted";
@@ -187,6 +208,43 @@ void MainWindow::showOnlineHelp()
 void MainWindow::showOfflineHelp()
 {
   HelpHandler::openHelpUrl(this, HELP_OFFLINE_URL, supportedLanguages);
+}
+
+atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()
+{
+  atools::fs::sc::ConnectHandler *handler;
+  if(ui->actionConnectFsx->isChecked())
+    handler = fsxConnectHandler;
+  else
+    handler = xpConnectHandler;
+
+  return handler;
+}
+
+void MainWindow::handlerChanged()
+{
+  if(ui->actionConnectFsx->isChecked())
+  {
+    qInfo(atools::fs::ns::gui).noquote().nospace()
+      << tr("Connecting to FSX or Prepar3D using SimConnect.");
+    Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, true);
+  }
+  else
+  {
+    qInfo(atools::fs::ns::gui).noquote().nospace()
+      << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
+    Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
+  }
+  Settings::instance().syncSettings();
+}
+
+void MainWindow::simulatorSelectionTriggered()
+{
+  // Update rate changed - restart data readers
+  dataReader->terminateThread();
+  dataReader->setHandler(handlerForSelection());
+  dataReader->start();
+  handlerChanged();
 }
 
 void MainWindow::saveReplayFileTriggered()
@@ -387,6 +445,8 @@ void MainWindow::mainWindowShown()
 {
   qDebug() << Q_FUNC_INFO;
 
+  atools::settings::Settings& settings = Settings::instance();
+
   qInfo(atools::fs::ns::gui).noquote().nospace() << QApplication::applicationName();
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
     arg(QApplication::applicationVersion()).arg(GIT_REVISION);
@@ -395,27 +455,41 @@ void MainWindow::mainWindowShown()
     << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
     SimConnectReply::getReplyVersion());
 
-  atools::fs::sc::SimConnectHandler *scHandler = new atools::fs::sc::SimConnectHandler(verbose);
-  scHandler->loadSimConnect(QApplication::applicationFilePath() + ".simconnect");
-  connectHandler = scHandler;
+  // Build the handler classes which are an abstraction to SimConnect and the Little Xpconnect shared memory
+  fsxConnectHandler = new atools::fs::sc::SimConnectHandler(verbose);
+  fsxConnectHandler->loadSimConnect(QApplication::applicationFilePath() + ".simconnect");
+  xpConnectHandler = new atools::fs::sc::XpConnectHandler();
 
-  dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
-  dataReader->setHandler(scHandler);
+#ifdef  Q_OS_WIN32
+  // Show toolbar with both buttons
+  bool fsx = true;
+  if(!settings.contains(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX))
+    // Check the first time if SimConnect is available - if yes use FSX settings
+    fsx = fsxConnectHandler->isLoaded();
+  else
+    // Otherwise fall back to X-Plane
+    fsx = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, true).toBool();
 
-#if defined(Q_OS_WIN32)
-  if(!dataReader->isSimconnectAvailable())
-  {
-    QMessageBox::warning(this, QApplication::applicationName(),
-                         tr("No Flight Simulator installation found.<br/>"
-                            "Could not load SimConnect.<br/><br/>"
-                            "Exiting now."));
-    close();
-  }
+  ui->actionConnectFsx->setChecked(fsx);
+  ui->actionConnectXplane->setChecked(!fsx);
+#else
+  // Remove buttons and activate X-Plane
+  settings.setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
+  ui->actionConnectXplane->setChecked(true);
+  ui->toolBar->removeAction(ui->actionConnectFsx);
+  ui->toolBar->removeAction(ui->actionConnectFsx);
+  ui->toolBar->removeAction(ui->actionConnectXplane);
+
 #endif
 
-  atools::settings::Settings& settings = Settings::instance();
-  dataReader->setReconnectRateSec(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_RECONNECT_RATE,
-                                                            10).toInt());
+  ui->menuTools->insertAction(ui->actionOptions, ui->toolBar->toggleViewAction());
+
+  // Build the thread which will read the data from the interfaces
+  dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
+  dataReader->setHandler(handlerForSelection());
+  handlerChanged();
+
+  dataReader->setReconnectRateSec(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
   dataReader->setUpdateRate(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
   dataReader->setLoadReplayFilepath(loadReplayFile);
   dataReader->setSaveReplayFilepath(saveReplayFile);

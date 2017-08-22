@@ -31,6 +31,8 @@ class HelpHandler;
 namespace fs {
 namespace sc {
 class DataReaderThread;
+class SimConnectHandler;
+class XpConnectHandler;
 class ConnectHandler;
 }
 namespace ns {
@@ -39,6 +41,8 @@ class NavServer;
 }
 }
 }
+
+class QActionGroup;
 
 class MainWindow :
   public QMainWindow
@@ -83,6 +87,8 @@ private:
   void stopReplay();
   void showOnlineHelp();
   void showOfflineHelp();
+  void simulatorSelectionTriggered();
+  void handlerChanged();
 
   Ui::MainWindow *ui = nullptr;
 
@@ -91,7 +97,10 @@ private:
 
   // Runs in background and fetches data from simulator - signals are sent to NavServerWorker threads
   atools::fs::sc::DataReaderThread *dataReader = nullptr;
-  atools::fs::sc::ConnectHandler *connectHandler = nullptr;
+  atools::fs::sc::SimConnectHandler *fsxConnectHandler = nullptr;
+  atools::fs::sc::XpConnectHandler *xpConnectHandler = nullptr;
+  QActionGroup *simulatorActionGroup = nullptr;
+  atools::fs::sc::ConnectHandler *handlerForSelection();
 
   atools::gui::HelpHandler *helpHandler = nullptr;
   bool firstStart = true; // Used to emit the first windowShown signal

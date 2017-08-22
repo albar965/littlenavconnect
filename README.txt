@@ -2,23 +2,33 @@ Little Navconnect
 =================
 
 Little Navconnect is a free open source application that acts as an agent connecting Little Navmap
-with a FSX or Prepar3D flight simulator. This allows to use Little Navmap on Linux or Mac and saves the the
-pain of setting up remote SimConnect links.
+with a FSX, Prepar3D or X-Plane flight simulator.
 
-This program is not needed for X-plane.
+This allows to use Little Navmap on Linux or Mac and saves the the pain of setting up remote SimConnect links.
+
+Network scenario for FSX or Prepar3D using SimConnect:
 
 |Windows Machine                                   |     Windows, Linux or Mac Machines  |
 ------------------------------------------------------------------------------------------
 FSX/P3D <-> Simconnect <-> Little Navonnect <- (Network) -> Little Navmap on Computer 1
                                             <- (Network) -> Little Navmap on Computer 2
 
+Network scenario for X-Plane using the Little Xpconnect plugin:
+
+|Windows, Linux or Mac Machine                           |     Windows, Linux or Mac Machines  |
+------------------------------------------------------------------------------------------------
+FSX/P3D <-> Little XpConnect <-> Little Navonnect <- (Network) -> Little Navmap on Computer 1
+                                                  <- (Network) -> Little Navmap on Computer 2
+
 ------------------------------------------------------------------------------
 
 See the Little Navconnect help for more information. All online here: https://www.gitbook.com/@albar965
 
-Little Navconnect supports FSX, FSX Steam Edition and Prepar3d Versions 2 and 3.
+Little Navconnect supports FSX, FSX Steam Edition, Prepar3d Versions 2, 3, 4 and X-Plane
 
--- INSTALLATION ----------------------------------------------------------------------------
+------------------------------------------------------------------------------
+-- INSTALLATION --------------------------------------------------------------
+------------------------------------------------------------------------------
 
 Installation involves the simple copying of files therefore an installer or setup program is not required.
 
@@ -43,7 +53,11 @@ See in the online manual if installing for other Simulators than FSX SP2.
 
 See the online manual for more details.
 
--- LICENSE ----------------------------------------------------------------------------
+The installation on Linux and macOS computers is simlar except different paths.
+
+------------------------------------------------------------------------------
+-- LICENSE -------------------------------------------------------------------
+------------------------------------------------------------------------------
 
 This software is licensed under GPL3 or any later version.
 

@@ -13,17 +13,62 @@ CONFIG += c++11
 TARGET = littlenavconnect
 TEMPLATE = app
 
-# Adapt these variables to compile on Windows
+# =======================================================================
+# Adapt these paths for each operating system
+# =======================================================================
+
+# Windows ==================
 win32 {
   QT_HOME=C:\\Qt\\5.9.1\\mingw53_32
   OPENSSL=C:\\OpenSSL-Win32
   GIT_BIN='C:\\Git\\bin\\git'
 }
 
+# Linux ==================
+unix:!macx {
+  QT_HOME=/home/alex/Qt/5.9.1/gcc_64
+}
+
+# End of configuration section
+# =======================================================================
+
+# =====================================================================
+# Dependencies
+# =====================================================================
+
+# Add dependencies to atools project and its static library to ensure relinking on changes
+DEPENDPATH += $$PWD/../atools/src
+INCLUDEPATH += $$PWD/../atools/src $$PWD/src
+
+CONFIG(debug, debug|release):CONF_TYPE=debug
+CONFIG(release, debug|release):CONF_TYPE=release
+
+unix {
+  LIBS += -L$$PWD/../build-atools-$${CONF_TYPE} -latools
+  PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/libatools.a
+}
+
+unix!macx {
+# Makes the shell script and setting LD_LIBRARY_PATH redundant
+  QMAKE_RPATHDIR=./lib
+}
+
+win32 {
+  LIBS += -L$$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE} -latools
+  PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE}/libatools.a
+  WINDEPLOY_FLAGS = --compiler-runtime
+
+  INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
+}
+
+
 # Get the current GIT revision to include it into the code
 win32:DEFINES += GIT_REVISION='\\"$$system($${GIT_BIN} rev-parse --short HEAD)\\"'
 unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
 
+# =====================================================================
+# Files
+# =====================================================================
 
 SOURCES +=\
     src/main.cpp \
@@ -50,25 +95,6 @@ DISTFILES += \
     htmltidy.cfg \
     LICENSE.txt
 
-# Add dependencies to atools project and its static library to ensure relinking on changes
-DEPENDPATH += $$PWD/../atools/src
-INCLUDEPATH += $$PWD/../atools/src $$PWD/src
-
-CONFIG(debug, debug|release):CONF_TYPE=debug
-CONFIG(release, debug|release):CONF_TYPE=release
-
-unix {
-  LIBS += -L$$PWD/../build-atools-$${CONF_TYPE} -latools
-  PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/libatools.a
-}
-
-win32 {
-  LIBS += -L$$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE} -latools
-  PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE}/libatools.a
-  WINDEPLOY_FLAGS = --compiler-runtime
-
-  INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
-}
 
 # Create additional makefile targets to copy help files
 unix {
@@ -77,6 +103,59 @@ unix {
   copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
 
   cleandata.commands = rm -Rvf $$OUT_PWD/help
+}
+
+# =====================================================================
+# Deployment commands
+# =====================================================================
+
+# Linux specific deploy target
+unix:!macx {
+  DEPLOY_DIR=\"$$PWD/../deploy/Little Navconnect\"
+  DEPLOY_DIR_LIB=\"$$PWD/../deploy/Little Navconnect/lib\"
+
+  deploy.commands = rm -Rfv $${DEPLOY_DIR} &&
+  deploy.commands += mkdir -pv $${DEPLOY_DIR_LIB} &&
+  deploy.commands += mkdir -pv $${DEPLOY_DIR}/iconengines &&
+  deploy.commands += mkdir -pv $${DEPLOY_DIR}/imageformats &&
+  deploy.commands += mkdir -pv $${DEPLOY_DIR}/platforms &&
+  deploy.commands += mkdir -pv $${DEPLOY_DIR}/platformthemes &&
+  deploy.commands += cp -Rvf $${OUT_PWD}/help $${DEPLOY_DIR} &&
+  deploy.commands += cp -Rvf $${OUT_PWD}/littlenavconnect $${DEPLOY_DIR} &&
+  deploy.commands += cp -vf $$PWD/desktop/littlenavconnect.sh $${DEPLOY_DIR} &&
+  deploy.commands += chmod -v a+x $${DEPLOY_DIR}/littlenavconnect.sh &&
+  deploy.commands += cp -vf $${PWD}/CHANGELOG.txt $${DEPLOY_DIR} &&
+  deploy.commands += cp -vf $${PWD}/README.txt $${DEPLOY_DIR} &&
+  deploy.commands += cp -vf $${PWD}/LICENSE.txt $${DEPLOY_DIR} &&
+  deploy.commands += cp -vf $${PWD}/resources/icons/navconnect.svg $${DEPLOY_DIR}/littlenavconnect.svg &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/iconengines/libqsvgicon.so*  $${DEPLOY_DIR}/iconengines &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqgif.so*  $${DEPLOY_DIR}/imageformats &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqjp2.so*  $${DEPLOY_DIR}/imageformats &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqjpeg.so*  $${DEPLOY_DIR}/imageformats &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqsvg.so*  $${DEPLOY_DIR}/imageformats &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqwbmp.so*  $${DEPLOY_DIR}/imageformats &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqwebp.so*  $${DEPLOY_DIR}/imageformats &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqeglfs.so*  $${DEPLOY_DIR}/platforms &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqlinuxfb.so*  $${DEPLOY_DIR}/platforms &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqminimal.so*  $${DEPLOY_DIR}/platforms &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqminimalegl.so*  $${DEPLOY_DIR}/platforms &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqoffscreen.so*  $${DEPLOY_DIR}/platforms &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqxcb.so*  $${DEPLOY_DIR}/platforms &&
+  deploy.commands += cp -vfa $${QT_HOME}/plugins/platformthemes/libqgtk*.so*  $${DEPLOY_DIR}/platformthemes &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libicudata.so*  $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libicui18n.so*  $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libicuuc.so*  $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Core.so*  $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Gui.so*  $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Network.so*  $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Widgets.so*  $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5X11Extras.so*  $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5XcbQpa.so*  $${DEPLOY_DIR_LIB}
+}
+
+# Mac specific deploy target
+macx {
+  deploy.commands += macdeployqt "Little Navconnect.app" -appstore-compliant -always-overwrite -dmg
 }
 
 # Windows specific deploy target

@@ -35,8 +35,11 @@
      <item row="0" column="1">
       <widget class="QSpinBox" name="spinBoxOptionsUpdateRate">
        <property name="toolTip">
-        <string>Allowed range is 100 milliseconds up to 2 seconds. 
+        <string>Allowed range is 50 milliseconds up to 2 seconds. 
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</string>
+       </property>
+       <property name="statusTip">
+        <string>Allowed range is 50 milliseconds up to 2 seconds.  Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</string>
        </property>
        <property name="suffix">
         <string> ms</string>
@@ -102,6 +105,9 @@ This can be useful for streaming sessions where others can see your desktop.</st
 Change this value only if another application occupies this port and 
 you get an error message like &quot;The bound address is already in use&quot;.</string>
        </property>
+       <property name="statusTip">
+        <string>This can normally be left at default.\nChange this value only if another application occupies this port and \nyou get an error message like &quot;The bound address is already in use&quot;.</string>
+       </property>
        <property name="minimum">
         <number>1024</number>
        </property>
@@ -116,13 +122,13 @@ you get an error message like &quot;The bound address is already in use&quot;.</
      <item row="3" column="0" colspan="2">
       <widget class="QCheckBox" name="checkBoxFetchAiShip">
        <property name="toolTip">
-        <string>Deselect to disable fetching and transmission of AI or multiplayer ships</string>
+        <string>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</string>
        </property>
        <property name="statusTip">
-        <string>Deselect to disable fetching and transmission of AI or multiplayer ships</string>
+        <string>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</string>
        </property>
        <property name="text">
-        <string>Fetch AI or multiplayer &amp;ships</string>
+        <string>Fetch AI or multiplayer &amp;ships (not X-Plane)</string>
        </property>
        <property name="checked">
         <bool>true</bool>

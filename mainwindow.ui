@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>200</height>
+    <width>584</width>
+    <height>178</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,18 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>6</number>
+    </property>
+    <property name="topMargin">
+     <number>3</number>
+    </property>
+    <property name="rightMargin">
+     <number>6</number>
+    </property>
+    <property name="bottomMargin">
+     <number>6</number>
+    </property>
     <item>
      <widget class="QTextEdit" name="textEdit">
       <property name="readOnly">
@@ -29,7 +41,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1024</width>
+     <width>584</width>
      <height>19</height>
     </rect>
    </property>
@@ -53,12 +65,37 @@
     <property name="title">
      <string>&amp;Tools</string>
     </property>
+    <addaction name="actionConnectFsx"/>
+    <addaction name="actionConnectXplane"/>
+    <addaction name="separator"/>
     <addaction name="actionResetMessages"/>
     <addaction name="actionOptions"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>Toolbar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionConnectFsx"/>
+   <addaction name="actionConnectXplane"/>
+   <addaction name="separator"/>
+   <addaction name="actionOptions"/>
+   <addaction name="actionContents"/>
   </widget>
   <action name="actionQuit">
    <property name="icon">
@@ -141,6 +178,37 @@
    </property>
    <property name="text">
     <string>&amp;Contents (Offline, PDF)</string>
+   </property>
+  </action>
+  <action name="actionConnectFsx">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>FSX or Prepar3D</string>
+   </property>
+   <property name="toolTip">
+    <string>Connect to FSX or Prepar3D using SimConnect.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+F</string>
+   </property>
+  </action>
+  <action name="actionConnectXplane">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>X-Plane</string>
+   </property>
+   <property name="toolTip">
+    <string>Connect to X-Plane using the Little Xpconnect plugin.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+X</string>
    </property>
   </action>
  </widget>
