@@ -84,9 +84,6 @@ HEADERS  += \
 FORMS    += mainwindow.ui \
     optionsdialog.ui
 
-RESOURCES += \
-    littlenavconnect.qrc
-
 DISTFILES += \
     uncrustify.cfg \
     README.txt \
@@ -95,12 +92,23 @@ DISTFILES += \
     htmltidy.cfg \
     LICENSE.txt
 
+RESOURCES += \
+    littlenavconnect.qrc
+
+ICON=resources/icons/littlenavconnect.icns
 
 # Create additional makefile targets to copy help files
-unix {
+unix:!macx {
   copydata.commands = cp -avfu $$PWD/help $$OUT_PWD &&
   copydata.commands += cp -vf $$PWD/desktop/littlenavconnect*.sh $$OUT_PWD &&
   copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
+
+  cleandata.commands = rm -Rvf $$OUT_PWD/help
+}
+
+# Mac OS X - Copy help and Marble plugins and data
+macx {
+  copydata.commands += cp -Rv $$PWD/help $$OUT_PWD/littlenavconnect.app/Contents/MacOS
 
   cleandata.commands = rm -Rvf $$OUT_PWD/help
 }
@@ -155,7 +163,11 @@ unix:!macx {
 
 # Mac specific deploy target
 macx {
-  deploy.commands += macdeployqt "Little Navconnect.app" -appstore-compliant -always-overwrite -dmg
+  DEPLOY_APP=\"$$PWD/../deploy/Little Navconnect.app\"
+
+  deploy.commands = rm -Rfv $${DEPLOY_APP} &&
+  deploy.commands += macdeployqt littlenavconnect.app -appstore-compliant -always-overwrite &&
+  deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $${DEPLOY_APP}
 }
 
 # Windows specific deploy target
