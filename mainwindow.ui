@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>584</width>
-    <height>178</height>
+    <width>800</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>584</width>
+     <width>800</width>
      <height>19</height>
     </rect>
    </property>
@@ -121,7 +121,7 @@
   <action name="actionAboutQt">
    <property name="icon">
     <iconset resource="littlenavconnect.qrc">
-     <normaloff>:/littlenavconnect/resources/icons/about.svg</normaloff>:/littlenavconnect/resources/icons/about.svg</iconset>
+     <normaloff>:/littlenavconnect/resources/icons/qticon.png</normaloff>:/littlenavconnect/resources/icons/qticon.png</iconset>
    </property>
    <property name="text">
     <string>About &amp;Qt</string>

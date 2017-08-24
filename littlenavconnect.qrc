@@ -7,5 +7,6 @@
         <file>resources/icons/navconnect.svg</file>
         <file>resources/config/logging.cfg</file>
         <file>resources/icons/settings.svg</file>
+        <file>resources/icons/qticon.png</file>
     </qresource>
 </RCC>
