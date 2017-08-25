@@ -1,3 +1,10 @@
+Version 1.5.4.develop
+
+* Enabled support for X-Plane.
+* Added complete macOS and Linux deployment.
+* Added option for simulator switch and toolbar.
+* Can now run on Linux and macOS.
+
 Version 1.5.3.develop
 
 * Updated to Qt 5.9.1
