@@ -17,7 +17,7 @@ Network scenario for X-Plane using the Little Xpconnect plugin:
 
 |Windows, Linux or Mac Machine                           |     Windows, Linux or Mac Machines  |
 ------------------------------------------------------------------------------------------------
-FSX/P3D <-> Little XpConnect <-> Little Navonnect <- (Network) -> Little Navmap on Computer 1
+X-Plane <-> Little XpConnect <-> Little Navonnect <- (Network) -> Little Navmap on Computer 1
                                                   <- (Network) -> Little Navmap on Computer 2
 
 ------------------------------------------------------------------------------
