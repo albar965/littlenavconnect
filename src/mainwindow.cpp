@@ -70,6 +70,10 @@ MainWindow::MainWindow()
   qDebug() << Q_FUNC_INFO;
 
   ui->setupUi(this);
+
+  // Show a dialog on fatal log events like asserts
+  atools::logging::LoggingHandler::setGuiAbortFunction(this);
+
   readSettings();
 
   supportedLanguages = atools::gui::HelpHandler::getInstalledLanguages(
@@ -92,6 +96,7 @@ MainWindow::MainWindow()
   QCommandLineOption replaySpeedOpt({"r", "replay-speed"},
                                     QObject::tr("Use speed factor <speed> for replay."),
                                     QObject::tr("speed"));
+  parser.addOption(replaySpeedOpt);
 
   QCommandLineOption showGuid({"g", "replay-gui"},
                               QObject::tr("Show replay menu items."));
@@ -198,6 +203,12 @@ MainWindow::~MainWindow()
 
   delete ui;
   qDebug() << Q_FUNC_INFO << "ui deleted";
+
+  atools::logging::LoggingHandler::resetAbortFunction();
+
+  qDebug() << "MainWindow destructor about to shut down logging";
+  atools::logging::LoggingHandler::shutdown();
+
 }
 
 void MainWindow::showOnlineHelp()
@@ -368,8 +379,13 @@ void MainWindow::resetMessages()
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
 {
+  if(type == QtFatalMsg)
+    // Fatal will look like a crash anyway - bail out to avoid follow up errors
+    return;
+
   if(context.category != nullptr && QString(context.category) == "gui")
   {
+    // Define colors
     QString style;
     switch(type)
     {
