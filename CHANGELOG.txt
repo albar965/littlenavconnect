@@ -1,3 +1,7 @@
+Version 1.6.2
+
+* Added handler for assertions/crashes showing dialog to avoid crash to desktop.
+
 Version 1.6.1
 
 * Updated offline manual.
