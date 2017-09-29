@@ -27,6 +27,7 @@
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
 #include "logging/logginghandler.h"
+#include "logging/loggingguiabort.h"
 #include "fs/sc/simconnectreply.h"
 #include "fs/sc/datareaderthread.h"
 #include "constants.h"
@@ -69,10 +70,10 @@ MainWindow::MainWindow()
 {
   qDebug() << Q_FUNC_INFO;
 
-  ui->setupUi(this);
-
   // Show a dialog on fatal log events like asserts
-  atools::logging::LoggingHandler::setGuiAbortFunction(this);
+  atools::logging::LoggingGuiAbortHandler::setGuiAbortFunction(this);
+
+  ui->setupUi(this);
 
   readSettings();
 
@@ -204,11 +205,10 @@ MainWindow::~MainWindow()
   delete ui;
   qDebug() << Q_FUNC_INFO << "ui deleted";
 
-  atools::logging::LoggingHandler::resetAbortFunction();
+  atools::logging::LoggingGuiAbortHandler::resetGuiAbortFunction();
 
   qDebug() << "MainWindow destructor about to shut down logging";
   atools::logging::LoggingHandler::shutdown();
-
 }
 
 void MainWindow::showOnlineHelp()

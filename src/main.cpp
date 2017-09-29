@@ -102,5 +102,9 @@ int main(int argc, char *argv[])
 
   mainWindow.show();
 
-  return app.exec();
+  int retval = app.exec();
+
+  qDebug() << "app.exec() done, retval is" << retval << (retval == 0 ? "(ok)" : "(error)");
+
+  return retval;
 }
