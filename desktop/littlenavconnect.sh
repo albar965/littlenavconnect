@@ -4,6 +4,8 @@
 # cd "/home/YOURUSERNAME/Little Navconnect"
 # LD_LIBRARY_PATH="/home/YOURUSERNAME/Little Navconnect/lib"
 
-LD_LIBRARY_PATH=./lib
-
+# Use subshell to keep LD_LIBRARY_PATH local
+(
+export LD_LIBRARY_PATH=./lib
 ./littlenavconnect
+)
