@@ -1,6 +1,7 @@
 Version 1.6.2
 
 * Added handler for assertions/crashes showing dialog to avoid crash to desktop.
+* Fixed deployment for Linux causing "could not find or load qt platform plugin xcb" error.
 
 Version 1.6.1
 
