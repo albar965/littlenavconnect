@@ -65,9 +65,6 @@
     <property name="title">
      <string>&amp;Tools</string>
     </property>
-    <addaction name="actionConnectFsx"/>
-    <addaction name="actionConnectXplane"/>
-    <addaction name="separator"/>
     <addaction name="actionResetMessages"/>
     <addaction name="actionOptions"/>
    </widget>
@@ -91,9 +88,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionConnectFsx"/>
-   <addaction name="actionConnectXplane"/>
-   <addaction name="separator"/>
    <addaction name="actionOptions"/>
    <addaction name="actionContents"/>
   </widget>

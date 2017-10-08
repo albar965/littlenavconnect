@@ -99,16 +99,16 @@ MainWindow::MainWindow()
                                     QObject::tr("speed"));
   parser.addOption(replaySpeedOpt);
 
-  QCommandLineOption showGuid({"g", "replay-gui"},
-                              QObject::tr("Show replay menu items."));
-  parser.addOption(showGuid);
+  QCommandLineOption showReplay({"g", "replay-gui"},
+                                QObject::tr("Show replay menu items."));
+  parser.addOption(showReplay);
 
   // Process the actual command line arguments given by the user
   parser.process(*QCoreApplication::instance());
   saveReplayFile = parser.value(saveReplayOpt);
   loadReplayFile = parser.value(loadReplayOpt);
   replaySpeed = parser.value(replaySpeedOpt).toInt();
-  if(parser.isSet(showGuid))
+  if(parser.isSet(showReplay))
   {
     ui->menuTools->insertActions(ui->actionResetMessages,
                                  {ui->actionReplayFileLoad, ui->actionReplayFileSave, ui->actionReplayStop});
@@ -149,7 +149,7 @@ MainWindow::MainWindow()
 
   connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
 
-  if(parser.isSet(showGuid))
+  if(parser.isSet(showReplay))
   {
     connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
     connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
@@ -477,6 +477,14 @@ void MainWindow::mainWindowShown()
   xpConnectHandler = new atools::fs::sc::XpConnectHandler();
 
 #ifdef  Q_OS_WIN32
+  ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectFsx);
+  ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectXplane);
+  ui->toolBar->insertSeparator(ui->actionOptions);
+
+  ui->menuTools->insertAction(ui->actionResetMessages, ui->actionConnectFsx);
+  ui->menuTools->insertAction(ui->actionResetMessages, ui->actionConnectXplane);
+  ui->menuTools->insertSeparator(ui->actionResetMessages);
+
   // Show toolbar with both buttons
   bool fsx = true;
   if(!settings.contains(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX))
@@ -492,10 +500,6 @@ void MainWindow::mainWindowShown()
   // Remove buttons and activate X-Plane
   settings.setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
   ui->actionConnectXplane->setChecked(true);
-  ui->toolBar->removeAction(ui->actionConnectFsx);
-  ui->toolBar->removeAction(ui->actionConnectFsx);
-  ui->toolBar->removeAction(ui->actionConnectXplane);
-
 #endif
 
   ui->menuTools->insertAction(ui->actionOptions, ui->toolBar->toggleViewAction());
