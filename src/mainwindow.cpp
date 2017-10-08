@@ -476,15 +476,19 @@ void MainWindow::mainWindowShown()
   fsxConnectHandler->loadSimConnect(QApplication::applicationFilePath() + ".simconnect");
   xpConnectHandler = new atools::fs::sc::XpConnectHandler();
 
-#ifdef  Q_OS_WIN32
+#ifdef Q_OS_WIN32
   // Show toolbar with both buttons
   bool fsx = true;
   if(!settings.contains(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX))
     // Check the first time if SimConnect is available - if yes use FSX settings
     fsx = fsxConnectHandler->isLoaded();
   else
-    // Otherwise fall back to X-Plane
+    // Otherwise fall back to stored value or X-Plane
     fsx = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, true).toBool();
+
+  if(!fsxConnectHandler->isLoaded())
+    // No SimConnect switch to X-Plane
+    fsx = false;
 
   ui->actionConnectFsx->setChecked(fsx);
   ui->actionConnectXplane->setChecked(!fsx);
@@ -501,9 +505,10 @@ void MainWindow::mainWindowShown()
   }
 
 #else
-  // Remove buttons and activate X-Plane
+  // Activate X-Plane on non windows
   settings.setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
   ui->actionConnectXplane->setChecked(true);
+  ui->actionConnectFsx->setChecked(false);
 #endif
 
   ui->menuTools->insertAction(ui->actionOptions, ui->toolBar->toggleViewAction());
