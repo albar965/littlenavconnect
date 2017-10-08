@@ -489,7 +489,7 @@ void MainWindow::mainWindowShown()
   ui->actionConnectFsx->setChecked(fsx);
   ui->actionConnectXplane->setChecked(!fsx);
 
-  if(fsx)
+  if(fsxConnectHandler->isLoaded())
   {
     ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectFsx);
     ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectXplane);
