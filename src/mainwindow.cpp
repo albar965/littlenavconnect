@@ -477,14 +477,6 @@ void MainWindow::mainWindowShown()
   xpConnectHandler = new atools::fs::sc::XpConnectHandler();
 
 #ifdef  Q_OS_WIN32
-  ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectFsx);
-  ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectXplane);
-  ui->toolBar->insertSeparator(ui->actionOptions);
-
-  ui->menuTools->insertAction(ui->actionResetMessages, ui->actionConnectFsx);
-  ui->menuTools->insertAction(ui->actionResetMessages, ui->actionConnectXplane);
-  ui->menuTools->insertSeparator(ui->actionResetMessages);
-
   // Show toolbar with both buttons
   bool fsx = true;
   if(!settings.contains(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX))
@@ -496,6 +488,18 @@ void MainWindow::mainWindowShown()
 
   ui->actionConnectFsx->setChecked(fsx);
   ui->actionConnectXplane->setChecked(!fsx);
+
+  if(fsx)
+  {
+    ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectFsx);
+    ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectXplane);
+    ui->toolBar->insertSeparator(ui->actionOptions);
+
+    ui->menuTools->insertAction(ui->actionResetMessages, ui->actionConnectFsx);
+    ui->menuTools->insertAction(ui->actionResetMessages, ui->actionConnectXplane);
+    ui->menuTools->insertSeparator(ui->actionResetMessages);
+  }
+
 #else
   // Remove buttons and activate X-Plane
   settings.setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
