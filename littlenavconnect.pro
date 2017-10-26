@@ -116,8 +116,8 @@ unix:!macx {
 # Mac OS X - Copy help and Marble plugins and data
 macx {
   copydata.commands += cp -Rv $$PWD/help $$OUT_PWD/littlenavconnect.app/Contents/MacOS &&
-  copydata.commands += cp -vf $$PWD/*.qm $$OUT_PWD/littlenavmap.app/Contents/MacOS &&
-  copydata.commands += cp -avfu $$PWD/../atools/*.qm $$OUT_PWD/littlenavmap.app/Contents/MacOS
+  copydata.commands += cp -vf $$PWD/*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS &&
+  copydata.commands += cp -vf $$PWD/../atools/*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS
 
   cleandata.commands = rm -Rvf $$OUT_PWD/help
 }
