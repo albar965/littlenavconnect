@@ -105,6 +105,8 @@ ICON=resources/icons/littlenavconnect.icns
 # Create additional makefile targets to copy help files
 unix:!macx {
   copydata.commands = cp -avfu $$PWD/help $$OUT_PWD &&
+  copydata.commands += cp -avfu $$PWD/*.qm $$OUT_PWD &&
+  copydata.commands += cp -avfu $$PWD/../atools/*.qm $$OUT_PWD &&
   copydata.commands += cp -vf $$PWD/desktop/littlenavconnect*.sh $$OUT_PWD &&
   copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
 
@@ -113,7 +115,8 @@ unix:!macx {
 
 # Mac OS X - Copy help and Marble plugins and data
 macx {
-  copydata.commands += cp -Rv $$PWD/help $$OUT_PWD/littlenavconnect.app/Contents/MacOS
+  copydata.commands += cp -Rv $$PWD/help $$OUT_PWD/littlenavconnect.app/Contents/MacOS &&
+  copydata.commands += cp -vf $$PWD/*.qm $$OUT_PWD/littlenavmap.app/Contents/MacOS
 
   cleandata.commands = rm -Rvf $$OUT_PWD/help
 }
@@ -135,6 +138,7 @@ unix:!macx {
   deploy.commands += mkdir -pv $${DEPLOY_DIR}/platformthemes &&
   deploy.commands += cp -Rvf $${OUT_PWD}/help $${DEPLOY_DIR} &&
   deploy.commands += cp -Rvf $${OUT_PWD}/littlenavconnect $${DEPLOY_DIR} &&
+  deploy.commands += cp -avfu $$OUT_PWD/*.qm $${DEPLOY_DIR} &&
   deploy.commands += cp -vf $$PWD/desktop/littlenavconnect.sh $${DEPLOY_DIR} &&
   deploy.commands += chmod -v a+x $${DEPLOY_DIR}/littlenavconnect.sh &&
   deploy.commands += cp -vf $${PWD}/CHANGELOG.txt $${DEPLOY_DIR} &&
@@ -196,6 +200,7 @@ win32 {
   deploy.commands += xcopy $${WINPWD}\\CHANGELOG.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINPWD}\\*.qm $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\littlenavconnect.exe.simconnect $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${OPENSSL}\\bin\\libeay32.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${OPENSSL}\\bin\\ssleay32.dll $${DEPLOY_DIR_WIN} &&
@@ -216,3 +221,7 @@ clean.depends = $(clean) cleandata
 QMAKE_EXTRA_TARGETS += clean cleandata
 
 
+TRANSLATIONS = \
+#                littlenavconnect_de.ts \
+#                littlenavconnect_nl.ts \
+                littlenavconnect_fr.ts
