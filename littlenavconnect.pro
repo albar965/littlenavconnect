@@ -228,5 +228,4 @@ clean.depends = $(clean) cleandata
 QMAKE_EXTRA_TARGETS += clean cleandata
 
 
-TRANSLATIONS =  littlenavconnect_de.ts \
-                littlenavconnect_fr.ts
+TRANSLATIONS =  littlenavconnect_fr.ts
