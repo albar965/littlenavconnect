@@ -39,18 +39,6 @@
 #include <QCommandLineParser>
 #include <QActionGroup>
 
-static QString ABOUT_MESSAGE =
-  QObject::tr("<p>is the Fligh Simulator Network agent for Little Navmap.</p>"
-                "<p>This software is licensed under "
-                  "<a href=\"http://www.gnu.org/licenses/gpl-3.0\">GPL3</a> or any later version.</p>"
-                    "<p>The source code for this application is available at "
-                      "<a href=\"https://github.com/albar965\">Github</a>.</p>"
-                        "<p>More about my projects at "
-                          "<a href=\"https://albar965.github.io\">albar965.github.io</a>.</p>"
-                            "<p><b>Copyright 2015-2017 Alexander Barthel</b></p> "
-                              "<p><a href=\"mailto:albar965@mailbox.org\">albar965@mailbox.org</a> or "
-                                "<a href=\"mailto:albar965@t-online.de\">albar965@t-online.de</a></p>");
-
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
 using atools::fs::sc::SimConnectReply;
@@ -69,6 +57,18 @@ MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
 {
   qDebug() << Q_FUNC_INFO;
+
+  aboutMessage =
+    QObject::tr("<p>is the Fligh Simulator Network agent for Little Navmap.</p>"
+                  "<p>This software is licensed under "
+                    "<a href=\"http://www.gnu.org/licenses/gpl-3.0\">GPL3</a> or any later version.</p>"
+                      "<p>The source code for this application is available at "
+                        "<a href=\"https://github.com/albar965\">Github</a>.</p>"
+                          "<p>More about my projects at "
+                            "<a href=\"https://albar965.github.io\">albar965.github.io</a>.</p>"
+                              "<p><b>Copyright 2015-2017 Alexander Barthel</b></p> "
+                                "<p><a href=\"mailto:albar965@mailbox.org\">albar965@mailbox.org</a> or "
+                                  "<a href=\"mailto:albar965@t-online.de\">albar965@t-online.de</a></p>");
 
   // Show a dialog on fatal log events like asserts
   atools::logging::LoggingGuiAbortHandler::setGuiAbortFunction(this);
@@ -125,7 +125,7 @@ MainWindow::MainWindow()
   atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logGuiMessage, this, _1, _2, _3));
 
   // Create help handler for managing the Help menu items
-  helpHandler = new atools::gui::HelpHandler(this, ABOUT_MESSAGE, GIT_REVISION);
+  helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION);
 
   int defaultPort = Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
   bool hideHostname =
