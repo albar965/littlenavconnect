@@ -182,10 +182,14 @@ unix:!macx {
 # Mac specific deploy target
 macx {
   DEPLOY_APP=\"$$PWD/../deploy/Little Navconnect.app\"
+  DEPLOY_DIR=\"$$PWD/../deploy\"
 
   deploy.commands = rm -Rfv $${DEPLOY_APP} &&
   deploy.commands += macdeployqt littlenavconnect.app -appstore-compliant -always-overwrite &&
-  deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $${DEPLOY_APP}
+  deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $${DEPLOY_APP} &&
+  deploy.commands += cp -fv $$PWD/LICENSE.txt $${DEPLOY_DIR} &&
+  deploy.commands += cp -fv $$PWD/README.txt $${DEPLOY_DIR}/README-LittleNavconnect.txt &&
+  deploy.commands += cp -fv $$PWD/CHANGELOG.txt $${DEPLOY_DIR}/CHANGELOG-LittleNavconnect.txt
 }
 
 # Windows specific deploy target
