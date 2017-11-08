@@ -8,7 +8,7 @@ QT       += core gui network svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++14
 
 TARGET = littlenavconnect
 TEMPLATE = app
