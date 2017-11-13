@@ -277,27 +277,27 @@ vous obtenez un message d&apos;erreur comme &quot;L&apos;adresse liée est déj�
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="69"/>
+        <location filename="src/main.cpp" line="70"/>
         <source>Log files:</source>
         <translation type="unfinished">Fichiers log:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="71"/>
+        <location filename="src/main.cpp" line="72"/>
         <source>Configuration:</source>
         <translation type="unfinished">Configuration:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="95"/>
+        <location filename="src/main.cpp" line="96"/>
         <source>%1 - Error</source>
         <translation type="unfinished">%1 - Erreur</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="96"/>
+        <location filename="src/main.cpp" line="97"/>
         <source>%1 is already running.</source>
         <translation type="unfinished">%1 fonctionne déjà.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="43"/>
+        <location filename="src/mainwindow.cpp" line="62"/>
         <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2017 Alexander Barthel&lt;/b&gt;&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;mailto:albar965@mailbox.org&quot;&gt;albar965@mailbox.org&lt;/a&gt; or &lt;a href=&quot;mailto:albar965@t-online.de&quot;&gt;albar965@t-online.de&lt;/a&gt;&lt;/p&gt;</source>
         <translation type="unfinished">&lt;p&gt;est l&apos;agent Fligh Simulator Network pour Little Navmap.&lt;/p&gt;&lt;p&gt;Ce logiciel est sous licence &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;Le code source de cette application est disponible à l&apos;adresse suivante &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Plus d&apos;informations sur mes projets à &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2017 Alexander Barthel&lt;/b&gt;&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;mailto:albar965@mailbox.org&quot;&gt;albar965@mailbox.org&lt;/a&gt; ou &lt;a href=&quot;mailto:albar965@t-online.de&quot;&gt;albar965@t-online.de&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
