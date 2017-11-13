@@ -1,3 +1,10 @@
+Version 1.8.0.beta
+
+* Added French user manual by Patrick.
+* Updated startup script so that it can be used also by the desktop launcher (thanks to Valerio for the tip).
+* Added readme and changelog to macOS deployment.
+* Removing "Unknown:0" in log now for release builds.
+
 Version 1.6.3
 
 * Fixes for translation support.
