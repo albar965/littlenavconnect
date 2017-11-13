@@ -6,7 +6,7 @@
 # cd "/home/YOURUSERNAME/Little Navconnect"
 # LD_LIBRARY_PATH="/home/YOURUSERNAME/Little Navconnect/lib"
 
-cd `dirname $0`
+cd "$(dirname "${0}")"
 
 export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH
 
