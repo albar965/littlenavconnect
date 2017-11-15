@@ -66,9 +66,7 @@ MainWindow::MainWindow()
                         "<a href=\"https://github.com/albar965\">Github</a>.</p>"
                           "<p>More about my projects at "
                             "<a href=\"https://albar965.github.io\">albar965.github.io</a>.</p>"
-                              "<p><b>Copyright 2015-2017 Alexander Barthel</b></p> "
-                                "<p><a href=\"mailto:albar965@mailbox.org\">albar965@mailbox.org</a> or "
-                                  "<a href=\"mailto:albar965@t-online.de\">albar965@t-online.de</a></p>");
+                              "<p><b>Copyright 2015-2017 Alexander Barthel</b></p>");
 
   // Show a dialog on fatal log events like asserts
   atools::logging::LoggingGuiAbortHandler::setGuiAbortFunction(this);
