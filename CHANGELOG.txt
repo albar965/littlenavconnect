@@ -1,3 +1,10 @@
+Version 1.8.1.beta
+
+from atools version  2.8.1.beta
+
+* Fixed crash when getting simulator base path for unknown simulator type.
+* Fixed help handler to use GUI language instead of system locale for links to help and legend.
+
 Version 1.8.0.beta
 
 * Added French user manual by Patrick.
