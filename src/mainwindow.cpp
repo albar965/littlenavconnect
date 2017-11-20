@@ -51,7 +51,7 @@ const QString HELP_BRANCH = "release/1.8"; // VERSION_NUMBER
 const QString HELP_ONLINE_URL(
   "https://albar965.gitbooks.io/little-navconnect-user-manual/content/v/" + HELP_BRANCH + "/${LANG}/");
 
-const QString HELP_OFFLINE_URL("help/little-navconnect-user-manual-${LANG}.pdf");
+const QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
 
 MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
@@ -75,8 +75,10 @@ MainWindow::MainWindow()
 
   readSettings();
 
-  supportedLanguages = atools::gui::HelpHandler::getInstalledLanguages(
+  supportedLanguagesOfflineHelp = atools::gui::HelpHandler::getInstalledLanguages(
     "help", "little-navconnect-user-manual-([a-z]{2})\\.pdf");
+  supportedLanguagesOnlineHelp = atools::gui::HelpHandler::getInstalledLanguages(
+    "help", "little-navconnect-user-manual-([a-z]{2})\\.online");
 
   QCommandLineParser parser;
   parser.addHelpOption();
@@ -211,12 +213,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::showOnlineHelp()
 {
-  HelpHandler::openHelpUrl(this, HELP_ONLINE_URL, supportedLanguages);
+  HelpHandler::openHelpUrl(this, HELP_ONLINE_URL, supportedLanguagesOnlineHelp);
 }
 
 void MainWindow::showOfflineHelp()
 {
-  HelpHandler::openHelpUrl(this, HELP_OFFLINE_URL, supportedLanguages);
+  HelpHandler::openHelpUrl(this, HELP_OFFLINE_FILE, supportedLanguagesOfflineHelp);
 }
 
 atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()

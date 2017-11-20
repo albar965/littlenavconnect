@@ -108,7 +108,7 @@ private:
 
   QString saveReplayFile, loadReplayFile;
   int replaySpeed = 1;
-  QStringList supportedLanguages;
+  QStringList supportedLanguagesOfflineHelp, supportedLanguagesOnlineHelp;
 
   QString aboutMessage;
 };
