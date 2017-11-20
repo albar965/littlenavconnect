@@ -110,8 +110,9 @@ ICON=resources/icons/littlenavconnect.icns
 # Create additional makefile targets to copy help files
 unix:!macx {
   copydata.commands = cp -avfu $$PWD/help $$OUT_PWD &&
-  copydata.commands += cp -avfu $$PWD/*.qm $$OUT_PWD &&
-  copydata.commands += cp -avfu $$PWD/../atools/*.qm $$OUT_PWD &&
+  copydata.commands += mkdir -p $$OUT_PWD/translations &&
+  copydata.commands += cp -avfu $$PWD/*.qm $$OUT_PWD/translations &&
+  copydata.commands += cp -avfu $$PWD/../atools/*.qm $$OUT_PWD/translations &&
   copydata.commands += cp -vf $$PWD/desktop/littlenavconnect*.sh $$OUT_PWD &&
   copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
 
@@ -143,14 +144,17 @@ unix:!macx {
   deploy.commands += mkdir -pv $${DEPLOY_DIR}/platforms &&
   deploy.commands += mkdir -pv $${DEPLOY_DIR}/platformthemes &&
   deploy.commands += cp -Rvf $${OUT_PWD}/help $${DEPLOY_DIR} &&
+  deploy.commands += cp -Rvf $${OUT_PWD}/translations $${DEPLOY_DIR} &&
   deploy.commands += cp -Rvf $${OUT_PWD}/littlenavconnect $${DEPLOY_DIR} &&
-  deploy.commands += cp -avfu $$OUT_PWD/*.qm $${DEPLOY_DIR} &&
   deploy.commands += cp -vf $$PWD/desktop/littlenavconnect.sh $${DEPLOY_DIR} &&
   deploy.commands += chmod -v a+x $${DEPLOY_DIR}/littlenavconnect.sh &&
   deploy.commands += cp -vf $${PWD}/CHANGELOG.txt $${DEPLOY_DIR} &&
   deploy.commands += cp -vf $${PWD}/README.txt $${DEPLOY_DIR} &&
   deploy.commands += cp -vf $${PWD}/LICENSE.txt $${DEPLOY_DIR} &&
   deploy.commands += cp -vf $${PWD}/resources/icons/navconnect.svg $${DEPLOY_DIR}/littlenavconnect.svg &&
+  deploy.commands += cp -vfa $${QT_HOME}/translations/qt_??.qm  $${DEPLOY_DIR}/translations &&
+  deploy.commands += cp -vfa $${QT_HOME}/translations/qt_??_??.qm  $${DEPLOY_DIR}/translations &&
+  deploy.commands += cp -vfa $${QT_HOME}/translations/qtbase*.qm  $${DEPLOY_DIR}/translations &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/iconengines/libqsvgicon.so*  $${DEPLOY_DIR}/iconengines &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqgif.so*  $${DEPLOY_DIR}/imageformats &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqjp2.so*  $${DEPLOY_DIR}/imageformats &&
@@ -206,12 +210,13 @@ win32 {
 
   deploy.commands = rmdir /s /q $${DEPLOY_DIR_WIN} &
   deploy.commands += mkdir $${DEPLOY_DIR_WIN} &&
+  deploy.commands += mkdir $${DEPLOY_DIR_WIN}\\translations &&
   deploy.commands += xcopy $${WINOUT_PWD}\\$${CONF_TYPE}\\littlenavconnect.exe $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\CHANGELOG.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINPWD}\\*.qm $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINPWD}\\..\\atools\\*.qm $${DEPLOY_DIR_WIN} &&
+  deploy.commands += xcopy $${WINPWD}\\*.qm $${DEPLOY_DIR_WIN}\\translations &&
+  deploy.commands += xcopy $${WINPWD}\\..\\atools\\*.qm $${DEPLOY_DIR_WIN}\\translations &&
   deploy.commands += xcopy $${WINPWD}\\littlenavconnect.exe.simconnect $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${OPENSSL}\\bin\\libeay32.dll $${DEPLOY_DIR_WIN} &&
   deploy.commands += xcopy $${OPENSSL}\\bin\\ssleay32.dll $${DEPLOY_DIR_WIN} &&
