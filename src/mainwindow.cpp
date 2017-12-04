@@ -151,9 +151,9 @@ MainWindow::MainWindow()
 
   if(parser.isSet(showReplay))
   {
-    connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
-    connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
-    connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
+  connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
+  connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
+  connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
   }
 
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
@@ -237,13 +237,13 @@ void MainWindow::handlerChanged()
   if(ui->actionConnectFsx->isChecked())
   {
     qInfo(atools::fs::ns::gui).noquote().nospace()
-      << tr("Connecting to FSX or Prepar3D using SimConnect.");
+    << tr("Connecting to FSX or Prepar3D using SimConnect.");
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, true);
   }
   else
   {
     qInfo(atools::fs::ns::gui).noquote().nospace()
-      << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
+    << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
   }
   Settings::instance().syncSettings();
@@ -465,10 +465,10 @@ void MainWindow::mainWindowShown()
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << QApplication::applicationName();
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
-    arg(QApplication::applicationVersion()).arg(GIT_REVISION);
+  arg(QApplication::applicationVersion()).arg(GIT_REVISION);
 
   qInfo(atools::fs::ns::gui).noquote().nospace()
-    << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
+  << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
     SimConnectReply::getReplyVersion());
 
   // Build the handler classes which are an abstraction to SimConnect and the Little Xpconnect shared memory
@@ -479,19 +479,16 @@ void MainWindow::mainWindowShown()
 #ifdef Q_OS_WIN32
   // Show toolbar with both buttons
   bool fsx = true;
-  if(!settings.contains(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX))
-    // Check the first time if SimConnect is available - if yes use FSX settings
-    fsx = fsxConnectHandler->isLoaded();
-  else
-    // Otherwise fall back to stored value or X-Plane
-    fsx = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, true).toBool();
+
+  // Check the first time if SimConnect is available - if yes use FSX settings
+  // Otherwise fall back to stored value or X-Plane
+  fsx = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, fsxConnectHandler->isLoaded()).toBool();
 
   if(!fsxConnectHandler->isLoaded())
     // No SimConnect switch to X-Plane
     fsx = false;
 
-  ui->actionConnectFsx->setChecked(fsx);
-  ui->actionConnectXplane->setChecked(!fsx);
+  qDebug() << "FSX status" << fsx;
 
   if(fsxConnectHandler->isLoaded())
   {
@@ -503,6 +500,9 @@ void MainWindow::mainWindowShown()
     ui->menuTools->insertAction(ui->actionResetMessages, ui->actionConnectXplane);
     ui->menuTools->insertSeparator(ui->actionResetMessages);
   }
+
+  ui->actionConnectFsx->setChecked(fsx);
+  ui->actionConnectXplane->setChecked(!fsx);
 
 #else
   // Activate X-Plane on non windows
