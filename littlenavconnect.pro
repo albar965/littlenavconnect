@@ -147,9 +147,7 @@ unix:!macx {
   deploy.commands += cp -Rvf $${OUT_PWD}/help $${DEPLOY_DIR} &&
   deploy.commands += cp -Rvf $${OUT_PWD}/translations $${DEPLOY_DIR} &&
   deploy.commands += cp -Rvf $${OUT_PWD}/littlenavconnect $${DEPLOY_DIR} &&
-  deploy.commands += cp -vf $$PWD/desktop/littlenavconnect.sh $${DEPLOY_DIR} &&
   deploy.commands += cp -vf $$PWD/desktop/qt.conf $${DEPLOY_DIR} &&
-  deploy.commands += chmod -v a+x $${DEPLOY_DIR}/littlenavconnect.sh &&
   deploy.commands += cp -vf $${PWD}/CHANGELOG.txt $${DEPLOY_DIR} &&
   deploy.commands += cp -vf $${PWD}/README.txt $${DEPLOY_DIR} &&
   deploy.commands += cp -vf $${PWD}/LICENSE.txt $${DEPLOY_DIR} &&
