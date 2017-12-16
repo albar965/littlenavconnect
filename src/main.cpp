@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
   Application::setOrganizationName("ABarthel");
   Application::setOrganizationDomain("abarthel.org");
 
-  Application::setApplicationVersion("1.8.2"); // VERSION_NUMBER
+  Application::setApplicationVersion("1.8.3"); // VERSION_NUMBER
   Application::setEmailAddresses({"albar965@mailbox.org"});
 
   // Initialize logging and force logfiles into the system or user temp directory
