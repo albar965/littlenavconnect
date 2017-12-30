@@ -4,9 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network svg
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui xml network svg
 
 CONFIG += c++14
 
@@ -188,7 +186,7 @@ macx {
   DEPLOY_DIR=\"$$PWD/../deploy\"
 
   deploy.commands = rm -Rfv $${DEPLOY_APP} &&
-  deploy.commands += macdeployqt littlenavconnect.app -appstore-compliant -always-overwrite &&
+  deploy.commands += macdeployqt littlenavconnect.app -always-overwrite &&
   deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $${DEPLOY_APP} &&
   deploy.commands += cp -fv $$PWD/LICENSE.txt $${DEPLOY_DIR} &&
   deploy.commands += cp -fv $$PWD/README.txt $${DEPLOY_DIR}/README-LittleNavconnect.txt &&
