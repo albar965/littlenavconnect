@@ -26,7 +26,7 @@
     <message>
         <location filename="mainwindow.ui" line="77"/>
         <source>Toolbar</source>
-        <translation>barra degli strumenti</translation>
+        <translation>Barra degli strumenti</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="100"/>
