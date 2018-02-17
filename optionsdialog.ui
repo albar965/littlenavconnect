@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>349</width>
-    <height>178</height>
+    <height>190</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Little Navconnect - Options</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
