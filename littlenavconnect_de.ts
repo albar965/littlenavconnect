@@ -190,10 +190,14 @@ Wollen Sie das Programm wirklich beenden?</translation>
 <context>
     <name>OptionsDialog</name>
     <message>
-        <location filename="optionsdialog.ui" line="14"/>
         <source>Dialog</source>
         <translatorcomment>Alex: Falscher Dialogtitel</translatorcomment>
-        <translation>Einstellungen</translation>
+        <translation type="vanished">Einstellungen</translation>
+    </message>
+    <message>
+        <location filename="optionsdialog.ui" line="14"/>
+        <source>Little Navconnect - Options</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="22"/>
@@ -209,9 +213,11 @@ Wollen Sie das Programm wirklich beenden?</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="38"/>
-        <source>Allowed range is 50 milliseconds up to 2 seconds.
+        <source>Allowed range is 50 milliseconds up to 2 seconds. 
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
-        <translation>Es sind Werte zwischen 50 Millisekunden und 2 Sekunden erlaubt.
+        <oldsource>Allowed range is 50 milliseconds up to 2 seconds.
+Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</oldsource>
+        <translation type="unfinished">Es sind Werte zwischen 50 Millisekunden und 2 Sekunden erlaubt.
 Little Navconnect holt in diesem Intervall die Daten vom Flugsimulator und schickt sie zu den Anwendungen (z.B. Little Navmap).</translation>
     </message>
     <message>
@@ -254,9 +260,12 @@ Dies kann für Streaming-Sitzungen, bei denen andere Ihren Desktop sehen, sinnvo
     <message>
         <location filename="optionsdialog.ui" line="104"/>
         <source>This can normally be left at default.
-Change this value only if another application occupies this port and
+Change this value only if another application occupies this port and 
 you get an error message like &quot;The bound address is already in use&quot;.</source>
-        <translation>Diese Einstellung kann in der Regel auf ihrem Standardwert belassen werden.
+        <oldsource>This can normally be left at default.
+Change this value only if another application occupies this port and
+you get an error message like &quot;The bound address is already in use&quot;.</oldsource>
+        <translation type="unfinished">Diese Einstellung kann in der Regel auf ihrem Standardwert belassen werden.
 Ändern Sie diesen Wert, wenn eine andere Anwendung diesen Port belegt und
 Sie eine Fehlermeldung wie &quot;Der Port wird bereits benutzt&quot; erhalten.</translation>
     </message>
@@ -301,8 +310,9 @@ Sie eine Fehlermeldung wie &quot;Der Port wird bereits benutzt&quot; erhalten.</
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="62"/>
-        <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2017 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;ist der Flugsimulator-Netzwerkagent für Little Navmap.&lt;/p&gt;&lt;p&gt;Diese Software ist unter der &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; oder einer späteren Version lizensiert.&lt;/p&gt;&lt;p&gt;Der Quellcode ist auf &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt; verfügbar.&lt;/p&gt;&lt;p&gt;Mehr über meine Projekte auf &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2018 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2018 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
+        <oldsource>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2017 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
+        <translation type="unfinished">&lt;p&gt;ist der Flugsimulator-Netzwerkagent für Little Navmap.&lt;/p&gt;&lt;p&gt;Diese Software ist unter der &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; oder einer späteren Version lizensiert.&lt;/p&gt;&lt;p&gt;Der Quellcode ist auf &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt; verfügbar.&lt;/p&gt;&lt;p&gt;Mehr über meine Projekte auf &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2018 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="88"/>
