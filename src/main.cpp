@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2017 Alexander Barthel albar965@mailbox.org
+* Copyright 2015-2018 Alexander Barthel albar965@mailbox.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
   Application::setOrganizationName("ABarthel");
   Application::setOrganizationDomain("abarthel.org");
 
-  Application::setApplicationVersion("1.8.3"); // VERSION_NUMBER
+  Application::setApplicationVersion("1.9.0.develop"); // VERSION_NUMBER
   Application::setEmailAddresses({"albar965@mailbox.org"});
 
   // Initialize logging and force logfiles into the system or user temp directory

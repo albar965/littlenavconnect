@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2017 Alexander Barthel albar965@mailbox.org
+* Copyright 2015-2018 Alexander Barthel albar965@mailbox.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ using atools::fs::sc::SimConnectReply;
 using atools::gui::HelpHandler;
 
 // "master" or "release/1.4"
-const QString HELP_BRANCH = "release/1.8"; // VERSION_NUMBER
+const QString HELP_BRANCH = "master"; // VERSION_NUMBER
 
 /* Important: keep slash at the end. Otherwise Gitbook will not display the page properly */
 const QString HELP_ONLINE_URL(
@@ -66,7 +66,7 @@ MainWindow::MainWindow()
                         "<a href=\"https://github.com/albar965\">Github</a>.</p>"
                           "<p>More about my projects at "
                             "<a href=\"https://albar965.github.io\">albar965.github.io</a>.</p>"
-                              "<p><b>Copyright 2015-2017 Alexander Barthel</b></p>");
+                              "<p><b>Copyright 2015-2018 Alexander Barthel</b></p>");
 
   // Show a dialog on fatal log events like asserts
   atools::logging::LoggingGuiAbortHandler::setGuiAbortFunction(this);

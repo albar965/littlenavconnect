@@ -1,12 +1,21 @@
-#-------------------------------------------------
+#*****************************************************************************
+# Copyright 2015-2018 Alexander Barthel albar965@mailbox.org
 #
-# Project created by QtCreator 2016-05-01T19:15:00
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#-------------------------------------------------
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#****************************************************************************
 
-QT       += core gui network svg
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui xml network svg
 
 CONFIG += c++14
 
@@ -20,14 +29,14 @@ TEMPLATE = app
 
 # Windows ==================
 win32 {
-  QT_HOME=C:\\Qt\\5.9.1\\mingw53_32
+  QT_HOME=C:\\Qt\\5.9.3\\mingw53_32
   OPENSSL=C:\\OpenSSL-Win32
   GIT_BIN='C:\\Git\\bin\\git'
 }
 
 # Linux ==================
 unix:!macx {
-  QT_HOME=/home/alex/Qt/5.9.1/gcc_64
+  QT_HOME=/home/alex/Qt/5.9.3/gcc_64
 }
 
 macx {
@@ -157,7 +166,6 @@ unix:!macx {
   deploy.commands += cp -vfa $${QT_HOME}/translations/qtbase*.qm  $${DEPLOY_DIR}/translations &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/iconengines/libqsvgicon.so*  $${DEPLOY_DIR_LIB}/iconengines &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqgif.so*  $${DEPLOY_DIR_LIB}/imageformats &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqjp2.so*  $${DEPLOY_DIR_LIB}/imageformats &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqjpeg.so*  $${DEPLOY_DIR_LIB}/imageformats &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqsvg.so*  $${DEPLOY_DIR_LIB}/imageformats &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqwbmp.so*  $${DEPLOY_DIR_LIB}/imageformats &&
@@ -189,7 +197,7 @@ macx {
   DEPLOY_DIR=\"$$PWD/../deploy\"
 
   deploy.commands = rm -Rfv $${DEPLOY_APP} &&
-  deploy.commands += macdeployqt littlenavconnect.app -appstore-compliant -always-overwrite &&
+  deploy.commands += macdeployqt littlenavconnect.app -always-overwrite &&
   deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $${DEPLOY_APP} &&
   deploy.commands += cp -fv $$PWD/LICENSE.txt $${DEPLOY_DIR} &&
   deploy.commands += cp -fv $$PWD/README.txt $${DEPLOY_DIR}/README-LittleNavconnect.txt &&
