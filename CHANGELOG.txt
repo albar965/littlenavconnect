@@ -1,3 +1,7 @@
+Version 2.0.0.beta
+
+* Updated from Qt 5.9.3 to 5.9.5
+
 Version 1.8.4
 
 * Updated from Qt 5.9.1 to 5.9.3
