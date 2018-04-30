@@ -247,4 +247,5 @@ QMAKE_EXTRA_TARGETS += clean cleandata
 TRANSLATIONS = littlenavconnect_fr.ts \
                littlenavconnect_it.ts \
                littlenavconnect_nl.ts \
-               littlenavconnect_de.ts
+               littlenavconnect_de.ts \
+               littlenavconnect_pt_BR.ts
