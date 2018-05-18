@@ -248,4 +248,5 @@ TRANSLATIONS = littlenavconnect_fr.ts \
                littlenavconnect_it.ts \
                littlenavconnect_nl.ts \
                littlenavconnect_de.ts \
+               littlenavconnect_es.ts \
                littlenavconnect_pt_BR.ts
