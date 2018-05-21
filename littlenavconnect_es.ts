@@ -2,124 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es_AR">
 <context>
-    <name>OptionsDialog</name>
-    <message>
-        <source> ms</source>
-        <translation> ms</translation>
-    </message>
-    <message>
-        <source>Fetch AI or multiplayer &amp;aircraft</source>
-        <translation>Obtener IA o &amp;aeronaves multijugador</translation>
-    </message>
-    <message>
-        <source>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</source>
-        <translation>Anular selección para desactivar búsqueda y transmisión de naves AI o multijugador. Esta opción no se aplica a X-Plane.</translation>
-    </message>
-    <message>
-        <source>Dialog</source>
-        <translation>Diálogo</translation>
-    </message>
-    <message>
-        <source>Fetch AI or multiplayer &amp;ships (not X-Plane)</source>
-        <translation>Búsqueda de nave&amp;s AI o multijugador (no para X-Plane)</translation>
-    </message>
-    <message>
-        <source>&amp;Network Port:</source>
-        <translation>&amp;Puerto de Red:</translation>
-    </message>
-    <message>
-        <source>Select this if you do not want to reveal your hostname or IP address in the log window.
-This can be useful for streaming sessions where others can see your desktop.</source>
-        <translation>Seleccione esto si no desea revelar su nombre de host o dirección IP en la ventana de registro.
-Esto puede ser útil para sesiones de transmisión donde otros puedan ver su escritorio.</translation>
-    </message>
-    <message>
-        <source>Allowed range is 50 milliseconds up to 2 seconds.  Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
-        <translation>El rango permitido es de 50 milisegundos hasta 2 segundos. Little Navconnect obtiene datos de Flight Simulator y los envía a todos los clientes (es decir, Little Navmap) utilizando este intervalo de tiempo.</translation>
-    </message>
-    <message>
-        <source>Allowed range is 50 milliseconds up to 2 seconds. 
-Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
-        <translation>El rango permitido es de 50 milisegundos hasta 2 segundos.
-Little Navconnect obtiene datos de Flight Simulator y los envía a todos los clientes (es decir, Little Navmap) utilizando este intervalo de tiempo.</translation>
-    </message>
-    <message>
-        <source>Select this if you do not want to reveal your hostname or IP address in the log window.\nThis can be useful for streaming sessions where others can see your desktop.</source>
-        <translation>Seleccione esto si no desea revelar su nombre de host o dirección IP en la ventana de registro. \nEsto puede ser útil para sesiones de transmisión donde otros puedan ver su escritorio.</translation>
-    </message>
-    <message>
-        <source>This can normally be left at default.
-Change this value only if another application occupies this port and 
-you get an error message like &quot;The bound address is already in use&quot;.</source>
-        <translation>Esto normalmente se puede dejar en forma predeterminada.
-Cambie este valor solo si otra aplicación ocupa este puerto y
-aparece un mensaje de error como &quot;La dirección enlazada ya está en uso&quot;.</translation>
-    </message>
-    <message>
-        <source>This can normally be left at default.\nChange this value only if another application occupies this port and \nyou get an error message like &quot;The bound address is already in use&quot;.</source>
-        <translation>Esto normalmente se puede dejar en forma predeterminada. \nCambie este valor solo si otra aplicación ocupa este puerto y \nobtiene un mensaje de error como &quot;La dirección enlazada ya está en uso&quot;.</translation>
-    </message>
-    <message>
-        <source>Deselect to disable fetching and transmission of AI or multiplayer aircraft</source>
-        <translation>Anule la selección para desactivar la búsqueda y transmisión de AI o aviones multijugador</translation>
-    </message>
-    <message>
-        <source>&amp;Update Time Interval:</source>
-        <translation>Intervalo de Act&amp;ualización:</translation>
-    </message>
-    <message>
-        <source>&amp;Hide hostname and IP in log window</source>
-        <translation>Ocultar nombre de &amp;Host e IP en ventana de logueo</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>file</source>
-        <translation>archivo</translation>
-    </message>
-    <message>
-        <source>speed</source>
-        <translation>velocidad</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2017 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt; es el agente de Fligh Simulator Network para Little Navmap. &lt;/p&gt; &lt;p&gt; Este software está licenciado bajo &lt;ahref=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt; GPL3 &lt;/a&gt; o cualquier versión posterior. &lt;/p&gt; &lt;p&gt; El código fuente de esta aplicación está disponible en &lt;ahref=&quot;https://github.com/albar965&quot;&gt; Github &lt;/a&gt;. &lt;/p&gt; &lt; Más información sobre mis proyectos en &lt;a href=&quot;https://albar965.github.io&quot;&gt; albar965.github.io &lt;/a&gt;. &lt;/p&gt; &lt;p&gt; &lt;b&gt; Copyright 2015-2017 Alexander Barthel &lt;/b&gt; &lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>%1 is already running.</source>
-        <translation>%1 ya está en ejecución.</translation>
-    </message>
-    <message>
-        <source>Save replay data to &lt;file&gt;.</source>
-        <translation>Grabando datos de repetición en &lt;file&gt;.</translation>
-    </message>
-    <message>
-        <source>Log files:</source>
-        <translation>Archivos log:</translation>
-    </message>
-    <message>
-        <source>Load replay data from &lt;file&gt;.</source>
-        <translation>Cargando datos de repetición desde &lt;file&gt;.</translation>
-    </message>
-    <message>
-        <source>Show replay menu items.</source>
-        <translation>Mostrar ítems del menú de repetición.</translation>
-    </message>
-    <message>
-        <source>Configuration:</source>
-        <translation>Configuración:</translation>
-    </message>
-    <message>
-        <source>%1 - Error</source>
-        <translation>%1 - Erreur</translation>
-    </message>
-    <message>
-        <source>Use speed factor &lt;speed&gt; for replay.</source>
-        <translation>Usar factor de velocidad &lt;vitesse&gt; para la repetición.</translation>
-    </message>
-</context>
-<context>
     <name>MainWindow</name>
     <message>
         <source>&amp;File</source>
@@ -264,6 +146,124 @@ Realmente salir ?</translation>
     <message>
         <source>Ctrl+Shift+X</source>
         <translation>Ctrl+Shift+X</translation>
+    </message>
+</context>
+<context>
+    <name>OptionsDialog</name>
+    <message>
+        <source> ms</source>
+        <translation> ms</translation>
+    </message>
+    <message>
+        <source>Fetch AI or multiplayer &amp;aircraft</source>
+        <translation>Obtener IA o &amp;aeronaves multijugador</translation>
+    </message>
+    <message>
+        <source>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</source>
+        <translation>Anular selección para desactivar búsqueda y transmisión de naves AI o multijugador. Esta opción no se aplica a X-Plane.</translation>
+    </message>
+    <message>
+        <source>Fetch AI or multiplayer &amp;ships (not X-Plane)</source>
+        <translation>Búsqueda de nave&amp;s AI o multijugador (no para X-Plane)</translation>
+    </message>
+    <message>
+        <source>&amp;Network Port:</source>
+        <translation>&amp;Puerto de Red:</translation>
+    </message>
+    <message>
+        <source>Select this if you do not want to reveal your hostname or IP address in the log window.
+This can be useful for streaming sessions where others can see your desktop.</source>
+        <translation>Seleccione esto si no desea revelar su nombre de host o dirección IP en la ventana de registro.
+Esto puede ser útil para sesiones de transmisión donde otros puedan ver su escritorio.</translation>
+    </message>
+    <message>
+        <source>Allowed range is 50 milliseconds up to 2 seconds.  Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
+        <translation>El rango permitido es de 50 milisegundos hasta 2 segundos. Little Navconnect obtiene datos de Flight Simulator y los envía a todos los clientes (es decir, Little Navmap) utilizando este intervalo de tiempo.</translation>
+    </message>
+    <message>
+        <source>Allowed range is 50 milliseconds up to 2 seconds. 
+Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
+        <translation>El rango permitido es de 50 milisegundos hasta 2 segundos.
+Little Navconnect obtiene datos de Flight Simulator y los envía a todos los clientes (es decir, Little Navmap) utilizando este intervalo de tiempo.</translation>
+    </message>
+    <message>
+        <source>Select this if you do not want to reveal your hostname or IP address in the log window.\nThis can be useful for streaming sessions where others can see your desktop.</source>
+        <translation>Seleccione esto si no desea revelar su nombre de host o dirección IP en la ventana de registro. \nEsto puede ser útil para sesiones de transmisión donde otros puedan ver su escritorio.</translation>
+    </message>
+    <message>
+        <source>This can normally be left at default.
+Change this value only if another application occupies this port and 
+you get an error message like &quot;The bound address is already in use&quot;.</source>
+        <translation>Esto normalmente se puede dejar en forma predeterminada.
+Cambie este valor solo si otra aplicación ocupa este puerto y
+aparece un mensaje de error como &quot;La dirección enlazada ya está en uso&quot;.</translation>
+    </message>
+    <message>
+        <source>This can normally be left at default.\nChange this value only if another application occupies this port and \nyou get an error message like &quot;The bound address is already in use&quot;.</source>
+        <translation>Esto normalmente se puede dejar en forma predeterminada. \nCambie este valor solo si otra aplicación ocupa este puerto y \nobtiene un mensaje de error como &quot;La dirección enlazada ya está en uso&quot;.</translation>
+    </message>
+    <message>
+        <source>Deselect to disable fetching and transmission of AI or multiplayer aircraft</source>
+        <translation>Anule la selección para desactivar la búsqueda y transmisión de AI o aviones multijugador</translation>
+    </message>
+    <message>
+        <source>&amp;Update Time Interval:</source>
+        <translation>Intervalo de Act&amp;ualización:</translation>
+    </message>
+    <message>
+        <source>&amp;Hide hostname and IP in log window</source>
+        <translation>Ocultar nombre de &amp;Host e IP en ventana de logueo</translation>
+    </message>
+    <message>
+        <source>Little Navconnect - Options</source>
+        <translation>Little Navconnect - Opciones</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>file</source>
+        <translation>archivo</translation>
+    </message>
+    <message>
+        <source>speed</source>
+        <translation>velocidad</translation>
+    </message>
+    <message>
+        <source>%1 is already running.</source>
+        <translation>%1 ya está en ejecución.</translation>
+    </message>
+    <message>
+        <source>Save replay data to &lt;file&gt;.</source>
+        <translation>Grabando datos de repetición en &lt;file&gt;.</translation>
+    </message>
+    <message>
+        <source>Log files:</source>
+        <translation>Archivos log:</translation>
+    </message>
+    <message>
+        <source>Load replay data from &lt;file&gt;.</source>
+        <translation>Cargando datos de repetición desde &lt;file&gt;.</translation>
+    </message>
+    <message>
+        <source>Show replay menu items.</source>
+        <translation>Mostrar ítems del menú de repetición.</translation>
+    </message>
+    <message>
+        <source>Configuration:</source>
+        <translation>Configuración:</translation>
+    </message>
+    <message>
+        <source>%1 - Error</source>
+        <translation>%1 - Erreur</translation>
+    </message>
+    <message>
+        <source>Use speed factor &lt;speed&gt; for replay.</source>
+        <translation>Usar factor de velocidad &lt;vitesse&gt; para la repetición.</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2018 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
+        <translation>&lt;p&gt; es el agente de Fligh Simulator Network para Little Navmap. &lt;/p&gt; &lt;p&gt; Este software está licenciado bajo &lt;ahref=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt; GPL3 &lt;/a&gt; o cualquier versión posterior. &lt;/p&gt; &lt;p&gt; El código fuente de esta aplicación está disponible en &lt;ahref=&quot;https://github.com/albar965&quot;&gt; Github &lt;/a&gt;. &lt;/p&gt; &lt; Más información sobre mis proyectos en &lt;a href=&quot;https://albar965.github.io&quot;&gt; albar965.github.io &lt;/a&gt;. &lt;/p&gt; &lt;p&gt; &lt;b&gt; Copyright 2015-2017 Alexander Barthel &lt;/b&gt; &lt;/p&gt;</translation>
     </message>
 </context>
 </TS>
