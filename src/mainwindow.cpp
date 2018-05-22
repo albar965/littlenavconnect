@@ -38,6 +38,7 @@
 #include <QCloseEvent>
 #include <QCommandLineParser>
 #include <QActionGroup>
+#include <QDir>
 
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
@@ -75,10 +76,17 @@ MainWindow::MainWindow()
 
   readSettings();
 
-  supportedLanguagesOfflineHelp = atools::gui::HelpHandler::getInstalledLanguages(
-    "help", "little-navconnect-user-manual-([a-z]{2})\\.pdf");
-  supportedLanguagesOnlineHelp = atools::gui::HelpHandler::getInstalledLanguages(
-    "help", "little-navconnect-user-manual-([a-z]{2})\\.online");
+  // Get the online indicator file which shows which help files are available online
+  QString onlineFlagFile = atools::gui::HelpHandler::getHelpFile(
+    QString("help") + QDir::separator() + "little-navconnect-user-manual-${LANG}.online", false /*override*/);
+
+  // Extract language from the file
+  QRegularExpression regexp("little-navconnect-user-manual-(.+)\\.online", QRegularExpression::CaseInsensitiveOption);
+  QRegularExpressionMatch match = regexp.match(onlineFlagFile);
+  if(match.hasMatch() && !match.captured(1).isEmpty())
+    supportedLanguageOnlineHelp = match.captured(1);
+  else
+    supportedLanguageOnlineHelp = "en";
 
   QCommandLineParser parser;
   parser.addHelpOption();
@@ -151,9 +159,9 @@ MainWindow::MainWindow()
 
   if(parser.isSet(showReplay))
   {
-  connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
-  connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
-  connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
+    connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
+    connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
+    connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
   }
 
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
@@ -213,12 +221,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::showOnlineHelp()
 {
-  HelpHandler::openHelpUrl(this, HELP_ONLINE_URL, supportedLanguagesOnlineHelp);
+  HelpHandler::openHelpUrl(this, HELP_ONLINE_URL, supportedLanguageOnlineHelp);
 }
 
 void MainWindow::showOfflineHelp()
 {
-  HelpHandler::openHelpUrl(this, HELP_OFFLINE_FILE, supportedLanguagesOfflineHelp);
+  HelpHandler::openUrl(this, HelpHandler::getHelpFile(HELP_OFFLINE_FILE, false /* override */));
 }
 
 atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()
@@ -237,13 +245,13 @@ void MainWindow::handlerChanged()
   if(ui->actionConnectFsx->isChecked())
   {
     qInfo(atools::fs::ns::gui).noquote().nospace()
-    << tr("Connecting to FSX or Prepar3D using SimConnect.");
+      << tr("Connecting to FSX or Prepar3D using SimConnect.");
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, true);
   }
   else
   {
     qInfo(atools::fs::ns::gui).noquote().nospace()
-    << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
+      << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
   }
   Settings::instance().syncSettings();
@@ -465,10 +473,10 @@ void MainWindow::mainWindowShown()
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << QApplication::applicationName();
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
-  arg(QApplication::applicationVersion()).arg(GIT_REVISION);
+    arg(QApplication::applicationVersion()).arg(GIT_REVISION);
 
   qInfo(atools::fs::ns::gui).noquote().nospace()
-  << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
+    << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
     SimConnectReply::getReplyVersion());
 
   // Build the handler classes which are an abstraction to SimConnect and the Little Xpconnect shared memory
