@@ -221,12 +221,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::showOnlineHelp()
 {
-  HelpHandler::openHelpUrl(this, HELP_ONLINE_URL, supportedLanguageOnlineHelp);
+  HelpHandler::openHelpUrlWeb(this, HELP_ONLINE_URL, supportedLanguageOnlineHelp);
 }
 
 void MainWindow::showOfflineHelp()
 {
-  HelpHandler::openUrl(this, HelpHandler::getHelpFile(HELP_OFFLINE_FILE, false /* override */));
+  HelpHandler::openFile(this, HelpHandler::getHelpFile(HELP_OFFLINE_FILE, false /* override */));
 }
 
 atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()
