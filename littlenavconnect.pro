@@ -42,6 +42,7 @@ unix:!macx {
 macx {
   # Compatibility down to OS X 10.10
   QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
+  QT_HOME=/Users/alex/Qt/5.9.5/clang_64
 }
 
 # End of configuration section
@@ -199,6 +200,9 @@ macx {
   deploy.commands = rm -Rfv $${DEPLOY_APP} &&
   deploy.commands += macdeployqt littlenavconnect.app -always-overwrite &&
   deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $${DEPLOY_APP} &&
+  deploy.commands += cp -fv $${QT_HOME}/translations/qt_??.qm  $${DEPLOY_APP}/Contents/MacOS &&
+  deploy.commands += cp -fv $${QT_HOME}/translations/qt_??_??.qm  $${DEPLOY_APP}/Contents/MacOS &&
+  deploy.commands += cp -fv $${QT_HOME}/translations/qtbase*.qm  $${DEPLOY_APP}/Contents/MacOS &&
   deploy.commands += cp -fv $$PWD/LICENSE.txt $${DEPLOY_DIR} &&
   deploy.commands += cp -fv $$PWD/README.txt $${DEPLOY_DIR}/README-LittleNavconnect.txt &&
   deploy.commands += cp -fv $$PWD/CHANGELOG.txt $${DEPLOY_DIR}/CHANGELOG-LittleNavconnect.txt
