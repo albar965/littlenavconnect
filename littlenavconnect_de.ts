@@ -120,80 +120,75 @@
         <translation>Strg+Umschalt+X</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="240"/>
+        <location filename="src/mainwindow.cpp" line="248"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Verbindet mit SimConnect zu FSX oder Prepar3D.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="246"/>
+        <location filename="src/mainwindow.cpp" line="254"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Verbindet mit Little Xpconnect Plugin zu X-Plane.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="264"/>
+        <location filename="src/mainwindow.cpp" line="272"/>
         <source>Save Replay</source>
         <translation>Wiederholung speichern</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="264"/>
-        <location filename="src/mainwindow.cpp" line="280"/>
+        <location filename="src/mainwindow.cpp" line="272"/>
+        <location filename="src/mainwindow.cpp" line="288"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Wiederholungsdateien (*.replay);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="280"/>
+        <location filename="src/mainwindow.cpp" line="288"/>
         <source>Open Replay</source>
         <translation>Wiederholung öffnen</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="356"/>
+        <location filename="src/mainwindow.cpp" line="364"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Es sind noch Anwendungen verbunden.
 Wollen Sie wirklich den Netzwerk-Port ändern?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="359"/>
-        <location filename="src/mainwindow.cpp" line="449"/>
+        <location filename="src/mainwindow.cpp" line="367"/>
+        <location filename="src/mainwindow.cpp" line="457"/>
         <source>Do not &amp;show this dialog again.</source>
         <translatorcomment>Ist das &quot;&amp;&quot; hier richtig gesetzt?</translatorcomment>
         <translation>Diesen Dialog &amp;nicht mehr anzeigen.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="447"/>
+        <location filename="src/mainwindow.cpp" line="455"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Es sind noch Anwendungen verbunden.
 Wollen Sie das Programm wirklich beenden?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="467"/>
+        <location filename="src/mainwindow.cpp" line="475"/>
         <source>Version %1 (revision %2).</source>
         <translation>Version %1 (Revision %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="471"/>
+        <location filename="src/mainwindow.cpp" line="479"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Datenversion %1. Antwortversion %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="536"/>
+        <location filename="src/mainwindow.cpp" line="544"/>
         <source>Starting server. This can take up to a minute ...</source>
         <translation>Server wird gestartet. Dies kann bis zu einer Minute dauern ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="548"/>
+        <location filename="src/mainwindow.cpp" line="556"/>
         <source>Server running.</source>
         <translation>Server läuft.</translation>
     </message>
 </context>
 <context>
     <name>OptionsDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translatorcomment>Alex: Falscher Dialogtitel</translatorcomment>
-        <translation type="vanished">Einstellungen</translation>
-    </message>
     <message>
         <location filename="optionsdialog.ui" line="14"/>
         <source>Little Navconnect - Options</source>
@@ -309,39 +304,39 @@ Sie eine Fehlermeldung wie &quot;Der Port wird bereits benutzt&quot; erhalten.</
         <translation>%1 läuft bereits.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="62"/>
+        <location filename="src/mainwindow.cpp" line="63"/>
         <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2018 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2017 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
         <translation>&lt;p&gt;ist der Flugsimulator-Netzwerkagent für Little Navmap.&lt;/p&gt;&lt;p&gt;Diese Software ist unter der &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; oder einer späteren Version lizensiert.&lt;/p&gt;&lt;p&gt;Der Quellcode ist auf &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt; verfügbar.&lt;/p&gt;&lt;p&gt;Mehr über meine Projekte auf &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2018 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="88"/>
+        <location filename="src/mainwindow.cpp" line="96"/>
         <source>Save replay data to &lt;file&gt;.</source>
         <translation>Wiederholung in &lt;file&gt; speichern.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="89"/>
-        <location filename="src/mainwindow.cpp" line="94"/>
+        <location filename="src/mainwindow.cpp" line="97"/>
+        <location filename="src/mainwindow.cpp" line="102"/>
         <source>file</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="93"/>
+        <location filename="src/mainwindow.cpp" line="101"/>
         <source>Load replay data from &lt;file&gt;.</source>
         <translation>Wiederholung aus &lt;file&gt; laden.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="98"/>
+        <location filename="src/mainwindow.cpp" line="106"/>
         <source>Use speed factor &lt;speed&gt; for replay.</source>
         <translation>Geschwindigkeitsfaktor &lt;speed&gt; für Wiederholung nutzen.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="99"/>
+        <location filename="src/mainwindow.cpp" line="107"/>
         <source>speed</source>
         <translation>Geschwindigkeit</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="103"/>
+        <location filename="src/mainwindow.cpp" line="111"/>
         <source>Show replay menu items.</source>
         <translation>Menüpunkte zu Wiederholung anzeigen.</translation>
     </message>
