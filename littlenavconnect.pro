@@ -37,6 +37,15 @@ win32 {
 # Linux ==================
 unix:!macx {
   QT_HOME=/home/alex/Qt/5.9.5/gcc_64
+
+  # Find OpenSSL location
+  exists( /lib/x86_64-linux-gnu/libssl.so.1.0.0 ) {
+    OPENSSL=/lib/x86_64-linux-gnu
+  }
+  exists( /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0 ) {
+    OPENSSL=/usr/lib/x86_64-linux-gnu
+  }
+  QMAKE_LFLAGS += -no-pie
 }
 
 macx {
@@ -178,6 +187,8 @@ unix:!macx {
   deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqoffscreen.so*  $${DEPLOY_DIR_LIB}/platforms &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqxcb.so*  $${DEPLOY_DIR_LIB}/platforms &&
   deploy.commands += cp -vfa $${QT_HOME}/plugins/platformthemes/libqgtk*.so*  $${DEPLOY_DIR_LIB}/platformthemes &&
+  deploy.commands += cp -vfa $${OPENSSL}/libssl.so.1.0.0 $${DEPLOY_DIR_LIB} &&
+  deploy.commands += cp -vfa $${OPENSSL}/libcrypto.so.1.0.0 $${DEPLOY_DIR_LIB} &&
   deploy.commands += cp -vfa $${QT_HOME}/lib/libicudata.so*  $${DEPLOY_DIR_LIB} &&
   deploy.commands += cp -vfa $${QT_HOME}/lib/libicui18n.so*  $${DEPLOY_DIR_LIB} &&
   deploy.commands += cp -vfa $${QT_HOME}/lib/libicuuc.so*  $${DEPLOY_DIR_LIB} &&
