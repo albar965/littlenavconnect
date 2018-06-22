@@ -1,6 +1,7 @@
 Version 2.0.2.rc1
 
 * Fixed SSL issues on new Linux systems.
+* Updated manual to fix freezes with Adobe Reader on Windows.
 
 related from atools version  3.0.3.rc1
 
