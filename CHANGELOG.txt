@@ -1,13 +1,14 @@
-Version 2.0.2.rc2
+Numbers (#) refer to Github issues.
+For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
+
+Version 2.0.2
 
 * Updated manual with fixed links.
-
-Version 2.0.2.rc1
-
 * Fixed SSL issues on new Linux systems.
 * Updated manual to fix freezes with Adobe Reader on Windows.
+* Fixed issue where program cannot be opened by Linux file managers.
 
-related from atools version  3.0.3.rc1
+related from atools version  3.0.3
 
 * Fixed translation issues in navserver resulting in confusing messages in Little Navconnect log window.
 * Now logging all warning dialog messages to logfile.

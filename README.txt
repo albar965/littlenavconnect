@@ -16,7 +16,7 @@ FSX/P3D <-> Simconnect <-> Little Navonnect <- (Network) -> Little Navmap on Com
 Network scenario for X-Plane using the Little Xpconnect plugin:
 
 |Windows, Linux or Mac Machine                           |     Windows, Linux or Mac Machines  |
-------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 X-Plane <-> Little XpConnect <-> Little Navonnect <- (Network) -> Little Navmap on Computer 1
                                                   <- (Network) -> Little Navmap on Computer 2
 
@@ -68,5 +68,5 @@ https://github.com/albar965/littlenavconnect
 Copyright 2015-2018 Alexander Barthel (albar965@mailbox.org).
 
 -------------------------------------------------------------------------------
-French translation copyright 2017 Patrick JUNG alias Patbest (patrickjung@laposte.net). 
+French translation copyright 2017 Patrick JUNG alias Patbest (patrickjung@laposte.net).
 
