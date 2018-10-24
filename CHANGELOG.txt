@@ -1,6 +1,11 @@
 Numbers (#) refer to Github issues.
 For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
 
+Version 2.2.0.beta
+
+* Log file is now rotated if the file size of 1 MB is exceeded. This avoid overwriting on startup and eases error reporting.
+  albar965/littlenavmap#275
+
 Version 2.0.2
 
 * Updated manual with fixed links.
