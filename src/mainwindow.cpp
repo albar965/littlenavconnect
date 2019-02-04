@@ -50,7 +50,7 @@ const QString HELP_BRANCH = "release/2.2"; // VERSION_NUMBER
 
 /* Important: keep slash at the end. Otherwise Gitbook will not display the page properly */
 const QString HELP_ONLINE_URL(
-  "https://www.littlenavmap.org/manuals/littlenavmap/" + HELP_BRANCH + "/${LANG}/");
+  "https://www.littlenavmap.org/manuals/littlenavconnect/" + HELP_BRANCH + "/${LANG}/");
 
 const QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
 
