@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2019 Alexander Barthel albar965@mailbox.org
+* Copyright 2015-2019 Alexander Barthel alex@littlenavmap.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ const QString HELP_BRANCH = "release/2.2"; // VERSION_NUMBER
 
 /* Important: keep slash at the end. Otherwise Gitbook will not display the page properly */
 const QString HELP_ONLINE_URL(
-  "https://albar965.gitbooks.io/little-navconnect-user-manual/content/v/" + HELP_BRANCH + "/${LANG}/");
+  "https://www.littlenavmap.org/manuals/littlenavmap/" + HELP_BRANCH + "/${LANG}/");
 
 const QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
 
@@ -66,7 +66,7 @@ MainWindow::MainWindow()
                       "<p>The source code for this application is available at "
                         "<a href=\"https://github.com/albar965\">Github</a>.</p>"
                           "<p>More about my projects at "
-                            "<a href=\"https://albar965.github.io\">albar965.github.io</a>.</p>"
+                            "<a href=\"https://www.littlenavmap.org\">www.littlenavmap.org</a>.</p>"
                               "<p><b>Copyright 2015-2019 Alexander Barthel</b></p>");
 
   // Show a dialog on fatal log events like asserts
