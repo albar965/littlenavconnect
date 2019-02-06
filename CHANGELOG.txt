@@ -1,6 +1,11 @@
 Numbers (#) refer to Github issues.
 For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
 
+Version 2.2.2
+
+* Changed email address and all help links to point to https://www.littlenavmap.org.
+  Manuals in all formats and languages can be found here: https://albar965.github.io/manuals.html
+
 Version 2.2.1
 
 No changes except version.
