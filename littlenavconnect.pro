@@ -15,253 +15,304 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #****************************************************************************
 
-QT       += core gui xml network svg
+# =============================================================================
+# Set these environment variables for configuration - do not change this .pro file
+# =============================================================================
+#
+# ATOOLS_INC_PATH
+# Optional. Path to atools include. Default is "../atools/src" if not set.
+# Also reads *.qm translation files from "$ATOOLS_INC_PATH/..".
+#
+# ATOOLS_LIB_PATH
+# Optional. Path to atools static library. Default is "../build-atools-$${CONF_TYPE}"
+# ("../build-atools-$${CONF_TYPE}/$${CONF_TYPE}" on Windows) if not set.
+#
+# OPENSSL_PATH
+# Required for Windows only. Base path of WinSSL installation (https://slproweb.com/products/Win32OpenSSL.html).
+# For example: C:\\OpenSSL-Win32
+#
+# ATOOLS_GIT_PATH
+# Optional. Path to GIT executable. Revision will be set to "UNKNOWN" if not set.
+# Uses "git" on macOS and Linux as default if not set.
+# Example: "C:\Git\bin\git"
+#
+# ATOOLS_SIMCONNECT_PATH
+# Optional. Path to SimConnect SDK. SimConnect support will be omitted in build if not set.
+# Example: "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK"
+#
+# DEPLOY_BASE
+# Optional. Target folder for "make deploy". Default is "../deploy" plus project name ($$TARGET_NAME).
+#
+# ATOOLS_QUIET
+# Optional. Set this to "true" to avoid qmake messages.
+#
+# =============================================================================
+# End of configuration documentation
+# =============================================================================
 
-CONFIG += c++14
+QT += core gui xml network svg
+
+CONFIG += build_all c++14
+CONFIG -= debug_and_release debug_and_release_target
 
 TARGET = littlenavconnect
 TEMPLATE = app
 
+TARGET_NAME=Little Navconnect
 
 # =======================================================================
-# Adapt these paths for each operating system
+# Copy ennvironment variables into qmake variables
+
+ATOOLS_INC_PATH=$$(ATOOLS_INC_PATH)
+ATOOLS_LIB_PATH=$$(ATOOLS_LIB_PATH)
+OPENSSL_PATH=$$(OPENSSL_PATH)
+GIT_PATH=$$(ATOOLS_GIT_PATH)
+SIMCONNECT_PATH=$$(ATOOLS_SIMCONNECT_PATH)
+DEPLOY_BASE=$$(DEPLOY_BASE)
+QUIET=$$(ATOOLS_QUIET)
+
 # =======================================================================
+# Fill defaults for unset
 
-# Windows ==================
-win32 {
-  QT_HOME=C:\\Qt\\5.9.5\\mingw53_32
-  OPENSSL=C:\\OpenSSL-Win32
-  GIT_BIN='C:\\Git\\bin\\git'
-}
+CONFIG(debug, debug|release) : CONF_TYPE=debug
+CONFIG(release, debug|release) : CONF_TYPE=release
 
-# Linux ==================
+isEmpty(DEPLOY_BASE) : DEPLOY_BASE=$$PWD/../deploy
+
+isEmpty(ATOOLS_INC_PATH) : ATOOLS_INC_PATH=$$PWD/../atools/src
+isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
+
+# =======================================================================
+# Set compiler flags and paths
+
 unix:!macx {
-  QT_HOME=/home/alex/Qt/5.9.5/gcc_64
+  isEmpty(GIT_PATH) : GIT_PATH=git
 
   # Find OpenSSL location
-  exists( /lib/x86_64-linux-gnu/libssl.so.1.0.0 ) {
-    OPENSSL=/lib/x86_64-linux-gnu
-  }
-  exists( /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0 ) {
-    OPENSSL=/usr/lib/x86_64-linux-gnu
-  }
+  exists( /lib/x86_64-linux-gnu/libssl.so.1.0.0 ) :  OPENSSL_PATH=/lib/x86_64-linux-gnu
+  exists( /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0 ) : OPENSSL_PATH=/usr/lib/x86_64-linux-gnu
   QMAKE_LFLAGS += -no-pie
-}
 
-macx {
-  # Compatibility down to OS X 10.10
-  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
-  QT_HOME=/Users/alex/Qt/5.9.5/clang_64
-}
-
-# End of configuration section
-# =======================================================================
-
-DEFINES += QT_NO_CAST_FROM_BYTEARRAY
-DEFINES += QT_NO_CAST_TO_ASCII
-#DEFINES += QT_NO_CAST_FROM_ASCII
-
-# =====================================================================
-# Dependencies
-# =====================================================================
-
-# Add dependencies to atools project and its static library to ensure relinking on changes
-DEPENDPATH += $$PWD/../atools/src
-INCLUDEPATH += $$PWD/../atools/src $$PWD/src
-
-CONFIG(debug, debug|release):CONF_TYPE=debug
-CONFIG(release, debug|release):CONF_TYPE=release
-
-unix {
-  LIBS += -L$$PWD/../build-atools-$${CONF_TYPE} -latools
-  PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/libatools.a
-}
-
-unix:!macx {
   # Makes the shell script and setting LD_LIBRARY_PATH redundant
   QMAKE_RPATHDIR=.
   QMAKE_RPATHDIR+=./lib
 }
 
 win32 {
-  LIBS += -L$$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE} -latools
-  PRE_TARGETDEPS += $$PWD/../build-atools-$${CONF_TYPE}/$${CONF_TYPE}/libatools.a
   WINDEPLOY_FLAGS = --compiler-runtime
+  CONFIG(debug, debug|release) : WINDEPLOY_FLAGS += --debug
+  CONFIG(release, debug|release) : WINDEPLOY_FLAGS += --release
 
-  INCLUDEPATH += "C:\Program Files (x86)\Microsoft Games\Microsoft Flight Simulator X SDK\SDK\Core Utilities Kit\SimConnect SDK\inc"
+  !isEmpty(SIMCONNECT_PATH) {
+    DEFINES += SIMCONNECT_BUILD
+    INCLUDEPATH += $$SIMCONNECT_PATH"\inc"
+    LIBS += $$SIMCONNECT_PATH"\lib\SimConnect.lib"
+  }
 }
 
+macx {
+  isEmpty(GIT_PATH) : GIT_PATH=git
 
-# Get the current GIT revision to include it into the code
-win32:DEFINES += GIT_REVISION='\\"$$system($${GIT_BIN} rev-parse --short HEAD)\\"'
-unix:DEFINES += GIT_REVISION='\\"$$system(git rev-parse --short HEAD)\\"'
+  # Compatibility down to OS X 10.10
+  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.10
+}
+
+isEmpty(GIT_PATH) {
+  GIT_REVISION='\\"UNKNOWN\\"'
+} else {
+  GIT_REVISION='\\"$$system('$$GIT_PATH' rev-parse --short HEAD)\\"'
+}
+
+LIBS += -L$$ATOOLS_LIB_PATH -latools
+PRE_TARGETDEPS += $$ATOOLS_LIB_PATH/libatools.a
+DEPENDPATH += $$ATOOLS_INC_PATH
+INCLUDEPATH += $$PWD/src $$ATOOLS_INC_PATH
+DEFINES += GIT_REVISION=$$GIT_REVISION
+DEFINES += QT_NO_CAST_FROM_BYTEARRAY
+DEFINES += QT_NO_CAST_TO_ASCII
+
+# =======================================================================
+# Print values when running qmake
+
+!isEqual(QUIET, "true") {
+message(-----------------------------------)
+message(GIT_PATH: $$GIT_PATH)
+message(GIT_REVISION: $$GIT_REVISION)
+message(OPENSSL_PATH: $$OPENSSL_PATH)
+message(ATOOLS_INC_PATH: $$ATOOLS_INC_PATH)
+message(ATOOLS_LIB_PATH: $$ATOOLS_LIB_PATH)
+message(DEPLOY_BASE: $$DEPLOY_BASE)
+message(DEFINES: $$DEFINES)
+message(INCLUDEPATH: $$INCLUDEPATH)
+message(LIBS: $$LIBS)
+message(TARGET_NAME: $$TARGET_NAME)
+message(QT_INSTALL_PREFIX: $$[QT_INSTALL_PREFIX])
+message(QT_INSTALL_LIBS: $$[QT_INSTALL_LIBS])
+message(QT_INSTALL_PLUGINS: $$[QT_INSTALL_PLUGINS])
+message(QT_INSTALL_TRANSLATIONS: $$[QT_INSTALL_TRANSLATIONS])
+message(QT_INSTALL_BINS: $$[QT_INSTALL_BINS])
+message(CONFIG: $$CONFIG)
+message(-----------------------------------)
+}
 
 # =====================================================================
 # Files
-# =====================================================================
 
 SOURCES +=\
-    src/main.cpp \
-    src/mainwindow.cpp \
-    src/optionsdialog.cpp \
-    src/constants.cpp
+  src/constants.cpp \
+  src/main.cpp \
+  src/mainwindow.cpp \
+  src/optionsdialog.cpp
 
 HEADERS  += \
-    src/mainwindow.h \
-    src/optionsdialog.h \
-    src/constants.h
+  src/constants.h \
+  src/mainwindow.h \
+  src/optionsdialog.h
 
 FORMS    += mainwindow.ui \
-    optionsdialog.ui
-
-DISTFILES += \
-    uncrustify.cfg \
-    README.txt \
-    BUILD.txt \
-    CHANGELOG.txt \
-    htmltidy.cfg \
-    LICENSE.txt
+  optionsdialog.ui
 
 RESOURCES += \
-    littlenavconnect.qrc
+  littlenavconnect.qrc
 
-ICON=resources/icons/littlenavconnect.icns
+ICON = resources/icons/littlenavconnect.icns
+
+TRANSLATIONS = \
+  littlenavconnect_fr.ts \
+  littlenavconnect_it.ts \
+  littlenavconnect_nl.ts \
+  littlenavconnect_de.ts \
+  littlenavconnect_es.ts \
+  littlenavconnect_pt_BR.ts
+
+OTHER_FILES += \
+  $$files(desktop/*, true) \
+  $$files(help/*, true) \
+  *.ts \
+  BUILD.txt \
+  CHANGELOG.txt \
+  LICENSE.txt \
+  README.txt \
+  htmltidy.cfg \
+  uncrustify.cfg
+
+# =====================================================================
+# Local deployment commands for development
 
 # Create additional makefile targets to copy help files
 unix:!macx {
   copydata.commands = cp -avfu $$PWD/help $$OUT_PWD &&
   copydata.commands += mkdir -p $$OUT_PWD/translations &&
   copydata.commands += cp -avfu $$PWD/*.qm $$OUT_PWD/translations &&
-  copydata.commands += cp -avfu $$PWD/../atools/*.qm $$OUT_PWD/translations &&
+  copydata.commands += cp -avfu $$ATOOLS_INC_PATH/../*.qm $$OUT_PWD/translations &&
   copydata.commands += cp -vf $$PWD/desktop/littlenavconnect*.sh $$OUT_PWD &&
   copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
-
-  cleandata.commands = rm -Rvf $$OUT_PWD/help
 }
 
 # Mac OS X - Copy help and Marble plugins and data
 macx {
   copydata.commands += cp -Rv $$PWD/help $$OUT_PWD/littlenavconnect.app/Contents/MacOS &&
   copydata.commands += cp -vf $$PWD/*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS &&
-  copydata.commands += cp -vf $$PWD/../atools/*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS
-
-  cleandata.commands = rm -Rvf $$OUT_PWD/help
+  copydata.commands += cp -vf $$ATOOLS_INC_PATH/../*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS
 }
 
 # =====================================================================
 # Deployment commands
-# =====================================================================
 
 # Linux specific deploy target
 unix:!macx {
-  DEPLOY_DIR=\"$$PWD/../deploy/Little Navconnect\"
-  DEPLOY_DIR_LIB=\"$$PWD/../deploy/Little Navconnect/lib\"
+  DEPLOY_DIR=\"$$DEPLOY_BASE/$$TARGET_NAME\"
+  DEPLOY_DIR_LIB=\"$$DEPLOY_BASE/$$TARGET_NAME/lib\"
 
-  deploy.commands = rm -Rfv $${DEPLOY_DIR} &&
-  deploy.commands += mkdir -pv $${DEPLOY_DIR_LIB} &&
-  deploy.commands += mkdir -pv $${DEPLOY_DIR_LIB}/iconengines &&
-  deploy.commands += mkdir -pv $${DEPLOY_DIR_LIB}/imageformats &&
-  deploy.commands += mkdir -pv $${DEPLOY_DIR_LIB}/platforms &&
-  deploy.commands += mkdir -pv $${DEPLOY_DIR_LIB}/platformthemes &&
-  deploy.commands += cp -Rvf $${OUT_PWD}/help $${DEPLOY_DIR} &&
-  deploy.commands += cp -Rvf $${OUT_PWD}/translations $${DEPLOY_DIR} &&
-  deploy.commands += cp -Rvf $${OUT_PWD}/littlenavconnect $${DEPLOY_DIR} &&
-  deploy.commands += cp -vf $$PWD/desktop/qt.conf $${DEPLOY_DIR} &&
-  deploy.commands += cp -vf $${PWD}/CHANGELOG.txt $${DEPLOY_DIR} &&
-  deploy.commands += cp -vf $${PWD}/README.txt $${DEPLOY_DIR} &&
-  deploy.commands += cp -vf $${PWD}/LICENSE.txt $${DEPLOY_DIR} &&
-  deploy.commands += cp -vf $${PWD}/resources/icons/navconnect.svg $${DEPLOY_DIR}/littlenavconnect.svg &&
-  deploy.commands += cp -vfa $${QT_HOME}/translations/qt_??.qm  $${DEPLOY_DIR}/translations &&
-  deploy.commands += cp -vfa $${QT_HOME}/translations/qt_??_??.qm  $${DEPLOY_DIR}/translations &&
-  deploy.commands += cp -vfa $${QT_HOME}/translations/qtbase*.qm  $${DEPLOY_DIR}/translations &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/iconengines/libqsvgicon.so*  $${DEPLOY_DIR_LIB}/iconengines &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqgif.so*  $${DEPLOY_DIR_LIB}/imageformats &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqjpeg.so*  $${DEPLOY_DIR_LIB}/imageformats &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqsvg.so*  $${DEPLOY_DIR_LIB}/imageformats &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqwbmp.so*  $${DEPLOY_DIR_LIB}/imageformats &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/imageformats/libqwebp.so*  $${DEPLOY_DIR_LIB}/imageformats &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqeglfs.so*  $${DEPLOY_DIR_LIB}/platforms &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqlinuxfb.so*  $${DEPLOY_DIR_LIB}/platforms &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqminimal.so*  $${DEPLOY_DIR_LIB}/platforms &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqminimalegl.so*  $${DEPLOY_DIR_LIB}/platforms &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqoffscreen.so*  $${DEPLOY_DIR_LIB}/platforms &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/platforms/libqxcb.so*  $${DEPLOY_DIR_LIB}/platforms &&
-  deploy.commands += cp -vfa $${QT_HOME}/plugins/platformthemes/libqgtk*.so*  $${DEPLOY_DIR_LIB}/platformthemes &&
-  deploy.commands += cp -vfa $${OPENSSL}/libssl.so.1.0.0 $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${OPENSSL}/libcrypto.so.1.0.0 $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libicudata.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libicui18n.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libicuuc.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Core.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5DBus.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Gui.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Network.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Svg.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Widgets.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5X11Extras.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5XcbQpa.so*  $${DEPLOY_DIR_LIB} &&
-  deploy.commands += cp -vfa $${QT_HOME}/lib/libQt5Xml.so* $${DEPLOY_DIR_LIB}
+  deploy.commands = rm -Rfv $$DEPLOY_DIR &&
+  deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB &&
+  deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB/iconengines &&
+  deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB/imageformats &&
+  deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB/platforms &&
+  deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB/platformthemes &&
+  deploy.commands += cp -Rvf $$OUT_PWD/littlenavconnect $$DEPLOY_DIR &&
+  deploy.commands += cp -Rvf $$OUT_PWD/help $$DEPLOY_DIR &&
+  deploy.commands += cp -Rvf $$OUT_PWD/translations $$DEPLOY_DIR &&
+  deploy.commands += cp -vf $$PWD/desktop/qt.conf $$DEPLOY_DIR &&
+  deploy.commands += cp -vf $$PWD/CHANGELOG.txt $$DEPLOY_DIR &&
+  deploy.commands += cp -vf $$PWD/README.txt $$DEPLOY_DIR &&
+  deploy.commands += cp -vf $$PWD/LICENSE.txt $$DEPLOY_DIR &&
+  deploy.commands += cp -vf $$PWD/resources/icons/navconnect.svg $$DEPLOY_DIR/littlenavconnect.svg &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_DIR/translations &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_DIR/translations &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_DIR/translations &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/iconengines/libqsvgicon.so*  $$DEPLOY_DIR_LIB/iconengines &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/imageformats/libqgif.so*  $$DEPLOY_DIR_LIB/imageformats &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/imageformats/libqjpeg.so*  $$DEPLOY_DIR_LIB/imageformats &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/imageformats/libqsvg.so*  $$DEPLOY_DIR_LIB/imageformats &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/platforms/libqeglfs.so*  $$DEPLOY_DIR_LIB/platforms &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/platforms/libqlinuxfb.so*  $$DEPLOY_DIR_LIB/platforms &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/platforms/libqminimal.so*  $$DEPLOY_DIR_LIB/platforms &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/platforms/libqminimalegl.so*  $$DEPLOY_DIR_LIB/platforms &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/platforms/libqoffscreen.so*  $$DEPLOY_DIR_LIB/platforms &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/platforms/libqxcb.so*  $$DEPLOY_DIR_LIB/platforms &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/platformthemes/libqgtk*.so*  $$DEPLOY_DIR_LIB/platformthemes &&
+  deploy.commands += cp -vfa $$OPENSSL_PATH/libssl.so.1.0.0 $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$OPENSSL_PATH/libcrypto.so.1.0.0 $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libicudata.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libicui18n.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libicuuc.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Core.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5DBus.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Gui.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Network.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Svg.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Widgets.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5X11Extras.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5XcbQpa.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Xml.so* $$DEPLOY_DIR_LIB
 }
 
 # Mac specific deploy target
 macx {
-  DEPLOY_APP=\"$$PWD/../deploy/Little Navconnect.app\"
-  DEPLOY_DIR=\"$$PWD/../deploy\"
+  DEPLOY_APP=\"$$DEPLOY_BASE/$$TARGET_NAME.app\"
+  DEPLOY_DIR=\"$$DEPLOY_BASE\"
 
-  deploy.commands = rm -Rfv $${DEPLOY_APP} &&
+  deploy.commands = rm -Rfv $$DEPLOY_APP &&
   deploy.commands += macdeployqt littlenavconnect.app -always-overwrite &&
-  deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $${DEPLOY_APP} &&
-  deploy.commands += cp -fv $${QT_HOME}/translations/qt_??.qm  $${DEPLOY_APP}/Contents/MacOS &&
-  deploy.commands += cp -fv $${QT_HOME}/translations/qt_??_??.qm  $${DEPLOY_APP}/Contents/MacOS &&
-  deploy.commands += cp -fv $${QT_HOME}/translations/qtbase*.qm  $${DEPLOY_APP}/Contents/MacOS &&
-  deploy.commands += cp -fv $$PWD/LICENSE.txt $${DEPLOY_DIR} &&
-  deploy.commands += cp -fv $$PWD/README.txt $${DEPLOY_DIR}/README-LittleNavconnect.txt &&
-  deploy.commands += cp -fv $$PWD/CHANGELOG.txt $${DEPLOY_DIR}/CHANGELOG-LittleNavconnect.txt
+  deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $$DEPLOY_APP &&
+  deploy.commands += cp -fv $[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_APP/Contents/MacOS &&
+  deploy.commands += cp -fv $[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_APP/Contents/MacOS &&
+  deploy.commands += cp -fv $[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_APP/Contents/MacOS &&
+  deploy.commands += cp -fv $$PWD/LICENSE.txt $$DEPLOY_DIR &&
+  deploy.commands += cp -fv $$PWD/README.txt $$DEPLOY_DIR/README-LittleNavconnect.txt &&
+  deploy.commands += cp -fv $$PWD/CHANGELOG.txt $$DEPLOY_DIR/CHANGELOG-LittleNavconnect.txt
 }
+
 
 # Windows specific deploy target
 win32 {
+  defineReplace(p){return ($$shell_quote($$shell_path($$1)))}
   RC_ICONS = resources/icons/navconnect.ico
 
-  # Create backslashed path
-  WINPWD=$${PWD}
-  WINPWD ~= s,/,\\,g
-  WINOUT_PWD=$${OUT_PWD}
-  WINOUT_PWD ~= s,/,\\,g
-  DEPLOY_DIR_NAME=Little Navconnect
-  DEPLOY_DIR_WIN=\"$${WINPWD}\\..\\deploy\\$${DEPLOY_DIR_NAME}\"
-
-  deploy.commands = rmdir /s /q $${DEPLOY_DIR_WIN} &
-  deploy.commands += mkdir $${DEPLOY_DIR_WIN}\\translations &&
-  deploy.commands += xcopy $${WINOUT_PWD}\\$${CONF_TYPE}\\littlenavconnect.exe $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINPWD}\\CHANGELOG.txt $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINPWD}\\README.txt $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINPWD}\\LICENSE.txt $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${WINPWD}\\*.qm $${DEPLOY_DIR_WIN}\\translations &&
-  deploy.commands += xcopy $${WINPWD}\\..\\atools\\*.qm $${DEPLOY_DIR_WIN}\\translations &&
-  deploy.commands += xcopy $${WINPWD}\\littlenavconnect.exe.simconnect $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${OPENSSL}\\bin\\libeay32.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${OPENSSL}\\bin\\ssleay32.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${OPENSSL}\\libssl32.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_HOME}\\bin\\libgcc*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_HOME}\\bin\\libstdc*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy $${QT_HOME}\\bin\\libwinpthread*.dll $${DEPLOY_DIR_WIN} &&
-  deploy.commands += xcopy /i /s /e /f /y $${WINPWD}\\help $${DEPLOY_DIR_WIN}\\help &&
-  deploy.commands += $${QT_HOME}\\bin\\windeployqt $${WINDEPLOY_FLAGS} $${DEPLOY_DIR_WIN}
+  deploy.commands = rmdir /s /q $$p($$DEPLOY_BASE/$$TARGET_NAME) &
+  deploy.commands += mkdir $$p($$DEPLOY_BASE/$$TARGET_NAME/translations) &&
+  deploy.commands += xcopy $$p($$OUT_PWD/littlenavconnect.exe) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$PWD/CHANGELOG.txt) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$PWD/README.txt) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$PWD/LICENSE.txt) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$PWD/*.qm) $$p($$DEPLOY_BASE/$$TARGET_NAME/translations) &&
+  deploy.commands += xcopy $$p($$ATOOLS_INC_PATH/../*.qm) $$p($$DEPLOY_BASE/$$TARGET_NAME/translations) &&
+  deploy.commands += xcopy $$p($$PWD/littlenavconnect.exe.simconnect) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$OPENSSL_PATH/bin/libeay32.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$OPENSSL_PATH/bin/ssleay32.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$OPENSSL_PATH/libssl32.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libgcc*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libstdc*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libwinpthread*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy /i /s /e /f /y $$p($$PWD/help) $$p($$DEPLOY_BASE/$$TARGET_NAME/help) &&
+  deploy.commands += $$p($$[QT_INSTALL_BINS]/windeployqt) $$WINDEPLOY_FLAGS $$p($$DEPLOY_BASE/$$TARGET_NAME)
 }
 
-QMAKE_EXTRA_TARGETS += deploy
+# =====================================================================
+# Additional targets
 
-first.depends = $(first) copydata
-QMAKE_EXTRA_TARGETS += first copydata
+QMAKE_EXTRA_TARGETS += deploy copydata
+deploy.depends = copydata
+copydata.depends = all
 
-clean.depends = $(clean) cleandata
-QMAKE_EXTRA_TARGETS += clean cleandata
-
-
-TRANSLATIONS = littlenavconnect_fr.ts \
-               littlenavconnect_it.ts \
-               littlenavconnect_nl.ts \
-               littlenavconnect_de.ts \
-               littlenavconnect_es.ts \
-               littlenavconnect_pt_BR.ts
