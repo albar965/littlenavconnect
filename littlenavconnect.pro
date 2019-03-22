@@ -270,15 +270,15 @@ unix:!macx {
 
 # Mac specific deploy target
 macx {
-  DEPLOY_APP=\"$$DEPLOY_BASE/$$TARGET_NAME.app\"
-  DEPLOY_DIR=\"$$DEPLOY_BASE\"
+  DEPLOY_APP=\"$$DEPLOY_BASE/$${TARGET_NAME}.app\"
+  DEPLOY_DIR=\"$$DEPLOY_BASE/\"
 
   deploy.commands = rm -Rfv $$DEPLOY_APP &&
   deploy.commands += macdeployqt littlenavconnect.app -always-overwrite &&
   deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $$DEPLOY_APP &&
-  deploy.commands += cp -fv $[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_APP/Contents/MacOS &&
-  deploy.commands += cp -fv $[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_APP/Contents/MacOS &&
-  deploy.commands += cp -fv $[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_APP/Contents/MacOS &&
+  deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_APP/Contents/MacOS &&
+  deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_APP/Contents/MacOS &&
+  deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_APP/Contents/MacOS &&
   deploy.commands += cp -fv $$PWD/LICENSE.txt $$DEPLOY_DIR &&
   deploy.commands += cp -fv $$PWD/README.txt $$DEPLOY_DIR/README-LittleNavconnect.txt &&
   deploy.commands += cp -fv $$PWD/CHANGELOG.txt $$DEPLOY_DIR/CHANGELOG-LittleNavconnect.txt
