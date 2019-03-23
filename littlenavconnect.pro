@@ -28,8 +28,8 @@
 # ("../build-atools-$${CONF_TYPE}/$${CONF_TYPE}" on Windows) if not set.
 #
 # OPENSSL_PATH
-# Required for Windows only. Base path of WinSSL installation (https://slproweb.com/products/Win32OpenSSL.html).
-# For example: C:\\OpenSSL-Win32
+# Required for Windows only. Base path of WinSSL 1.0.1 installation (https://slproweb.com/products/Win32OpenSSL.html).
+# Defaults to "C:\OpenSSL-Win32" if empty.
 #
 # ATOOLS_GIT_PATH
 # Optional. Path to GIT executable. Revision will be set to "UNKNOWN" if not set.
@@ -81,6 +81,8 @@ isEmpty(DEPLOY_BASE) : DEPLOY_BASE=$$PWD/../deploy
 
 isEmpty(ATOOLS_INC_PATH) : ATOOLS_INC_PATH=$$PWD/../atools/src
 isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
+
+win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=C:\OpenSSL-Win32
 
 # =======================================================================
 # Set compiler flags and paths
