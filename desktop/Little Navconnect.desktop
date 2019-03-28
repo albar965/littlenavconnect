@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=YOUR_PATH_TO_LITTLENAVCONNECT/littlenavconnect 
+Path=YOUR_PATH_TO_LITTLENAVCONNECT/
+Name=Little Navconnect
+GenericName=Little Navconnect
+Icon=YOUR_PATH_TO_LITTLENAVMAP/littlenavconnect.svg
+Terminal=false
+Categories=Qt;Utility;Geography;Map;
+

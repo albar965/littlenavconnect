@@ -240,6 +240,7 @@ unix:!macx {
   deploy.commands += cp -vf $$PWD/README.txt $$DEPLOY_DIR &&
   deploy.commands += cp -vf $$PWD/LICENSE.txt $$DEPLOY_DIR &&
   deploy.commands += cp -vf $$PWD/resources/icons/navconnect.svg $$DEPLOY_DIR/littlenavconnect.svg &&
+  deploy.commands += cp -vf \"$$PWD/desktop/Little Navconnect.desktop\" $$DEPLOY_DIR &&
   deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_DIR/translations &&
   deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_DIR/translations &&
   deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_DIR/translations &&
