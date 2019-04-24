@@ -39,6 +39,7 @@
 #include <QCommandLineParser>
 #include <QActionGroup>
 #include <QDir>
+#include <QRegularExpression>
 
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
