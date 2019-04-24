@@ -40,8 +40,8 @@ before_script:
     - git clone --branch=master https://github.com/albar965/atools.git ../atools
 
     # Get atools if auth token for dropbox is available
-    - '[ -f ~/.dropbox_uploader ] && ../littlenavconnect/deployment/dropbox_uploader.sh download linux/atools-release.tar.gz ../atools-release.tar.gz'
-    - '[ -f ~/.dropbox_uploader ] && tar -xvzf ../atools-release.tar.gz -C ../'
+    - '[ "$TRAVIS_SECURE_ENV_VARS" == "false" ] || ../littlenavconnect/deployment/dropbox_uploader.sh download linux/atools-release.tar.gz ../atools-release.tar.gz'
+    - '[ "$TRAVIS_SECURE_ENV_VARS" == "false" ] || tar -xvzf ../atools-release.tar.gz -C ../'
 
 script:
     # Build atools if auth token for dropbox is not available
