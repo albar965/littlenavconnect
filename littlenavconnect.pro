@@ -190,6 +190,8 @@ TRANSLATIONS = \
 OTHER_FILES += \
   $$files(desktop/*, true) \
   $$files(help/*, true) \
+  .travis.yml \
+  .gitignore \
   *.ts \
   BUILD.txt \
   CHANGELOG.txt \
