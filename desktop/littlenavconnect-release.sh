@@ -1,6 +1,11 @@
 #!/bin/bash
 
-export LD_LIBRARY_PATH=~/Qt/5.9.5/gcc_64/lib
+# Script for internal debugging/startup
 
-cd ~/Projekte/build-littlenavconnect-release
-~/Projekte/build-littlenavconnect-release/littlenavconnect $@
+CONF=release
+
+cd ${APROJECTS}/build-littlenavconnect-${CONF}
+
+export LD_LIBRARY_PATH=~/Qt/5.12.3/gcc_64/lib:${APROJECTS}/build-littlenavconnect-${CONF}
+
+${APROJECTS}/build-littlenavconnect-${CONF}/littlenavconnect $@

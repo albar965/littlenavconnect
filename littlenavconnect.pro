@@ -28,8 +28,13 @@
 # ("../build-atools-$${CONF_TYPE}/$${CONF_TYPE}" on Windows) if not set.
 #
 # OPENSSL_PATH
-# Required for Windows only. Base path of WinSSL 1.0.1 installation (https://slproweb.com/products/Win32OpenSSL.html).
-# Defaults to "C:\OpenSSL-Win32" if empty.
+# Windows: Base path of WinSSL 1.0.1 installation (https://slproweb.com/products/Win32OpenSSL.html).
+#          Defaults to "C:\OpenSSL-Win32" if empty.
+# Linux:   If your Linux distribution does not come with OpenSSL 1.0.0 download and compile it yourself and
+#          adjust this path to point to the OpenSSL base directory, i.e. the result of "make install".
+#          Default in this case (not found in system) is ../build-openssl-$$CONF_TYPE
+#          ./config --prefix=../build-openssl-$$CONF_TYPE --openssldir=../build-openssl-$$CONF_TYPE/openssl shared -fPIC
+# macOS:   Not used.
 #
 # ATOOLS_GIT_PATH
 # Optional. Path to GIT executable. Revision will be set to "UNKNOWN" if not set.
@@ -61,7 +66,7 @@ TEMPLATE = app
 TARGET_NAME=Little Navconnect
 
 # =======================================================================
-# Copy ennvironment variables into qmake variables
+# Copy environment variables into qmake variables
 
 ATOOLS_INC_PATH=$$(ATOOLS_INC_PATH)
 ATOOLS_LIB_PATH=$$(ATOOLS_LIB_PATH)
@@ -83,6 +88,7 @@ isEmpty(ATOOLS_INC_PATH) : ATOOLS_INC_PATH=$$PWD/../atools/src
 isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
 
 win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=C:\OpenSSL-Win32
+unix:!macx: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=$$PWD/../build-openssl-$$CONF_TYPE/lib
 
 # =======================================================================
 # Set compiler flags and paths
@@ -95,6 +101,8 @@ unix:!macx {
   exists( /usr/lib/x86_64-linux-gnu/libssl.so.1.0.0 ) : OPENSSL_PATH=/usr/lib/x86_64-linux-gnu
   QMAKE_LFLAGS += -no-pie
 
+  LIBS += -L$$OPENSSL_PATH
+
   # Makes the shell script and setting LD_LIBRARY_PATH redundant
   QMAKE_RPATHDIR=.
   QMAKE_RPATHDIR+=./lib
@@ -104,6 +112,8 @@ win32 {
   WINDEPLOY_FLAGS = --compiler-runtime
   CONFIG(debug, debug|release) : WINDEPLOY_FLAGS += --debug
   CONFIG(release, debug|release) : WINDEPLOY_FLAGS += --release
+
+  LIBS += -L$$OPENSSL_PATH
 
   !isEmpty(SIMCONNECT_PATH) {
     DEFINES += SIMCONNECT_BUILD
@@ -210,7 +220,9 @@ unix:!macx {
   copydata.commands += cp -avfu $$PWD/*.qm $$OUT_PWD/translations &&
   copydata.commands += cp -avfu $$ATOOLS_INC_PATH/../*.qm $$OUT_PWD/translations &&
   copydata.commands += cp -vf $$PWD/desktop/littlenavconnect*.sh $$OUT_PWD &&
-  copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
+  copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh &&
+  copydata.commands += cp -vfa $$OPENSSL_PATH/libssl.so.1.0.0 $$OUT_PWD &&
+  copydata.commands += cp -vfa $$OPENSSL_PATH/libcrypto.so.1.0.0 $$OUT_PWD
 }
 
 # Mac OS X - Copy help and Marble plugins and data
