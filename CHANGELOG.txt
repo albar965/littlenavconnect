@@ -1,6 +1,19 @@
 Numbers (#) refer to Github issues.
 For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
 
+Version 2.4.0.beta
+
+Build and Deployment for Developers: albar965/littlenavmap#387
+* Updated for Qt 5.12.4. Changed OpenSSL to 1.1.1.
+* Linux compilation now uses system OpenSSL again and is based on Ubuntu 18.04.
+* Added build for Travis CI. Thanks to Jannik for all his work!
+* Complete update of project files to allow configuration with environment variables. Removed all hardcoded paths.
+* Added documentation about environment variables to configure build and updated build instructions
+  in "BUILD.txt" and "littlenavconnect.pro" files.
+
+related from atools version 3.4.0.beta
+See CHANGELOG.txt in atools project for more technical details. Relevant comments were added to list above.
+
 Version 2.2.2
 
 * Changed email address and all help links to point to https://www.littlenavmap.org.
