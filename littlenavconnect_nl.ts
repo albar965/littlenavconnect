@@ -120,68 +120,68 @@
         <translation>Ctrl+Shift+X</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="248"/>
+        <location filename="src/mainwindow.cpp" line="249"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Aan het verbinden met FSX or Prepar3D met SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="254"/>
+        <location filename="src/mainwindow.cpp" line="255"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Aan het verbinden met X-Plane met de Little Xpconnect plugin.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="272"/>
+        <location filename="src/mainwindow.cpp" line="273"/>
         <source>Save Replay</source>
         <translation>Bewaar Herhaling</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="272"/>
-        <location filename="src/mainwindow.cpp" line="288"/>
+        <location filename="src/mainwindow.cpp" line="273"/>
+        <location filename="src/mainwindow.cpp" line="289"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Bestanden Herhaing (*.replay);;Alle Bestanden (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="288"/>
+        <location filename="src/mainwindow.cpp" line="289"/>
         <source>Open Replay</source>
         <translation>Open Herhaing</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="364"/>
+        <location filename="src/mainwindow.cpp" line="365"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Er zijn nog applicaties verbonden.
 Doorgaan met de Netwerk Poort te wijzigen?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="367"/>
-        <location filename="src/mainwindow.cpp" line="457"/>
+        <location filename="src/mainwindow.cpp" line="368"/>
+        <location filename="src/mainwindow.cpp" line="458"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Dit &amp;dialoogvenster niet meer tonen.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="455"/>
+        <location filename="src/mainwindow.cpp" line="456"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Er zijn nog applicaties verbonden.
 Toch Stoppen?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="475"/>
+        <location filename="src/mainwindow.cpp" line="476"/>
         <source>Version %1 (revision %2).</source>
         <translation>Versie %1 (revisie %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="479"/>
+        <location filename="src/mainwindow.cpp" line="480"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Data Versie %1. Reply Versie %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="544"/>
+        <location filename="src/mainwindow.cpp" line="545"/>
         <source>Starting server. This can take up to a minute ...</source>
         <translation>Server opstarten. Kan tot één minuut duren ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="556"/>
+        <location filename="src/mainwindow.cpp" line="557"/>
         <source>Server running.</source>
         <translation>Server draaiend.</translation>
     </message>
@@ -297,39 +297,39 @@ als je een foutbericht krijgt zoals &quot;The bound address is already in use&qu
         <translation>%1 is reeds gestart.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="63"/>
+        <location filename="src/mainwindow.cpp" line="64"/>
         <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2019 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2019 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
         <translation>&lt;p&gt;is de Fligh Simulator Network agent voor Little Navmap.&lt;/p&gt;&lt;p&gt;Deze software is gelicencieerd bij &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; of gelijk welke latere versie.&lt;/p&gt;&lt;p&gt;De broncode voor deze applicatie is beschikbaar op &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Meer over mijn projecten op &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2019 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="96"/>
+        <location filename="src/mainwindow.cpp" line="97"/>
         <source>Save replay data to &lt;file&gt;.</source>
         <translation>Bewaar herhaingsdata naar &lt;file&gt;.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="97"/>
-        <location filename="src/mainwindow.cpp" line="102"/>
+        <location filename="src/mainwindow.cpp" line="98"/>
+        <location filename="src/mainwindow.cpp" line="103"/>
         <source>file</source>
         <translation>bestand</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="101"/>
+        <location filename="src/mainwindow.cpp" line="102"/>
         <source>Load replay data from &lt;file&gt;.</source>
         <translation>Laden herhalingsdata van bestand &lt;file&gt;.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="106"/>
+        <location filename="src/mainwindow.cpp" line="107"/>
         <source>Use speed factor &lt;speed&gt; for replay.</source>
         <translation>Gebruikt snelheidsfactor &lt;speed&gt; voor herhaling.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="107"/>
+        <location filename="src/mainwindow.cpp" line="108"/>
         <source>speed</source>
         <translation>snelheid</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="111"/>
+        <location filename="src/mainwindow.cpp" line="112"/>
         <source>Show replay menu items.</source>
         <translation>Toon inhoud herhalingsmenu.</translation>
     </message>
