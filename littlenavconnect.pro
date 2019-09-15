@@ -29,7 +29,7 @@
 #
 # OPENSSL_PATH
 # Windows: Base path of WinSSL 1.1.1 installation (https://slproweb.com/products/Win32OpenSSL.html).
-#          Defaults to "C:\Program Files (x86)\OpenSSL-Win32" if empty.
+#          Defaults to ../openssl-1.1.1d-win32-mingw" if empty.
 # Linux:   Not used.
 # macOS:   Not used.
 #
@@ -84,7 +84,7 @@ isEmpty(DEPLOY_BASE) : DEPLOY_BASE=$$PWD/../deploy
 isEmpty(ATOOLS_INC_PATH) : ATOOLS_INC_PATH=$$PWD/../atools/src
 isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
 
-win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=C:\Program Files (x86)\OpenSSL-Win32
+win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=$$PWD/../openssl-1.1.1d-win32-mingw
 
 # =======================================================================
 # Set compiler flags and paths
