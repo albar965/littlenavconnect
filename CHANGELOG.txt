@@ -1,6 +1,15 @@
 Numbers (#) refer to Github issues.
 For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
 
+Version 2.4.1.beta
+
+* Now using an OpenSSL library version 1.1.1 which does not require Microsoft Visual C++ Redistributables.
+  No need to install any redistributables at all for Little Navmap on a freshly installed Windows 10.
+* Fixed issues with OpenSSL on Linux. The libraries are now included in archive again.
+* Now providing two builds for Linux. One based on Ubuntu 18.04 and one based on Ubuntu 16.04. This allows to use
+  Little Navmap on older Linux distributions too.
+* Updated to latest Qt 5.12.5 library due to bugfixes.
+
 Version 2.4.0.beta
 
 Build and Deployment for Developers: albar965/littlenavmap#387
