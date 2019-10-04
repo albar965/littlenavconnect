@@ -285,7 +285,7 @@ macx {
   deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_APP/Contents/MacOS &&
   deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_APP/Contents/MacOS &&
   deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_APP/Contents/MacOS &&
-  deploy.commands += cp -fv $$PWD/build/mac/Info.plist $$ $$DEPLOY_APP/Contents &&
+  deploy.commands += cp -fv $$PWD/build/mac/Info.plist $$DEPLOY_APP/Contents &&
   deploy.commands += cp -fv $$PWD/LICENSE.txt $$DEPLOY_DIR &&
   deploy.commands += cp -fv $$PWD/README.txt $$DEPLOY_DIR/README-LittleNavconnect.txt &&
   deploy.commands += cp -fv $$PWD/CHANGELOG.txt $$DEPLOY_DIR/CHANGELOG-LittleNavconnect.txt
