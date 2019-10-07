@@ -1,6 +1,12 @@
 Numbers (#) refer to Github issues.
 For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
 
+Version 2.4.2.rc1
+
+* Now showing correct program name in application menu on macOS.
+
+===============================================================================
+
 Version 2.4.1.beta
 
 * Now using an OpenSSL library version 1.1.1 which does not require Microsoft Visual C++ Redistributables.
@@ -9,6 +15,8 @@ Version 2.4.1.beta
 * Now providing two builds for Linux. One based on Ubuntu 18.04 and one based on Ubuntu 16.04. This allows to use
   Little Navmap on older Linux distributions too.
 * Updated to latest Qt 5.12.5 library due to bugfixes.
+
+===============================================================================
 
 Version 2.4.0.beta
 
@@ -23,10 +31,14 @@ Build and Deployment for Developers: albar965/littlenavmap#387
 related from atools version 3.4.0.beta
 See CHANGELOG.txt in atools project for more technical details. Relevant comments were added to list above.
 
+===============================================================================
+
 Version 2.2.2
 
 * Changed email address and all help links to point to https://www.littlenavmap.org.
   Manuals in all formats and languages can be found here: https://albar965.github.io/manuals.html
+
+===============================================================================
 
 Version 2.2.1
 
