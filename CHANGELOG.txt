@@ -1,6 +1,13 @@
 Numbers (#) refer to Github issues.
 For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
 
+Version 2.4.4
+
+* Version to 2.4.4 to have the same number as Little Navmap.
+* Updated PDF manual.
+
+===============================================================================
+
 Version 2.4.2.rc1
 
 * Now showing correct program name in application menu on macOS.
