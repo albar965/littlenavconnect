@@ -186,6 +186,7 @@ TRANSLATIONS = \
   littlenavconnect_nl.ts \
   littlenavconnect_de.ts \
   littlenavconnect_es.ts \
+  littlenavconnect_cn.ts \
   littlenavconnect_pt_BR.ts
 
 OTHER_FILES += \
