@@ -1,12 +1,14 @@
 Numbers (#) refer to Github issues.
 For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
 
-Version 2.4.5.rc1
+Version 2.4.5
+
 * Chinese translation by John Liu.
 * Added P3D v5 for simulator detection. #512
 
 Build:
 * Added option to include common "../build_options.pro" file with defines for qmake.
+  File is included automatically if it exists.
 
 ===============================================================================
 
