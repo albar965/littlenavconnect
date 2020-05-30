@@ -79,7 +79,7 @@ MainWindow::MainWindow()
 
   // Get the online indicator file which shows which help files are available online
   QString onlineFlagFile = atools::gui::HelpHandler::getHelpFile(
-    QString("help") + QDir::separator() + "little-navconnect-user-manual-${LANG}.online", false /*override*/);
+    QString("help") + QDir::separator() + "little-navconnect-user-manual-${LANG}.online", QLocale().name());
 
   // Extract language from the file
   QRegularExpression regexp("little-navconnect-user-manual-(.+)\\.online", QRegularExpression::CaseInsensitiveOption);
@@ -227,7 +227,7 @@ void MainWindow::showOnlineHelp()
 
 void MainWindow::showOfflineHelp()
 {
-  HelpHandler::openFile(this, HelpHandler::getHelpFile(HELP_OFFLINE_FILE, false /* override */));
+  HelpHandler::openFile(this, HelpHandler::getHelpFile(HELP_OFFLINE_FILE, QLocale().name()));
 }
 
 atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()
