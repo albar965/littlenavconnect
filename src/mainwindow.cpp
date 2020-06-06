@@ -33,6 +33,8 @@
 #include "constants.h"
 #include "fs/sc/simconnecthandler.h"
 #include "fs/sc/xpconnecthandler.h"
+#include "util/htmlbuilder.h"
+#include "util/version.h"
 
 #include <QMessageBox>
 #include <QCloseEvent>
@@ -76,6 +78,25 @@ MainWindow::MainWindow()
   ui->setupUi(this);
 
   readSettings();
+
+  // Update window title ===================================================
+  // Remember original title
+  mainWindowTitle = windowTitle();
+
+  QString newTitle = mainWindowTitle;
+  atools::util::Version version(QApplication::applicationVersion());
+
+  // Program version and revision ==========================================
+  if(version.isStable() || version.isReleaseCandidate() || version.isBeta())
+    newTitle += QString(" %1").arg(version.getVersionString());
+  else
+    newTitle += QString(" %1 (%2)").arg(version.getVersionString()).arg(GIT_REVISION);
+
+#ifndef QT_NO_DEBUG
+  newTitle += " - DEBUG";
+#endif
+
+  setWindowTitle(newTitle);
 
   // Get the online indicator file which shows which help files are available online
   QString onlineFlagFile = atools::gui::HelpHandler::getHelpFile(
@@ -309,6 +330,8 @@ void MainWindow::stopReplay()
 
 void MainWindow::options()
 {
+  qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options";
+
   OptionsDialog dialog;
 
   Settings& settings = Settings::instance();
@@ -330,6 +353,7 @@ void MainWindow::options()
 
   if(result == QDialog::Accepted)
   {
+    qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options accepted";
     settings.setValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, static_cast<int>(dialog.isHideHostname()));
     settings.setValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
     settings.setValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
@@ -377,6 +401,10 @@ void MainWindow::options()
       }
     }
   }
+  else
+    qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options not accepted";
+
+  qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options exit";
 }
 
 void MainWindow::resetMessages()
@@ -388,10 +416,20 @@ void MainWindow::resetMessages()
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
 {
+  const static QString MESSAGEPATTERN("[%1] %2");
+
   if(type == QtFatalMsg)
-    // Fatal will look like a crash anyway - bail out to avoid follow up errors
+    // Fatal is a crash anyway - bail out to avoid follow up errors
     return;
 
+  // Do not print debug messages in release mode
+#ifdef QT_NO_DEBUG
+  if(type == QtDebugMsg)
+    return;
+
+#endif
+
+  QString msg;
   if(context.category != nullptr && QString(context.category) == "gui")
   {
     // Define colors
@@ -399,28 +437,31 @@ void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context
     switch(type)
     {
       case QtDebugMsg:
-        style = "color:darkgrey";
+        msg = atools::util::HtmlBuilder::textMessage(message, atools::util::html::NO_ENTITIES, Qt::darkGray);
         break;
       case QtWarningMsg:
-        style = "color:orange;font-weight:bold";
+        msg = atools::util::HtmlBuilder::warningMessage(message);
         break;
       case QtFatalMsg:
       case QtCriticalMsg:
-        style = "color:red;font-weight:bold";
+        msg = atools::util::HtmlBuilder::errorMessage(message);
         break;
       case QtInfoMsg:
+        msg = atools::util::HtmlBuilder::textMessage(message, atools::util::html::NO_ENTITIES);
         break;
     }
 
     QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd h:mm:ss");
     // Use a signal to update the text edit in the main thread context
-    emit appendLogMessage("[" + now + "] <span style=\"" + style + "\">" + message + "</span>");
+    emit appendLogMessage(MESSAGEPATTERN.arg(now).arg(msg));
   }
 }
 
-void MainWindow::postLogMessage(QString message, bool warning)
+void MainWindow::postLogMessage(QString message, bool warning, bool error)
 {
-  if(warning)
+  if(error)
+    qCritical(atools::fs::ns::gui).noquote().nospace() << message;
+  else if(warning)
     qWarning(atools::fs::ns::gui).noquote().nospace() << message;
   else
     qInfo(atools::fs::ns::gui).noquote().nospace() << message;
@@ -469,6 +510,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::mainWindowShown()
 {
   qDebug() << Q_FUNC_INFO;
+  qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::mainWindowShown";
 
   atools::settings::Settings& settings = Settings::instance();
 
@@ -542,7 +584,7 @@ void MainWindow::mainWindowShown()
 
   connect(dataReader, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
 
-  qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Starting server. This can take up to a minute ...");
+  qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Starting server. This can take some time ...");
 
   QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
@@ -555,6 +597,7 @@ void MainWindow::mainWindowShown()
   QGuiApplication::restoreOverrideCursor();
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Server running.");
+  qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::mainWindowShown exit";
 }
 
 void MainWindow::showEvent(QShowEvent *event)

@@ -53,7 +53,7 @@ public:
   MainWindow();
   virtual ~MainWindow();
 
-  void postLogMessage(QString message, bool warning);
+  void postLogMessage(QString message, bool warning, bool error);
 
 signals:
   /* Append a log message to the gui log. */
@@ -106,6 +106,7 @@ private:
   bool firstStart = true; // Used to emit the first windowShown signal
   bool verbose = false;
 
+  QString mainWindowTitle;
   QString saveReplayFile, loadReplayFile;
   int replaySpeed = 1;
   QString supportedLanguageOnlineHelp;
