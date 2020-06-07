@@ -35,7 +35,7 @@
      <item row="0" column="1">
       <widget class="QSpinBox" name="spinBoxOptionsUpdateRate">
        <property name="toolTip">
-        <string>Allowed range is 50 milliseconds up to 2 seconds. 
+        <string>Allowed range is 50 milliseconds up to 2 seconds.
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</string>
        </property>
        <property name="statusTip">
@@ -102,7 +102,7 @@ This can be useful for streaming sessions where others can see your desktop.</st
       <widget class="QSpinBox" name="spinBoxOptionsPort">
        <property name="toolTip">
         <string>This can normally be left at default.
-Change this value only if another application occupies this port and 
+Change this value only if another application occupies this port and
 you get an error message like &quot;The bound address is already in use&quot;.</string>
        </property>
        <property name="statusTip">
@@ -128,7 +128,7 @@ you get an error message like &quot;The bound address is already in use&quot;.</
         <string>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</string>
        </property>
        <property name="text">
-        <string>Fetch AI or multiplayer &amp;ships (not X-Plane)</string>
+        <string>Fetch AI or multiplayer</string>
        </property>
        <property name="checked">
         <bool>true</bool>
