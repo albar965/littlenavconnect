@@ -20,13 +20,13 @@
 #include "logging/logginghandler.h"
 #include "logging/loggingutil.h"
 #include "settings/settings.h"
-#include "fs/sc/simconnectdata.h"
-#include "fs/sc/simconnectreply.h"
+#include "fs/sc/simconnecttypes.h"
 #include "gui/application.h"
 #include "gui/translator.h"
 #include "fs/ns/navservercommon.h"
 #include "constants.h"
 #include "atools.h"
+#include "geo/calculations.h"
 
 #include <QSslSocket>
 #include <QStyleFactory>
@@ -49,10 +49,8 @@ int main(int argc, char *argv[])
   Q_INIT_RESOURCE(atools);
 
   // Needed to send SimConnectData through queued connections
-  qRegisterMetaType<atools::fs::sc::SimConnectData>();
-  qRegisterMetaType<atools::fs::sc::SimConnectReply>();
-  qRegisterMetaType<atools::fs::sc::SimConnectStatus>();
-  qRegisterMetaType<atools::fs::sc::WeatherRequest>();
+  atools::fs::sc::registerMetaTypes();
+  atools::geo::registerMetaTypes();
 
   using atools::gui::Application;
   Application app(argc, argv);
