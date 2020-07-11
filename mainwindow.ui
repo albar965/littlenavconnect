@@ -150,7 +150,10 @@
      <normaloff>:/littlenavconnect/resources/icons/settings.svg</normaloff>:/littlenavconnect/resources/icons/settings.svg</iconset>
    </property>
    <property name="text">
-    <string>&amp;Options</string>
+    <string>&amp;Options ...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+,</string>
    </property>
   </action>
   <action name="actionReplayFileSave">
