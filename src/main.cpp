@@ -27,6 +27,7 @@
 #include "constants.h"
 #include "atools.h"
 #include "geo/calculations.h"
+#include "fs/fspaths.h"
 
 #include <QSslSocket>
 #include <QStyleFactory>
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
   // Needed to send SimConnectData through queued connections
   atools::fs::sc::registerMetaTypes();
   atools::geo::registerMetaTypes();
+  atools::fs::FsPaths::intitialize();
 
   using atools::gui::Application;
   Application app(argc, argv);
