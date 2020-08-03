@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>Starting server. This can take up to a minute ...</source>
-        <translation>Iniciando servidor. Esto puede tomar hasta un minuto ...</translation>
+        <translation type="vanished">Iniciando servidor. Esto puede tomar hasta un minuto ...</translation>
     </message>
     <message>
         <source>&amp;About Little Navconnect</source>
@@ -91,7 +91,7 @@ Realmente desea cambiar el puerto de red?</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation>&amp;Opciones</translation>
+        <translation type="vanished">&amp;Opciones</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -147,6 +147,18 @@ Realmente salir ?</translation>
         <source>Ctrl+Shift+X</source>
         <translation>Ctrl+Shift+X</translation>
     </message>
+    <message>
+        <source>&amp;Options ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting server. This can take some time ...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OptionsDialog</name>
@@ -164,7 +176,7 @@ Realmente salir ?</translation>
     </message>
     <message>
         <source>Fetch AI or multiplayer &amp;ships (not X-Plane)</source>
-        <translation>Búsqueda de nave&amp;s AI o multijugador (no para X-Plane)</translation>
+        <translation type="vanished">Búsqueda de nave&amp;s AI o multijugador (no para X-Plane)</translation>
     </message>
     <message>
         <source>&amp;Network Port:</source>
@@ -183,7 +195,7 @@ Esto puede ser útil para sesiones de transmisión donde otros puedan ver su esc
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds. 
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
-        <translation>El rango permitido es de 50 milisegundos hasta 2 segundos.
+        <translation type="vanished">El rango permitido es de 50 milisegundos hasta 2 segundos.
 Little Navconnect obtiene datos de Flight Simulator y los envía a todos los clientes (es decir, Little Navmap) utilizando este intervalo de tiempo.</translation>
     </message>
     <message>
@@ -194,7 +206,7 @@ Little Navconnect obtiene datos de Flight Simulator y los envía a todos los cli
         <source>This can normally be left at default.
 Change this value only if another application occupies this port and 
 you get an error message like &quot;The bound address is already in use&quot;.</source>
-        <translation>Esto normalmente se puede dejar en forma predeterminada.
+        <translation type="vanished">Esto normalmente se puede dejar en forma predeterminada.
 Cambie este valor solo si otra aplicación ocupa este puerto y
 aparece un mensaje de error como &quot;La dirección enlazada ya está en uso&quot;.</translation>
     </message>
@@ -217,6 +229,21 @@ aparece un mensaje de error como &quot;La dirección enlazada ya está en uso&qu
     <message>
         <source>Little Navconnect - Options</source>
         <translation>Little Navconnect - Opciones</translation>
+    </message>
+    <message>
+        <source>Allowed range is 50 milliseconds up to 2 seconds.
+Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This can normally be left at default.
+Change this value only if another application occupies this port and
+you get an error message like &quot;The bound address is already in use&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fetch AI or multiplayer</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
