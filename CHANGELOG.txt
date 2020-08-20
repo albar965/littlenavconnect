@@ -1,5 +1,18 @@
-Numbers (#) refer to Github issues.
-For example: albar965/littlenavmap#3 is https://github.com/albar965/littlenavmap/issues/3.
+Numbers (#) refer to GitHub issues in project `littlenavmap`.
+For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
+
+Version 2.6.0.beta
+
+Note: The data protocol has changed. You have to update Little Navmap,
+      Little Navconnect (if using remote connections) and Little Xpconnect (if using X-Plane).
+
+* Fixed issues with user home folders containing special characters. This caused issues when detecting flight simulators.
+* New shortcut key `Ctrl+Shift+,` for options.
+* Ship AI now also for X-Plane. Added frigate and carrier. #531
+* Fixed error handling on incompatible data versions. #531
+* Added version to window title.
+
+===============================================================================
 
 Version 2.4.5
 
@@ -38,7 +51,7 @@ Version 2.4.1.beta
 
 Version 2.4.0.beta
 
-Build and Deployment for Developers: albar965/littlenavmap#387
+Build and Deployment for Developers: #387
 * Updated for Qt 5.12.4. Changed OpenSSL to 1.1.1.
 * Linux compilation now uses system OpenSSL again and is based on Ubuntu 18.04.
 * Added build for Travis CI. Thanks to Jannik for all his work!
@@ -65,7 +78,7 @@ No changes except version.
 Version 2.2.0.beta
 
 * Log file is now rotated if the file size of 1 MB is exceeded. This avoid overwriting on startup and eases error reporting.
-  albar965/littlenavmap#275
+  #275
 
 Version 2.0.2
 
