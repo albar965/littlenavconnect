@@ -86,6 +86,10 @@ int main(int argc, char *argv[])
 
   Settings::logSettingsInformation();
 
+  // Load simulator paths =================================
+  atools::fs::FsPaths::loadAllPaths();
+  atools::fs::FsPaths::logAllPaths();
+
   // Load local and Qt system translations from various places
   Translator::load(Settings::instance().valueStr(lnc::SETTINGS_OPTIONS_LANGUAGE, QString()));
 
