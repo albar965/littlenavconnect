@@ -194,10 +194,13 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>FSX or Prepar3D</string>
+    <string>FSX, Prepar3D or MSFS</string>
    </property>
    <property name="toolTip">
-    <string>Connect to FSX or Prepar3D using SimConnect.</string>
+    <string>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</string>
+   </property>
+   <property name="statusTip">
+    <string>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+F</string>

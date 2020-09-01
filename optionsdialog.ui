@@ -48,7 +48,7 @@ Little Navconnect fetches data from Flight Simulator and sends it to all clients
         <number>50</number>
        </property>
        <property name="maximum">
-        <number>2000</number>
+        <number>5000</number>
        </property>
        <property name="singleStep">
         <number>50</number>
