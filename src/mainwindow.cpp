@@ -24,6 +24,7 @@
 
 #include "settings/settings.h"
 #include "gui/dialog.h"
+#include "geo/calculations.h"
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
 #include "logging/logginghandler.h"
@@ -335,19 +336,20 @@ void MainWindow::options()
   OptionsDialog dialog;
 
   Settings& settings = Settings::instance();
-  unsigned int updateRateMs =
-    settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt();
+  unsigned int updateRateMs = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt();
   int port = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
   bool hideHostname = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
 
   bool fetchAiAircraft = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool();
   bool fetchAiShip = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool();
+  int fetchAiRadiusNm = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, 200).toInt();
 
   dialog.setUpdateRate(updateRateMs);
   dialog.setPort(port);
   dialog.setHideHostname(hideHostname);
   dialog.setFetchAiAircraft(fetchAiAircraft);
   dialog.setFetchAiShip(fetchAiShip);
+  dialog.setFetchAiRadius(fetchAiRadiusNm);
 
   int result = dialog.exec();
 
@@ -359,6 +361,7 @@ void MainWindow::options()
     settings.setValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
     settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, dialog.isFetchAiAircraft());
     settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, dialog.isFetchAiShip());
+    settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, dialog.getAiFetchRadiusNm());
 
     settings.syncSettings();
 
@@ -369,6 +372,7 @@ void MainWindow::options()
       options |= atools::fs::sc::FETCH_AI_BOAT;
 
     dataReader->setSimconnectOptions(options);
+    dataReader->setAiFetchRadius(atools::geo::nmToKm(dialog.getAiFetchRadiusNm()));
 
     if(dialog.getUpdateRate() != updateRateMs)
     {
@@ -581,6 +585,8 @@ void MainWindow::mainWindowShown()
   if(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool())
     options |= atools::fs::sc::FETCH_AI_BOAT;
   dataReader->setSimconnectOptions(options);
+  dataReader->setAiFetchRadius(atools::geo::nmToKm(
+                                 settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, 200).toInt()));
 
   connect(dataReader, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
 

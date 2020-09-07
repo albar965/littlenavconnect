@@ -27,6 +27,7 @@ const QLatin1Literal SETTINGS_OPTIONS_DEFAULT_PORT("Options/DefaultPort");
 const QLatin1Literal SETTINGS_OPTIONS_UPDATE_RATE("Options/UpdateRate");
 const QLatin1Literal SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT("Options/FetchAiAircraft");
 const QLatin1Literal SETTINGS_OPTIONS_FETCH_AI_SHIP("Options/FetchAiShip");
+const QLatin1Literal SETTINGS_OPTIONS_FETCH_AI_RADIUS("Options/FetchAiRadius");
 const QLatin1Literal SETTINGS_ACTIONS_SHOW_PORT_CHANGE("Actions/ShowPortChange");
 const QLatin1Literal SETTINGS_ACTIONS_SHOW_QUIT("Actions/ShowQuit");
 const QLatin1Literal SETTINGS_OPTIONS_VERBOSE("Options/Verbose");

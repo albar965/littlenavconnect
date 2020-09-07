@@ -39,6 +39,11 @@ int OptionsDialog::getPort() const
   return ui->spinBoxOptionsPort->value();
 }
 
+int OptionsDialog::getAiFetchRadiusNm() const
+{
+  return ui->spinBoxOptionsAiFetchRadius->value();
+}
+
 unsigned int OptionsDialog::getUpdateRate() const
 {
   return static_cast<unsigned int>(ui->spinBoxOptionsUpdateRate->value());
@@ -72,6 +77,11 @@ void OptionsDialog::setFetchAiAircraft(bool value)
 void OptionsDialog::setFetchAiShip(bool value)
 {
   ui->checkBoxFetchAiShip->setChecked(value);
+}
+
+void OptionsDialog::setFetchAiRadius(int radiusNm)
+{
+  ui->spinBoxOptionsAiFetchRadius->setValue(radiusNm);
 }
 
 void OptionsDialog::setPort(int port)
