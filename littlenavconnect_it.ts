@@ -100,92 +100,95 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="197"/>
-        <source>FSX or Prepar3D</source>
-        <translation>FSX o Prepar3D</translation>
+        <source>FSX, Prepar3D or MSFS</source>
+        <oldsource>FSX or Prepar3D</oldsource>
+        <translation type="unfinished">FSX o Prepar3D</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="200"/>
-        <source>Connect to FSX or Prepar3D using SimConnect.</source>
-        <translation>Connetti a FSX o Prepar3D usando SimConnect.</translation>
+        <location filename="mainwindow.ui" line="203"/>
+        <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
+        <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
+        <translation type="unfinished">Connetti a FSX o Prepar3D usando SimConnect.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="203"/>
+        <location filename="mainwindow.ui" line="206"/>
         <source>Ctrl+Shift+F</source>
         <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="211"/>
+        <location filename="mainwindow.ui" line="214"/>
         <source>X-Plane</source>
         <translation>X-Plane</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="214"/>
+        <location filename="mainwindow.ui" line="217"/>
         <source>Connect to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Connetti a X-Plane usando Little Xpconnect plugin.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="217"/>
+        <location filename="mainwindow.ui" line="220"/>
         <source>Ctrl+Shift+X</source>
         <translation>Ctrl+Shift+X</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="270"/>
+        <location filename="src/mainwindow.cpp" line="271"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Connessione a FSX o Prepar3D usando SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="276"/>
+        <location filename="src/mainwindow.cpp" line="277"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Connessione a X-Plane usando Little Xpconnect plugin.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="294"/>
+        <location filename="src/mainwindow.cpp" line="295"/>
         <source>Save Replay</source>
         <translation>Salva Replay</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="294"/>
-        <location filename="src/mainwindow.cpp" line="310"/>
+        <location filename="src/mainwindow.cpp" line="295"/>
+        <location filename="src/mainwindow.cpp" line="311"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Replay Files (*.replay);;All Files (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="310"/>
+        <location filename="src/mainwindow.cpp" line="311"/>
         <source>Open Replay</source>
         <translation>Apri Replay</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="389"/>
+        <location filename="src/mainwindow.cpp" line="393"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Ci sono ancora applicazioni connesse.
 Cambiare veramente la Porta di Rete?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="392"/>
-        <location filename="src/mainwindow.cpp" line="499"/>
+        <location filename="src/mainwindow.cpp" line="396"/>
+        <location filename="src/mainwindow.cpp" line="503"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Non &amp;mostrare nuovamente questa finestra di dialogo.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="497"/>
+        <location filename="src/mainwindow.cpp" line="501"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Ci sono ancora applicazioni connesse.
 Uscire veramente?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="518"/>
+        <location filename="src/mainwindow.cpp" line="522"/>
         <source>Version %1 (revision %2).</source>
         <translation>Versione %1 (revisione %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="522"/>
+        <location filename="src/mainwindow.cpp" line="526"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Data Versione %1. Reply Versione %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="587"/>
+        <location filename="src/mainwindow.cpp" line="593"/>
         <source>Starting server. This can take some time ...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -194,7 +197,7 @@ Uscire veramente?</translation>
         <translation type="vanished">Avvio del server. Questo può richiedere fino a un minuto ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="599"/>
+        <location filename="src/mainwindow.cpp" line="605"/>
         <source>Server running.</source>
         <translation>Server in esecuzione.</translation>
     </message>
@@ -211,64 +214,76 @@ Uscire veramente?</translation>
         <translation>Little Navconnect - Opzioni</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="22"/>
-        <location filename="optionsdialog.ui" line="25"/>
+        <location filename="optionsdialog.ui" line="60"/>
+        <location filename="optionsdialog.ui" line="63"/>
         <source>Deselect to disable fetching and transmission of AI or multiplayer aircraft</source>
         <translation>Deselezionare per disabilitare scaricamento e trasmissione di aerei AI</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="28"/>
+        <location filename="optionsdialog.ui" line="66"/>
         <source>Fetch AI or multiplayer &amp;aircraft</source>
         <translation>Scarica &amp;aerei AI</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="38"/>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
         <oldsource>Allowed range is 50 milliseconds up to 2 seconds. 
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</oldsource>
-        <translation type="unfinished">L&apos;intervallo permesso è da 50 millisecondi fino a 2 secondi. 
+        <translation type="obsolete">L&apos;intervallo permesso è da 50 millisecondi fino a 2 secondi. 
 Little Navconnect scarica dati da Flight Simulator e li invia a tutti i client (es. Little Navmap) usando questo intervallo di tempo.</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="42"/>
+        <location filename="optionsdialog.ui" line="28"/>
         <source>Allowed range is 50 milliseconds up to 2 seconds.  Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
         <translation>L&apos;intervallo permesso è da 50 millisecondi fino a 2 secondi.  Little Navconnect scarica dati da Flight Simulator e li invia a tutti i client (es. Little Navmap) usando questo intervallo di tempo.</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="45"/>
+        <location filename="optionsdialog.ui" line="31"/>
         <source> ms</source>
         <translation> ms</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="64"/>
+        <location filename="optionsdialog.ui" line="76"/>
         <source>Select this if you do not want to reveal your hostname or IP address in the log window.
 This can be useful for streaming sessions where others can see your desktop.</source>
         <translation>Selezionare se non vuoi rivelare il tuo hostname o indirizzo IP nella finestra di log.
 Può essere utile per le sessioni in streming dove altri possono vedere il tuo desktop.</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="68"/>
+        <location filename="optionsdialog.ui" line="80"/>
         <source>Select this if you do not want to reveal your hostname or IP address in the log window.\nThis can be useful for streaming sessions where others can see your desktop.</source>
         <translation>Selezionare se non vuoi rivelare il tuo hostname o indirizzo IP nella finestra di log.\nPuò essere utile per le sessioni in streming dove altri possono vedere il tuo desktop.</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="71"/>
+        <location filename="optionsdialog.ui" line="83"/>
         <source>&amp;Hide hostname and IP in log window</source>
         <translation>&amp;Nascondi hostname e IP nella finestra di log</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="78"/>
+        <location filename="optionsdialog.ui" line="50"/>
         <source>&amp;Network Port:</source>
         <translation>&amp;Rete Porta:</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="91"/>
+        <location filename="optionsdialog.ui" line="137"/>
+        <source>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
+Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
+The unit is always nautical miles (1 NM equals to 1852 km).
+FSX, P3D and MSFS allow a maxium of 105 NM.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="optionsdialog.ui" line="143"/>
+        <source> NM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="optionsdialog.ui" line="162"/>
         <source>&amp;Update Time Interval:</source>
         <translation>Intervallo Temporale di &amp;Aggiornamento:</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="104"/>
+        <location filename="optionsdialog.ui" line="90"/>
         <source>This can normally be left at default.
 Change this value only if another application occupies this port and
 you get an error message like &quot;The bound address is already in use&quot;.</source>
@@ -280,18 +295,31 @@ Cambiare questo valore solo se un&apos;altra applicazione usa questa porta e
 ottieni un errore come &quot;L&apos;indirizzo di bound è già in uso&quot;.</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="109"/>
+        <location filename="optionsdialog.ui" line="22"/>
+        <source>Allowed range is 50 up to 5000 milliseconds (5 seconds).
+Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
+Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
+Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="optionsdialog.ui" line="95"/>
         <source>This can normally be left at default.\nChange this value only if another application occupies this port and \nyou get an error message like &quot;The bound address is already in use&quot;.</source>
         <translation>Normalmente può essere lasciato al default.\nCambiare questo valore solo se un&apos;altra applicazione usa questa porta e \nottieni un errore come &quot;L&apos;indirizzo di bound è già in uso&quot;.</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="125"/>
-        <location filename="optionsdialog.ui" line="128"/>
+        <location filename="optionsdialog.ui" line="111"/>
+        <source>&amp;AI fetch radius (not used for X-Plane):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="optionsdialog.ui" line="121"/>
+        <location filename="optionsdialog.ui" line="124"/>
         <source>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</source>
         <translation>Deselezionare per disabilitare scaricamento e trasmissione di AI o navi. Questa opzione non si applica a X-Plane.</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="131"/>
+        <location filename="optionsdialog.ui" line="127"/>
         <source>Fetch AI or multiplayer</source>
         <oldsource>Fetch AI or multiplayer &amp;ships (not X-Plane)</oldsource>
         <translation type="unfinished">Scarica &amp;navi AI (non X-Plane)</translation>
@@ -310,12 +338,12 @@ ottieni un errore come &quot;L&apos;indirizzo di bound è già in uso&quot;.</tr
         <translation>Configurazione:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="97"/>
+        <location filename="src/main.cpp" line="101"/>
         <source>%1 - Error</source>
         <translation>%1 - Errore</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="98"/>
+        <location filename="src/main.cpp" line="102"/>
         <source>%1 is already running.</source>
         <translation>%1 è già avviato.</translation>
     </message>
@@ -325,39 +353,39 @@ ottieni un errore come &quot;L&apos;indirizzo di bound è già in uso&quot;.</tr
         <translation type="vanished">&lt;p&gt;è un agente di Rete di Fligh Simulator per Little Navmap.&lt;/p&gt;&lt;p&gt;Questo software è licenziato in &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; o versioni successive.&lt;/p&gt;&lt;p&gt;Il codice sorgente per questa applicazione è disponibile a &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Altre informazioni sui miei progetti a &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="66"/>
+        <location filename="src/mainwindow.cpp" line="67"/>
         <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
         <translation type="unfinished">&lt;p&gt;è un agente di Rete di Fligh Simulator per Little Navmap.&lt;/p&gt;&lt;p&gt;Questo software è licenziato in &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; o versioni successive.&lt;/p&gt;&lt;p&gt;Il codice sorgente per questa applicazione è disponibile a &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Altre informazioni sui miei progetti a &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="118"/>
+        <location filename="src/mainwindow.cpp" line="119"/>
         <source>Save replay data to &lt;file&gt;.</source>
         <translation>Salva dati di reply in &lt;file&gt;.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="119"/>
-        <location filename="src/mainwindow.cpp" line="124"/>
+        <location filename="src/mainwindow.cpp" line="120"/>
+        <location filename="src/mainwindow.cpp" line="125"/>
         <source>file</source>
         <translation>file</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="123"/>
+        <location filename="src/mainwindow.cpp" line="124"/>
         <source>Load replay data from &lt;file&gt;.</source>
         <translation>Carica dati di reply da &lt;file&gt;.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="128"/>
+        <location filename="src/mainwindow.cpp" line="129"/>
         <source>Use speed factor &lt;speed&gt; for replay.</source>
         <translation>Usa fattore velocità &lt;speed&gt; per il replay.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="129"/>
+        <location filename="src/mainwindow.cpp" line="130"/>
         <source>speed</source>
         <translation>velocità</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="133"/>
+        <location filename="src/mainwindow.cpp" line="134"/>
         <source>Show replay menu items.</source>
         <translation>Mostra voci di menù replay.</translation>
     </message>

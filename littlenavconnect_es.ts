@@ -59,7 +59,7 @@ Realmente desea cambiar el puerto de red?</translation>
     </message>
     <message>
         <source>FSX or Prepar3D</source>
-        <translation>FSX o Prepar3D</translation>
+        <translation type="vanished">FSX o Prepar3D</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
@@ -133,7 +133,7 @@ Realmente salir ?</translation>
     </message>
     <message>
         <source>Connect to FSX or Prepar3D using SimConnect.</source>
-        <translation>Conectando a FSX o Prepar3D usando SimConnect.</translation>
+        <translation type="vanished">Conectando a FSX o Prepar3D usando SimConnect.</translation>
     </message>
     <message>
         <source>Little Navconnect</source>
@@ -157,6 +157,14 @@ Realmente salir ?</translation>
     </message>
     <message>
         <source>Starting server. This can take some time ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FSX, Prepar3D or MSFS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -231,11 +239,6 @@ aparece un mensaje de error como &quot;La dirección enlazada ya está en uso&qu
         <translation>Little Navconnect - Opciones</translation>
     </message>
     <message>
-        <source>Allowed range is 50 milliseconds up to 2 seconds.
-Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This can normally be left at default.
 Change this value only if another application occupies this port and
 you get an error message like &quot;The bound address is already in use&quot;.</source>
@@ -243,6 +246,28 @@ you get an error message like &quot;The bound address is already in use&quot;.</
     </message>
     <message>
         <source>Fetch AI or multiplayer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allowed range is 50 up to 5000 milliseconds (5 seconds).
+Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
+Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
+Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;AI fetch radius (not used for X-Plane):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
+Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
+The unit is always nautical miles (1 NM equals to 1852 km).
+FSX, P3D and MSFS allow a maxium of 105 NM.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> NM</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
