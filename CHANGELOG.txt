@@ -6,11 +6,17 @@ Version 2.6.0.beta
 Note: The data protocol has changed. You have to update Little Navmap,
       Little Navconnect (if using remote connections) and Little Xpconnect (if using X-Plane).
 
-* Fixed issues with user home folders containing special characters. This caused issues when detecting flight simulators.
+* MSFS support: Little Navconnect can connect to MSFS with the included SimConnect interface.
+* Fixed issues with user home folders containing special characters. This caused issues when
+  detecting flight simulators.
 * New shortcut key `Ctrl+Shift+,` for options.
 * Ship AI now also for X-Plane. Added frigate and carrier. #531
-* Fixed error handling on incompatible data versions. #531
+* Fixed error handling on incompatible data versions when mixing different versions of Little
+  Navmap, Little Navconnect or Little Xpconnect. #531
 * Added version to window title.
+* SimConnect library is included now. A FSX SP2 installation is not required. #544
+* New option to set maximum AI range around the user aircraft in connection dialog for FSX, P3D and
+  MSFS.
 
 ===============================================================================
 
