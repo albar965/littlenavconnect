@@ -64,7 +64,7 @@ MainWindow::MainWindow()
   qDebug() << Q_FUNC_INFO;
 
   aboutMessage =
-    QObject::tr("<p>is the Fligh Simulator Network agent for Little Navmap.</p>"
+    QObject::tr("<p style='white-space:pre'>is the Flight Simulator Network agent for Little Navmap.</p>"
                   "<p>This software is licensed under "
                     "<a href=\"http://www.gnu.org/licenses/gpl-3.0\">GPL3</a> or any later version.</p>"
                       "<p>The source code for this application is available at "
