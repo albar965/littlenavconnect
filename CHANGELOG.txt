@@ -17,6 +17,7 @@ Note: The data protocol has changed. You have to update Little Navmap,
 * SimConnect library is included now. A FSX SP2 installation is not required. #544
 * New option to set maximum AI range around the user aircraft in connection dialog for FSX, P3D and
   MSFS.
+* macOS is supported up from macOS Sierra 10.12 inclusive. Older versions are not supported anymore.
 
 ===============================================================================
 
