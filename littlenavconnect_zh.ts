@@ -264,8 +264,12 @@ This can be useful for streaming sessions where others can see your desktop.</so
         <location filename="optionsdialog.ui" line="137"/>
         <source>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
-The unit is always nautical miles (1 NM equals to 1852 km).
+The unit is always nautical miles (1 NM equals to 1.852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</source>
+        <oldsource>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
+Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
+The unit is always nautical miles (1 NM equals to 1852 km).
+FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
