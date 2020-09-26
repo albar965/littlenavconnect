@@ -196,6 +196,10 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</string>
  <tabstops>
   <tabstop>spinBoxOptionsUpdateRate</tabstop>
   <tabstop>spinBoxOptionsPort</tabstop>
+  <tabstop>spinBoxOptionsAiFetchRadius</tabstop>
+  <tabstop>checkBoxFetchAiAircraft</tabstop>
+  <tabstop>checkBoxFetchAiShip</tabstop>
+  <tabstop>checkBoxHideHostname</tabstop>
  </tabstops>
  <resources/>
  <connections/>

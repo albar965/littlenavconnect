@@ -1,6 +1,16 @@
 Numbers (#) refer to GitHub issues in project `littlenavmap`.
 For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
+===============================================================================
+
+Version 2.6.1.beta
+
+FSX, P3D and MSFS:
+
+* Fix for blinking aircraft when updating weather over SimConnect.
+
+===============================================================================
+
 Version 2.6.0.beta
 
 Note: The data protocol has changed. You have to update Little Navmap,
