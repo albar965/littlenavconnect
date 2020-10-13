@@ -63,7 +63,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
         <string>Deselect to disable fetching and transmission of AI or multiplayer aircraft</string>
        </property>
        <property name="text">
-        <string>Fetch AI or multiplayer &amp;aircraft</string>
+        <string>Fetch AI or &amp;multiplayer aircraft</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -124,7 +124,7 @@ you get an error message like &quot;The bound address is already in use&quot;.</
         <string>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</string>
        </property>
        <property name="text">
-        <string>Fetch AI or multiplayer</string>
+        <string>Fetch AI or multiplayer &amp;ships</string>
        </property>
        <property name="checked">
         <bool>true</bool>

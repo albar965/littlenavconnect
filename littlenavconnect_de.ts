@@ -61,12 +61,12 @@
     <message>
         <location filename="mainwindow.ui" line="153"/>
         <source>&amp;Options ...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einstellungen ...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="156"/>
         <source>Ctrl+Shift+,</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+Umschalt+,</translation>
     </message>
     <message>
         <source>&amp;Options</source>
@@ -102,14 +102,14 @@
         <location filename="mainwindow.ui" line="197"/>
         <source>FSX, Prepar3D or MSFS</source>
         <oldsource>FSX or Prepar3D</oldsource>
-        <translation type="unfinished">FSX oder Prepar3D</translation>
+        <translation>FSX, Prepar3D oder MSFS</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="200"/>
         <location filename="mainwindow.ui" line="203"/>
         <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
         <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
-        <translation type="unfinished">Verbindung mit SimConnect zu FSX oder Prepar3D.</translation>
+        <translation>Verbindung zu FSX, Prepar3D oder Microsoft Flight Simulator 2020 mit SimConnect.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="206"/>
@@ -191,7 +191,7 @@ Wollen Sie das Programm wirklich beenden?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="593"/>
         <source>Starting server. This can take some time ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Server wird gestartet. Dies kann einige Zeit dauern ...</translation>
     </message>
     <message>
         <source>Starting server. This can take up to a minute ...</source>
@@ -208,7 +208,7 @@ Wollen Sie das Programm wirklich beenden?</translation>
     <message>
         <location filename="optionsdialog.ui" line="14"/>
         <source>Little Navconnect - Options</source>
-        <translation>Little Navconnect - Optionen</translation>
+        <translation>Little Navconnect - Einstellungen</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="60"/>
@@ -218,9 +218,9 @@ Wollen Sie das Programm wirklich beenden?</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="66"/>
-        <source>Fetch AI or multiplayer &amp;aircraft</source>
-        <translatorcomment>Ist das &quot;&amp;&quot; hier richtig gesetzt?</translatorcomment>
-        <translation>KI- oder Mehrspielerflugzeuge &amp;anzeigen</translation>
+        <source>Fetch AI or &amp;multiplayer aircraft</source>
+        <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
+        <translation>KI- oder &amp;Mehrspielerflugzeuge übertragen</translation>
     </message>
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
@@ -272,12 +272,15 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</source>
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Ändert den Radius um das Benutzerflugzeug, der verwendet wird, um KI- oder Multiplayer-Flugzeuge einzubeziehen.
+Die Verwendung höherer Werte bei vielen KI- oder Multiplayer-Flugzeugen kann zu Stottern im Simulator führen.
+Die Einheit ist immer nautische Meilen (1 NM entspricht 1,852 km).
+FSX, Prepar3D und MSFS erlauben ein Maximum von 105 NM.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="143"/>
         <source> NM</source>
-        <translation type="unfinished"></translation>
+        <translation> NM</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="162"/>
@@ -292,9 +295,9 @@ you get an error message like &quot;The bound address is already in use&quot;.</
         <oldsource>This can normally be left at default.
 Change this value only if another application occupies this port and 
 you get an error message like &quot;The bound address is already in use&quot;.</oldsource>
-        <translation type="unfinished">Diese Einstellung kann in der Regel auf ihrem Standardwert belassen werden.
+        <translation>Diese Einstellung kann in der Regel auf ihrem Standardwert belassen werden.
 Ändern Sie diesen Wert, wenn eine andere Anwendung diesen Port belegt und
-Sie eine Fehlermeldung wie &quot;Der Port wird bereits benutzt&quot; erhalten.</translation>
+Sie eine Fehlermeldung wie &quot;Die Adresse wird bereits benutzt&quot; erhalten.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="22"/>
@@ -302,7 +305,10 @@ Sie eine Fehlermeldung wie &quot;Der Port wird bereits benutzt&quot; erhalten.</
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
 Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
 Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaubter Bereich ist 50 Millisekunden bis zu 5 Sekunden.
+Little Navconnect holt in diesem Intervall die Daten vom Flugsimulator und schickt sie zu den Anwendungen (z.B. Little Navmap).
+Niedrigere Werte führen zu einer flüssigeren Flugzeugbewegung, können aber zu Bildruckeln führen.
+Verwenden Sie höhere Werte (d.h. langsamere Aktualisierungsraten), wenn Sie ein langsames Netzwerk haben oder Probleme auftreten.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="95"/>
@@ -312,7 +318,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
     <message>
         <location filename="optionsdialog.ui" line="111"/>
         <source>&amp;AI fetch radius (not used for X-Plane):</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;KI Abrufradius (nicht für X-Plane):</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="121"/>
@@ -322,9 +328,9 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
     </message>
     <message>
         <location filename="optionsdialog.ui" line="127"/>
-        <source>Fetch AI or multiplayer</source>
-        <oldsource>Fetch AI or multiplayer &amp;ships (not X-Plane)</oldsource>
-        <translation type="unfinished">KI- oder Mehrspieler&amp;schiffe anzeigen (nicht in X-Plane)</translation>
+        <source>Fetch AI or multiplayer &amp;ships</source>
+        <oldsource>Fetch AI or multiplayer</oldsource>
+        <translation>KI- oder Mehrspieler&amp;schiffe übertragen</translation>
     </message>
 </context>
 <context>
@@ -353,7 +359,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
         <location filename="src/mainwindow.cpp" line="67"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;p&gt;ist der Flugsimulator-Netzwerkagent für Little Navmap.&lt;/p&gt;&lt;p&gt;Diese Software ist unter der &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; oder einer späteren Version lizensiert.&lt;/p&gt;&lt;p&gt;Der Quellcode ist auf &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt; verfügbar.&lt;/p&gt;&lt;p&gt;Mehr über meine Projekte auf &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;ist der Flugsimulator-Netzwerkagent für Little Navmap.&lt;/p&gt;&lt;p&gt;Diese Software ist unter der &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; oder einer späteren Version lizensiert.&lt;/p&gt;&lt;p&gt;Der Quellcode ist auf &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt; verfügbar.&lt;/p&gt;&lt;p&gt;Mehr über meine Projekte auf &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="119"/>

@@ -217,8 +217,9 @@ Vraiment arrêter?</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="66"/>
-        <source>Fetch AI or multiplayer &amp;aircraft</source>
-        <translation>Apportez de l&apos;IA ou un &amp;aéronef multijoueur</translation>
+        <source>Fetch AI or &amp;multiplayer aircraft</source>
+        <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
+        <translation type="unfinished">Apportez de l&apos;IA ou un &amp;aéronef multijoueur</translation>
     </message>
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
@@ -320,8 +321,8 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
     </message>
     <message>
         <location filename="optionsdialog.ui" line="127"/>
-        <source>Fetch AI or multiplayer</source>
-        <oldsource>Fetch AI or multiplayer &amp;ships (not X-Plane)</oldsource>
+        <source>Fetch AI or multiplayer &amp;ships</source>
+        <oldsource>Fetch AI or multiplayer</oldsource>
         <translation type="unfinished">Récupérez de&amp;s navires AI ou multijoueurs (pas de X-Plane)</translation>
     </message>
 </context>

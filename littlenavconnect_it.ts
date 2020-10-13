@@ -221,8 +221,9 @@ Uscire veramente?</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="66"/>
-        <source>Fetch AI or multiplayer &amp;aircraft</source>
-        <translation>Scarica &amp;aerei AI</translation>
+        <source>Fetch AI or &amp;multiplayer aircraft</source>
+        <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
+        <translation type="unfinished">Scarica &amp;aerei AI</translation>
     </message>
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
@@ -330,9 +331,9 @@ Usa valori più alti (cioè velocità di aggiornamento più lente) se hai una re
     </message>
     <message>
         <location filename="optionsdialog.ui" line="127"/>
-        <source>Fetch AI or multiplayer</source>
-        <oldsource>Fetch AI or multiplayer &amp;ships (not X-Plane)</oldsource>
-        <translation>Monitora AI o multiplayer</translation>
+        <source>Fetch AI or multiplayer &amp;ships</source>
+        <oldsource>Fetch AI or multiplayer</oldsource>
+        <translation type="unfinished">Monitora AI o multiplayer</translation>
     </message>
 </context>
 <context>

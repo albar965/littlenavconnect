@@ -176,7 +176,7 @@ Realmente salir ?</translation>
     </message>
     <message>
         <source>Fetch AI or multiplayer &amp;aircraft</source>
-        <translation>Obtener IA o &amp;aeronaves multijugador</translation>
+        <translation type="vanished">Obtener IA o &amp;aeronaves multijugador</translation>
     </message>
     <message>
         <source>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</source>
@@ -245,10 +245,6 @@ you get an error message like &quot;The bound address is already in use&quot;.</
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fetch AI or multiplayer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Allowed range is 50 up to 5000 milliseconds (5 seconds).
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
 Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
@@ -268,6 +264,14 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1.852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fetch AI or &amp;multiplayer aircraft</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fetch AI or multiplayer &amp;ships</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
