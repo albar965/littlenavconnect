@@ -223,7 +223,7 @@ Uscire veramente?</translation>
         <location filename="optionsdialog.ui" line="66"/>
         <source>Fetch AI or &amp;multiplayer aircraft</source>
         <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
-        <translation type="unfinished">Scarica &amp;aerei AI</translation>
+        <translation>Monitora aerei AI o &amp;multiplayer</translation>
     </message>
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
@@ -333,7 +333,7 @@ Usa valori più alti (cioè velocità di aggiornamento più lente) se hai una re
         <location filename="optionsdialog.ui" line="127"/>
         <source>Fetch AI or multiplayer &amp;ships</source>
         <oldsource>Fetch AI or multiplayer</oldsource>
-        <translation type="unfinished">Monitora AI o multiplayer</translation>
+        <translation>Monitora &amp;navi AI o multigiocatore</translation>
     </message>
 </context>
 <context>
