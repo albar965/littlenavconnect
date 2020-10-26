@@ -72,6 +72,14 @@ int main(int argc, char *argv[])
 
   Application::addReportPath(QObject::tr("Configuration:"), {Settings::getFilename()});
 
+  // Disable tooltip effects since these do not work well with tooltip updates while displaying
+  QApplication::setEffectEnabled(Qt::UI_FadeTooltip, false);
+  QApplication::setEffectEnabled(Qt::UI_AnimateTooltip, false);
+
+#if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
+  QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
+#endif
+
   // Print some information which can be useful for debugging
   LoggingUtil::logSystemInformation();
   qInfo().noquote().nospace() << "atools revision " << atools::gitRevision() << " "
