@@ -61,12 +61,12 @@
     <message>
         <location filename="mainwindow.ui" line="153"/>
         <source>&amp;Options ...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Options ...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="156"/>
         <source>Ctrl+Shift+,</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ctrl+Shift+,</translation>
     </message>
     <message>
         <source>&amp;Options</source>
@@ -190,7 +190,7 @@ Vraiment arrêter?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="593"/>
         <source>Starting server. This can take some time ...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Démarrage du serveur. Cela peut prendre un certain temps ...</translation>
     </message>
     <message>
         <source>Starting server. This can take up to a minute ...</source>
@@ -271,12 +271,15 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</source>
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Modifie le rayon autour de l&apos;aéronef utilisateur qui est utilisé pour inclure l&apos;IA ou les aéronefs multijoueurs.
+L&apos;utilisation de valeurs plus élevées avec beaucoup d&apos;aéronefs AI ou multijoueurs peut provoquer des bégaiements dans le simulateur.
+L&apos;unité est toujours le mille nautique (1 NM équivaut à 1,852 km).
+FSX, P3D et MSFS permettent un maximum de 105 NM.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="143"/>
         <source> NM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> NM</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="162"/>
@@ -301,7 +304,10 @@ vous obtenez un message d&apos;erreur comme &quot;L&apos;adresse liée est déj�
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
 Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
 Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La plage autorisée est de 50 à 5000 millisecondes (5 secondes).
+Little Navconnect récupère les données du simulateur de vol et les envoie à tous les clients (c&apos;est-à-dire Little Navmap) en utilisant cet intervalle de temps.
+Des valeurs plus faibles entraîneront un mouvement plus fluide de l&apos;aéronef mais peuvent potentiellement induire des bégaiements dans le simulateur.
+Utilisez des valeurs plus élevées (c&apos;est-à-dire des taux de mise à jour plus lents) si vous avez un réseau lent ou si vous rencontrez des problèmes.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="95"/>
@@ -311,7 +317,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
     <message>
         <location filename="optionsdialog.ui" line="111"/>
         <source>&amp;AI fetch radius (not used for X-Plane):</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rayon de recherche &amp;AI (non utilisé pour X-Plane):</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="121"/>
