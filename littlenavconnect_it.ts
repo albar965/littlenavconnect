@@ -349,12 +349,12 @@ Usa valori più alti (cioè velocità di aggiornamento più lente) se hai una re
         <translation>Configurazione:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="101"/>
+        <location filename="src/main.cpp" line="109"/>
         <source>%1 - Error</source>
         <translation>%1 - Errore</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="102"/>
+        <location filename="src/main.cpp" line="110"/>
         <source>%1 is already running.</source>
         <translation>%1 è già avviato.</translation>
     </message>
