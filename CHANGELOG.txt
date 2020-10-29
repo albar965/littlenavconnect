@@ -5,6 +5,13 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 Version 2.6.2.beta
 
+* Updated Chinese translation. Thanks to John Liu for providing a first draft!
+* Fixed freezing on startup on macOS Big Sur.
+
+===============================================================================
+
+Version 2.6.2.beta
+
 * Italian user interface translation completed. Thanks to Flavio for his work!
 * German program translation completed.
 
