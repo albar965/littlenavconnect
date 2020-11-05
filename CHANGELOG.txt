@@ -3,7 +3,7 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
-Version 2.6.2.beta
+Version 2.6.3.beta
 
 * Updated Chinese translation. Thanks to John Liu for providing a first draft!
 * Fixed freezing on startup on macOS Big Sur.
