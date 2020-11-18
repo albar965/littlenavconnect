@@ -61,12 +61,12 @@
     <message>
         <location filename="mainwindow.ui" line="153"/>
         <source>&amp;Options ...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Opçôes ...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="156"/>
         <source>Ctrl+Shift+,</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Options</source>
@@ -102,14 +102,14 @@
         <location filename="mainwindow.ui" line="197"/>
         <source>FSX, Prepar3D or MSFS</source>
         <oldsource>FSX or Prepar3D</oldsource>
-        <translation type="unfinished">FSX ou Prepar3D</translation>
+        <translation>FSX, Prepar3D ou MSFS</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="200"/>
         <location filename="mainwindow.ui" line="203"/>
         <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
         <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
-        <translation type="unfinished">Conectado com o FSX ou Prepar3D usando SimConnect.</translation>
+        <translation>Conectar ao FSX Prepar3D ou Microsoft Flight Simulator 2020 usando SimConnect.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="206"/>
@@ -190,7 +190,7 @@ Você deseja sair?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="593"/>
         <source>Starting server. This can take some time ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicializando servidor. Isso pode levar um tempo ...</translation>
     </message>
     <message>
         <source>Starting server. This can take up to a minute ...</source>
@@ -219,7 +219,7 @@ Você deseja sair?</translation>
         <location filename="optionsdialog.ui" line="66"/>
         <source>Fetch AI or &amp;multiplayer aircraft</source>
         <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
-        <translation type="unfinished">Buscar AI ou &amp;aeronave no multiplayer</translation>
+        <translation>Buscar AI ou &amp;aeronave multiplayer</translation>
     </message>
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
@@ -272,12 +272,15 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</source>
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Altere o raio ao redor da aeronave do usuário que é usado para incluir AI ou aeronaves multiplayer.
+Usar valores mais altos com muito AI ou aeronaves multiplayer pode induzir a &quot;lags&quot; no simulador.
+A unidade é sempre milhas náuticas (1 NM é igual a 1,852 km).
+FSX, P3D e MSFS permitem um máximo de 105 NM.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="143"/>
         <source> NM</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="162"/>
@@ -292,9 +295,9 @@ you get an error message like &quot;The bound address is already in use&quot;.</
         <oldsource>This can normally be left at default.
 Change this value only if another application occupies this port and 
 you get an error message like &quot;The bound address is already in use&quot;.</oldsource>
-        <translation type="unfinished">Isso normalmente pode ser deixado em padrão
-Mude esse valor somente se outro aplicativo ocupar esta porta e
-Você recebe uma mensagem de erro como &quot;O endereço já está em uso&quot;.</translation>
+        <translation>Normalmente, isso pode ser deixado no padrão.
+Altere este valor apenas se outro aplicativo ocupar esta porta e
+se você recebe uma mensagem de erro como &quot;O endereço vinculado já está em uso&quot;.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="22"/>
@@ -302,7 +305,10 @@ Você recebe uma mensagem de erro como &quot;O endereço já está em uso&quot;.
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
 Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
 Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
-        <translation type="unfinished"></translation>
+        <translation>O intervalo permitido é de 50 a 5.000 milissegundos (5 segundos).
+Little Navconnect busca dados do Flight Simulator e os envia para todos os clientes (ou seja, Little Navmap) usando este intervalo de tempo.
+Valores mais baixos resultarão em um movimento mais fluido da aeronave, mas podem potencialmente induzir lags no simulador.
+Use valores mais altos (ou seja, taxas de atualização mais lentas) se você tiver uma rede lenta ou tiver problemas.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="95"/>
@@ -312,7 +318,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
     <message>
         <location filename="optionsdialog.ui" line="111"/>
         <source>&amp;AI fetch radius (not used for X-Plane):</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Raio de busca AI (não usado para X-Plane):</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="121"/>
@@ -324,7 +330,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
         <location filename="optionsdialog.ui" line="127"/>
         <source>Fetch AI or multiplayer &amp;ships</source>
         <oldsource>Fetch AI or multiplayer</oldsource>
-        <translation type="unfinished">Buscar AI ou &amp;navios no multiplayer (não funciona no X-Plane)</translation>
+        <translation>Buscar AI ou &amp;navios no multiplayer</translation>
     </message>
 </context>
 <context>
@@ -353,7 +359,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
         <location filename="src/mainwindow.cpp" line="67"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;p&gt;Flight Simulator Network para Little Navmap.&lt;/p&gt;&lt;p&gt;Este software está licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt; GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte para este aplicativo está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Server Flight Simulator Network para Little Navmap.&lt;/p&gt;&lt;p&gt;Este software está licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt; GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte para este aplicativo está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="119"/>
