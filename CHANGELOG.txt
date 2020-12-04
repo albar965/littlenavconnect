@@ -3,6 +3,12 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
+Version 2.6.5.rc1
+
+* Included updated manual.
+
+===============================================================================
+
 Version 2.6.3.beta
 
 * Updated Chinese translation. Thanks to John Liu for providing a first draft!
