@@ -61,12 +61,12 @@
     <message>
         <location filename="mainwindow.ui" line="153"/>
         <source>&amp;Options ...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Opties ...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="156"/>
         <source>Ctrl+Shift+,</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+,</translation>
     </message>
     <message>
         <source>&amp;Options</source>
@@ -102,14 +102,14 @@
         <location filename="mainwindow.ui" line="197"/>
         <source>FSX, Prepar3D or MSFS</source>
         <oldsource>FSX or Prepar3D</oldsource>
-        <translation type="unfinished">FSX of Prepar3D</translation>
+        <translation>FSX, Prepar3D of MSFS</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="200"/>
         <location filename="mainwindow.ui" line="203"/>
         <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
         <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
-        <translation type="unfinished">Verbinden met FSX of Prepar3D met SimConnect.</translation>
+        <translation>Verbinden met FSX Prepar3D of Microsoft Flight Simulator 2020 met SimConnect.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="206"/>
@@ -190,7 +190,7 @@ Toch Stoppen?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="593"/>
         <source>Starting server. This can take some time ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Opstarten Server. Dit kan een tijdje duren ...</translation>
     </message>
     <message>
         <source>Starting server. This can take up to a minute ...</source>
@@ -219,7 +219,7 @@ Toch Stoppen?</translation>
         <location filename="optionsdialog.ui" line="66"/>
         <source>Fetch AI or &amp;multiplayer aircraft</source>
         <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
-        <translation type="unfinished">Ophalen AI of multiplayer &amp;vliegtuigen</translation>
+        <translation>Ophalen AI of multiplayer &amp;vliegtuigen</translation>
     </message>
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
@@ -271,12 +271,15 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</source>
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Wijzigt de radius rond het vliegtuig van de gebruiker (wordt gebruikt voor de AI of multiplayer vliegtuigen).
+Hogere waarden met een hoog aantal AI of multiplayer vliegtuigen kunnen mogelijk kleine schokkende bewegingen veroorzaken.
+De eenheid is altijd nautical mijlen (1 NM is gelijk aan 1.852 km).
+FSX, P3D en MSFS laten een maxium van 105 NM toe.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="143"/>
         <source> NM</source>
-        <translation type="unfinished"></translation>
+        <translation> NM</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="162"/>
@@ -291,7 +294,7 @@ you get an error message like &quot;The bound address is already in use&quot;.</
         <oldsource>This can normally be left at default.
 Change this value only if another application occupies this port and 
 you get an error message like &quot;The bound address is already in use&quot;.</oldsource>
-        <translation type="unfinished">Dit kan normaal gezien standaard gelaten worden.
+        <translation>Dit kan normaal gezien standaard gelaten worden.
 Verander deze waarde enkel als een andere applicatie deze poort gebruikt en 
 als je een foutbericht krijgt zoals &quot;The bound address is already in use&quot;.</translation>
     </message>
@@ -301,7 +304,10 @@ als je een foutbericht krijgt zoals &quot;The bound address is already in use&qu
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
 Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
 Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toegelaten waarden van 50 tot 5000 milliseconden (5 seconden).
+Little Navconnect haalt data van Flight Simulator en zend dit naar alle clienten (vb. Little Navmap) met dit ingesteld tijdsinterval.
+Lagere waarden zullen resulteren in een vloeiender beweging van het vliegtuig maar kan mogelijk kleine schokkende bewegingen veroorzaken.
+Hogere waarden instellen vb. trage update waarden) instellen als je een zwakke internetverbinding hebt of als je problemen ondervindt.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="95"/>
@@ -311,7 +317,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
     <message>
         <location filename="optionsdialog.ui" line="111"/>
         <source>&amp;AI fetch radius (not used for X-Plane):</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;AI ophaalradius (niet gebruikt voor X-Plane):</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="121"/>
@@ -323,7 +329,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
         <location filename="optionsdialog.ui" line="127"/>
         <source>Fetch AI or multiplayer &amp;ships</source>
         <oldsource>Fetch AI or multiplayer</oldsource>
-        <translation type="unfinished">Ophalen van AI of multiplayer &amp;schepen (niet X-Plane)</translation>
+        <translation>Ophalen van AI of multiplayer &amp;schepen</translation>
     </message>
 </context>
 <context>
@@ -352,7 +358,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
         <location filename="src/mainwindow.cpp" line="67"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;p&gt;is de Fligh Simulator Network agent voor Little Navmap.&lt;/p&gt;&lt;p&gt;Deze software is gelicencieerd bij &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; of gelijk welke latere versie.&lt;/p&gt;&lt;p&gt;De broncode voor deze applicatie is beschikbaar op &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Meer over mijn projecten op &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p style=&apos;white-space:pre&apos;&gt;is de Fligh Simulator Network agent voor Little Navmap.&lt;/p&gt;&lt;p&gt;Deze software is gelicencieerd bij &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; of gelijk welke latere versie.&lt;/p&gt;&lt;p&gt;De broncode voor deze applicatie is beschikbaar op &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Meer over mijn projecten op &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2020 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="119"/>
