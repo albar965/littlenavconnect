@@ -2,7 +2,7 @@ Little Navconnect
 =================
 
 Little Navconnect is a free open source application that acts as an agent connecting Little Navmap
-with a FSX, Prepar3D or X-Plane flight simulator.
+with a FSX, Prepar3D, Microsoft Flight Simulator 2020 or X-Plane flight simulator.
 
 This allows to use Little Navmap on Linux or Mac and saves the the pain of setting up remote SimConnect links.
 
@@ -44,12 +44,6 @@ It is recommended to delete the any old installation directories of Little Navco
 You can also install a newer version into another directory but do not merge the installations.
 
 Anyway, no settings are a stored in the installation directory. Therefore it is safe to remove it.
-
-In some cases you have to install the MS Visual C++ 2013 Redistributable package
-(https://www.microsoft.com/en-US/download/details.aspx?id=40784). Install both 32 and 64 bit versions.
-Usually this is already installed since many other programs require it.
-
-See in the online manual if installing for other Simulators than FSX SP2.
 
 See the online manual for more details.
 
