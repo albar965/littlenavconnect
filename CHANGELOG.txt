@@ -1,6 +1,11 @@
 Numbers (#) refer to GitHub issues in project `littlenavmap`.
 For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
+Version 2.6.6
+
+* Version change for stable.
+* Updated manuals.
+
 ===============================================================================
 
 Version 2.6.5.rc1
