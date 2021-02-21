@@ -1,6 +1,24 @@
 Numbers (#) refer to GitHub issues in project `littlenavmap`.
 For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
+===============================================================================
+
+# Version 2.6.8
+
+* Fixed issue where weather from FSX and P3D was not transferred across networked connections.
+* Reverted change that was needed for work around a MSFS crash which occured when connecting. Now
+  fetching destination and departure for AI aircraft again.
+
+===============================================================================
+
+Version 2.6.7
+
+* **Added workaround for MSFS crashes that were introduced with the MSFS 1.12.13.0 update.**
+  This was possible due to a hint in the official forum. The workaround disables the display of departure and
+  destination for AI.
+
+===============================================================================
+
 Version 2.6.6
 
 * Version change for stable.
