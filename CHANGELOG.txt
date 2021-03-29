@@ -3,6 +3,12 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
+# Version 2.6.9
+
+* Updated address for contact and support.
+
+===============================================================================
+
 # Version 2.6.8
 
 * Fixed issue where weather from FSX and P3D was not transferred across networked connections.
