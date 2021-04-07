@@ -6,7 +6,7 @@
     <message>
         <location filename="mainwindow.ui" line="14"/>
         <source>Little Navconnect</source>
-        <translation></translation>
+        <translation>Little Navconnect</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="59"/>
@@ -36,22 +36,22 @@
     <message>
         <location filename="mainwindow.ui" line="112"/>
         <source>Ctrl+Q</source>
-        <translation></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="121"/>
         <source>&amp;About Little Navconnect</source>
-        <translation>关于Little Navconnect（&amp;A）</translation>
+        <translation>关于 Little Navconnect(&amp;A)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="130"/>
         <source>About &amp;Qt</source>
-        <translation>关于 &amp;Qt</translation>
+        <translation>关于 Qt(&amp;Q)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="139"/>
         <source>&amp;Contents (Online)</source>
-        <translation>帮助内容（在线&amp;C）</translation>
+        <translation>帮助内容（在线）(&amp;C)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="144"/>
@@ -61,12 +61,12 @@
     <message>
         <location filename="mainwindow.ui" line="153"/>
         <source>&amp;Options ...</source>
-        <translation>选项（&amp;O）...</translation>
+        <translation>选项(&amp;O)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="156"/>
         <source>Ctrl+Shift+,</source>
-        <translation></translation>
+        <translation>Ctrl+Shift+,</translation>
     </message>
     <message>
         <source>&amp;Options</source>
@@ -75,12 +75,12 @@
     <message>
         <location filename="mainwindow.ui" line="161"/>
         <source>&amp;Save Replay File ...</source>
-        <translation>保存回放文件（&amp;S） ...</translation>
+        <translation>保存回放文件(&amp;S) ...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="166"/>
         <source>Open Replay &amp;File ...</source>
-        <translation>打开回放文件（&amp;F） ...</translation>
+        <translation>打开回放文件(&amp;F) ...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="169"/>
@@ -96,50 +96,50 @@
     <message>
         <location filename="mainwindow.ui" line="186"/>
         <source>&amp;Contents (Offline, PDF)</source>
-        <translation>帮助内容（离线PDF&amp;C）</translation>
+        <translation>帮助内容（离线 PDF）(&amp;C)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="197"/>
         <source>FSX, Prepar3D or MSFS</source>
         <oldsource>FSX or Prepar3D</oldsource>
-        <translation>FSX Prepar3D 或MSFS</translation>
+        <translation>FSX、Prepar3D 或 MSFS</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="200"/>
         <location filename="mainwindow.ui" line="203"/>
         <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
         <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
-        <translation>使用SimConnect连接到FSX Prepar3D或者微软飞信模拟器2020。</translation>
+        <translation>使用 SimConnect 连接到 FSX、Prepar3D 或者微软飞信模拟器 2020。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="206"/>
         <source>Ctrl+Shift+F</source>
-        <translation></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="214"/>
         <source>X-Plane</source>
-        <translation></translation>
+        <translation>X-Plane</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="217"/>
         <source>Connect to X-Plane using the Little Xpconnect plugin.</source>
-        <translation>使用Xpconnect连接到X-Plane。</translation>
+        <translation>使用 Xpconnect 插件连接到 X-Plane。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="220"/>
         <source>Ctrl+Shift+X</source>
-        <translation></translation>
+        <translation>Ctrl+Shift+X</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="271"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
-        <translation>正在使用SimConnect连接到FSX 或 Prepar3D。</translation>
+        <translation>正在使用 SimConnect 连接到 FSX 或 Prepar3D。</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="277"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
-        <translation>正在使用Xpconnect连接到X-Plane。</translation>
+        <translation>正在使用 Xpconnect 插件连接到X-Plane。</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="295"/>
@@ -150,7 +150,7 @@
         <location filename="src/mainwindow.cpp" line="295"/>
         <location filename="src/mainwindow.cpp" line="311"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
-        <translation>回放文举 (*.replay);;所有文件 (*)</translation>
+        <translation>回放文件（*.replay）;;所有文件 (*)</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="311"/>
@@ -161,7 +161,7 @@
         <location filename="src/mainwindow.cpp" line="393"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
-        <translation>仍然有程序已连接。
+        <translation>有程序还在连接中。
 真的要改变网络端口号吗？</translation>
     </message>
     <message>
@@ -174,18 +174,18 @@ Really change the Network Port?</source>
         <location filename="src/mainwindow.cpp" line="501"/>
         <source>There are still applications connected.
 Really Quit?</source>
-        <translation>仍然有程序已连接。
-真的要退出吗？</translation>
+        <translation>有程序还在连接中。
+真的要退出？</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="522"/>
         <source>Version %1 (revision %2).</source>
-        <translation>版本 %1 (修订 %2)。</translation>
+        <translation>版本 %1（修点版本 %2）。</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="526"/>
         <source>Data Version %1. Reply Version %2.</source>
-        <translation>数据 %1。回放版本 %2。</translation>
+        <translation>数据版本 %1。回放版本 %2。</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="593"/>
@@ -213,13 +213,13 @@ Really Quit?</source>
         <location filename="optionsdialog.ui" line="60"/>
         <location filename="optionsdialog.ui" line="63"/>
         <source>Deselect to disable fetching and transmission of AI or multiplayer aircraft</source>
-        <translation>取消选中以禁止获取及传输AI或多人游戏航空器</translation>
+        <translation>取消选中以禁止获取及传输 AI 或多人游戏航空器</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="66"/>
         <source>Fetch AI or &amp;multiplayer aircraft</source>
         <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
-        <translation>获取AI或多人游戏航空器（&amp;A）</translation>
+        <translation>获取 AI 或多人游戏航空器（&amp;A）</translation>
     </message>
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
@@ -232,7 +232,7 @@ Little Navconnect 每隔相应的时间会向模拟器获取数据并发送到�
     <message>
         <location filename="optionsdialog.ui" line="28"/>
         <source>Allowed range is 50 milliseconds up to 2 seconds.  Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
-        <translation>允许的范围是50毫秒到2秒。Little Navconnect 每隔相应的时间会向模拟器获取数据并发送到所有的客户端（例如Little Navmap）。</translation>
+        <translation>允许的范围是 50 毫秒到 2 秒。Little Navconnect 每隔相应的时间会向模拟器获取数据并发送到所有的客户端（例如 Little Navmap）。</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="31"/>
@@ -243,23 +243,23 @@ Little Navconnect 每隔相应的时间会向模拟器获取数据并发送到�
         <location filename="optionsdialog.ui" line="76"/>
         <source>Select this if you do not want to reveal your hostname or IP address in the log window.
 This can be useful for streaming sessions where others can see your desktop.</source>
-        <translation>如您不愿意日志窗口中显示您的主机名或IP地址可以选中此选项。
+        <translation>如您不愿意日志窗口中显示您的主机名或 IP 地址可以选中此选项。
 这将会在有其他人可以看到您的桌面的在线直播会话中有用。</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="80"/>
         <source>Select this if you do not want to reveal your hostname or IP address in the log window.\nThis can be useful for streaming sessions where others can see your desktop.</source>
-        <translation>如您不愿意日志窗口中显示您的主机名或IP地址可以选中此选项。这将会在有其他人可以看到您的桌面的在线直播会话中有用。</translation>
+        <translation>如您不愿意日志窗口中显示您的主机名或 IP 地址可以选中此选项。这将会在有其他人可以看到您的桌面的在线直播会话中有用。</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="83"/>
         <source>&amp;Hide hostname and IP in log window</source>
-        <translation>在日志窗口中隐藏主机名及IP地址（&amp;H）</translation>
+        <translation>在日志窗口中隐藏主机名及 IP 地址(&amp;H)</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="50"/>
         <source>&amp;Network Port:</source>
-        <translation>网络端口（&amp;N）：</translation>
+        <translation>网络端口(&amp;N)：</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="137"/>
@@ -271,20 +271,20 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</source>
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
-        <translation>更改用于包含用户周围AI或多人飞行器的半径。
-在很多AI或多人游戏的时候使用较高的值可能会导致模拟器出现卡顿现象。
-单位始终为海里（1 NM等于1.852 km）。
-FSX，P3D和MSFS允许最大105 NM。</translation>
+        <translation>更改用于包含用户周围 AI 或多人飞行器的半径。
+在很多 AI 或多人游戏的时候使用较高的值可能会导致模拟器出现卡顿现象。
+单位始终为海里（1 NM 等于 1.852 km）。
+FSX、P3D 和 MSFS 允许最大 105 NM。</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="143"/>
         <source> NM</source>
-        <translation> 海里(NM)</translation>
+        <translation> 海里</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="162"/>
         <source>&amp;Update Time Interval:</source>
-        <translation>更新时间间隔（&amp;U）：</translation>
+        <translation>更新时间间隔(&amp;U)：</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="90"/>
@@ -303,8 +303,8 @@ you get an error message like &quot;The bound address is already in use&quot;.</
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
 Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
 Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
-        <translation>允许的范围是50到5000毫秒（5秒）。
-Little Navconnect使用该时间间隔从Flight Simulator提取数据并将其发送给所有客户端（即Little Navmap）。
+        <translation>允许的范围是 50 到 5000 毫秒（5秒）。
+Little Navconnect 使用该时间间隔从飞行模拟器提取数据并将其发送给所有客户端（即 Little Navmap）。
 较低的值将导致飞机运动更加流畅，但可能会导致模拟器卡顿。
 如果您的网络速度较慢或遇到问题，请使用较高的值（即更新速度较慢）。</translation>
     </message>
@@ -316,19 +316,19 @@ Little Navconnect使用该时间间隔从Flight Simulator提取数据并将其�
     <message>
         <location filename="optionsdialog.ui" line="111"/>
         <source>&amp;AI fetch radius (not used for X-Plane):</source>
-        <translation>获取AI半径(不适用于X-Plane)（&amp;S）：</translation>
+        <translation>获取 AI 半径（不适用于 X-Plane）(&amp;S)：</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="121"/>
         <location filename="optionsdialog.ui" line="124"/>
         <source>Deselect to disable fetching and transmission of AI or multiplayer ships. This option does not apply to X-Plane.</source>
-        <translation>取消选中以禁止获取及传输AI或多人游戏航船舶。这个选色不适用与X-Plane。</translation>
+        <translation>取消选中以禁止获取及传输 AI 或多人游戏航航船。这个选色不适用与 X-Plane。</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="127"/>
         <source>Fetch AI or multiplayer &amp;ships</source>
         <oldsource>Fetch AI or multiplayer</oldsource>
-        <translation>获取AI或多人游戏船舶（&amp;S）</translation>
+        <translation>获取 AI 或多人游戏航船(&amp;S)</translation>
     </message>
 </context>
 <context>
@@ -357,12 +357,12 @@ Little Navconnect使用该时间间隔从Flight Simulator提取数据并将其�
         <location filename="src/mainwindow.cpp" line="67"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;p&gt;是Little Navmap的飞行模拟器网络代理&lt;/p&gt;&lt;p&gt;这个软件由&lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; 或更新版本授权。&lt;/p&gt;&lt;p&gt;此程序的源代码在 &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;更多关于我的项目： &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;是 Little Navmap 的飞行模拟器网络代理&lt;/p&gt;&lt;p&gt;这个软件由 &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; 或更新版本授权。&lt;/p&gt;&lt;p&gt;此程序的源代码在 &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;更多关于我的项目：&lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;。&lt;/p&gt;&lt;p&gt;&lt;b&gt;版权所有 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="119"/>
         <source>Save replay data to &lt;file&gt;.</source>
-        <translation>保存回放到 &lt;文件&gt;。</translation>
+        <translation>保存回放到 &lt;file&gt;。</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="120"/>
@@ -373,12 +373,12 @@ Little Navconnect使用该时间间隔从Flight Simulator提取数据并将其�
     <message>
         <location filename="src/mainwindow.cpp" line="124"/>
         <source>Load replay data from &lt;file&gt;.</source>
-        <translation>自 &lt;文件&gt;载入回放。</translation>
+        <translation>自 &lt;file&gt; 载入回放。</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="129"/>
         <source>Use speed factor &lt;speed&gt; for replay.</source>
-        <translation>使用倍数&lt;speed&gt;回放。</translation>
+        <translation>以 &lt;speed&gt; 倍速回放。</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="130"/>
