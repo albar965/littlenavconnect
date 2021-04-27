@@ -6,6 +6,8 @@ with a FSX, Prepar3D, Microsoft Flight Simulator 2020 or X-Plane flight simulato
 
 This allows to use Little Navmap on Linux or Mac and saves the the pain of setting up remote SimConnect links.
 
+Issues can be submitted at https://github.com/albar965/littlenavmap/issues .
+
 Network scenario for FSX or Prepar3D using SimConnect:
 
 |Windows Machine                                   |     Windows, Linux or Mac Machines  |
