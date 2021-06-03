@@ -3,6 +3,22 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
+# Version 2.6.10.beta
+
+**You have to update/reinstall *Little Navmap* and *Little Xpconnect* if you use these since
+the data protocol has changed.**
+
+This version is compatible with *Little Navmap* 2.6.12.beta and *Little Xpconnect* 1.0.23.beta or
+newer.
+
+* Added transponder code to user and AI aircraft. Fetching transponder code for all simulators now.
+  Increased data version to 11 to force incompatibility. Added properties to avoid future
+  incompatibilities when adding new value types. albar965/littlenavmap#525
+* Prepared user aircraft data blocks for future functions. Added data flags to allow omitting
+  strings. Added autopilot set target altitude.
+
+===============================================================================
+
 # Version 2.6.9
 
 * Updated address for contact and support.
