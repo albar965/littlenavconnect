@@ -3,7 +3,7 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
-# Version 2.6.10.beta
+# Version 2.6.11
 
 **You have to update/reinstall *Little Navmap* and *Little Xpconnect* if you use these since
 the data protocol has changed.**
@@ -16,6 +16,12 @@ newer.
   incompatibilities when adding new value types. albar965/littlenavmap#525
 * Prepared user aircraft data blocks for future functions. Added data flags to allow omitting
   strings. Added autopilot set target altitude.
+
+===============================================================================
+
+# Version 2.6.10.beta
+
+Unofficial beta release.
 
 ===============================================================================
 
