@@ -8,7 +8,7 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 **You have to update/reinstall *Little Navmap* and *Little Xpconnect* if you use these since
 the data protocol has changed.**
 
-This version is compatible with *Little Navmap* 2.6.12.beta and *Little Xpconnect* 1.0.23.beta or
+This version is compatible with *Little Navmap* 2.6.13 and *Little Xpconnect* 1.0.24 or
 newer.
 
 * Added transponder code to user and AI aircraft. Fetching transponder code for all simulators now.
