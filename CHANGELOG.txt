@@ -3,6 +3,13 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
+# Version 2.6.14
+
+* Updated version to the same as *Little Navmap*.
+* Updated Qt libraries to 5.12.11.
+
+===============================================================================
+
 # Version 2.6.11
 
 **You have to update/reinstall *Little Navmap* and *Little Xpconnect* if you use these since
