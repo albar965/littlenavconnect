@@ -31,8 +31,8 @@ the examples below. Avoid paths with spaces if possible.
 
 ## Windows
 
-- Get OpenSSL binaries from https://bintray.com/vszakats/generic/openssl and extract them
-  to the project directory. You need to get one like "openssl-1.1.1d-win32-mingw.zip".
+- Get OpenSSL binaries from https://wiki.openssl.org/index.php/Binaries/ and extract them
+  to the project directory.
   You might use any 1.1.1 version but have to adapt the OPENSSL_PATH if it differs.
 - Install SimConnect if needed (optional). The FSX SP2 is the preferred version.
 - Clone littlenavconnect from GIT (`git clone https://github.com/albar965/littlenavconnect.git`)
