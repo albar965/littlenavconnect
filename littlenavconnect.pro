@@ -29,7 +29,7 @@
 #
 # OPENSSL_PATH
 # Windows: Base path of WinSSL 1.1.1 installation (https://slproweb.com/products/Win32OpenSSL.html).
-#          Defaults to ../openssl-1.1.1d-win32-mingw" if empty.
+#          Defaults to ../openssl" if empty.
 # Linux:   Not used.
 # macOS:   Not used.
 #
@@ -84,7 +84,7 @@ isEmpty(DEPLOY_BASE) : DEPLOY_BASE=$$PWD/../deploy
 isEmpty(ATOOLS_INC_PATH) : ATOOLS_INC_PATH=$$PWD/../atools/src
 isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
 
-win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=$$PWD/../openssl-1.1.1d-win32-mingw
+win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=$$PWD/../openssl
 
 # =======================================================================
 # Set compiler flags and paths
@@ -102,7 +102,7 @@ unix:!macx {
 win32 {
   WINDEPLOY_FLAGS = --compiler-runtime
   CONFIG(debug, debug|release) : WINDEPLOY_FLAGS += --debug
-  CONFIG(release, debug|release) : WINDEPLOY_FLAGS += --release
+#  CONFIG(release, debug|release) : WINDEPLOY_FLAGS += --release
 
   LIBS += -L$$OPENSSL_PATH
 
@@ -325,8 +325,8 @@ win32 {
   deploy.commands += xcopy /i /s /e /f /y $$p($$PWD/etc) $$p($$DEPLOY_BASE/$$TARGET_NAME/etc) &&
   deploy.commands += del /f /q $$p($$DEPLOY_BASE/$$TARGET_NAME/etc/SimConnect.dll) &&
   deploy.commands += xcopy $$p($$PWD/etc/SimConnect.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$OPENSSL_PATH\libcrypto-1_1.dll $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$OPENSSL_PATH\libssl-1_1.dll $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$OPENSSL_PATH\libcrypto*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$OPENSSL_PATH\libssl*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
   deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libgcc*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
   deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libstdc*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
   deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libwinpthread*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
