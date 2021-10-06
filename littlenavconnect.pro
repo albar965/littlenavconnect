@@ -28,8 +28,8 @@
 # ("../build-atools-$${CONF_TYPE}/$${CONF_TYPE}" on Windows) if not set.
 #
 # OPENSSL_PATH
-# Windows: Base path of WinSSL 1.1.1 installation (https://slproweb.com/products/Win32OpenSSL.html).
-#          Defaults to ../openssl" if empty.
+# Windows: Base path of WinSSL 1.1.1 installation which can optionally installed with the Qt Installer.
+#          Defaults to "$$[QT_INSTALL_PREFIX])\..\..\Tools\OpenSSL\Win_x86\bin\" (e.g. "C:\Qt\Tools\OpenSSL\Win_x86\bin\") if empty.
 # Linux:   Not used.
 # macOS:   Not used.
 #
@@ -84,7 +84,9 @@ isEmpty(DEPLOY_BASE) : DEPLOY_BASE=$$PWD/../deploy
 isEmpty(ATOOLS_INC_PATH) : ATOOLS_INC_PATH=$$PWD/../atools/src
 isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
 
-win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=$$PWD/../openssl
+# QT_INSTALL_PREFIX: C:/Qt/5.15.2/mingw81_32
+# C:\Qt\Tools\OpenSSL\Win_x86\bin\
+win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=$$[QT_INSTALL_PREFIX])\..\..\Tools\OpenSSL\Win_x86\bin\
 
 # =======================================================================
 # Set compiler flags and paths
@@ -103,8 +105,6 @@ win32 {
   WINDEPLOY_FLAGS = --compiler-runtime
   CONFIG(debug, debug|release) : WINDEPLOY_FLAGS += --debug
 #  CONFIG(release, debug|release) : WINDEPLOY_FLAGS += --release
-
-  LIBS += -L$$OPENSSL_PATH
 
   !isEmpty(SIMCONNECT_PATH) {
     DEFINES += SIMCONNECT_BUILD
