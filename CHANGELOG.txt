@@ -3,6 +3,19 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
+# Version 2.6.17
+
+* Updated version to the same as *Little Navmap*.
+* Updated to Qt library version 5.15.2.
+
+===============================================================================
+
+# Version 2.6.16
+
+Skipped.
+
+===============================================================================
+
 # Version 2.6.15
 
 * Updated version to the same as *Little Navmap*.
