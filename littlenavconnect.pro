@@ -27,12 +27,6 @@
 # Optional. Path to atools static library. Default is "../build-atools-$${CONF_TYPE}"
 # ("../build-atools-$${CONF_TYPE}/$${CONF_TYPE}" on Windows) if not set.
 #
-# OPENSSL_PATH
-# Windows: Base path of WinSSL 1.1.1 installation which can optionally installed with the Qt Installer.
-#          Defaults to "$$[QT_INSTALL_PREFIX])\..\..\Tools\OpenSSL\Win_x86\bin\" (e.g. "C:\Qt\Tools\OpenSSL\Win_x86\bin\") if empty.
-# Linux:   Not used.
-# macOS:   Not used.
-#
 # ATOOLS_GIT_PATH
 # Optional. Path to GIT executable. Revision will be set to "UNKNOWN" if not set.
 # Uses "git" on macOS and Linux as default if not set.
@@ -67,7 +61,6 @@ TARGET_NAME=Little Navconnect
 
 ATOOLS_INC_PATH=$$(ATOOLS_INC_PATH)
 ATOOLS_LIB_PATH=$$(ATOOLS_LIB_PATH)
-OPENSSL_PATH=$$(OPENSSL_PATH)
 GIT_PATH=$$(ATOOLS_GIT_PATH)
 SIMCONNECT_PATH=$$(ATOOLS_SIMCONNECT_PATH)
 DEPLOY_BASE=$$(DEPLOY_BASE)
@@ -83,10 +76,6 @@ isEmpty(DEPLOY_BASE) : DEPLOY_BASE=$$PWD/../deploy
 
 isEmpty(ATOOLS_INC_PATH) : ATOOLS_INC_PATH=$$PWD/../atools/src
 isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
-
-# QT_INSTALL_PREFIX: C:/Qt/5.15.2/mingw81_32
-# C:\Qt\Tools\OpenSSL\Win_x86\bin\
-win32: isEmpty(OPENSSL_PATH) : OPENSSL_PATH=$$[QT_INSTALL_PREFIX])\..\..\Tools\OpenSSL\Win_x86\bin\
 
 # =======================================================================
 # Set compiler flags and paths
@@ -156,7 +145,6 @@ exists($$PWD/../build_options.pro) {
 message(-----------------------------------)
 message(GIT_PATH: $$GIT_PATH)
 message(GIT_REVISION: $$GIT_REVISION)
-message(OPENSSL_PATH: $$OPENSSL_PATH)
 message(ATOOLS_INC_PATH: $$ATOOLS_INC_PATH)
 message(ATOOLS_LIB_PATH: $$ATOOLS_LIB_PATH)
 message(DEPLOY_BASE: $$DEPLOY_BASE)
@@ -260,8 +248,6 @@ unix:!macx {
   deploy.commands += cp -vf $$PWD/LICENSE.txt $$DEPLOY_DIR &&
   deploy.commands += cp -vf $$PWD/resources/icons/navconnect.svg $$DEPLOY_DIR/littlenavconnect.svg &&
   deploy.commands += cp -vf \"$$PWD/desktop/Little Navconnect.desktop\" $$DEPLOY_DIR &&
-  exists(/usr/lib/x86_64-linux-gnu/libssl.so) : deploy.commands += cp -vfaL /usr/lib/x86_64-linux-gnu/libssl.so $${DEPLOY_DIR_LIB}/libssl.so &&
-  exists(/usr/lib/x86_64-linux-gnu/libcrypto.so) : deploy.commands += cp -vfaL /usr/lib/x86_64-linux-gnu/libcrypto.so $${DEPLOY_DIR_LIB}/libcrypto.so &&
   deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_DIR/translations &&
   deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_DIR/translations &&
   deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_DIR/translations &&
@@ -325,8 +311,6 @@ win32 {
   deploy.commands += xcopy /i /s /e /f /y $$p($$PWD/etc) $$p($$DEPLOY_BASE/$$TARGET_NAME/etc) &&
   deploy.commands += del /f /q $$p($$DEPLOY_BASE/$$TARGET_NAME/etc/SimConnect.dll) &&
   deploy.commands += xcopy $$p($$PWD/etc/SimConnect.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$OPENSSL_PATH\libcrypto*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$OPENSSL_PATH\libssl*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
   deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libgcc*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
   deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libstdc*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
   deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libwinpthread*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
