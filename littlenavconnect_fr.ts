@@ -213,13 +213,13 @@ Vraiment arrêter?</translation>
         <location filename="optionsdialog.ui" line="60"/>
         <location filename="optionsdialog.ui" line="63"/>
         <source>Deselect to disable fetching and transmission of AI or multiplayer aircraft</source>
-        <translation>Désélectionner pour désactiver la récupération et la transmission de l&apos;IA ou des aéronefs multijoueurs</translation>
+        <translation type="unfinished">Désélectionner pour désactiver la récupération et la transmission de l&apos;IA ou des avions multijoueurs</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="66"/>
         <source>Fetch AI or &amp;multiplayer aircraft</source>
         <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
-        <translation type="unfinished">Apportez de l&apos;IA ou un &amp;aéronef multijoueur</translation>
+        <translation type="unfinished">Apportez de l&apos;IA ou un &amp;avion multijoueur</translation>
     </message>
     <message>
         <source>Allowed range is 50 milliseconds up to 2 seconds.
@@ -271,8 +271,8 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</source>
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
-        <translation type="unfinished">Modifie le rayon autour de l&apos;aéronef utilisateur qui est utilisé pour inclure l&apos;IA ou les aéronefs multijoueurs.
-L&apos;utilisation de valeurs plus élevées avec beaucoup d&apos;aéronefs AI ou multijoueurs peut provoquer des bégaiements dans le simulateur.
+        <translation type="unfinished">Modifie le rayon autour de l&apos;avion utilisateur qui est utilisé pour inclure l&apos;IA ou les avions multijoueurs.
+L&apos;utilisation de valeurs plus élevées avec beaucoup d&apos;avions AI ou multijoueurs peut provoquer des bégaiements dans le simulateur.
 L&apos;unité est toujours le mille nautique (1 NM équivaut à 1,852 km).
 FSX, P3D et MSFS permettent un maximum de 105 NM.</translation>
     </message>
@@ -306,7 +306,7 @@ Lower values will result in a more fluid aircraft movement but can potentially i
 Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
         <translation type="unfinished">La plage autorisée est de 50 à 5000 millisecondes (5 secondes).
 Little Navconnect récupère les données du simulateur de vol et les envoie à tous les clients (c&apos;est-à-dire Little Navmap) en utilisant cet intervalle de temps.
-Des valeurs plus faibles entraîneront un mouvement plus fluide de l&apos;aéronef mais peuvent potentiellement induire des bégaiements dans le simulateur.
+Des valeurs plus faibles entraîneront un mouvement plus fluide de l&apos;avion mais peuvent potentiellement induire des bégaiements dans le simulateur.
 Utilisez des valeurs plus élevées (c&apos;est-à-dire des taux de mise à jour plus lents) si vous avez un réseau lent ou si vous rencontrez des problèmes.</translation>
     </message>
     <message>
