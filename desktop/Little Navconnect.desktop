@@ -1,10 +1,12 @@
 [Desktop Entry]
 Type=Application
-Exec=YOUR_PATH_TO_LITTLENAVCONNECT/littlenavconnect
-Path=YOUR_PATH_TO_LITTLENAVCONNECT/
+Exec='YOUR_PATH/Little Navmap/Little Navconnect/littlenavconnect'
+# replace spaces with \s
+Path=YOUR_PATH/Little\sNavmap/Little\sNavconnect
+# replace spaces with \s
+Icon=YOUR_PATH/Little\sNavmap/Little\sNavconnect/littlenavconnect.svg
 Name=Little Navconnect
 GenericName=Little Navconnect
-Icon=YOUR_PATH_TO_LITTLENAVMAP/littlenavconnect.svg
 Terminal=false
 Categories=Qt;Utility;Geography;Maps;
 
