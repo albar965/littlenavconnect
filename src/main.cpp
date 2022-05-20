@@ -61,12 +61,11 @@ int main(int argc, char *argv[])
   Application::setOrganizationName("ABarthel");
   Application::setOrganizationDomain("littlenavmap.org");
 
-  Application::setApplicationVersion("2.6.17"); // VERSION_NUMBER - Little Navconnect
+  Application::setApplicationVersion(VERSION_NUMBER_LITTLENAVCONNECT); // VERSION_NUMBER - Little Navconnect
   Application::setEmailAddresses({"alex@littlenavmap.org"});
 
   // Initialize logging and force logfiles into the system or user temp directory
-  LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(
-                                      ":/littlenavconnect/resources/config/logging.cfg"));
+  LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(":/littlenavconnect/resources/config/logging.cfg"));
 
   Application::addReportPath(QObject::tr("Log files:"), LoggingHandler::getLogFiles());
 
@@ -83,7 +82,7 @@ int main(int argc, char *argv[])
   // Print some information which can be useful for debugging
   LoggingUtil::logSystemInformation();
   qInfo().noquote().nospace() << "atools revision " << atools::gitRevision() << " "
-                              << Application::applicationName() << " revision " << GIT_REVISION;
+                              << Application::applicationName() << " revision " << GIT_REVISION_LITTLENAVCONNECT;
 
   LoggingUtil::logStandardPaths();
   qInfo() << "SSL supported" << QSslSocket::supportsSsl()

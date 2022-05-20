@@ -91,7 +91,7 @@ MainWindow::MainWindow()
   if(version.isStable() || version.isReleaseCandidate() || version.isBeta())
     newTitle += QString(" %1").arg(version.getVersionString());
   else
-    newTitle += QString(" %1 (%2)").arg(version.getVersionString()).arg(GIT_REVISION);
+    newTitle += QString(" %1 (%2)").arg(version.getVersionString()).arg(GIT_REVISION_LITTLENAVCONNECT);
 
 #ifndef QT_NO_DEBUG
   newTitle += " - DEBUG";
@@ -156,7 +156,7 @@ MainWindow::MainWindow()
   atools::logging::LoggingHandler::setLogFunction(std::bind(&MainWindow::logGuiMessage, this, _1, _2, _3));
 
   // Create help handler for managing the Help menu items
-  helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION);
+  helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION_LITTLENAVCONNECT);
 
   int defaultPort = Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
   bool hideHostname =
@@ -520,7 +520,7 @@ void MainWindow::mainWindowShown()
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << QApplication::applicationName();
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
-    arg(QApplication::applicationVersion()).arg(GIT_REVISION);
+    arg(QApplication::applicationVersion()).arg(GIT_REVISION_LITTLENAVCONNECT);
 
   qInfo(atools::fs::ns::gui).noquote().nospace()
     << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
