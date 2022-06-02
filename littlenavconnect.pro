@@ -53,7 +53,7 @@
 # =============================================================================
 
 # Define program version here
-VERSION_NUMBER=2.6.18
+VERSION_NUMBER=2.6.19
 
 QT += core gui xml network svg
 
