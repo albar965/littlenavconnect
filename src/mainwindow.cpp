@@ -573,7 +573,7 @@ void MainWindow::mainWindowShown()
   dataReader->setHandler(handlerForSelection());
   handlerChanged();
 
-  dataReader->setReconnectRateSec(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_RECONNECT_RATE, 10).toInt());
+  dataReader->setReconnectRateSec(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_RECONNECT_RATE, 15).toInt());
   dataReader->setUpdateRate(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
   dataReader->setLoadReplayFilepath(loadReplayFile);
   dataReader->setSaveReplayFilepath(saveReplayFile);

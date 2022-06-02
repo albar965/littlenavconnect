@@ -32,7 +32,7 @@ const QLatin1String SETTINGS_ACTIONS_SHOW_PORT_CHANGE("Actions/ShowPortChange");
 const QLatin1String SETTINGS_ACTIONS_SHOW_QUIT("Actions/ShowQuit");
 const QLatin1String SETTINGS_OPTIONS_VERBOSE("Options/Verbose");
 const QLatin1String SETTINGS_MAINWINDOW_WIDGET("MainWindow/Widget");
-const QLatin1String SETTINGS_OPTIONS_RECONNECT_RATE("Options/ReconnectRate");
+const QLatin1String SETTINGS_OPTIONS_RECONNECT_RATE("Options/ReconnectRate2");
 const QLatin1String SETTINGS_OPTIONS_LANGUAGE("Options/Language");
 const QLatin1String SETTINGS_OPTIONS_SIMULATOR_FSX("Options/Simulator");
 } // namespace lnc

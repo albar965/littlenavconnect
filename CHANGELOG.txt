@@ -3,6 +3,12 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
+# Version 2.7.1.develop
+
+* Decreased rate for connection attempts to 15 seconds.
+
+===============================================================================
+
 # Version 2.6.17
 
 * Updated version to the same as *Little Navmap*.
