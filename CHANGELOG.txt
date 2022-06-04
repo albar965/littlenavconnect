@@ -5,7 +5,17 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 # Version 2.7.1.develop
 
+## General
+
 * Decreased rate for connection attempts to 15 seconds.
+
+## Build
+
+* Moved version number to variable `VERSION_NUMBER` in file `littlenavconnect.pro` instead of
+  coding it into sources.
+* Now writing files `version.txt` and `revision.txt` files into deployment folder allowing
+  deployment scripts to automatically name archives. These files can be used to identify
+  a version without opening the program.
 
 ===============================================================================
 
