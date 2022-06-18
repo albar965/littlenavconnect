@@ -12,15 +12,15 @@ Network scenario for FSX or Prepar3D using SimConnect:
 
 |Windows Machine                                   |     Windows, Linux or Mac Machines  |
 ------------------------------------------------------------------------------------------
-FSX/P3D <-> Simconnect <-> Little Navonnect <- (Network) -> Little Navmap on Computer 1
-                                            <- (Network) -> Little Navmap on Computer 2
+FSX/P3D <-> Simconnect <-> Little Navconnect <- (Network) -> Little Navmap on Computer 1
+                                             <- (Network) -> Little Navmap on Computer 2
 
 Network scenario for X-Plane using the Little Xpconnect plugin:
 
 |Windows, Linux or Mac Machine                           |     Windows, Linux or Mac Machines  |
 -----------------------------------------------------------------------------------------------
-X-Plane <-> Little XpConnect <-> Little Navonnect <- (Network) -> Little Navmap on Computer 1
-                                                  <- (Network) -> Little Navmap on Computer 2
+X-Plane <-> Little XpConnect <-> Little Navconnect <- (Network) -> Little Navmap on Computer 1
+                                                   <- (Network) -> Little Navmap on Computer 2
 
 ------------------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ Anyway, no settings are a stored in the installation directory. Therefore it is 
 
 See the online manual for more details.
 
-The installation on Linux and macOS computers is simlar except different paths.
+The installation on Linux and macOS computers is similar except different paths.
 
 ------------------------------------------------------------------------------
 -- LICENSE -------------------------------------------------------------------
