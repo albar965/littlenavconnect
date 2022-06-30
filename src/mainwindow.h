@@ -108,7 +108,8 @@ private:
 
   QString mainWindowTitle;
   QString saveReplayFile, loadReplayFile;
-  int replaySpeed = 1;
+  int replaySpeed = 1, replayWhazzupUpdateSpeed = 15;
+  QString writeReplayWhazzupFile;
   QString supportedLanguageOnlineHelp;
 
   QString aboutMessage;

@@ -130,6 +130,16 @@ MainWindow::MainWindow()
                                     QObject::tr("speed"));
   parser.addOption(replaySpeedOpt);
 
+  QCommandLineOption replayWhazzupOpt({"w", "write-whazzup"},
+                                      QObject::tr("Update whazzup file <file> using VATSIM format during replay."),
+                                      QObject::tr("file"));
+  parser.addOption(replayWhazzupOpt);
+
+  QCommandLineOption replayWhazzupUpdateOpt({"z", "write-whazzup-speed"},
+                                            QObject::tr("Update whazzup file every <seconds> during replay."),
+                                            QObject::tr("seconds"));
+  parser.addOption(replayWhazzupUpdateOpt);
+
   QCommandLineOption showReplay({"g", "replay-gui"},
                                 QObject::tr("Show replay menu items."));
   parser.addOption(showReplay);
@@ -139,10 +149,12 @@ MainWindow::MainWindow()
   saveReplayFile = parser.value(saveReplayOpt);
   loadReplayFile = parser.value(loadReplayOpt);
   replaySpeed = parser.value(replaySpeedOpt).toInt();
+  replayWhazzupUpdateSpeed = parser.value(replayWhazzupUpdateOpt).toInt();
+  writeReplayWhazzupFile = parser.value(replayWhazzupOpt);
+
   if(parser.isSet(showReplay))
   {
-    ui->menuTools->insertActions(ui->actionResetMessages,
-                                 {ui->actionReplayFileLoad, ui->actionReplayFileSave, ui->actionReplayStop});
+    ui->menuTools->insertActions(ui->actionResetMessages, {ui->actionReplayFileLoad, ui->actionReplayFileSave, ui->actionReplayStop});
     ui->menuTools->insertSeparator(ui->actionResetMessages);
   }
 
@@ -577,6 +589,8 @@ void MainWindow::mainWindowShown()
   dataReader->setUpdateRate(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
   dataReader->setLoadReplayFilepath(loadReplayFile);
   dataReader->setSaveReplayFilepath(saveReplayFile);
+  dataReader->setReplayWhazzupFile(writeReplayWhazzupFile);
+  dataReader->setWhazzupUpdateSeconds(replayWhazzupUpdateSpeed);
   dataReader->setReplaySpeed(replaySpeed);
 
   atools::fs::sc::Options options = atools::fs::sc::NO_OPTION;
@@ -585,8 +599,7 @@ void MainWindow::mainWindowShown()
   if(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool())
     options |= atools::fs::sc::FETCH_AI_BOAT;
   dataReader->setSimconnectOptions(options);
-  dataReader->setAiFetchRadius(atools::geo::nmToKm(
-                                 settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, 105).toInt()));
+  dataReader->setAiFetchRadius(atools::geo::nmToKm(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, 105).toInt()));
 
   connect(dataReader, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
 
