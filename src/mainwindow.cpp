@@ -289,7 +289,7 @@ void MainWindow::handlerChanged()
       << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
   }
-  Settings::instance().syncSettings();
+  Settings::syncSettings();
 }
 
 void MainWindow::simulatorSelectionTriggered()
@@ -375,7 +375,7 @@ void MainWindow::options()
     settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, dialog.isFetchAiShip());
     settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, dialog.getAiFetchRadiusNm());
 
-    settings.syncSettings();
+    Settings::syncSettings();
 
     atools::fs::sc::Options options = atools::fs::sc::NO_OPTION;
     if(dialog.isFetchAiAircraft())
