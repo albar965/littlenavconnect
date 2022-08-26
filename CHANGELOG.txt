@@ -1,5 +1,14 @@
 Numbers (#) refer to GitHub issues in project `littlenavmap`.
 For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
+This text is partially Markdown, hence sometimes strange formatting.
+
+===============================================================================
+
+# Version 2.7.11.develop
+
+* Added command line option to save whazzup file in VATSIM format during replay for testing purposes.
+* New command line options --write-whazzup and --write-whazzup-speed. #761
+* Skipped versions to have same as Little Navmap.
 
 ===============================================================================
 
