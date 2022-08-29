@@ -3,6 +3,13 @@ For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 
 ===============================================================================
 
+# Version 2.6.20
+
+* Updated version to the same as Little Navmap.
+* Fixed execution scripts for Linux to allow paths with spaces.
+
+===============================================================================
+
 # Version 2.6.19
 
 ## General
