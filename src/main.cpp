@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
   Application::setOrganizationName("ABarthel");
   Application::setOrganizationDomain("littlenavmap.org");
 
-  Application::setApplicationVersion(VERSION_NUMBER_LITTLENAVCONNECT); // VERSION_NUMBER - Little Navconnect
+  Application::setApplicationVersion(VERSION_NUMBER_LITTLENAVCONNECT);
   Application::setEmailAddresses({"alex@littlenavmap.org"});
 
   // Initialize logging and force logfiles into the system or user temp directory
