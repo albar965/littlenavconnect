@@ -4,19 +4,14 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
-# Version 2.7.11.develop
-
-* Added command line option to save whazzup file in VATSIM format during replay for testing purposes.
-* New command line options --write-whazzup and --write-whazzup-speed. #761
-* Skipped versions to have same as Little Navmap.
-
-===============================================================================
-
-# Version 2.7.1.develop
+# Version 2.8.0.beta
 
 ## General
 
+* Added command line option to save whazzup file in VATSIM format during replay for testing purposes.
+* New command line options --write-whazzup and --write-whazzup-speed. #761
 * Decreased rate for connection attempts to 15 seconds.
+* Skipped versions to have same as Little Navmap.
 
 ## Build
 
