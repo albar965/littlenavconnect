@@ -132,63 +132,63 @@
         <translation>Ctrl+Shift+X</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="271"/>
+        <location filename="src/mainwindow.cpp" line="282"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Aan het verbinden met FSX or Prepar3D met SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="277"/>
+        <location filename="src/mainwindow.cpp" line="288"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Aan het verbinden met X-Plane met de Little Xpconnect plugin.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="295"/>
+        <location filename="src/mainwindow.cpp" line="306"/>
         <source>Save Replay</source>
         <translation>Bewaar Herhaling</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="295"/>
-        <location filename="src/mainwindow.cpp" line="311"/>
+        <location filename="src/mainwindow.cpp" line="306"/>
+        <location filename="src/mainwindow.cpp" line="322"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Bestanden Herhaing (*.replay);;Alle Bestanden (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="311"/>
+        <location filename="src/mainwindow.cpp" line="322"/>
         <source>Open Replay</source>
         <translation>Open Herhaing</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="393"/>
+        <location filename="src/mainwindow.cpp" line="404"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Er zijn nog applicaties verbonden.
 Doorgaan met de Netwerk Poort te wijzigen?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="396"/>
-        <location filename="src/mainwindow.cpp" line="503"/>
+        <location filename="src/mainwindow.cpp" line="407"/>
+        <location filename="src/mainwindow.cpp" line="514"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Dit &amp;dialoogvenster niet meer tonen.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="501"/>
+        <location filename="src/mainwindow.cpp" line="512"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Er zijn nog applicaties verbonden.
 Toch Stoppen?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="522"/>
+        <location filename="src/mainwindow.cpp" line="533"/>
         <source>Version %1 (revision %2).</source>
         <translation>Versie %1 (revisie %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="526"/>
+        <location filename="src/mainwindow.cpp" line="537"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Data Versie %1. Reply Versie %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="593"/>
+        <location filename="src/mainwindow.cpp" line="605"/>
         <source>Starting server. This can take some time ...</source>
         <translation>Opstarten Server. Dit kan een tijdje duren ...</translation>
     </message>
@@ -197,7 +197,7 @@ Toch Stoppen?</translation>
         <translation type="vanished">Server opstarten. Kan tot één minuut duren ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="605"/>
+        <location filename="src/mainwindow.cpp" line="617"/>
         <source>Server running.</source>
         <translation>Server draaiend.</translation>
     </message>
@@ -335,59 +335,75 @@ Hogere waarden instellen vb. trage update waarden) instellen als je een zwakke i
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="71"/>
+        <location filename="src/main.cpp" line="70"/>
         <source>Log files:</source>
         <translation>Logbestanden:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="73"/>
+        <location filename="src/main.cpp" line="72"/>
         <source>Configuration:</source>
         <translation>Configuratie:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="109"/>
+        <location filename="src/main.cpp" line="108"/>
         <source>%1 - Error</source>
         <translation>%1 - Fout</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="110"/>
+        <location filename="src/main.cpp" line="109"/>
         <source>%1 is already running.</source>
         <translation>%1 is reeds gestart.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="67"/>
+        <location filename="src/mainwindow.cpp" line="66"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
         <translation type="unfinished">&lt;p style=&apos;white-space:pre&apos;&gt;is de Fligh Simulator Network agent voor Little Navmap.&lt;/p&gt;&lt;p&gt;Deze software is gelicencieerd bij &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; of gelijk welke latere versie.&lt;/p&gt;&lt;p&gt;De broncode voor deze applicatie is beschikbaar op &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Meer over mijn projecten op &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="119"/>
+        <location filename="src/mainwindow.cpp" line="118"/>
         <source>Save replay data to &lt;file&gt;.</source>
         <translation>Bewaar herhaingsdata naar &lt;file&gt;.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="120"/>
-        <location filename="src/mainwindow.cpp" line="125"/>
+        <location filename="src/mainwindow.cpp" line="119"/>
+        <location filename="src/mainwindow.cpp" line="124"/>
+        <location filename="src/mainwindow.cpp" line="134"/>
         <source>file</source>
         <translation>bestand</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="124"/>
+        <location filename="src/mainwindow.cpp" line="123"/>
         <source>Load replay data from &lt;file&gt;.</source>
         <translation>Laden herhalingsdata van bestand &lt;file&gt;.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="129"/>
+        <location filename="src/mainwindow.cpp" line="128"/>
         <source>Use speed factor &lt;speed&gt; for replay.</source>
         <translation>Gebruikt snelheidsfactor &lt;speed&gt; voor herhaling.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="130"/>
+        <location filename="src/mainwindow.cpp" line="129"/>
         <source>speed</source>
         <translation>snelheid</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="134"/>
+        <location filename="src/mainwindow.cpp" line="133"/>
+        <source>Update whazzup file &lt;file&gt; using VATSIM format during replay.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="138"/>
+        <source>Update whazzup file every &lt;seconds&gt; during replay.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="139"/>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="143"/>
         <source>Show replay menu items.</source>
         <translation>Toon inhoud herhalingsmenu.</translation>
     </message>
