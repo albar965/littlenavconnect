@@ -399,17 +399,17 @@ Usa valori più alti (cioè velocità di aggiornamento più lente) se hai una re
     <message>
         <location filename="src/mainwindow.cpp" line="133"/>
         <source>Update whazzup file &lt;file&gt; using VATSIM format during replay.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna il file whazzup &lt;file&gt; utilizzando il formato Vatsim durante la riproduzione.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="138"/>
         <source>Update whazzup file every &lt;seconds&gt; during replay.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna il file whazzup ogni &lt;seconds&gt; durante il replay.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="139"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>secondi</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="143"/>
