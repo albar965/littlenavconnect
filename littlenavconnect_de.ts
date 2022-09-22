@@ -391,17 +391,17 @@ Verwenden Sie höhere Werte (d.h. langsamere Aktualisierungsraten), wenn Sie ein
     <message>
         <location filename="src/mainwindow.cpp" line="133"/>
         <source>Update whazzup file &lt;file&gt; using VATSIM format during replay.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere whazzup-Datei &lt;file&gt; im VATSIM-Format während der Wiederholung.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="138"/>
         <source>Update whazzup file every &lt;seconds&gt; during replay.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere whazzup-Datei jede &lt;seconds&gt; Sekunden der Wiederholung.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="139"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="143"/>
