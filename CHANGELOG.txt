@@ -4,6 +4,13 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+* Version 2.8.1.beta
+
+* German translation updated.
+* Updated Italian translation by Flavio Borgna.
+
+===============================================================================
+
 # Version 2.8.0.beta
 
 ## General
