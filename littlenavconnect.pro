@@ -107,9 +107,6 @@ win32 {
 
 macx {
   isEmpty(GIT_PATH) : GIT_PATH=git
-
-  # Compatibility down to OS X Sierra 10.12 inclusive
-  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.12
 }
 
 isEmpty(GIT_PATH) {
@@ -292,7 +289,7 @@ macx {
   DEPLOY_DIR=\"$$DEPLOY_BASE/\"
 
   deploy.commands = rm -Rfv $$DEPLOY_APP &&
-  deploy.commands += macdeployqt littlenavconnect.app -always-overwrite &&
+  deploy.commands += $$[QT_INSTALL_BINS]/macdeployqt littlenavconnect.app -always-overwrite &&
   deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $$DEPLOY_APP &&
   deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_APP/Contents/MacOS &&
   deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_APP/Contents/MacOS &&
