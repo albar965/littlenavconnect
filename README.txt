@@ -24,7 +24,7 @@ X-Plane <-> Little XpConnect <-> Little Navconnect <- (Network) -> Little Navmap
 
 ------------------------------------------------------------------------------
 
-See the Little Navconnect help for more information. All online here: https://www.gitbook.com/@albar965
+See the Little Navconnect help for more information. All online here: https://albar965.github.io/manuals.html .
 
 Little Navconnect supports FSX, FSX Steam Edition, Prepar3d Versions 2, 3, 4 and X-Plane
 

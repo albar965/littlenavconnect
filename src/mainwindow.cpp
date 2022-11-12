@@ -52,7 +52,7 @@ using atools::gui::HelpHandler;
 // "master" or "release/1.4" VERSION_NUMBER_TODO
 const QString HELP_BRANCH = "release/2.8";
 
-/* Important: keep slash at the end. Otherwise Gitbook will not display the page properly */
+/* Important: keep slash at the end. Otherwise browser might not display the page properly */
 const QString HELP_ONLINE_URL("https://www.littlenavmap.org/manuals/littlenavconnect/" + HELP_BRANCH + "/${LANG}/");
 
 const QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
