@@ -1,6 +1,6 @@
 Files in this directory:
 
-=== littlenavconnect.exe.manifest.RTM, littlenavconnect.exe.manifest.SP1 and littlenavconnect.exe.manifest.XPACK
+=== littlemavmap.exe.manifest.RTM, littlemavmap.exe.manifest.SP1 and littlemavmap.exe.manifest.XPACK
 
 These can be used to force Little Navmap or Little Navconnect to use a different version of SimConnect.
 To use overwrite "littlenavmap.exe.manifest" with one of these files.

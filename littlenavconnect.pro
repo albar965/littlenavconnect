@@ -57,6 +57,8 @@ CONFIG -= debug_and_release debug_and_release_target
 TARGET = littlenavconnect
 TEMPLATE = app
 
+win32 { contains(QT_ARCH, i386) { WINARCH = win32 } else { WINARCH = win64 } }
+
 TARGET_NAME=Little Navconnect
 
 # =======================================================================
@@ -65,7 +67,8 @@ TARGET_NAME=Little Navconnect
 ATOOLS_INC_PATH=$$(ATOOLS_INC_PATH)
 ATOOLS_LIB_PATH=$$(ATOOLS_LIB_PATH)
 GIT_PATH=$$(ATOOLS_GIT_PATH)
-SIMCONNECT_PATH=$$(ATOOLS_SIMCONNECT_PATH)
+SIMCONNECT_PATH_WIN32=$$(ATOOLS_SIMCONNECT_PATH_WIN32)
+SIMCONNECT_PATH_WIN64=$$(ATOOLS_SIMCONNECT_PATH_WIN64)
 DEPLOY_BASE=$$(DEPLOY_BASE)
 QUIET=$$(ATOOLS_QUIET)
 
@@ -94,15 +97,28 @@ unix:!macx {
 }
 
 win32 {
+  contains(QT_ARCH, i386) {
+    WINARCH = win32
+    !isEmpty(SIMCONNECT_PATH_WIN32) {
+      DEFINES += SIMCONNECT_BUILD_WIN32 WINARCH32
+      INCLUDEPATH += $$SIMCONNECT_PATH_WIN32"\inc"
+      LIBS += $$SIMCONNECT_PATH_WIN32"\lib\SimConnect.lib"
+    }
+  } else {
+    WINARCH = win64
+    !isEmpty(SIMCONNECT_PATH_WIN64) {
+      DEFINES += SIMCONNECT_BUILD_WIN64 WINARCH64
+      INCLUDEPATH += $$SIMCONNECT_PATH_WIN64"\include"
+      LIBS += $$SIMCONNECT_PATH_WIN64"\lib\SimConnect.lib"
+    }
+  }
+
   WINDEPLOY_FLAGS = --compiler-runtime
   CONFIG(debug, debug|release) : WINDEPLOY_FLAGS += --debug
-#  CONFIG(release, debug|release) : WINDEPLOY_FLAGS += --release
 
-  !isEmpty(SIMCONNECT_PATH) {
-    DEFINES += SIMCONNECT_BUILD
-    INCLUDEPATH += $$SIMCONNECT_PATH"\inc"
-    LIBS += $$SIMCONNECT_PATH"\lib\SimConnect.lib"
-  }
+  DEFINES += _USE_MATH_DEFINES
+
+  LIBS += -L$$ATOOLS_LIB_PATH -latools -lz
 }
 
 macx {
@@ -150,8 +166,11 @@ message(VERSION_NUMBER: $$VERSION_NUMBER)
 message(GIT_REVISION: $$GIT_REVISION)
 message(GIT_REVISION_FULL: $$GIT_REVISION_FULL)
 message(GIT_PATH: $$GIT_PATH)
+message(WINARCH: $$WINARCH)
 message(ATOOLS_INC_PATH: $$ATOOLS_INC_PATH)
 message(ATOOLS_LIB_PATH: $$ATOOLS_LIB_PATH)
+message(SIMCONNECT_PATH_WIN32: $$SIMCONNECT_PATH_WIN32)
+message(SIMCONNECT_PATH_WIN64: $$SIMCONNECT_PATH_WIN64)
 message(DEPLOY_BASE: $$DEPLOY_BASE)
 message(DEFINES: $$DEFINES)
 message(INCLUDEPATH: $$INCLUDEPATH)
@@ -200,6 +219,7 @@ TRANSLATIONS = \
 OTHER_FILES += \
   $$files(desktop/*, true) \
   $$files(help/*, true) \
+  $$files(simconnect/*, true) \
   .travis.yml \
   .gitignore \
   *.ts \
@@ -308,25 +328,31 @@ win32 {
   defineReplace(p){return ($$shell_quote($$shell_path($$1)))}
   RC_ICONS = resources/icons/navconnect.ico
 
-  deploy.commands = rmdir /s /q $$p($$DEPLOY_BASE/$$TARGET_NAME) &
-  deploy.commands += mkdir $$p($$DEPLOY_BASE/$$TARGET_NAME/translations) &&
-  deploy.commands += echo $$VERSION_NUMBER > $$p($$DEPLOY_BASE/$$TARGET_NAME/version.txt) &&
-  deploy.commands += echo $$GIT_REVISION_FULL > $$p($$DEPLOY_BASE/$$TARGET_NAME/revision.txt) &&
-  deploy.commands += xcopy $$p($$OUT_PWD/littlenavconnect.exe) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$PWD/CHANGELOG.txt) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$PWD/README.txt) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$PWD/LICENSE.txt) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$PWD/*.qm) $$p($$DEPLOY_BASE/$$TARGET_NAME/translations) &&
-  deploy.commands += xcopy $$p($$ATOOLS_INC_PATH/../*.qm) $$p($$DEPLOY_BASE/$$TARGET_NAME/translations) &&
-  deploy.commands += xcopy $$p($$PWD/littlenavconnect.exe.simconnect) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy /i /s /e /f /y $$p($$PWD/etc) $$p($$DEPLOY_BASE/$$TARGET_NAME/etc) &&
-  deploy.commands += del /f /q $$p($$DEPLOY_BASE/$$TARGET_NAME/etc/SimConnect.dll) &&
-  deploy.commands += xcopy $$p($$PWD/etc/SimConnect.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libgcc*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libstdc*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libwinpthread*.dll) $$p($$DEPLOY_BASE/$$TARGET_NAME) &&
-  deploy.commands += xcopy /i /s /e /f /y $$p($$PWD/help) $$p($$DEPLOY_BASE/$$TARGET_NAME/help) &&
-  deploy.commands += $$p($$[QT_INSTALL_BINS]/windeployqt) $$WINDEPLOY_FLAGS $$p($$DEPLOY_BASE/$$TARGET_NAME)
+  WIN_TARGET_NAME="$$TARGET_NAME $$WINARCH"
+
+  deploy.commands = rmdir /s /q $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &
+  deploy.commands += mkdir $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
+  deploy.commands += echo $$VERSION_NUMBER-$$WINARCH > $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/version.txt) &&
+  deploy.commands += echo $$GIT_REVISION_FULL > $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/revision.txt) &&
+  deploy.commands += xcopy $$p($$OUT_PWD/littlenavconnect.exe) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$PWD/CHANGELOG.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$PWD/README.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$PWD/LICENSE.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$PWD/*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
+  deploy.commands += xcopy $$p($$ATOOLS_INC_PATH/../*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
+  deploy.commands += xcopy /i /s /e /f /y $$p($$PWD/simconnect) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect) &&
+  contains(QT_ARCH, i386) { # 32 Bit build
+    deploy.commands += move /Y $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect/SimConnect.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  } else { # 64 Bit build
+    deploy.commands += del /f /q $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect/SimConnect.dll) &&
+    deploy.commands += del /f /q $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect/simconnect.manifest) &&
+    deploy.commands += xcopy $$p($$SIMCONNECT_PATH_WIN64/lib/SimConnect.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  }
+  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libgcc*.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libstdc*.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy $$p($$[QT_INSTALL_BINS]/libwinpthread*.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy /i /s /e /f /y $$p($$PWD/help) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/help) &&
+  deploy.commands += $$p($$[QT_INSTALL_BINS]/windeployqt) $$WINDEPLOY_FLAGS $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME)
 }
 
 # =====================================================================

@@ -92,6 +92,12 @@ MainWindow::MainWindow()
   else
     newTitle += QString(" %1 (%2)").arg(version.getVersionString()).arg(GIT_REVISION_LITTLENAVCONNECT);
 
+#if defined(WINARCH64)
+  newTitle += tr(" 64-bit");
+#elif defined(WINARCH32)
+  newTitle += tr(" 32-bit");
+#endif
+
 #ifndef QT_NO_DEBUG
   newTitle += " - DEBUG";
 #endif
@@ -103,7 +109,7 @@ MainWindow::MainWindow()
     QString("help") + QDir::separator() + "little-navconnect-user-manual-${LANG}.online", QLocale().name());
 
   // Extract language from the file
-  QRegularExpression regexp("little-navconnect-user-manual-(.+)\\.online", QRegularExpression::CaseInsensitiveOption);
+  const static QRegularExpression regexp("little-navconnect-user-manual-(.+)\\.online", QRegularExpression::CaseInsensitiveOption);
   QRegularExpressionMatch match = regexp.match(onlineFlagFile);
   if(match.hasMatch() && !match.captured(1).isEmpty())
     supportedLanguageOnlineHelp = match.captured(1);
@@ -181,6 +187,17 @@ MainWindow::MainWindow()
 
   navServer = new atools::fs::ns::NavServer(this, options, defaultPort);
 
+#if defined(WINARCH64)
+  ui->actionConnectFsx->setText(tr("MSFS"));
+  ui->actionConnectFsx->setToolTip(tr("Connect to Microsoft Flight Simulator 2020 using SimConnect."));
+#elif defined(WINARCH32)
+  ui->actionConnectFsx->setText(tr("FSX or Prepar3D"));
+  ui->actionConnectFsx->setToolTip(tr("Connect to FSX or Prepar3D using SimConnect."));
+#else
+  ui->actionConnectFsx->setText(tr("FSX, Prepar3D or MSFS"));
+  ui->actionConnectFsx->setToolTip(tr("Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect."));
+#endif
+
   // Create a group to turn the simulator actions into mutual exclusive ones
   simulatorActionGroup = new QActionGroup(ui->menuTools);
   simulatorActionGroup->addAction(ui->actionConnectFsx);
@@ -193,9 +210,9 @@ MainWindow::MainWindow()
 
   if(parser.isSet(showReplay))
   {
-    connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
-    connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
-    connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
+  connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
+  connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
+  connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
   }
 
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
@@ -279,13 +296,13 @@ void MainWindow::handlerChanged()
   if(ui->actionConnectFsx->isChecked())
   {
     qInfo(atools::fs::ns::gui).noquote().nospace()
-      << tr("Connecting to FSX or Prepar3D using SimConnect.");
+    << tr("Connecting to FSX or Prepar3D using SimConnect.");
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, true);
   }
   else
   {
     qInfo(atools::fs::ns::gui).noquote().nospace()
-      << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
+    << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
   }
   Settings::syncSettings();
@@ -529,17 +546,26 @@ void MainWindow::mainWindowShown()
 
   atools::settings::Settings& settings = Settings::instance();
 
+#if defined(WINARCH64)
+  QString applicationVersion = QApplication::applicationVersion() + tr(" 64-bit");
+#elif defined(WINARCH32)
+  QString applicationVersion = QApplication::applicationVersion() + tr(" 32-bit");
+#else
+  QString applicationVersion = QApplication::applicationVersion();
+#endif
+
   qInfo(atools::fs::ns::gui).noquote().nospace() << QApplication::applicationName();
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
-    arg(QApplication::applicationVersion()).arg(GIT_REVISION_LITTLENAVCONNECT);
+  arg(applicationVersion).arg(GIT_REVISION_LITTLENAVCONNECT);
 
   qInfo(atools::fs::ns::gui).noquote().nospace()
-    << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
+  << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
     SimConnectReply::getReplyVersion());
 
   // Build the handler classes which are an abstraction to SimConnect and the Little Xpconnect shared memory
   fsxConnectHandler = new atools::fs::sc::SimConnectHandler(verbose);
-  fsxConnectHandler->loadSimConnect(QApplication::applicationFilePath() + ".simconnect");
+  fsxConnectHandler->loadSimConnect(QApplication::applicationDirPath() +
+                                    QDir::separator() + "simconnect" + QDir::separator() + "simconnect.manifest");
   xpConnectHandler = new atools::fs::sc::XpConnectHandler();
 
 #ifdef Q_OS_WIN32
