@@ -98,6 +98,7 @@ unix:!macx {
 
 win32 {
   contains(QT_ARCH, i386) {
+  # FSX or P3D
     WINARCH = win32
     !isEmpty(SIMCONNECT_PATH_WIN32) {
       DEFINES += SIMCONNECT_BUILD_WIN32 WINARCH32
@@ -105,6 +106,7 @@ win32 {
       LIBS += $$SIMCONNECT_PATH_WIN32"\lib\SimConnect.lib"
     }
   } else {
+  # MSFS
     WINARCH = win64
     !isEmpty(SIMCONNECT_PATH_WIN64) {
       DEFINES += SIMCONNECT_BUILD_WIN64 WINARCH64
@@ -332,7 +334,7 @@ win32 {
 
   deploy.commands = rmdir /s /q $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &
   deploy.commands += mkdir $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
-  deploy.commands += echo $$VERSION_NUMBER-$$WINARCH > $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/version.txt) &&
+  deploy.commands += echo $$WINARCH-$$VERSION_NUMBER > $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/version.txt) &&
   deploy.commands += echo $$GIT_REVISION_FULL > $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/revision.txt) &&
   deploy.commands += xcopy $$p($$OUT_PWD/littlenavconnect.exe) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
   deploy.commands += xcopy $$p($$PWD/CHANGELOG.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&

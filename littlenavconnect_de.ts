@@ -135,13 +135,13 @@
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="96"/>
-        <location filename="src/mainwindow.cpp" line="550"/>
+        <location filename="src/mainwindow.cpp" line="554"/>
         <source> 64-bit</source>
         <translation> 64-Bit</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="98"/>
-        <location filename="src/mainwindow.cpp" line="552"/>
+        <location filename="src/mainwindow.cpp" line="556"/>
         <source> 32-bit</source>
         <translation> 32-Bit</translation>
     </message>
@@ -167,63 +167,68 @@
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="299"/>
+        <source>Connecting to MSFS using SimConnect.</source>
+        <translation>Verbindet mit SimConnect zu MSFS.</translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="301"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Verbindet mit SimConnect zu FSX oder Prepar3D.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="305"/>
+        <location filename="src/mainwindow.cpp" line="309"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Verbindet mit Little Xpconnect Plugin zu X-Plane.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="323"/>
+        <location filename="src/mainwindow.cpp" line="327"/>
         <source>Save Replay</source>
         <translation>Wiederholung speichern</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="323"/>
-        <location filename="src/mainwindow.cpp" line="339"/>
+        <location filename="src/mainwindow.cpp" line="327"/>
+        <location filename="src/mainwindow.cpp" line="343"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Wiederholungsdateien (*.replay);;Alle Dateien (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="339"/>
+        <location filename="src/mainwindow.cpp" line="343"/>
         <source>Open Replay</source>
         <translation>Wiederholung öffnen</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="421"/>
+        <location filename="src/mainwindow.cpp" line="425"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Es sind noch Anwendungen verbunden.
 Wollen Sie wirklich den Netzwerk-Port ändern?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="424"/>
-        <location filename="src/mainwindow.cpp" line="531"/>
+        <location filename="src/mainwindow.cpp" line="428"/>
+        <location filename="src/mainwindow.cpp" line="535"/>
         <source>Do not &amp;show this dialog again.</source>
         <translatorcomment>Ist das &quot;&amp;&quot; hier richtig gesetzt?</translatorcomment>
         <translation>Diesen Dialog &amp;nicht mehr anzeigen.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="529"/>
+        <location filename="src/mainwindow.cpp" line="533"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Es sind noch Anwendungen verbunden.
 Wollen Sie das Programm wirklich beenden?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="558"/>
+        <location filename="src/mainwindow.cpp" line="562"/>
         <source>Version %1 (revision %2).</source>
         <translation>Version %1 (Revision %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="562"/>
+        <location filename="src/mainwindow.cpp" line="566"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Datenversion %1. Antwortversion %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="631"/>
+        <location filename="src/mainwindow.cpp" line="635"/>
         <source>Starting server. This can take some time ...</source>
         <translation>Server wird gestartet. Dies kann einige Zeit dauern ...</translation>
     </message>
@@ -232,7 +237,7 @@ Wollen Sie das Programm wirklich beenden?</translation>
         <translation type="vanished">Server wird gestartet. Dies kann bis zu einer Minute dauern ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="643"/>
+        <location filename="src/mainwindow.cpp" line="647"/>
         <source>Server running.</source>
         <translation>Server läuft.</translation>
     </message>

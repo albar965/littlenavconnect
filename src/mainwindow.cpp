@@ -295,8 +295,12 @@ void MainWindow::handlerChanged()
 {
   if(ui->actionConnectFsx->isChecked())
   {
-    qInfo(atools::fs::ns::gui).noquote().nospace()
-    << tr("Connecting to FSX or Prepar3D using SimConnect.");
+#if defined(WINARCH64)
+    qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Connecting to MSFS using SimConnect.");
+#elif defined(WINARCH32)
+    qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Connecting to FSX or Prepar3D using SimConnect.");
+#endif
+
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, true);
   }
   else
