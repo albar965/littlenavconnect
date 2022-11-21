@@ -187,10 +187,10 @@ MainWindow::MainWindow()
 
   navServer = new atools::fs::ns::NavServer(this, options, defaultPort);
 
-#if defined(WINARCH64)
+#if defined(SIMCONNECT_BUILD_WIN64)
   ui->actionConnectFsx->setText(tr("MSFS"));
   ui->actionConnectFsx->setToolTip(tr("Connect to Microsoft Flight Simulator 2020 using SimConnect."));
-#elif defined(WINARCH32)
+#elif defined(SIMCONNECT_BUILD_WIN32)
   ui->actionConnectFsx->setText(tr("FSX or Prepar3D"));
   ui->actionConnectFsx->setToolTip(tr("Connect to FSX or Prepar3D using SimConnect."));
 #else
@@ -295,9 +295,9 @@ void MainWindow::handlerChanged()
 {
   if(ui->actionConnectFsx->isChecked())
   {
-#if defined(WINARCH64)
+#if defined(SIMCONNECT_BUILD_WIN64)
     qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Connecting to MSFS using SimConnect.");
-#elif defined(WINARCH32)
+#elif defined(SIMCONNECT_BUILD_WIN32)
     qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Connecting to FSX or Prepar3D using SimConnect.");
 #endif
 
