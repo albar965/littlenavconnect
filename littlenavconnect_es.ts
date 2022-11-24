@@ -59,7 +59,7 @@ Realmente desea cambiar el puerto de red?</translation>
     </message>
     <message>
         <source>FSX or Prepar3D</source>
-        <translation type="vanished">FSX o Prepar3D</translation>
+        <translation>FSX o Prepar3D</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
@@ -133,7 +133,7 @@ Realmente salir ?</translation>
     </message>
     <message>
         <source>Connect to FSX or Prepar3D using SimConnect.</source>
-        <translation type="vanished">Conectando a FSX o Prepar3D usando SimConnect.</translation>
+        <translation>Conectando a FSX o Prepar3D usando SimConnect.</translation>
     </message>
     <message>
         <source>Little Navconnect</source>
@@ -165,6 +165,26 @@ Realmente salir ?</translation>
     </message>
     <message>
         <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> 64-bit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> 32-bit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MSFS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connect to Microsoft Flight Simulator 2020 using SimConnect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting to MSFS using SimConnect.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
