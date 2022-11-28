@@ -4,6 +4,16 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+* Version 2.8.2.beta
+
+* Updated PDF manuals
+* Updated translation files.
+* Added win64 build and reorganized simconnect files.
+* Fixed several issues with macOS build. Now building based on Big Sur and XCode 13.2.1.
+* Updated Italian translation by Flavio Borgna.
+
+===============================================================================
+
 * Version 2.8.1.beta
 
 * German translation updated.
