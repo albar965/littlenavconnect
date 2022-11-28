@@ -137,38 +137,38 @@
         <location filename="src/mainwindow.cpp" line="96"/>
         <location filename="src/mainwindow.cpp" line="554"/>
         <source> 64-bit</source>
-        <translation type="unfinished"></translation>
+        <translation> 64-bit</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="98"/>
         <location filename="src/mainwindow.cpp" line="556"/>
         <source> 32-bit</source>
-        <translation type="unfinished"></translation>
+        <translation> 32-bit</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="191"/>
         <source>MSFS</source>
-        <translation type="unfinished"></translation>
+        <translation>MSFS</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="192"/>
         <source>Connect to Microsoft Flight Simulator 2020 using SimConnect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connessione a Microsoft Flight Simulator 2020 usando SimConnect.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="194"/>
         <source>FSX or Prepar3D</source>
-        <translation type="unfinished"></translation>
+        <translation>FSX o Prepar3D</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="195"/>
         <source>Connect to FSX or Prepar3D using SimConnect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connessione a FSX o Prepar3D usando SimConnect.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="299"/>
         <source>Connecting to MSFS using SimConnect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Connessione a MSFS usando SimConnect.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="301"/>
@@ -406,7 +406,7 @@ Usa valori più alti (cioè velocità di aggiornamento più lente) se hai una re
         <location filename="src/mainwindow.cpp" line="66"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2022 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;p style=&apos;white-space:pre&apos;&gt;è un agente di Rete di Fligh Simulator per Little Navmap.&lt;/p&gt;&lt;p&gt;Questo software è licenziato in &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; o versioni successive.&lt;/p&gt;&lt;p&gt;Il codice sorgente per questa applicazione è disponibile a &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Altre informazioni sui miei progetti a &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p style=&apos;white-space:pre&apos;&gt;è un agente di Rete di Fligh Simulator per Little Navmap.&lt;/p&gt;&lt;p&gt;Questo software è licenziato in &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; o versioni successive.&lt;/p&gt;&lt;p&gt;Il codice sorgente per questa applicazione è disponibile a &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Altre informazioni sui miei progetti a &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2022 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="124"/>
