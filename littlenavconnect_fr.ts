@@ -137,38 +137,38 @@
         <location filename="src/mainwindow.cpp" line="96"/>
         <location filename="src/mainwindow.cpp" line="554"/>
         <source> 64-bit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> 64-bit</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="98"/>
         <location filename="src/mainwindow.cpp" line="556"/>
         <source> 32-bit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> 32-bit</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="191"/>
         <source>MSFS</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MSFS</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="192"/>
         <source>Connect to Microsoft Flight Simulator 2020 using SimConnect.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Se connecter à Microsoft Flight Simulator 2020 à l&apos;aide de SimConnect.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="194"/>
         <source>FSX or Prepar3D</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">FSX ou Prepar3D</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="195"/>
         <source>Connect to FSX or Prepar3D using SimConnect.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Connectez-vous à FSX ou Prepar3D en utilisant SimConnect.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="299"/>
         <source>Connecting to MSFS using SimConnect.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Connexion à MSFS à l&apos;aide de SimConnect.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="301"/>
