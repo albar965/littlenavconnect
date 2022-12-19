@@ -4,6 +4,12 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 2.8.4
+
+No changes to previous version.
+
+===============================================================================
+
 # Version 2.8.3.rc1
 
 * Updated French translations by Patrick.
