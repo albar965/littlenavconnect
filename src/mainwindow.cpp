@@ -70,7 +70,7 @@ MainWindow::MainWindow()
                         "<a href=\"https://github.com/albar965\">Github</a>.</p>"
                           "<p>More about my projects at "
                             "<a href=\"https://www.littlenavmap.org\">www.littlenavmap.org</a>.</p>"
-                              "<p><b>Copyright 2015-2022 Alexander Barthel</b></p>");
+                              "<p><b>Copyright 2015-2023 Alexander Barthel</b></p>");
 
   // Show a dialog on fatal log events like asserts
   atools::logging::LoggingGuiAbortHandler::setGuiAbortFunction(this);
