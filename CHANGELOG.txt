@@ -4,6 +4,12 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 2.8.5
+
+Reverted workaround for MSFS unreliable on-ground indication for user aircraft.
+
+===============================================================================
+
 # Version 2.8.4
 
 No changes to previous version.
