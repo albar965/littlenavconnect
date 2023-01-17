@@ -6,7 +6,8 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 # Version 2.8.5
 
-Reverted workaround for MSFS unreliable on-ground indication for user aircraft.
+* Reverted workaround for MSFS unreliable on-ground indication for user aircraft.
+* Updated program translation for Brazilian Portuguese by Ricardo.
 
 ===============================================================================
 
