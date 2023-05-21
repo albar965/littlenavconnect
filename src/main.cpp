@@ -23,7 +23,6 @@
 #include "fs/sc/simconnecttypes.h"
 #include "gui/application.h"
 #include "gui/translator.h"
-#include "fs/ns/navservercommon.h"
 #include "constants.h"
 #include "atools.h"
 #include "geo/calculations.h"
@@ -105,8 +104,8 @@ int main(int argc, char *argv[])
   QSharedMemory shared("ed1b2f62-a6b3-8c64-09b4-e4daa232ecf4"); // generated GUID
   if(!shared.create(512, QSharedMemory::ReadWrite))
   {
-    QMessageBox::critical(nullptr, QObject::tr("%1 - Error").arg(QApplication::applicationName()),
-                          QObject::tr("%1 is already running.").arg(QApplication::applicationName()));
+    QMessageBox::critical(nullptr, QObject::tr("%1 - Error").arg(QCoreApplication::applicationName()),
+                          QObject::tr("%1 is already running.").arg(QCoreApplication::applicationName()));
     return 1;
   }
 #endif
