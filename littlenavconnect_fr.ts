@@ -374,22 +374,22 @@ Utilisez des valeurs plus élevées (c&apos;est-à-dire des taux de mise à jour
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="70"/>
+        <location filename="src/main.cpp" line="69"/>
         <source>Log files:</source>
         <translation>Fichiers log:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="72"/>
+        <location filename="src/main.cpp" line="71"/>
         <source>Configuration:</source>
         <translation>Configuration:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="108"/>
+        <location filename="src/main.cpp" line="107"/>
         <source>%1 - Error</source>
         <translation>%1 - Erreur</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="109"/>
+        <location filename="src/main.cpp" line="108"/>
         <source>%1 is already running.</source>
         <translation>%1 fonctionne déjà.</translation>
     </message>

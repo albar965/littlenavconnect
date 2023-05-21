@@ -374,22 +374,22 @@ Hogere waarden instellen vb. trage update waarden) instellen als je een zwakke i
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="70"/>
+        <location filename="src/main.cpp" line="69"/>
         <source>Log files:</source>
         <translation>Logbestanden:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="72"/>
+        <location filename="src/main.cpp" line="71"/>
         <source>Configuration:</source>
         <translation>Configuratie:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="108"/>
+        <location filename="src/main.cpp" line="107"/>
         <source>%1 - Error</source>
         <translation>%1 - Fout</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="109"/>
+        <location filename="src/main.cpp" line="108"/>
         <source>%1 is already running.</source>
         <translation>%1 is reeds gestart.</translation>
     </message>

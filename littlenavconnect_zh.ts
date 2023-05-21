@@ -373,22 +373,22 @@ Little Navconnect 使用该时间间隔从飞行模拟器提取数据并将其�
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="70"/>
+        <location filename="src/main.cpp" line="69"/>
         <source>Log files:</source>
         <translation>日志文件：</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="72"/>
+        <location filename="src/main.cpp" line="71"/>
         <source>Configuration:</source>
         <translation>配置：</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="108"/>
+        <location filename="src/main.cpp" line="107"/>
         <source>%1 - Error</source>
         <translation>%1 - 错误</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="109"/>
+        <location filename="src/main.cpp" line="108"/>
         <source>%1 is already running.</source>
         <translation>%1 已在运行。</translation>
     </message>
