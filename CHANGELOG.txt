@@ -4,6 +4,14 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 2.8.6
+
+* Reading correct ICAO aircraft designator from MSFS `aircraft.cfg` files for user aircraft now.
+* Smoother aircraft movement when zoomed in close to an airport and increased precision when
+  drawing aircraft and track.
+
+===============================================================================
+
 # Version 2.8.5
 
 * Reverted workaround for MSFS unreliable on-ground indication for user aircraft.
