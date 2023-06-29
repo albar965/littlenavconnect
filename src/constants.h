@@ -30,6 +30,7 @@ const QLatin1String SETTINGS_OPTIONS_FETCH_AI_SHIP("Options/FetchAiShip");
 const QLatin1String SETTINGS_OPTIONS_FETCH_AI_RADIUS("Options/FetchAiRadius");
 const QLatin1String SETTINGS_ACTIONS_SHOW_PORT_CHANGE("Actions/ShowPortChange");
 const QLatin1String SETTINGS_ACTIONS_SHOW_QUIT("Actions/ShowQuit");
+const QLatin1String SETTINGS_ACTIONS_SHOW_TRAY_HINT("Actions/ShowTrayHint");
 const QLatin1String SETTINGS_OPTIONS_VERBOSE("Options/Verbose");
 const QLatin1String SETTINGS_MAINWINDOW_WIDGET("MainWindow/Widget");
 const QLatin1String SETTINGS_OPTIONS_RECONNECT_RATE("Options/ReconnectRate2");

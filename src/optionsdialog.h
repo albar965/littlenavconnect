@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2020 Alexander Barthel alex@littlenavmap.org
+* Copyright 2015-2023 Alexander Barthel alex@littlenavmap.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,14 +24,17 @@ namespace Ui {
 class OptionsDialog;
 }
 
+/*
+ * Options dialog. Passive and allows only to set and get option values
+ */
 class OptionsDialog :
   public QDialog
 {
   Q_OBJECT
 
 public:
-  explicit OptionsDialog(QWidget *parent = 0);
-  ~OptionsDialog();
+  explicit OptionsDialog(QWidget *parent);
+  virtual ~OptionsDialog() override;
 
   int getPort() const;
   unsigned int getUpdateRate() const;

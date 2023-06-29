@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Little Navconnect</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="littlenavconnect.qrc">
+    <normaloff>:/littlenavconnect/resources/icons/navconnect.svg</normaloff>:/littlenavconnect/resources/icons/navconnect.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="leftMargin">
@@ -41,6 +45,9 @@
       <property name="readOnly">
        <bool>true</bool>
       </property>
+      <property name="textInteractionFlags">
+       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+      </property>
      </widget>
     </item>
    </layout>
@@ -51,7 +58,7 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -64,8 +71,9 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionContents"/>
-    <addaction name="actionContentsOffline"/>
+    <addaction name="actionHelp"/>
+    <addaction name="actionHelpOffline"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
     <addaction name="separator"/>
     <addaction name="actionAboutQt"/>
@@ -75,10 +83,20 @@
      <string>&amp;Tools</string>
     </property>
     <addaction name="actionResetMessages"/>
+    <addaction name="separator"/>
     <addaction name="actionOptions"/>
+   </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>&amp;Window</string>
+    </property>
+    <addaction name="actionMinimizeTray"/>
+    <addaction name="actionStartMinimizeTray"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
+   <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
@@ -98,7 +116,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionOptions"/>
-   <addaction name="actionContents"/>
+   <addaction name="actionHelp"/>
   </widget>
   <action name="actionQuit">
    <property name="icon">
@@ -130,13 +148,13 @@
     <string>About &amp;Qt</string>
    </property>
   </action>
-  <action name="actionContents">
+  <action name="actionHelp">
    <property name="icon">
     <iconset resource="littlenavconnect.qrc">
      <normaloff>:/littlenavconnect/resources/icons/help.svg</normaloff>:/littlenavconnect/resources/icons/help.svg</iconset>
    </property>
    <property name="text">
-    <string>&amp;Contents (Online)</string>
+    <string>&amp;User Manual (Online)</string>
    </property>
   </action>
   <action name="actionResetMessages">
@@ -177,13 +195,13 @@
     <string>Stop Saving or Loading of Replay</string>
    </property>
   </action>
-  <action name="actionContentsOffline">
+  <action name="actionHelpOffline">
    <property name="icon">
     <iconset resource="littlenavconnect.qrc">
      <normaloff>:/littlenavconnect/resources/icons/help.svg</normaloff>:/littlenavconnect/resources/icons/help.svg</iconset>
    </property>
    <property name="text">
-    <string>&amp;Contents (Offline, PDF)</string>
+    <string>&amp;User Manual (Offline, PDF)</string>
    </property>
   </action>
   <action name="actionConnectFsx">
@@ -218,6 +236,31 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+X</string>
+   </property>
+  </action>
+  <action name="actionMinimizeTray">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Minimize to System Tray</string>
+   </property>
+  </action>
+  <action name="actionStartMinimizeTray">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Start minimized to System Tray</string>
+   </property>
+   <property name="toolTip">
+    <string>Startup minimized to the System Tray</string>
    </property>
   </action>
  </widget>

@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2020 Alexander Barthel alex@littlenavmap.org
+* Copyright 2015-2023 Alexander Barthel alex@littlenavmap.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -22,27 +22,28 @@
 #include "fs/ns/navservercommon.h"
 #include "optionsdialog.h"
 
-#include "settings/settings.h"
-#include "gui/dialog.h"
+#include "constants.h"
+#include "fs/sc/datareaderthread.h"
+#include "fs/sc/simconnecthandler.h"
+#include "fs/sc/simconnectreply.h"
+#include "fs/sc/xpconnecthandler.h"
 #include "geo/calculations.h"
+#include "gui/dialog.h"
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
-#include "logging/logginghandler.h"
 #include "logging/loggingguiabort.h"
-#include "fs/sc/simconnectreply.h"
-#include "fs/sc/datareaderthread.h"
-#include "constants.h"
-#include "fs/sc/simconnecthandler.h"
-#include "fs/sc/xpconnecthandler.h"
+#include "logging/logginghandler.h"
+#include "settings/settings.h"
 #include "util/htmlbuilder.h"
 #include "util/version.h"
 
-#include <QMessageBox>
 #include <QCloseEvent>
 #include <QCommandLineParser>
-#include <QActionGroup>
 #include <QDir>
+#include <QMessageBox>
 #include <QRegularExpression>
+#include <QSystemTrayIcon>
+#include <QTimer>
 
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
@@ -76,8 +77,9 @@ MainWindow::MainWindow()
   atools::logging::LoggingGuiAbortHandler::setGuiAbortFunction(this);
 
   ui->setupUi(this);
+  ui->textEdit->clear();
 
-  readSettings();
+  restoreState();
 
   // Update window title ===================================================
   // Remember original title
@@ -120,33 +122,24 @@ MainWindow::MainWindow()
   parser.addHelpOption();
   parser.addVersionOption();
 
-  QCommandLineOption saveReplayOpt({"s", "save-replay"},
-                                   QObject::tr("Save replay data to <file>."),
-                                   QObject::tr("file"));
+  QCommandLineOption saveReplayOpt({"s", "save-replay"}, QObject::tr("Save replay data to <file>."), QObject::tr("file"));
   parser.addOption(saveReplayOpt);
 
-  QCommandLineOption loadReplayOpt({"l", "load-replay"},
-                                   QObject::tr("Load replay data from <file>."),
-                                   QObject::tr("file"));
+  QCommandLineOption loadReplayOpt({"l", "load-replay"}, QObject::tr("Load replay data from <file>."), QObject::tr("file"));
   parser.addOption(loadReplayOpt);
 
-  QCommandLineOption replaySpeedOpt({"r", "replay-speed"},
-                                    QObject::tr("Use speed factor <speed> for replay."),
-                                    QObject::tr("speed"));
+  QCommandLineOption replaySpeedOpt({"r", "replay-speed"}, QObject::tr("Use speed factor <speed> for replay."), QObject::tr("speed"));
   parser.addOption(replaySpeedOpt);
 
-  QCommandLineOption replayWhazzupOpt({"w", "write-whazzup"},
-                                      QObject::tr("Update whazzup file <file> using VATSIM format during replay."),
+  QCommandLineOption replayWhazzupOpt({"w", "write-whazzup"}, QObject::tr("Update whazzup file <file> using VATSIM format during replay."),
                                       QObject::tr("file"));
   parser.addOption(replayWhazzupOpt);
 
-  QCommandLineOption replayWhazzupUpdateOpt({"z", "write-whazzup-speed"},
-                                            QObject::tr("Update whazzup file every <seconds> during replay."),
+  QCommandLineOption replayWhazzupUpdateOpt({"z", "write-whazzup-speed"}, QObject::tr("Update whazzup file every <seconds> during replay."),
                                             QObject::tr("seconds"));
   parser.addOption(replayWhazzupUpdateOpt);
 
-  QCommandLineOption showReplay({"g", "replay-gui"},
-                                QObject::tr("Show replay menu items."));
+  QCommandLineOption showReplay({"g", "replay-gui"}, QObject::tr("Show replay menu items."));
   parser.addOption(showReplay);
 
   // Process the actual command line arguments given by the user
@@ -157,6 +150,7 @@ MainWindow::MainWindow()
   replayWhazzupUpdateSpeed = parser.value(replayWhazzupUpdateOpt).toInt();
   writeReplayWhazzupFile = parser.value(replayWhazzupOpt);
 
+  // Add replay menu items if requested
   if(parser.isSet(showReplay))
   {
     ui->menuTools->insertActions(ui->actionResetMessages, {ui->actionReplayFileLoad, ui->actionReplayFileSave, ui->actionReplayStop});
@@ -166,7 +160,7 @@ MainWindow::MainWindow()
   // Right align the help button
   QWidget *spacerWidget = new QWidget(ui->toolBar);
   spacerWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-  ui->toolBar->insertWidget(ui->actionContents, spacerWidget);
+  ui->toolBar->insertWidget(ui->actionHelp, spacerWidget);
 
   // Bind the log function to this class for category "gui"
   using namespace std::placeholders;
@@ -176,14 +170,12 @@ MainWindow::MainWindow()
   helpHandler = new atools::gui::HelpHandler(this, aboutMessage, GIT_REVISION_LITTLENAVCONNECT);
 
   int defaultPort = Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
-  bool hideHostname =
-    Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
+  bool hideHostname = Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
+
   // Create nav server but to not start it yet
   atools::fs::ns::NavServerOptions options = atools::fs::ns::NONE;
-  if(verbose)
-    options |= atools::fs::ns::VERBOSE;
-  if(hideHostname)
-    options |= atools::fs::ns::HIDE_HOST;
+  options.setFlag(atools::fs::ns::VERBOSE, verbose);
+  options.setFlag(atools::fs::ns::HIDE_HOST, hideHostname);
 
   navServer = new atools::fs::ns::NavServer(this, options, defaultPort);
 
@@ -205,69 +197,77 @@ MainWindow::MainWindow()
 
   connect(ui->actionConnectFsx, &QAction::triggered, this, &MainWindow::simulatorSelectionTriggered);
   connect(ui->actionConnectXplane, &QAction::triggered, this, &MainWindow::simulatorSelectionTriggered);
-
-  connect(ui->actionQuit, &QAction::triggered, this, &QMainWindow::close);
+  connect(ui->actionQuit, &QAction::triggered, this, &MainWindow::closeFromTrayOrAction);
 
   if(parser.isSet(showReplay))
   {
-  connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
-  connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
-  connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
+    connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
+    connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
+    connect(ui->actionReplayStop, &QAction::triggered, this, &MainWindow::stopReplay);
   }
 
   connect(ui->actionResetMessages, &QAction::triggered, this, &MainWindow::resetMessages);
   connect(ui->actionOptions, &QAction::triggered, this, &MainWindow::options);
-  connect(ui->actionContents, &QAction::triggered, this, &MainWindow::showOnlineHelp);
-  connect(ui->actionContentsOffline, &QAction::triggered, this, &MainWindow::showOfflineHelp);
+  connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::showOnlineHelp);
+  connect(ui->actionHelpOffline, &QAction::triggered, this, &MainWindow::showOfflineHelp);
   connect(ui->actionAbout, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::about);
   connect(ui->actionAboutQt, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::aboutQt);
 
   // Log messages have to be redirected through a message so that QTextEdit::append is not called on
   // a thread context different than main
-  connect(this, &MainWindow::appendLogMessage, ui->textEdit, &QTextEdit::append);
+  connect(this, &MainWindow::appendLogMessage, ui->textEdit, &QTextEdit::append, Qt::QueuedConnection);
 
-  // Once visible start server and log messagess
-  connect(this, &MainWindow::windowShown, this, &MainWindow::mainWindowShown, Qt::QueuedConnection);
+  if(QSystemTrayIcon::isSystemTrayAvailable())
+    // Create and show tray and menus
+    createTrayIcon();
+  else
+  {
+    ui->actionMinimizeTray->setDisabled(true);
+    ui->actionStartMinimizeTray->setDisabled(true);
+  }
 }
 
 MainWindow::~MainWindow()
 {
   qDebug() << Q_FUNC_INFO;
 
-  navServer->stopServer();
+  qDebug() << Q_FUNC_INFO << "delete trayIcon";
+  delete trayIcon;
+
+  qDebug() << Q_FUNC_INFO << "delete trayIconMenu";
+  delete trayIconMenu;
+
   qDebug() << Q_FUNC_INFO << "navServer stopped";
+  navServer->stopServer();
 
+  qDebug() << Q_FUNC_INFO << "delete navServer";
   delete navServer;
-  qDebug() << Q_FUNC_INFO << "navServer deleted";
 
+  qDebug() << Q_FUNC_INFO << "dataReader terminate";
   dataReader->terminateThread();
-  qDebug() << Q_FUNC_INFO << "dataReader terminated";
 
+  qDebug() << Q_FUNC_INFO << "delete dataReader";
   delete dataReader;
-  qDebug() << Q_FUNC_INFO << "dataReader deleted";
 
+  qDebug() << Q_FUNC_INFO << "delete fsxConnectHandler";
   delete fsxConnectHandler;
-  qDebug() << Q_FUNC_INFO << "fsxConnectHandler deleted";
 
+  qDebug() << Q_FUNC_INFO << "delete xpConnectHandler";
   delete xpConnectHandler;
-  qDebug() << Q_FUNC_INFO << "xpConnectHandler deleted";
 
+  qDebug() << Q_FUNC_INFO << "reset logging";
   atools::logging::LoggingHandler::setLogFunction(nullptr);
-  qDebug() << Q_FUNC_INFO << "logging reset";
 
+  qDebug() << Q_FUNC_INFO << "delete helpHandler";
   delete helpHandler;
-  qDebug() << Q_FUNC_INFO << "help handler deleted";
 
+  qDebug() << Q_FUNC_INFO << "delete fsActionGroup";
   delete simulatorActionGroup;
-  qDebug() << Q_FUNC_INFO << "fsActionGroup deleted";
 
+  qDebug() << Q_FUNC_INFO << "delete ui";
   delete ui;
-  qDebug() << Q_FUNC_INFO << "ui deleted";
 
   atools::logging::LoggingGuiAbortHandler::resetGuiAbortFunction();
-
-  qDebug() << "MainWindow destructor about to shut down logging";
-  atools::logging::LoggingHandler::shutdown();
 }
 
 void MainWindow::showOnlineHelp()
@@ -282,13 +282,10 @@ void MainWindow::showOfflineHelp()
 
 atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()
 {
-  atools::fs::sc::ConnectHandler *handler;
   if(ui->actionConnectFsx->isChecked())
-    handler = fsxConnectHandler;
+    return fsxConnectHandler;
   else
-    handler = xpConnectHandler;
-
-  return handler;
+    return xpConnectHandler;
 }
 
 void MainWindow::handlerChanged()
@@ -305,8 +302,7 @@ void MainWindow::handlerChanged()
   }
   else
   {
-    qInfo(atools::fs::ns::gui).noquote().nospace()
-    << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
+    qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Connecting to X-Plane using the Little Xpconnect plugin.");
     Settings::instance().setValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, false);
   }
   Settings::syncSettings();
@@ -323,16 +319,14 @@ void MainWindow::simulatorSelectionTriggered()
 
 void MainWindow::saveReplayFileTriggered()
 {
-  QString filepath = atools::gui::Dialog(this).saveFileDialog(
-    tr("Save Replay"), tr("Replay Files (*.replay);;All Files (*)"), "replay", "Replay/",
-    QString(), "littlenavconnect.replay");
+  QString filepath = atools::gui::Dialog(this).saveFileDialog(tr("Save Replay"), tr("Replay Files (*.replay);;All Files (*)"),
+                                                              "replay", "Replay/", QString(), "littlenavconnect.replay");
 
   if(!filepath.isEmpty())
   {
     dataReader->terminateThread();
     dataReader->setSaveReplayFilepath(filepath);
     dataReader->setLoadReplayFilepath(QString());
-
     dataReader->start();
   }
 }
@@ -347,7 +341,6 @@ void MainWindow::loadReplayFileTriggered()
     dataReader->terminateThread();
     dataReader->setSaveReplayFilepath(QString());
     dataReader->setLoadReplayFilepath(filepath);
-
     dataReader->start();
   }
 }
@@ -357,7 +350,6 @@ void MainWindow::stopReplay()
   dataReader->terminateThread();
   dataReader->setSaveReplayFilepath(QString());
   dataReader->setLoadReplayFilepath(QString());
-
   dataReader->start();
 }
 
@@ -365,23 +357,18 @@ void MainWindow::options()
 {
   qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options";
 
-  OptionsDialog dialog;
+  OptionsDialog dialog(this);
 
   Settings& settings = Settings::instance();
   unsigned int updateRateMs = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt();
   int port = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
-  bool hideHostname = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool();
-
-  bool fetchAiAircraft = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool();
-  bool fetchAiShip = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool();
-  int fetchAiRadiusNm = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, 105).toInt();
 
   dialog.setUpdateRate(updateRateMs);
   dialog.setPort(port);
-  dialog.setHideHostname(hideHostname);
-  dialog.setFetchAiAircraft(fetchAiAircraft);
-  dialog.setFetchAiShip(fetchAiShip);
-  dialog.setFetchAiRadius(fetchAiRadiusNm);
+  dialog.setHideHostname(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, false).toBool());
+  dialog.setFetchAiAircraft(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool());
+  dialog.setFetchAiShip(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool());
+  dialog.setFetchAiRadius(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, 105).toInt());
 
   int result = dialog.exec();
 
@@ -398,10 +385,8 @@ void MainWindow::options()
     Settings::syncSettings();
 
     atools::fs::sc::Options options = atools::fs::sc::NO_OPTION;
-    if(dialog.isFetchAiAircraft())
-      options |= atools::fs::sc::FETCH_AI_AIRCRAFT;
-    if(dialog.isFetchAiShip())
-      options |= atools::fs::sc::FETCH_AI_BOAT;
+    options.setFlag(atools::fs::sc::FETCH_AI_AIRCRAFT, dialog.isFetchAiAircraft());
+    options.setFlag(atools::fs::sc::FETCH_AI_BOAT, dialog.isFetchAiShip());
 
     dataReader->setSimconnectOptions(options);
     dataReader->setAiFetchRadius(atools::geo::nmToKm(dialog.getAiFetchRadiusNm()));
@@ -422,9 +407,8 @@ void MainWindow::options()
       if(navServer->hasConnections())
         result2 = atools::gui::Dialog(this).showQuestionMsgBox(
           lnc::SETTINGS_ACTIONS_SHOW_PORT_CHANGE,
-          tr(
-            "There are still applications connected.\n"
-            "Really change the Network Port?"),
+          tr("There are still applications connected.\n"
+             "Really change the Network Port?"),
           tr("Do not &show this dialog again."),
           QMessageBox::Yes | QMessageBox::No,
           QMessageBox::No, QMessageBox::Yes);
@@ -452,7 +436,7 @@ void MainWindow::resetMessages()
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
 {
-  const static QString MESSAGEPATTERN("[%1] %2");
+  const static QString MESSAGEPATTERN("[%1] %2<br/>");
 
   if(type == QtFatalMsg)
     // Fatal is a crash anyway - bail out to avoid follow up errors
@@ -465,31 +449,42 @@ void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context
 
 #endif
 
-  QString msg;
+  QString htmlMessage;
   if(context.category != nullptr && QString(context.category) == "gui")
   {
     // Define colors
-    QString style;
     switch(type)
     {
       case QtDebugMsg:
-        msg = atools::util::HtmlBuilder::textMessage(message, atools::util::html::NO_ENTITIES, Qt::darkGray);
+        htmlMessage = atools::util::HtmlBuilder::textMessage(message, atools::util::html::NO_ENTITIES, Qt::darkGray);
         break;
+
       case QtWarningMsg:
-        msg = atools::util::HtmlBuilder::warningMessage(message);
+        htmlMessage = atools::util::HtmlBuilder::warningMessage(message);
         break;
+
       case QtFatalMsg:
       case QtCriticalMsg:
-        msg = atools::util::HtmlBuilder::errorMessage(message);
+        htmlMessage = atools::util::HtmlBuilder::errorMessage(message);
         break;
+
       case QtInfoMsg:
-        msg = atools::util::HtmlBuilder::textMessage(message, atools::util::html::NO_ENTITIES);
+        htmlMessage = atools::util::HtmlBuilder::textMessage(message, atools::util::html::NO_ENTITIES);
         break;
     }
 
-    QString now = QDateTime::currentDateTime().toString("yyyy-MM-dd h:mm:ss");
+    // Add five last messages to tray
+    if(type != QtDebugMsg && trayIcon != nullptr)
+    {
+      QStringList tooltip = trayIcon->toolTip().split('\n');
+      tooltip.append(tr("- %1").arg(atools::strToPlainText(message)));
+      if(tooltip.size() > 5)
+        tooltip.removeFirst();
+      trayIcon->setToolTip(tooltip.join('\n'));
+    }
+
     // Use a signal to update the text edit in the main thread context
-    emit appendLogMessage(MESSAGEPATTERN.arg(now).arg(msg));
+    emit appendLogMessage(MESSAGEPATTERN.arg(QDateTime::currentDateTime().toString("yyyy-MM-dd h:mm:ss")).arg(htmlMessage));
   }
 }
 
@@ -503,47 +498,35 @@ void MainWindow::postLogMessage(QString message, bool warning, bool error)
     qInfo(atools::fs::ns::gui).noquote().nospace() << message;
 }
 
-void MainWindow::readSettings()
+void MainWindow::showInitial()
+{
+  if(ui->actionStartMinimizeTray->isChecked() && trayIcon != nullptr)
+    hide();
+  else
+    show();
+
+  QTimer::singleShot(0, this, &MainWindow::mainWindowShownDelayed);
+}
+
+void MainWindow::restoreState()
 {
   qDebug() << Q_FUNC_INFO;
 
   verbose = Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_VERBOSE, false).toBool();
 
-  atools::gui::WidgetState(lnc::SETTINGS_MAINWINDOW_WIDGET).restore(this);
+  atools::gui::WidgetState(lnc::SETTINGS_MAINWINDOW_WIDGET).restore({this, ui->actionMinimizeTray, ui->actionStartMinimizeTray});
 }
 
-void MainWindow::writeSettings()
+void MainWindow::saveState()
 {
   qDebug() << Q_FUNC_INFO;
 
   atools::gui::WidgetState widgetState(lnc::SETTINGS_MAINWINDOW_WIDGET);
-  widgetState.save(this);
+  widgetState.save({this, ui->actionMinimizeTray, ui->actionStartMinimizeTray});
   widgetState.syncSettings();
 }
 
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-  // Catch all close events like Ctrl-Q or Menu/Exit or clicking on the
-  // close button on the window frame
-  qDebug() << Q_FUNC_INFO;
-
-  if(navServer->hasConnections())
-  {
-    int result = atools::gui::Dialog(this).showQuestionMsgBox(lnc::SETTINGS_ACTIONS_SHOW_QUIT,
-                                                              tr("There are still applications connected.\n"
-                                                                 "Really Quit?"),
-                                                              tr("Do not &show this dialog again."),
-                                                              QMessageBox::Yes | QMessageBox::No,
-                                                              QMessageBox::No, QMessageBox::Yes);
-
-    if(result != QMessageBox::Yes)
-      event->ignore();
-  }
-
-  writeSettings();
-}
-
-void MainWindow::mainWindowShown()
+void MainWindow::mainWindowShownDelayed()
 {
   qDebug() << Q_FUNC_INFO;
   qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::mainWindowShown";
@@ -560,11 +543,10 @@ void MainWindow::mainWindowShown()
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << QApplication::applicationName();
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
-  arg(applicationVersion).arg(GIT_REVISION_LITTLENAVCONNECT);
+    arg(applicationVersion).arg(GIT_REVISION_LITTLENAVCONNECT);
 
   qInfo(atools::fs::ns::gui).noquote().nospace()
-  << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(
-    SimConnectReply::getReplyVersion());
+    << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(SimConnectReply::getReplyVersion());
 
   // Build the handler classes which are an abstraction to SimConnect and the Little Xpconnect shared memory
   fsxConnectHandler = new atools::fs::sc::SimConnectHandler(verbose);
@@ -607,7 +589,7 @@ void MainWindow::mainWindowShown()
   ui->actionConnectFsx->setChecked(false);
 #endif
 
-  ui->menuTools->insertAction(ui->actionOptions, ui->toolBar->toggleViewAction());
+  ui->menuWindow->addAction(ui->toolBar->toggleViewAction());
 
   // Build the thread which will read the data from the interfaces
   dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
@@ -648,13 +630,135 @@ void MainWindow::mainWindowShown()
   qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::mainWindowShown exit";
 }
 
-void MainWindow::showEvent(QShowEvent *event)
+void MainWindow::showEvent(QShowEvent *)
 {
-  if(firstStart)
+  updateTrayActions();
+}
+
+void MainWindow::hideEvent(QHideEvent *)
+{
+  // Use minimize to hide to tray
+  if(isMinimized() && ui->actionMinimizeTray->isChecked() && trayIcon != nullptr)
+    hide();
+  updateTrayActions();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+  // Catch all close events like Ctrl-Q or Menu/Exit or clicking on the
+  // close button on the window frame
+  qDebug() << Q_FUNC_INFO;
+  bool askClose = false;
+  if(windowCloseButtonClicked)
   {
-    emit windowShown();
-    firstStart = false;
+    // Close button on window frame clicked ================================================
+
+    // Check if tray is valid in case OS does not support it
+    if(trayIcon != nullptr && trayIcon->isVisible() && ui->actionMinimizeTray->isChecked())
+    {
+      // Show hint only once per session and not if startup option is checked
+      if(!trayHintShown && !ui->actionStartMinimizeTray->isChecked())
+      {
+        atools::gui::Dialog(this).showInfoMsgBox(lnc::SETTINGS_ACTIONS_SHOW_TRAY_HINT,
+                                                 tr("The program will keep running in the system tray.\n"
+                                                    "Select \"Quit\" in the context menu of the system tray entry to terminate the program."),
+                                                 tr("Do not &show this dialog again."));
+
+        // Show only once per session
+        trayHintShown = true;
+      }
+    } // else keep closing
+    else
+      // No tray - close as usual
+      askClose = true;
+  }
+  else
+    // From tray menu or close action
+    askClose = true;
+
+  if(askClose)
+  {
+    if(askCloseApplication())
+      // Required here since QApplication::quitOnLastWindowClosed() is set to false
+      QApplication::quit();
+    else
+      event->ignore();
   }
 
-  event->ignore();
+  windowCloseButtonClicked = true;
+  saveState();
+}
+
+void MainWindow::closeFromTrayOrAction()
+{
+  // Signal for close event
+  windowCloseButtonClicked = false;
+
+  close();
+}
+
+bool MainWindow::askCloseApplication()
+{
+  if(navServer->hasConnections())
+  {
+    int result = atools::gui::Dialog(this).showQuestionMsgBox(lnc::SETTINGS_ACTIONS_SHOW_QUIT,
+                                                              tr("There are still applications connected.\n"
+                                                                 "Really Quit?"),
+                                                              tr("Do not &show this dialog again."),
+                                                              QMessageBox::Yes | QMessageBox::No, QMessageBox::No, QMessageBox::Yes);
+
+    return result == QMessageBox::Yes;
+  }
+
+  return true;
+}
+
+void MainWindow::updateTrayActions()
+{
+  if(trayRestoreHideAction != nullptr)
+    trayRestoreHideAction->setText(isVisible() ? tr("&Hide Window") : tr("&Restore Window"));
+}
+
+void MainWindow::showHideFromTray()
+{
+  setVisible(!isVisible());
+}
+
+void MainWindow::createTrayIcon()
+{
+  trayRestoreHideAction = new QAction(tr("&Restore"), this); // Text toggles depending on window state
+
+  // Copy text and icon from main but not shortcuts
+  trayOptionsAction = new QAction(ui->actionOptions->icon(), ui->actionOptions->text(), this);
+  trayHelpAction = new QAction(ui->actionHelp->icon(), ui->actionHelp->text(), this);
+  tryQuitAction = new QAction(ui->actionQuit->icon(), ui->actionQuit->text(), this);
+
+  // Context menu
+  trayIconMenu = new QMenu(this);
+  trayIconMenu->addAction(trayRestoreHideAction);
+  trayIconMenu->addSeparator();
+  trayIconMenu->addAction(trayOptionsAction);
+  trayIconMenu->addSeparator();
+  trayIconMenu->addAction(trayHelpAction);
+  trayIconMenu->addSeparator();
+  trayIconMenu->addAction(tryQuitAction);
+
+  // Create tray
+  trayIcon = new QSystemTrayIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"), this);
+  trayIcon->setContextMenu(trayIconMenu);
+
+  connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::trayActivated);
+  connect(trayRestoreHideAction, &QAction::triggered, this, &MainWindow::showHideFromTray);
+  connect(trayOptionsAction, &QAction::triggered, this, &MainWindow::options);
+  connect(trayHelpAction, &QAction::triggered, this, &MainWindow::showOnlineHelp);
+  connect(tryQuitAction, &QAction::triggered, this, &MainWindow::closeFromTrayOrAction);
+
+  trayIcon->show();
+}
+
+void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
+{
+  // Toggle main window visibility on click
+  if(reason == QSystemTrayIcon::Trigger)
+    setVisible(!isVisible());
 }

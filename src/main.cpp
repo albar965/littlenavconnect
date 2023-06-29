@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2020 Alexander Barthel alex@littlenavmap.org
+* Copyright 2015-2023 Alexander Barthel alex@littlenavmap.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -27,15 +27,12 @@
 #include "atools.h"
 #include "geo/calculations.h"
 #include "fs/fspaths.h"
+#include "exception.h"
 
 #include <QSslSocket>
 #include <QStyleFactory>
-
-#if defined(Q_OS_WIN32)
 #include <QSharedMemory>
 #include <QMessageBox>
-
-#endif
 
 using atools::gui::Application;
 using atools::logging::LoggingHandler;
@@ -53,70 +50,88 @@ int main(int argc, char *argv[])
   atools::geo::registerMetaTypes();
   atools::fs::FsPaths::intitialize();
 
-  using atools::gui::Application;
-  Application app(argc, argv);
-  Application::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"));
-  Application::setApplicationName("Little Navconnect");
-  Application::setOrganizationName("ABarthel");
-  Application::setOrganizationDomain("littlenavmap.org");
+  int retval = 0;
 
-  Application::setApplicationVersion(VERSION_NUMBER_LITTLENAVCONNECT);
-  Application::setEmailAddresses({"alex@littlenavmap.org"});
+  try
+  {
+    using atools::gui::Application;
+    Application app(argc, argv);
+    Application::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"));
+    Application::setApplicationName("Little Navconnect");
+    Application::setOrganizationName("ABarthel");
+    Application::setOrganizationDomain("littlenavmap.org");
 
-  // Initialize logging and force logfiles into the system or user temp directory
-  LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(":/littlenavconnect/resources/config/logging.cfg"));
+    Application::setApplicationVersion(VERSION_NUMBER_LITTLENAVCONNECT);
+    Application::setEmailAddresses({"alex@littlenavmap.org"});
 
-  Application::addReportPath(QObject::tr("Log files:"), LoggingHandler::getLogFiles());
+    // Initialize logging and force logfiles into the system or user temp directory
+    LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(":/littlenavconnect/resources/config/logging.cfg"));
 
-  Application::addReportPath(QObject::tr("Configuration:"), {Settings::getFilename()});
+    Application::addReportPath(QObject::tr("Log files:"), LoggingHandler::getLogFiles());
 
-  // Disable tooltip effects since these do not work well with tooltip updates while displaying
-  QApplication::setEffectEnabled(Qt::UI_FadeTooltip, false);
-  QApplication::setEffectEnabled(Qt::UI_AnimateTooltip, false);
+    Application::addReportPath(QObject::tr("Configuration:"), {Settings::getFilename()});
+
+    // Disable tooltip effects since these do not work well with tooltip updates while displaying
+    QApplication::setEffectEnabled(Qt::UI_FadeTooltip, false);
+    QApplication::setEffectEnabled(Qt::UI_AnimateTooltip, false);
+
+    // Avoid closing if options dialog is closed with main window hidden to tray
+    QApplication::setQuitOnLastWindowClosed(false);
 
 #if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
-  QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
+    QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 #endif
 
-  // Print some information which can be useful for debugging
-  LoggingUtil::logSystemInformation();
-  qInfo().noquote().nospace() << "atools revision " << atools::gitRevision() << " "
-                              << Application::applicationName() << " revision " << GIT_REVISION_LITTLENAVCONNECT;
+    // Print some information which can be useful for debugging
+    LoggingUtil::logSystemInformation();
+    qInfo().noquote().nospace() << "atools revision " << atools::gitRevision() << " "
+                                << Application::applicationName() << " revision " << GIT_REVISION_LITTLENAVCONNECT;
 
-  LoggingUtil::logStandardPaths();
-  qInfo() << "SSL supported" << QSslSocket::supportsSsl()
-          << "build library" << QSslSocket::sslLibraryBuildVersionString()
-          << "library" << QSslSocket::sslLibraryVersionString();
+    LoggingUtil::logStandardPaths();
+    qInfo() << "SSL supported" << QSslSocket::supportsSsl()
+            << "build library" << QSslSocket::sslLibraryBuildVersionString()
+            << "library" << QSslSocket::sslLibraryVersionString();
 
-  qInfo() << "Available styles" << QStyleFactory::keys();
+    qInfo() << "Available styles" << QStyleFactory::keys();
 
-  Settings::logSettingsInformation();
+    Settings::logSettingsInformation();
 
-  // Load simulator paths =================================
-  atools::fs::FsPaths::loadAllPaths();
-  atools::fs::FsPaths::logAllPaths();
+    // Load simulator paths =================================
+    atools::fs::FsPaths::loadAllPaths();
+    atools::fs::FsPaths::logAllPaths();
 
-  // Load local and Qt system translations from various places
-  Translator::load(Settings::instance().valueStr(lnc::SETTINGS_OPTIONS_LANGUAGE, QString()));
+    // Load local and Qt system translations from various places
+    Translator::load(Settings::instance().valueStr(lnc::SETTINGS_OPTIONS_LANGUAGE, QString()));
 
-#if defined(Q_OS_WIN32)
-  // Detect other running application instance - this is unsafe on Unix since shm can remain after crashes
-  QSharedMemory shared("ed1b2f62-a6b3-8c64-09b4-e4daa232ecf4"); // generated GUID
-  if(!shared.create(512, QSharedMemory::ReadWrite))
-  {
-    QMessageBox::critical(nullptr, QObject::tr("%1 - Error").arg(QCoreApplication::applicationName()),
-                          QObject::tr("%1 is already running.").arg(QCoreApplication::applicationName()));
-    return 1;
+    // Detect other running application instance - this is unsafe on Unix since shared memory can remain after crashes
+    QSharedMemory shared("ed1b2f62-a6b3-8c64-09b4-e4daa232ecf4"); // generated GUID
+    if(!shared.create(64, QSharedMemory::ReadOnly))
+    {
+      shared.detach();
+      QMessageBox::critical(nullptr, QObject::tr("%1 - Error").arg(QCoreApplication::applicationName()),
+                            QObject::tr("%1 is already running.").arg(QCoreApplication::applicationName()));
+      return 1;
+    }
+
+    // Put in separate block to destroy main window before shutting down logging
+    MainWindow mainWindow;
+    mainWindow.showInitial();
+    retval = QCoreApplication::exec();
   }
-#endif
-
-  MainWindow mainWindow;
-
-  mainWindow.show();
-
-  int retval = app.exec();
+  catch(atools::Exception& e)
+  {
+    ATOOLS_HANDLE_EXCEPTION(e);
+    // Does not return in case of fatal error
+  }
+  catch(...)
+  {
+    ATOOLS_HANDLE_UNKNOWN_EXCEPTION;
+    // Does not return in case of fatal error
+  }
 
   qDebug() << "app.exec() done, retval is" << retval << (retval == 0 ? "(ok)" : "(error)");
+  qInfo() << "About to shut down logging";
+  atools::logging::LoggingHandler::shutdown();
 
   return retval;
 }

@@ -47,7 +47,7 @@
 # =============================================================================
 
 # Define program version here VERSION_NUMBER_TODO
-VERSION_NUMBER=2.8.6
+VERSION_NUMBER=2.8.7
 
 QT += core gui xml network svg
 
@@ -191,7 +191,6 @@ message(-----------------------------------)
 # Files
 
 SOURCES +=\
-  src/constants.cpp \
   src/main.cpp \
   src/mainwindow.cpp \
   src/optionsdialog.cpp
