@@ -4,6 +4,18 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 2.8.7
+
+* Added support for system tray. Close button on window frame now optionally minimizes window to
+  system tray. Enable this in menu `Window` -> `Minimize to system tray`. Tray icon is always
+  visible. System tray icon shows last five messages from log in tooltip. #712
+* New option `Window` -> `Start minimized to system tray` to start program without opening a window.
+* Tray icon has a context menu to restore window, show settings and more. Click the tray icon to
+  restore or minmize the *Little Navconnect* window.
+* Fixed various issues with text field updates causing warnings in log.
+
+===============================================================================
+
 # Version 2.8.6
 
 * Reading correct ICAO aircraft designator from MSFS `aircraft.cfg` files for user aircraft now.
