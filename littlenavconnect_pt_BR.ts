@@ -9,62 +9,91 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="59"/>
+        <location filename="mainwindow.ui" line="66"/>
         <source>&amp;File</source>
         <translation>&amp;Arquivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="65"/>
+        <location filename="mainwindow.ui" line="72"/>
         <source>&amp;Help</source>
         <translation>&amp;Ajuda</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="75"/>
+        <location filename="mainwindow.ui" line="83"/>
         <source>&amp;Tools</source>
         <translation>&amp;Ferramentas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="86"/>
+        <location filename="mainwindow.ui" line="91"/>
+        <source>&amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="104"/>
         <source>Toolbar</source>
         <translation>Barra de Ferramentas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="109"/>
+        <location filename="mainwindow.ui" line="127"/>
         <source>&amp;Quit</source>
         <translation>&amp;Sair</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="112"/>
+        <location filename="mainwindow.ui" line="130"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="121"/>
+        <location filename="mainwindow.ui" line="139"/>
         <source>&amp;About Little Navconnect</source>
         <translation>&amp;Sobre o Little NavConnect</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="130"/>
+        <location filename="mainwindow.ui" line="148"/>
         <source>About &amp;Qt</source>
         <translation>Sobre &amp;Qt</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="139"/>
-        <source>&amp;Contents (Online)</source>
-        <translation>&amp;Conteúdo (Online)</translation>
+        <location filename="mainwindow.ui" line="157"/>
+        <source>&amp;User Manual (Online)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="144"/>
+        <location filename="mainwindow.ui" line="204"/>
+        <source>&amp;User Manual (Offline, PDF)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="249"/>
+        <source>&amp;Minimize to System Tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="260"/>
+        <source>&amp;Start minimized to System Tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="263"/>
+        <source>Startup minimized to the System Tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Contents (Online)</source>
+        <translation type="vanished">&amp;Conteúdo (Online)</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="162"/>
         <source>&amp;Reset Messages</source>
         <translation>&amp;Resetar Mensagens</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="153"/>
+        <location filename="mainwindow.ui" line="171"/>
         <source>&amp;Options ...</source>
         <translation>&amp;Opçôes ...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="156"/>
+        <location filename="mainwindow.ui" line="174"/>
         <source>Ctrl+Shift+,</source>
         <translation></translation>
     </message>
@@ -73,161 +102,187 @@
         <translation type="vanished">&amp;Opçôes</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="161"/>
+        <location filename="mainwindow.ui" line="179"/>
         <source>&amp;Save Replay File ...</source>
         <translation>&amp;Salvar Arquivo de Repetição ...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="166"/>
+        <location filename="mainwindow.ui" line="184"/>
         <source>Open Replay &amp;File ...</source>
         <translation>Abrir &amp;Arquivo de Repetição ...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="169"/>
+        <location filename="mainwindow.ui" line="187"/>
         <source>Open Replay File</source>
         <translation>Abrir Arquivo de Repetição</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="174"/>
-        <location filename="mainwindow.ui" line="177"/>
+        <location filename="mainwindow.ui" line="192"/>
+        <location filename="mainwindow.ui" line="195"/>
         <source>Stop Saving or Loading of Replay</source>
         <translation>Parar de salvar ou carregar a repetição</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="186"/>
         <source>&amp;Contents (Offline, PDF)</source>
-        <translation>&amp;Conteúdos (Offline, PDF)</translation>
+        <translation type="vanished">&amp;Conteúdos (Offline, PDF)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="197"/>
-        <location filename="src/mainwindow.cpp" line="197"/>
+        <location filename="mainwindow.ui" line="215"/>
+        <location filename="src/mainwindow.cpp" line="189"/>
         <source>FSX, Prepar3D or MSFS</source>
         <oldsource>FSX or Prepar3D</oldsource>
         <translation>FSX, Prepar3D ou MSFS</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="200"/>
-        <location filename="mainwindow.ui" line="203"/>
-        <location filename="src/mainwindow.cpp" line="198"/>
+        <location filename="mainwindow.ui" line="218"/>
+        <location filename="mainwindow.ui" line="221"/>
+        <location filename="src/mainwindow.cpp" line="190"/>
         <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
         <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
         <translation>Conectar ao FSX Prepar3D ou Microsoft Flight Simulator 2020 usando SimConnect.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="206"/>
+        <location filename="mainwindow.ui" line="224"/>
         <source>Ctrl+Shift+F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="214"/>
+        <location filename="mainwindow.ui" line="232"/>
         <source>X-Plane</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="217"/>
+        <location filename="mainwindow.ui" line="235"/>
         <source>Connect to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Conectado com o X-Plane usando o pluguin Little Xpconnect.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="220"/>
+        <location filename="mainwindow.ui" line="238"/>
         <source>Ctrl+Shift+X</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="96"/>
-        <location filename="src/mainwindow.cpp" line="554"/>
+        <location filename="src/mainwindow.cpp" line="98"/>
+        <location filename="src/mainwindow.cpp" line="537"/>
         <source> 64-bit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="98"/>
-        <location filename="src/mainwindow.cpp" line="556"/>
+        <location filename="src/mainwindow.cpp" line="100"/>
+        <location filename="src/mainwindow.cpp" line="539"/>
         <source> 32-bit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="191"/>
+        <location filename="src/mainwindow.cpp" line="183"/>
         <source>MSFS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="192"/>
+        <location filename="src/mainwindow.cpp" line="184"/>
         <source>Connect to Microsoft Flight Simulator 2020 using SimConnect.</source>
         <translation>Conecte-se ao Microsoft Flight Simulator 2020 usando o SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="194"/>
+        <location filename="src/mainwindow.cpp" line="186"/>
         <source>FSX or Prepar3D</source>
         <translation>FSX ou Prepar3D</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="195"/>
+        <location filename="src/mainwindow.cpp" line="187"/>
         <source>Connect to FSX or Prepar3D using SimConnect.</source>
         <translation>Conecte-se ao FSX ou Prepar3D usando o SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="299"/>
+        <location filename="src/mainwindow.cpp" line="296"/>
         <source>Connecting to MSFS using SimConnect.</source>
         <translation>Conectando-se ao MSFS usando o SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="301"/>
+        <location filename="src/mainwindow.cpp" line="298"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Conectando com o FSX ou Prepar3D usando SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="309"/>
+        <location filename="src/mainwindow.cpp" line="305"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Conectando com o X-Plane usando o pluguin Xpconnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="327"/>
+        <location filename="src/mainwindow.cpp" line="322"/>
         <source>Save Replay</source>
         <translation>Salvar Repetição</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="327"/>
-        <location filename="src/mainwindow.cpp" line="343"/>
+        <location filename="src/mainwindow.cpp" line="322"/>
+        <location filename="src/mainwindow.cpp" line="337"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Arquivo de Repetição (*.replay);;Todos os Arquivos (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="343"/>
+        <location filename="src/mainwindow.cpp" line="337"/>
         <source>Open Replay</source>
         <translation>Abrir Repetição</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="425"/>
+        <location filename="src/mainwindow.cpp" line="410"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>O programa ainda está conectado.
 Você deseja realmente muda a porta da rede?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="428"/>
-        <location filename="src/mainwindow.cpp" line="535"/>
+        <location filename="src/mainwindow.cpp" line="412"/>
+        <location filename="src/mainwindow.cpp" line="665"/>
+        <location filename="src/mainwindow.cpp" line="707"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Não &amp;mostrar esse diálogo novamente.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="533"/>
+        <location filename="src/mainwindow.cpp" line="480"/>
+        <source>- %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="663"/>
+        <source>The program will keep running in the system tray.
+Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="705"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>O programa ainda está conectado.
 Você deseja sair?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="562"/>
+        <location filename="src/mainwindow.cpp" line="719"/>
+        <source>&amp;Hide Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="719"/>
+        <source>&amp;Restore Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="729"/>
+        <source>&amp;Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="545"/>
         <source>Version %1 (revision %2).</source>
         <translation>Versão %1 (revisão%2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="566"/>
+        <location filename="src/mainwindow.cpp" line="549"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Data da Versão %1. Versão repitida %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="635"/>
+        <location filename="src/mainwindow.cpp" line="617"/>
         <source>Starting server. This can take some time ...</source>
         <translation>Inicializando servidor. Isso pode levar um tempo ...</translation>
     </message>
@@ -236,7 +291,7 @@ Você deseja sair?</translation>
         <translation type="vanished">Iniciando o servidor. Isso pode demorar até um minuto ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="647"/>
+        <location filename="src/mainwindow.cpp" line="629"/>
         <source>Server running.</source>
         <translation>Servidor em funcionamento.</translation>
     </message>
@@ -375,22 +430,22 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="69"/>
+        <location filename="src/main.cpp" line="70"/>
         <source>Log files:</source>
         <translation>Logue de arquivos:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="71"/>
+        <location filename="src/main.cpp" line="72"/>
         <source>Configuration:</source>
         <translation>Configurações:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="107"/>
+        <location filename="src/main.cpp" line="111"/>
         <source>%1 - Error</source>
         <translation>%1 - Erro</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="108"/>
+        <location filename="src/main.cpp" line="112"/>
         <source>%1 is already running.</source>
         <translation>%1 Já está funcionando.</translation>
     </message>
@@ -400,55 +455,55 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
         <translation type="vanished">&lt;p&gt;Server Flight Simulator Network para Little Navmap.&lt;/p&gt;&lt;p&gt;Este software está licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt; GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte para este aplicativo está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="66"/>
+        <location filename="src/mainwindow.cpp" line="67"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2022 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
         <translation>&lt;p style=&apos;white-space:pre&apos;&gt;é o agente Flight Simulator Network para Little Navmap.&lt;/p&gt;&lt;p&gt;Este software está licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses /gpl-3.0&quot;&gt;GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte deste aplicativo está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt; /a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt; b&gt;Direitos autorais 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="124"/>
+        <location filename="src/mainwindow.cpp" line="125"/>
         <source>Save replay data to &lt;file&gt;.</source>
         <translation>Salve os dados de repetição em  &lt;file&gt;.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="125"/>
-        <location filename="src/mainwindow.cpp" line="130"/>
-        <location filename="src/mainwindow.cpp" line="140"/>
+        <location filename="src/mainwindow.cpp" line="128"/>
+        <location filename="src/mainwindow.cpp" line="135"/>
         <source>file</source>
         <translation>arquivo</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="129"/>
+        <location filename="src/mainwindow.cpp" line="128"/>
         <source>Load replay data from &lt;file&gt;.</source>
         <translation>Carregar os dados de repetição para &lt;file&gt;.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="134"/>
+        <location filename="src/mainwindow.cpp" line="131"/>
         <source>Use speed factor &lt;speed&gt; for replay.</source>
         <translation>Use o fator de velocidade &lt;speed&gt; para a repetição.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="135"/>
+        <location filename="src/mainwindow.cpp" line="131"/>
         <source>speed</source>
         <translation>velocidade</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="139"/>
+        <location filename="src/mainwindow.cpp" line="134"/>
         <source>Update whazzup file &lt;file&gt; using VATSIM format during replay.</source>
         <translation>Atualize o arquivo whazzup &lt;arquivo&gt; usando o formato VATSIM durante a reprodução.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="144"/>
+        <location filename="src/mainwindow.cpp" line="138"/>
         <source>Update whazzup file every &lt;seconds&gt; during replay.</source>
         <translation>Atualize o arquivo whazzup a cada &lt;segundos&gt; durante o replay.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="145"/>
+        <location filename="src/mainwindow.cpp" line="139"/>
         <source>seconds</source>
         <translation>segundos</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="149"/>
+        <location filename="src/mainwindow.cpp" line="142"/>
         <source>Show replay menu items.</source>
         <translation>Mostrar repetição no menu de ítens.</translation>
     </message>

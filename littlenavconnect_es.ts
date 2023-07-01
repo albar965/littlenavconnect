@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>&amp;Contents (Online)</source>
-        <translation>&amp;Contenido (En línea)</translation>
+        <translation type="vanished">&amp;Contenido (En línea)</translation>
     </message>
     <message>
         <source>Starting server. This can take up to a minute ...</source>
@@ -107,7 +107,7 @@ Realmente desea cambiar el puerto de red?</translation>
     </message>
     <message>
         <source>&amp;Contents (Offline, PDF)</source>
-        <translation>&amp;Contenido (Fuera de línea, PDF)</translation>
+        <translation type="vanished">&amp;Contenido (Fuera de línea, PDF)</translation>
     </message>
     <message>
         <source>Open Replay File</source>
@@ -185,6 +185,51 @@ Realmente salir ?</translation>
     </message>
     <message>
         <source>Connecting to MSFS using SimConnect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;User Manual (Online)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;User Manual (Offline, PDF)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Minimize to System Tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Start minimized to System Tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Startup minimized to the System Tray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>- %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The program will keep running in the system tray.
+Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Hide Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Restore Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
