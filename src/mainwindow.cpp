@@ -68,7 +68,7 @@ MainWindow::MainWindow()
                   "<p>This software is licensed under "
                     "<a href=\"http://www.gnu.org/licenses/gpl-3.0\">GPL3</a> or any later version.</p>"
                       "<p>The source code for this application is available at "
-                        "<a href=\"https://github.com/albar965\">Github</a>.</p>"
+                        "<a href=\"https://github.com/albar965\">GitHub</a>.</p>"
                           "<p>More about my projects at "
                             "<a href=\"https://www.littlenavmap.org\">www.littlenavmap.org</a>.</p>"
                               "<p><b>Copyright 2015-2023 Alexander Barthel</b></p>");
