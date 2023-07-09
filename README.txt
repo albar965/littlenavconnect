@@ -32,24 +32,11 @@ Little Navconnect supports FSX, FSX Steam Edition, Prepar3d Versions 2, 3, 4 and
 -- INSTALLATION --------------------------------------------------------------
 ------------------------------------------------------------------------------
 
-Installation involves the simple copying of files therefore an installer or setup program is not required.
+Little Navconnect is bundled with the Little Navmap packages. There is no
+separate package available.
 
-Do not extract the archive into the folder "c:\Program Files\" or "c:\Program Files (x86)\"
-since you will need administrative privileges in some Windows versions.
-
-Since Windows keeps control of these folders other problems might occur like replaced or deleted files.
-
-Extract the Zip archive into a folder like "c:\Own Programs\Little Navconnect".
-Then start the program by double-clicking "littlenavconnect.exe".
-
-It is recommended to delete the any old installation directories of Little Navconnect.
-You can also install a newer version into another directory but do not merge the installations.
-
-Anyway, no settings are a stored in the installation directory. Therefore it is safe to remove it.
-
-See the online manual for more details.
-
-The installation on Linux and macOS computers is similar except different paths.
+See the installation instructions in the Little Navmap User Manual:
+https://www.littlenavmap.org/manuals/littlenavmap/release/latest/en/INSTALLATION.html
 
 ------------------------------------------------------------------------------
 -- LICENSE -------------------------------------------------------------------
