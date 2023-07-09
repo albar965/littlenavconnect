@@ -213,17 +213,25 @@ MainWindow::MainWindow()
   connect(ui->actionAbout, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::about);
   connect(ui->actionAboutQt, &QAction::triggered, helpHandler, &atools::gui::HelpHandler::aboutQt);
 
+  connect(ui->actionMinimizeTray, &QAction::toggled, this, &MainWindow::actionTrayToggled);
+  connect(ui->actionStartMinimizeTray, &QAction::toggled, this, &MainWindow::actionTrayToggled);
+
   // Log messages have to be redirected through a message so that QTextEdit::append is not called on
   // a thread context different than main
   connect(this, &MainWindow::appendLogMessage, ui->textEdit, &QTextEdit::append, Qt::QueuedConnection);
 
   if(QSystemTrayIcon::isSystemTrayAvailable())
-    // Create and show tray and menus
-    createTrayIcon();
+  {
+    if(ui->actionMinimizeTray->isChecked() || ui->actionStartMinimizeTray->isChecked())
+      // Create and show tray and menus if any of the menu options are enabled
+      createTrayIcon();
+  }
   else
   {
     ui->actionMinimizeTray->setDisabled(true);
+    ui->actionMinimizeTray->setChecked(false);
     ui->actionStartMinimizeTray->setDisabled(true);
+    ui->actionStartMinimizeTray->setChecked(false);
   }
 }
 
@@ -231,11 +239,7 @@ MainWindow::~MainWindow()
 {
   qDebug() << Q_FUNC_INFO;
 
-  qDebug() << Q_FUNC_INFO << "delete trayIcon";
-  delete trayIcon;
-
-  qDebug() << Q_FUNC_INFO << "delete trayIconMenu";
-  delete trayIconMenu;
+  deleteTrayIcon();
 
   qDebug() << Q_FUNC_INFO << "navServer stopped";
   navServer->stopServer();
@@ -514,7 +518,11 @@ void MainWindow::restoreState()
 
   verbose = Settings::instance().getAndStoreValue(lnc::SETTINGS_OPTIONS_VERBOSE, false).toBool();
 
-  atools::gui::WidgetState(lnc::SETTINGS_MAINWINDOW_WIDGET).restore({this, ui->actionMinimizeTray, ui->actionStartMinimizeTray});
+  atools::gui::WidgetState widgetState(lnc::SETTINGS_MAINWINDOW_WIDGET);
+  widgetState.restore(this);
+
+  widgetState.setBlockSignals(true);
+  widgetState.restore({ui->actionMinimizeTray, ui->actionStartMinimizeTray});
 }
 
 void MainWindow::saveState()
@@ -724,36 +732,55 @@ void MainWindow::showHideFromTray()
   setVisible(!isVisible());
 }
 
+void MainWindow::deleteTrayIcon()
+{
+  qDebug() << Q_FUNC_INFO << "delete trayIcon";
+  delete trayIcon;
+  trayIcon = nullptr;
+
+  qDebug() << Q_FUNC_INFO << "delete trayIconMenu";
+  delete trayIconMenu;
+  trayIconMenu = nullptr;
+
+  // Icon menu also deletes action
+  trayRestoreHideAction = nullptr;
+}
+
 void MainWindow::createTrayIcon()
 {
-  trayRestoreHideAction = new QAction(tr("&Restore"), this); // Text toggles depending on window state
+  if(trayIcon == nullptr && QSystemTrayIcon::isSystemTrayAvailable())
+  {
+    // Context menu takes ownership of actions
+    trayIconMenu = new QMenu(this);
 
-  // Copy text and icon from main but not shortcuts
-  trayOptionsAction = new QAction(ui->actionOptions->icon(), ui->actionOptions->text(), this);
-  trayHelpAction = new QAction(ui->actionHelp->icon(), ui->actionHelp->text(), this);
-  tryQuitAction = new QAction(ui->actionQuit->icon(), ui->actionQuit->text(), this);
+    // Copy text and icon from main but not shortcuts
+    QAction *trayOptionsAction = new QAction(ui->actionOptions->icon(), ui->actionOptions->text(), trayIconMenu);
+    QAction *trayHelpAction = new QAction(ui->actionHelp->icon(), ui->actionHelp->text(), trayIconMenu);
+    QAction *tryQuitAction = new QAction(ui->actionQuit->icon(), ui->actionQuit->text(), trayIconMenu);
 
-  // Context menu
-  trayIconMenu = new QMenu(this);
-  trayIconMenu->addAction(trayRestoreHideAction);
-  trayIconMenu->addSeparator();
-  trayIconMenu->addAction(trayOptionsAction);
-  trayIconMenu->addSeparator();
-  trayIconMenu->addAction(trayHelpAction);
-  trayIconMenu->addSeparator();
-  trayIconMenu->addAction(tryQuitAction);
+    // Use member variable to allow changing text
+    trayRestoreHideAction = new QAction(tr("&Restore"), trayIconMenu); // Text toggles depending on window state
 
-  // Create tray
-  trayIcon = new QSystemTrayIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"), this);
-  trayIcon->setContextMenu(trayIconMenu);
+    trayIconMenu->addAction(trayRestoreHideAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(trayOptionsAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(trayHelpAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(tryQuitAction);
 
-  connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::trayActivated);
-  connect(trayRestoreHideAction, &QAction::triggered, this, &MainWindow::showHideFromTray);
-  connect(trayOptionsAction, &QAction::triggered, this, &MainWindow::options);
-  connect(trayHelpAction, &QAction::triggered, this, &MainWindow::showOnlineHelp);
-  connect(tryQuitAction, &QAction::triggered, this, &MainWindow::closeFromTrayOrAction);
+    // Create tray
+    trayIcon = new QSystemTrayIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"), this);
+    trayIcon->setContextMenu(trayIconMenu); // trayIcon does not take ownership
 
-  trayIcon->show();
+    connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::trayActivated);
+    connect(trayRestoreHideAction, &QAction::triggered, this, &MainWindow::showHideFromTray);
+    connect(trayOptionsAction, &QAction::triggered, this, &MainWindow::options);
+    connect(trayHelpAction, &QAction::triggered, this, &MainWindow::showOnlineHelp);
+    connect(tryQuitAction, &QAction::triggered, this, &MainWindow::closeFromTrayOrAction);
+
+    trayIcon->show();
+  }
 }
 
 void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
@@ -761,4 +788,12 @@ void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
   // Toggle main window visibility on click
   if(reason == QSystemTrayIcon::Trigger)
     setVisible(!isVisible());
+}
+
+void MainWindow::actionTrayToggled(bool)
+{
+  if(ui->actionMinimizeTray->isChecked() || ui->actionStartMinimizeTray->isChecked())
+    createTrayIcon();
+  else if(!ui->actionMinimizeTray->isChecked() && !ui->actionStartMinimizeTray->isChecked())
+    deleteTrayIcon();
 }

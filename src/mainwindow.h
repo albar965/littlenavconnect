@@ -97,9 +97,13 @@ private:
 
   /* Creates the tray icon and menu */
   void createTrayIcon();
+  void deleteTrayIcon();
 
   /* Clicked */
   void trayActivated(QSystemTrayIcon::ActivationReason reason);
+
+  /* One of the minimize to tray changed */
+  void actionTrayToggled(bool);
 
   /* Returns true if shutdown can be continued */
   bool askCloseApplication();
@@ -117,7 +121,7 @@ private:
   /* Tray and menus */
   QSystemTrayIcon *trayIcon = nullptr;
   QMenu *trayIconMenu = nullptr;
-  QAction *trayRestoreHideAction = nullptr, *tryQuitAction = nullptr, *trayHelpAction = nullptr, *trayOptionsAction = nullptr;
+  QAction *trayRestoreHideAction = nullptr;
 
   // Navserver that waits and accepts tcp connections. Starts a NavServerWorker in a thread for each connection.
   atools::fs::ns::NavServer *navServer = nullptr;
