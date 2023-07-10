@@ -2,6 +2,12 @@ Numbers (#) refer to GitHub issues in project `littlenavmap`.
 For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 This text is partially Markdown, hence sometimes strange formatting.
 
+# Version 2.8.8
+
+* Updated readme and user manual.
+* Tray icon is now hidden if all tray options are disabled.
+* Fixed crash when rotating log file on size overflow.
+
 ===============================================================================
 
 # Version 2.8.7
