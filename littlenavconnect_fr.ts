@@ -26,7 +26,7 @@
     <message>
         <location filename="mainwindow.ui" line="91"/>
         <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Fenêtre</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="104"/>
@@ -56,27 +56,27 @@
     <message>
         <location filename="mainwindow.ui" line="157"/>
         <source>&amp;User Manual (Online)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Manuel d&apos;&amp;utilisation (en ligne)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
         <source>&amp;User Manual (Offline, PDF)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Manuel de l&apos;&amp;utilisateur (hors ligne, PDF)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="249"/>
         <source>&amp;Minimize to System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Minimiser dans la barre d&apos;état système</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="260"/>
         <source>&amp;Start minimized to System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Démarrage  minimisé dans la barre d&apos;état système</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="263"/>
         <source>Startup minimized to the System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Démarrage minimisé dans la barre d&apos;état système</translation>
     </message>
     <message>
         <source>&amp;Contents (Online)</source>
@@ -163,13 +163,13 @@
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="98"/>
-        <location filename="src/mainwindow.cpp" line="537"/>
+        <location filename="src/mainwindow.cpp" line="545"/>
         <source> 64-bit</source>
         <translation type="unfinished"> 64-bit</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="100"/>
-        <location filename="src/mainwindow.cpp" line="539"/>
+        <location filename="src/mainwindow.cpp" line="547"/>
         <source> 32-bit</source>
         <translation type="unfinished"> 32-bit</translation>
     </message>
@@ -194,95 +194,96 @@
         <translation type="unfinished">Connectez-vous à FSX ou Prepar3D en utilisant SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="296"/>
+        <location filename="src/mainwindow.cpp" line="300"/>
         <source>Connecting to MSFS using SimConnect.</source>
         <translation type="unfinished">Connexion à MSFS à l&apos;aide de SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="298"/>
+        <location filename="src/mainwindow.cpp" line="302"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Connexion à FSX ou Prepar3D à l&apos;aide de SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="305"/>
+        <location filename="src/mainwindow.cpp" line="309"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Connexion à X-Plane à l&apos;aide du plugin Little Xpconnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="322"/>
+        <location filename="src/mainwindow.cpp" line="326"/>
         <source>Save Replay</source>
         <translation>Sauver la lecture</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="322"/>
-        <location filename="src/mainwindow.cpp" line="337"/>
+        <location filename="src/mainwindow.cpp" line="326"/>
+        <location filename="src/mainwindow.cpp" line="341"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Lecture des fichiers (*.replay);;Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="337"/>
+        <location filename="src/mainwindow.cpp" line="341"/>
         <source>Open Replay</source>
         <translation>Lecture libre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="410"/>
+        <location filename="src/mainwindow.cpp" line="414"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Il y a encore des applications connectées.
 Changer vraiment le port réseau?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="412"/>
-        <location filename="src/mainwindow.cpp" line="665"/>
-        <location filename="src/mainwindow.cpp" line="707"/>
+        <location filename="src/mainwindow.cpp" line="416"/>
+        <location filename="src/mainwindow.cpp" line="673"/>
+        <location filename="src/mainwindow.cpp" line="715"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Ne plu&amp;s afficher cette boîte de dialogue.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="480"/>
+        <location filename="src/mainwindow.cpp" line="484"/>
         <source>- %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">- %1</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="663"/>
+        <location filename="src/mainwindow.cpp" line="671"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Le programme continuera à s&apos;exécuter dans la barre d&apos;état système.
+Sélectionnez &quot;Quitter&quot; dans le menu contextuel de l&apos;entrée de la barre d&apos;état système pour mettre fin au programme.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="705"/>
+        <location filename="src/mainwindow.cpp" line="713"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Il y a encore des applications connectées.
 Vraiment arrêter?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="719"/>
+        <location filename="src/mainwindow.cpp" line="727"/>
         <source>&amp;Hide Window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Masquer la fenêtre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="719"/>
+        <location filename="src/mainwindow.cpp" line="727"/>
         <source>&amp;Restore Window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Restaurer la fenêtre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="729"/>
+        <location filename="src/mainwindow.cpp" line="762"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Restaurer</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="545"/>
+        <location filename="src/mainwindow.cpp" line="553"/>
         <source>Version %1 (revision %2).</source>
         <translation>Version %1 (révision %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="549"/>
+        <location filename="src/mainwindow.cpp" line="557"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Données Version %1. Réponse Version %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="617"/>
+        <location filename="src/mainwindow.cpp" line="625"/>
         <source>Starting server. This can take some time ...</source>
         <translation type="unfinished">Démarrage du serveur. Cela peut prendre un certain temps ...</translation>
     </message>
@@ -291,7 +292,7 @@ Vraiment arrêter?</translation>
         <translation type="vanished">Serveur de démarrage. Cela peut prendre jusqu&apos; à une minute....</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="629"/>
+        <location filename="src/mainwindow.cpp" line="637"/>
         <source>Server running.</source>
         <translation>Serveur en marche.</translation>
     </message>
@@ -449,10 +450,14 @@ Utilisez des valeurs plus élevées (c&apos;est-à-dire des taux de mise à jour
         <translation>%1 fonctionne déjà.</translation>
     </message>
     <message>
+        <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
+        <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
+        <translation type="obsolete">&lt;p&gt;est l&apos;agent Fligh Simulator Network pour Little Navmap.&lt;/p&gt;&lt;p&gt;Ce logiciel est sous licence &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;Le code source de cette application est disponible à l&apos;adresse suivante &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Plus d&apos;informations sur mes projets à &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;mailto:albar965@mailbox.org&quot;&gt;albar965@mailbox.org&lt;/a&gt; ou &lt;a href=&quot;mailto:albar965@t-online.de&quot;&gt;albar965@t-online.de&lt;/a&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
         <location filename="src/mainwindow.cpp" line="67"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
-        <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;p&gt;est l&apos;agent Fligh Simulator Network pour Little Navmap.&lt;/p&gt;&lt;p&gt;Ce logiciel est sous licence &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;Le code source de cette application est disponible à l&apos;adresse suivante &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Plus d&apos;informations sur mes projets à &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;mailto:albar965@mailbox.org&quot;&gt;albar965@mailbox.org&lt;/a&gt; ou &lt;a href=&quot;mailto:albar965@t-online.de&quot;&gt;albar965@t-online.de&lt;/a&gt;&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p style=&apos;white-space:pre&apos;&gt;est l&apos;agent du réseau Flight Simulator pour Little Navmap.&lt;/p&gt;&lt;p&gt;Ce logiciel est sous licence &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; ou toute version ultérieure.&lt;/p&gt;&lt;p&gt;Le code source de cette application est disponible à l&apos;adresse. &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;En savoir plus sur mes projets à &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="125"/>
