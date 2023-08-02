@@ -108,7 +108,7 @@ MainWindow::MainWindow()
 
   // Get the online indicator file which shows which help files are available online
   QString onlineFlagFile = atools::gui::HelpHandler::getHelpFile(
-    QString("help") + QDir::separator() + "little-navconnect-user-manual-${LANG}.online", QLocale().name());
+    QString("help") + atools::SEP + "little-navconnect-user-manual-${LANG}.online", QLocale().name());
 
   // Extract language from the file
   const static QRegularExpression regexp("little-navconnect-user-manual-(.+)\\.online", QRegularExpression::CaseInsensitiveOption);
@@ -559,7 +559,7 @@ void MainWindow::mainWindowShownDelayed()
   // Build the handler classes which are an abstraction to SimConnect and the Little Xpconnect shared memory
   fsxConnectHandler = new atools::fs::sc::SimConnectHandler(verbose);
   fsxConnectHandler->loadSimConnect(QApplication::applicationDirPath() +
-                                    QDir::separator() + "simconnect" + QDir::separator() + "simconnect.manifest");
+                                    atools::SEP + "simconnect" + atools::SEP + "simconnect.manifest");
   xpConnectHandler = new atools::fs::sc::XpConnectHandler();
 
 #ifdef Q_OS_WIN32
