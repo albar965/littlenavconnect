@@ -244,32 +244,21 @@ MainWindow::~MainWindow()
   qDebug() << Q_FUNC_INFO << "navServer stopped";
   navServer->stopServer();
 
-  qDebug() << Q_FUNC_INFO << "delete navServer";
-  delete navServer;
+  ATOOLS_DELETE_LOG(navServer);
 
   qDebug() << Q_FUNC_INFO << "dataReader terminate";
   dataReader->terminateThread();
 
-  qDebug() << Q_FUNC_INFO << "delete dataReader";
-  delete dataReader;
-
-  qDebug() << Q_FUNC_INFO << "delete fsxConnectHandler";
-  delete fsxConnectHandler;
-
-  qDebug() << Q_FUNC_INFO << "delete xpConnectHandler";
-  delete xpConnectHandler;
+  ATOOLS_DELETE_LOG(dataReader);
+  ATOOLS_DELETE_LOG(fsxConnectHandler);
+  ATOOLS_DELETE_LOG(xpConnectHandler);
 
   qDebug() << Q_FUNC_INFO << "reset logging";
   atools::logging::LoggingHandler::setLogFunction(nullptr);
 
-  qDebug() << Q_FUNC_INFO << "delete helpHandler";
-  delete helpHandler;
-
-  qDebug() << Q_FUNC_INFO << "delete fsActionGroup";
-  delete simulatorActionGroup;
-
-  qDebug() << Q_FUNC_INFO << "delete ui";
-  delete ui;
+  ATOOLS_DELETE_LOG(helpHandler);
+  ATOOLS_DELETE_LOG(simulatorActionGroup);
+  ATOOLS_DELETE_LOG(ui);
 
   atools::logging::LoggingGuiAbortHandler::resetGuiAbortFunction();
 }
@@ -734,13 +723,8 @@ void MainWindow::showHideFromTray()
 
 void MainWindow::deleteTrayIcon()
 {
-  qDebug() << Q_FUNC_INFO << "delete trayIcon";
-  delete trayIcon;
-  trayIcon = nullptr;
-
-  qDebug() << Q_FUNC_INFO << "delete trayIconMenu";
-  delete trayIconMenu;
-  trayIconMenu = nullptr;
+  ATOOLS_DELETE_LOG(trayIcon);
+  ATOOLS_DELETE_LOG(trayIconMenu);
 
   // Icon menu also deletes action
   trayRestoreHideAction = nullptr;
