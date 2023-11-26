@@ -43,6 +43,7 @@
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <QSystemTrayIcon>
+#include <QTextDocumentFragment>
 #include <QTimer>
 
 using atools::settings::Settings;
@@ -470,7 +471,7 @@ void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context
     if(type != QtDebugMsg && trayIcon != nullptr)
     {
       QStringList tooltip = trayIcon->toolTip().split('\n');
-      tooltip.append(tr("- %1").arg(atools::strToPlainText(message)));
+      tooltip.append(tr("- %1").arg(QTextDocumentFragment::fromHtml(message).toPlainText()));
       if(tooltip.size() > 5)
         tooltip.removeFirst();
       trayIcon->setToolTip(tooltip.join('\n'));
