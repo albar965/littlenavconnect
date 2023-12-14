@@ -52,7 +52,7 @@ using atools::fs::sc::SimConnectReply;
 using atools::gui::HelpHandler;
 
 // "master" or "release/1.4" VERSION_NUMBER_TODO
-const QString HELP_BRANCH = "release/2.8";
+const QString HELP_BRANCH = "release/3.0";
 
 /* Important: keep slash at the end. Otherwise browser might not display the page properly */
 const QString HELP_ONLINE_URL("https://www.littlenavmap.org/manuals/littlenavconnect/" + HELP_BRANCH + "/${LANG}/");
