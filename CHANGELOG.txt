@@ -2,9 +2,11 @@ Numbers (#) refer to GitHub issues in project `littlenavmap`.
 For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 This text is partially Markdown, hence sometimes strange formatting.
 
+===============================================================================
+
 # Version 3.0.0.beta
 
-* Enabled IPv6 and added additional IPv6 addresses to display.
+* Enabled IPv6 and added additional IPv6 addresses in status log.
 
 ===============================================================================
 
