@@ -367,7 +367,7 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</source>
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
-        <translation>Ändert den Radius um das Benutzerflugzeug, der verwendet wird, um KI- oder Multiplayer-Flugzeuge einzubeziehen.
+        <translation>Ändert den Radius um das Nutzerflugzeug, der verwendet wird, um KI- oder Multiplayer-Flugzeuge einzubeziehen.
 Die Verwendung höherer Werte bei vielen KI- oder Multiplayer-Flugzeugen kann zu Stottern im Simulator führen.
 Die Einheit ist immer nautische Meilen (1 NM entspricht 1,852 km).
 FSX, Prepar3D und MSFS erlauben ein Maximum von 105 NM.</translation>
