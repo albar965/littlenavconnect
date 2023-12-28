@@ -28,11 +28,11 @@
 #include "geo/calculations.h"
 #include "fs/fspaths.h"
 #include "exception.h"
+#include "gui/dialog.h"
 
 #include <QSslSocket>
 #include <QStyleFactory>
 #include <QSharedMemory>
-#include <QMessageBox>
 
 using atools::gui::Application;
 using atools::logging::LoggingHandler;
@@ -108,8 +108,7 @@ int main(int argc, char *argv[])
     if(!shared.create(64, QSharedMemory::ReadOnly))
     {
       shared.detach();
-      QMessageBox::critical(nullptr, QObject::tr("%1 - Error").arg(QCoreApplication::applicationName()),
-                            QObject::tr("%1 is already running.").arg(QCoreApplication::applicationName()));
+      atools::gui::Dialog::critical(nullptr, QObject::tr("%1 is already running.").arg(QCoreApplication::applicationName()));
       return 1;
     }
 

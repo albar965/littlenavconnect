@@ -40,7 +40,6 @@
 #include <QCloseEvent>
 #include <QCommandLineParser>
 #include <QDir>
-#include <QMessageBox>
 #include <QRegularExpression>
 #include <QSystemTrayIcon>
 #include <QTextDocumentFragment>
@@ -539,7 +538,7 @@ void MainWindow::mainWindowShownDelayed()
   QString applicationVersion = QApplication::applicationVersion();
 #endif
 
-  qInfo(atools::fs::ns::gui).noquote().nospace() << QApplication::applicationName();
+  qInfo(atools::fs::ns::gui).noquote().nospace() << QCoreApplication::applicationName();
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
     arg(applicationVersion).arg(GIT_REVISION_LITTLENAVCONNECT);
 
