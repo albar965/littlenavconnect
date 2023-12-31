@@ -376,7 +376,7 @@ FSX, P3D and MSFS allow a maxium of 105 NM.</source>
     </message>
     <message>
         <source>%1 - Error</source>
-        <translation>%1 - Erreur</translation>
+        <translation type="vanished">%1 - Erreur</translation>
     </message>
     <message>
         <source>Use speed factor &lt;speed&gt; for replay.</source>
