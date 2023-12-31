@@ -4,6 +4,13 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.0.1.beta
+
+* Update message dialog to make all text in dialog boxes selectable.
+* Updates for German translation.
+
+===============================================================================
+
 # Version 3.0.0.beta
 
 * Enabled IPv6 and added additional IPv6 addresses in status log.
