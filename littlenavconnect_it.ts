@@ -26,7 +26,7 @@
     <message>
         <location filename="mainwindow.ui" line="91"/>
         <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Finestra</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="104"/>
@@ -56,27 +56,27 @@
     <message>
         <location filename="mainwindow.ui" line="157"/>
         <source>&amp;User Manual (Online)</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuale &amp;Utente (Online)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
         <source>&amp;User Manual (Offline, PDF)</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuale &amp;Utente (Offline, PDF)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="249"/>
         <source>&amp;Minimize to System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Riduci a icona nella Barra delle Applicazioni</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="260"/>
         <source>&amp;Start minimized to System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Avvia ridotto a icona nella Barra delle Applicazioni</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="263"/>
         <source>Startup minimized to the System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvio ridotto a icona nella Barra delle Applicazioni</translation>
     </message>
     <message>
         <source>&amp;Contents (Online)</source>
@@ -241,13 +241,14 @@ Cambiare veramente la Porta di Rete?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="473"/>
         <source>- %1</source>
-        <translation type="unfinished"></translation>
+        <translation>- %1</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="660"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il programma continuerà ad essere eseguito nella barra delle applicazioni.
+Selezionare &quot;Esci&quot; nel menu contestuale della voce della barra delle applicazioni per terminare il programma.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="702"/>
@@ -259,17 +260,17 @@ Uscire veramente?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="716"/>
         <source>&amp;Hide Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nascondi Finestra</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="716"/>
         <source>&amp;Restore Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ripristina Finestra</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="746"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ripristina</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="542"/>
