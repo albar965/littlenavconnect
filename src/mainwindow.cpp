@@ -35,6 +35,7 @@
 #include "logging/logginghandler.h"
 #include "settings/settings.h"
 #include "util/htmlbuilder.h"
+#include "util/signalhandler.h"
 #include "util/version.h"
 
 #include <QCloseEvent>
@@ -78,6 +79,14 @@ MainWindow::MainWindow()
 
   ui->setupUi(this);
   ui->textEdit->clear();
+
+#if defined(Q_OS_LINUX)
+  // Catch Ctrl+C and other signals to avoid data loss on Linux/Unix systems
+  const atools::util::SignalHandler& signalHandler = atools::util::SignalHandler::instance();
+  connect(&signalHandler, &atools::util::SignalHandler::sigHupReceived, this, &MainWindow::close, Qt::QueuedConnection);
+  connect(&signalHandler, &atools::util::SignalHandler::sigTermReceived, this, &MainWindow::close, Qt::QueuedConnection);
+  connect(&signalHandler, &atools::util::SignalHandler::sigIntReceived, this, &MainWindow::close, Qt::QueuedConnection);
+#endif
 
   restoreState();
 
@@ -259,6 +268,11 @@ MainWindow::~MainWindow()
   ATOOLS_DELETE_LOG(helpHandler);
   ATOOLS_DELETE_LOG(simulatorActionGroup);
   ATOOLS_DELETE_LOG(ui);
+
+#if defined(Q_OS_LINUX)
+  // Remove signal handler
+  atools::util::SignalHandler::deleteInstance();
+#endif
 
   atools::logging::LoggingGuiAbortHandler::resetGuiAbortFunction();
 }
