@@ -4,6 +4,16 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.0.2.beta
+
+* Update message dialog to make all text in dialog boxes selectable.
+* Now safely catching SIGHUP, SIGTERM or SIGINT on Linux. This avoids data loss due to unsaved
+  files when terminating program with Ctrl+C.
+* Changed application to catch program stopping during Windows shutdown. Now shutting program
+  cleanly down when shutting down Windows with Little Navconnect is running.
+
+===============================================================================
+
 # Version 3.0.1.beta
 
 * Update message dialog to make all text in dialog boxes selectable.
