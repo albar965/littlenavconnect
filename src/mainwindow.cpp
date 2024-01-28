@@ -17,23 +17,23 @@
 
 #include "mainwindow.h"
 
-#include "ui_mainwindow.h"
+#include "constants.h"
 #include "fs/ns/navserver.h"
 #include "fs/ns/navservercommon.h"
-#include "optionsdialog.h"
-
-#include "constants.h"
 #include "fs/sc/datareaderthread.h"
 #include "fs/sc/simconnecthandler.h"
 #include "fs/sc/simconnectreply.h"
 #include "fs/sc/xpconnecthandler.h"
 #include "geo/calculations.h"
+#include "gui/desktopservices.h"
 #include "gui/dialog.h"
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
 #include "logging/loggingguiabort.h"
 #include "logging/logginghandler.h"
+#include "optionsdialog.h"
 #include "settings/settings.h"
+#include "ui_mainwindow.h"
 #include "util/htmlbuilder.h"
 #include "util/signalhandler.h"
 #include "util/version.h"
@@ -72,7 +72,7 @@ MainWindow::MainWindow()
                         "<a href=\"https://github.com/albar965\">GitHub</a>.</p>"
                           "<p>More about my projects at "
                             "<a href=\"https://www.littlenavmap.org\">www.littlenavmap.org</a>.</p>"
-                              "<p><b>Copyright 2015-2023 Alexander Barthel</b></p>");
+                              "<p><b>Copyright 2015-2024 Alexander Barthel</b></p>");
 
   // Show a dialog on fatal log events like asserts
   atools::logging::LoggingGuiAbortHandler::setGuiAbortFunction(this);
@@ -284,7 +284,8 @@ void MainWindow::showOnlineHelp()
 
 void MainWindow::showOfflineHelp()
 {
-  HelpHandler::openFile(this, HelpHandler::getHelpFile(HELP_OFFLINE_FILE, QLocale().name()));
+  atools::gui::DesktopServices::openFile(this, HelpHandler::getHelpFile(HELP_OFFLINE_FILE, QLocale().name()),
+                                         false /* showInFileManager */);
 }
 
 atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()
