@@ -163,13 +163,13 @@
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="107"/>
-        <location filename="src/mainwindow.cpp" line="548"/>
+        <location filename="src/mainwindow.cpp" line="549"/>
         <source> 64-bit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="109"/>
-        <location filename="src/mainwindow.cpp" line="550"/>
+        <location filename="src/mainwindow.cpp" line="551"/>
         <source> 32-bit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -194,95 +194,95 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="303"/>
+        <location filename="src/mainwindow.cpp" line="304"/>
         <source>Connecting to MSFS using SimConnect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="305"/>
+        <location filename="src/mainwindow.cpp" line="306"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Aan het verbinden met FSX or Prepar3D met SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="312"/>
+        <location filename="src/mainwindow.cpp" line="313"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Aan het verbinden met X-Plane met de Little Xpconnect plugin.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="329"/>
+        <location filename="src/mainwindow.cpp" line="330"/>
         <source>Save Replay</source>
         <translation>Bewaar Herhaling</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="329"/>
-        <location filename="src/mainwindow.cpp" line="344"/>
+        <location filename="src/mainwindow.cpp" line="330"/>
+        <location filename="src/mainwindow.cpp" line="345"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Bestanden Herhaing (*.replay);;Alle Bestanden (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="344"/>
+        <location filename="src/mainwindow.cpp" line="345"/>
         <source>Open Replay</source>
         <translation>Open Herhaing</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="417"/>
+        <location filename="src/mainwindow.cpp" line="418"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Er zijn nog applicaties verbonden.
 Doorgaan met de Netwerk Poort te wijzigen?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="419"/>
-        <location filename="src/mainwindow.cpp" line="676"/>
-        <location filename="src/mainwindow.cpp" line="718"/>
+        <location filename="src/mainwindow.cpp" line="420"/>
+        <location filename="src/mainwindow.cpp" line="677"/>
+        <location filename="src/mainwindow.cpp" line="719"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Dit &amp;dialoogvenster niet meer tonen.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="487"/>
+        <location filename="src/mainwindow.cpp" line="488"/>
         <source>- %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="674"/>
+        <location filename="src/mainwindow.cpp" line="675"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="716"/>
+        <location filename="src/mainwindow.cpp" line="717"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Er zijn nog applicaties verbonden.
 Toch Stoppen?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="730"/>
+        <location filename="src/mainwindow.cpp" line="731"/>
         <source>&amp;Hide Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="730"/>
+        <location filename="src/mainwindow.cpp" line="731"/>
         <source>&amp;Restore Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="760"/>
+        <location filename="src/mainwindow.cpp" line="761"/>
         <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="556"/>
+        <location filename="src/mainwindow.cpp" line="557"/>
         <source>Version %1 (revision %2).</source>
         <translation>Versie %1 (revisie %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="560"/>
+        <location filename="src/mainwindow.cpp" line="561"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Data Versie %1. Reply Versie %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="628"/>
+        <location filename="src/mainwindow.cpp" line="629"/>
         <source>Starting server. This can take some time ...</source>
         <translation>Opstarten Server. Dit kan een tijdje duren ...</translation>
     </message>
@@ -291,7 +291,7 @@ Toch Stoppen?</translation>
         <translation type="vanished">Server opstarten. Kan tot één minuut duren ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="640"/>
+        <location filename="src/mainwindow.cpp" line="641"/>
         <source>Server running.</source>
         <translation>Server draaiend.</translation>
     </message>
@@ -449,8 +449,8 @@ Hogere waarden instellen vb. trage update waarden) instellen als je een zwakke i
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="68"/>
-        <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
-        <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
+        <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2024 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
+        <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
         <translation type="unfinished">&lt;p style=&apos;white-space:pre&apos;&gt;is de Fligh Simulator Network agent voor Little Navmap.&lt;/p&gt;&lt;p&gt;Deze software is gelicencieerd bij &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; of gelijk welke latere versie.&lt;/p&gt;&lt;p&gt;De broncode voor deze applicatie is beschikbaar op &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Meer over mijn projecten op &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
