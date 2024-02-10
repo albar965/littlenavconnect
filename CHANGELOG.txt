@@ -4,6 +4,12 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.0.3.rc1
+
+* Updated to release candidate.
+
+===============================================================================
+
 # Version 3.0.2.beta
 
 * Update message dialog to make all text in dialog boxes selectable.
