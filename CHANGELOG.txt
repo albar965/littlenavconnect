@@ -4,9 +4,9 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
-# Version 3.0.3.rc1
+# Version 3.0.4
 
-* Updated to release candidate.
+* Updated to stable release.
 
 ===============================================================================
 
