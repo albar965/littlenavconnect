@@ -26,7 +26,7 @@
     <message>
         <location filename="mainwindow.ui" line="91"/>
         <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Janela</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="104"/>
@@ -56,27 +56,27 @@
     <message>
         <location filename="mainwindow.ui" line="157"/>
         <source>&amp;User Manual (Online)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Manual do Usuário (Online)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
         <source>&amp;User Manual (Offline, PDF)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Manual do Usuário (Offline, PDF)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="249"/>
         <source>&amp;Minimize to System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Minimizar para a Bandeja do Sistema</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="260"/>
         <source>&amp;Start minimized to System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Iniciar minimizado na Bandeja do Sistema</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="263"/>
         <source>Startup minimized to the System Tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar minimizado na Bandeja do Sistema</translation>
     </message>
     <message>
         <source>&amp;Contents (Online)</source>
@@ -241,13 +241,14 @@ Você deseja realmente muda a porta da rede?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="488"/>
         <source>- %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="675"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
-        <translation type="unfinished"></translation>
+        <translation>O programa continuará rodando na bandeja do sistema.
+Selecione “Sair” no menu de contexto da entrada da bandeja do sistema para terminar o programa.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="717"/>
@@ -259,17 +260,17 @@ Você deseja sair?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="731"/>
         <source>&amp;Hide Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Esconder Janela</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="731"/>
         <source>&amp;Restore Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Restaurar Janela</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="761"/>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Restaurar</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="557"/>
@@ -457,7 +458,7 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
         <location filename="src/mainwindow.cpp" line="68"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2024 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation type="unfinished">&lt;p style=&apos;white-space:pre&apos;&gt;é o agente Flight Simulator Network para Little Navmap.&lt;/p&gt;&lt;p&gt;Este software está licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses /gpl-3.0&quot;&gt;GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte deste aplicativo está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt; /a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt; b&gt;Direitos autorais 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p style=&apos;white-space:pre&apos;&gt;é o agente da Rede de Simulação de Voo para o Little Navmap.&lt;/p&gt;&lt;p&gt;Este software é licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte desta aplicação está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Direitos autorais 2015-2024 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="134"/>
