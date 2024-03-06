@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2023 Alexander Barthel alex@littlenavmap.org
+* Copyright 2015-2024 Alexander Barthel alex@littlenavmap.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -52,14 +52,17 @@ int main(int argc, char *argv[])
 
   int retval = 0;
 
+  Settings::setOrganizationName(lnc::OPTIONS_APPLICATION_ORGANIZATION);
+  Settings::setApplicationName(lnc::OPTIONS_APPLICATION);
+
   try
   {
     using atools::gui::Application;
     Application app(argc, argv);
     Application::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"));
-    Application::setApplicationName("Little Navconnect");
-    Application::setOrganizationName("ABarthel");
-    Application::setOrganizationDomain("littlenavmap.org");
+    Application::setApplicationName(lnc::OPTIONS_APPLICATION);
+    Application::setOrganizationName(lnc::OPTIONS_APPLICATION_ORGANIZATION);
+    Application::setOrganizationDomain(lnc::OPTIONS_APPLICATION_DOMAIN);
 
     Application::setApplicationVersion(VERSION_NUMBER_LITTLENAVCONNECT);
     Application::setEmailAddresses({"alex@littlenavmap.org"});
@@ -83,18 +86,18 @@ int main(int argc, char *argv[])
 #endif
 
     // Print some information which can be useful for debugging
+    Settings::logMessages();
     LoggingUtil::logSystemInformation();
+    LoggingUtil::logStandardPaths();
+
     qInfo().noquote().nospace() << "atools revision " << atools::gitRevision() << " "
                                 << Application::applicationName() << " revision " << GIT_REVISION_LITTLENAVCONNECT;
 
-    LoggingUtil::logStandardPaths();
     qInfo() << "SSL supported" << QSslSocket::supportsSsl()
             << "build library" << QSslSocket::sslLibraryBuildVersionString()
             << "library" << QSslSocket::sslLibraryVersionString();
 
     qInfo() << "Available styles" << QStyleFactory::keys();
-
-    Settings::logSettingsInformation();
 
     // Load simulator paths =================================
     atools::fs::FsPaths::loadAllPaths();
