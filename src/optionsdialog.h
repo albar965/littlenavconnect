@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2023 Alexander Barthel alex@littlenavmap.org
+* Copyright 2015-2024 Alexander Barthel alex@littlenavmap.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -35,6 +35,9 @@ class OptionsDialog :
 public:
   explicit OptionsDialog(QWidget *parent);
   virtual ~OptionsDialog() override;
+
+  OptionsDialog(const OptionsDialog& other) = delete;
+  OptionsDialog& operator=(const OptionsDialog& other) = delete;
 
   int getPort() const;
   unsigned int getUpdateRate() const;
