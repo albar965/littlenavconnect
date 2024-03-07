@@ -430,12 +430,12 @@ Utilisez des valeurs plus élevées (c&apos;est-à-dire des taux de mise à jour
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="70"/>
+        <location filename="src/main.cpp" line="73"/>
         <source>Log files:</source>
         <translation>Fichiers log:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="72"/>
+        <location filename="src/main.cpp" line="75"/>
         <source>Configuration:</source>
         <translation>Configuration:</translation>
     </message>
@@ -444,7 +444,7 @@ Utilisez des valeurs plus élevées (c&apos;est-à-dire des taux de mise à jour
         <translation type="vanished">%1 - Erreur</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="111"/>
+        <location filename="src/main.cpp" line="114"/>
         <source>%1 is already running.</source>
         <translation>%1 fonctionne déjà.</translation>
     </message>

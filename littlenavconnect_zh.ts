@@ -428,12 +428,12 @@ Little Navconnect 使用该时间间隔从飞行模拟器提取数据并将其�
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="70"/>
+        <location filename="src/main.cpp" line="73"/>
         <source>Log files:</source>
         <translation>日志文件：</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="72"/>
+        <location filename="src/main.cpp" line="75"/>
         <source>Configuration:</source>
         <translation>配置：</translation>
     </message>
@@ -442,7 +442,7 @@ Little Navconnect 使用该时间间隔从飞行模拟器提取数据并将其�
         <translation type="vanished">%1 - 错误</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="111"/>
+        <location filename="src/main.cpp" line="114"/>
         <source>%1 is already running.</source>
         <translation>%1 已在运行。</translation>
     </message>

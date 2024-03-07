@@ -434,12 +434,12 @@ Usa valori più alti (cioè velocità di aggiornamento più lente) se hai una re
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="70"/>
+        <location filename="src/main.cpp" line="73"/>
         <source>Log files:</source>
         <translation>File di log:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="72"/>
+        <location filename="src/main.cpp" line="75"/>
         <source>Configuration:</source>
         <translation>Configurazione:</translation>
     </message>
@@ -448,7 +448,7 @@ Usa valori più alti (cioè velocità di aggiornamento più lente) se hai una re
         <translation type="vanished">%1 - Errore</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="111"/>
+        <location filename="src/main.cpp" line="114"/>
         <source>%1 is already running.</source>
         <translation>%1 è già avviato.</translation>
     </message>

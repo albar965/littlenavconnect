@@ -431,12 +431,12 @@ Verwenden Sie höhere Werte (d.h. langsamere Aktualisierungsraten), wenn Sie ein
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="70"/>
+        <location filename="src/main.cpp" line="73"/>
         <source>Log files:</source>
         <translation>Logdateien:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="72"/>
+        <location filename="src/main.cpp" line="75"/>
         <source>Configuration:</source>
         <translation>Konfiguration:</translation>
     </message>
@@ -445,7 +445,7 @@ Verwenden Sie höhere Werte (d.h. langsamere Aktualisierungsraten), wenn Sie ein
         <translation type="vanished">%1 - Fehler</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="111"/>
+        <location filename="src/main.cpp" line="114"/>
         <source>%1 is already running.</source>
         <translation>%1 läuft bereits.</translation>
     </message>

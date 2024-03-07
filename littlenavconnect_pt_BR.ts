@@ -431,12 +431,12 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="70"/>
+        <location filename="src/main.cpp" line="73"/>
         <source>Log files:</source>
         <translation>Logue de arquivos:</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="72"/>
+        <location filename="src/main.cpp" line="75"/>
         <source>Configuration:</source>
         <translation>Configurações:</translation>
     </message>
@@ -445,7 +445,7 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
         <translation type="vanished">%1 - Erro</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="111"/>
+        <location filename="src/main.cpp" line="114"/>
         <source>%1 is already running.</source>
         <translation>%1 Já está funcionando.</translation>
     </message>
