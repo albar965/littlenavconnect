@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     // Initialize logging and force logfiles into the system or user temp directory
     LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(":/littlenavconnect/resources/config/logging.cfg"));
 
-    Application::addReportPath(QObject::tr("Log files:"), LoggingHandler::getLogFiles());
+    Application::addReportPath(QObject::tr("Log files:"), LoggingHandler::getLogFiles(false /* includeBackups */));
 
     Application::addReportPath(QObject::tr("Configuration:"), {Settings::getFilename()});
 
