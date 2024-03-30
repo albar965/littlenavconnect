@@ -26,7 +26,7 @@
     <message>
         <location filename="mainwindow.ui" line="91"/>
         <source>&amp;Window</source>
-        <translation>&amp;Janela</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="104"/>
@@ -56,27 +56,50 @@
     <message>
         <location filename="mainwindow.ui" line="157"/>
         <source>&amp;User Manual (Online)</source>
-        <translation>&amp;Manual do Usuário (Online)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="171"/>
+        <source>&amp;Options ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="174"/>
+        <source>Ctrl+Shift+,</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="204"/>
         <source>&amp;User Manual (Offline, PDF)</source>
-        <translation>&amp;Manual do Usuário (Offline, PDF)</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="215"/>
+        <location filename="src/mainwindow.cpp" line="198"/>
+        <source>FSX, Prepar3D or MSFS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="218"/>
+        <location filename="mainwindow.ui" line="221"/>
+        <location filename="src/mainwindow.cpp" line="199"/>
+        <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="249"/>
         <source>&amp;Minimize to System Tray</source>
-        <translation>&amp;Minimizar para a Bandeja do Sistema</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="260"/>
         <source>&amp;Start minimized to System Tray</source>
-        <translation>&amp;Iniciar minimizado na Bandeja do Sistema</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="263"/>
         <source>Startup minimized to the System Tray</source>
-        <translation>Iniciar minimizado na Bandeja do Sistema</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Contents (Online)</source>
@@ -86,16 +109,6 @@
         <location filename="mainwindow.ui" line="162"/>
         <source>&amp;Reset Messages</source>
         <translation>&amp;Resetar Mensagens</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="171"/>
-        <source>&amp;Options ...</source>
-        <translation>&amp;Opçôes ...</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="174"/>
-        <source>Ctrl+Shift+,</source>
-        <translation></translation>
     </message>
     <message>
         <source>&amp;Options</source>
@@ -127,19 +140,14 @@
         <translation type="vanished">&amp;Conteúdos (Offline, PDF)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="215"/>
-        <location filename="src/mainwindow.cpp" line="198"/>
-        <source>FSX, Prepar3D or MSFS</source>
-        <oldsource>FSX or Prepar3D</oldsource>
-        <translation>FSX, Prepar3D ou MSFS</translation>
+        <location filename="src/mainwindow.cpp" line="195"/>
+        <source>FSX or Prepar3D</source>
+        <translation>FSX ou Prepar3D</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="218"/>
-        <location filename="mainwindow.ui" line="221"/>
-        <location filename="src/mainwindow.cpp" line="199"/>
-        <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
-        <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
-        <translation>Conectar ao FSX Prepar3D ou Microsoft Flight Simulator 2020 usando SimConnect.</translation>
+        <location filename="src/mainwindow.cpp" line="196"/>
+        <source>Connect to FSX or Prepar3D using SimConnect.</source>
+        <translation>Conectado com o FSX ou Prepar3D usando SimConnect.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="224"/>
@@ -160,43 +168,6 @@
         <location filename="mainwindow.ui" line="238"/>
         <source>Ctrl+Shift+X</source>
         <translation></translation>
-    </message>
-    <message>
-        <location filename="src/mainwindow.cpp" line="107"/>
-        <location filename="src/mainwindow.cpp" line="549"/>
-        <source> 64-bit</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="src/mainwindow.cpp" line="109"/>
-        <location filename="src/mainwindow.cpp" line="551"/>
-        <source> 32-bit</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="src/mainwindow.cpp" line="192"/>
-        <source>MSFS</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="src/mainwindow.cpp" line="193"/>
-        <source>Connect to Microsoft Flight Simulator 2020 using SimConnect.</source>
-        <translation>Conecte-se ao Microsoft Flight Simulator 2020 usando o SimConnect.</translation>
-    </message>
-    <message>
-        <location filename="src/mainwindow.cpp" line="195"/>
-        <source>FSX or Prepar3D</source>
-        <translation>FSX ou Prepar3D</translation>
-    </message>
-    <message>
-        <location filename="src/mainwindow.cpp" line="196"/>
-        <source>Connect to FSX or Prepar3D using SimConnect.</source>
-        <translation>Conecte-se ao FSX ou Prepar3D usando o SimConnect.</translation>
-    </message>
-    <message>
-        <location filename="src/mainwindow.cpp" line="304"/>
-        <source>Connecting to MSFS using SimConnect.</source>
-        <translation>Conectando-se ao MSFS usando o SimConnect.</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="306"/>
@@ -241,14 +212,18 @@ Você deseja realmente muda a porta da rede?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="488"/>
         <source>- %1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="629"/>
+        <source>Starting server. This can take some time ...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="675"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
-        <translation>O programa continuará rodando na bandeja do sistema.
-Selecione “Sair” no menu de contexto da entrada da bandeja do sistema para terminar o programa.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="717"/>
@@ -260,17 +235,17 @@ Você deseja sair?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="731"/>
         <source>&amp;Hide Window</source>
-        <translation>&amp;Esconder Janela</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="731"/>
         <source>&amp;Restore Window</source>
-        <translation>&amp;Restaurar Janela</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="761"/>
         <source>&amp;Restore</source>
-        <translation>&amp;Restaurar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="557"/>
@@ -278,14 +253,36 @@ Você deseja sair?</translation>
         <translation>Versão %1 (revisão%2).</translation>
     </message>
     <message>
+        <location filename="src/mainwindow.cpp" line="107"/>
+        <location filename="src/mainwindow.cpp" line="549"/>
+        <source> 64-bit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="109"/>
+        <location filename="src/mainwindow.cpp" line="551"/>
+        <source> 32-bit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="192"/>
+        <source>MSFS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="193"/>
+        <source>Connect to Microsoft Flight Simulator 2020 using SimConnect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/mainwindow.cpp" line="304"/>
+        <source>Connecting to MSFS using SimConnect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="src/mainwindow.cpp" line="561"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Data da Versão %1. Versão repitida %2.</translation>
-    </message>
-    <message>
-        <location filename="src/mainwindow.cpp" line="629"/>
-        <source>Starting server. This can take some time ...</source>
-        <translation>Inicializando servidor. Isso pode levar um tempo ...</translation>
     </message>
     <message>
         <source>Starting server. This can take up to a minute ...</source>
@@ -305,23 +302,27 @@ Você deseja sair?</translation>
         <translation>Little Navconnect - Opções</translation>
     </message>
     <message>
+        <location filename="optionsdialog.ui" line="22"/>
+        <source>Allowed range is 50 up to 5000 milliseconds (5 seconds).
+Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
+Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
+Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="optionsdialog.ui" line="60"/>
         <location filename="optionsdialog.ui" line="63"/>
         <source>Deselect to disable fetching and transmission of AI or multiplayer aircraft</source>
         <translation>Desmarque para desativar a busca e transmissão de AI ou aeronave do Multiplayer</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="66"/>
-        <source>Fetch AI or &amp;multiplayer aircraft</source>
-        <oldsource>Fetch AI or multiplayer &amp;aircraft</oldsource>
-        <translation>Buscar AI ou &amp;aeronave multiplayer</translation>
+        <source>Fetch AI or multiplayer &amp;aircraft</source>
+        <translation type="vanished">Buscar AI ou &amp;aeronave no multiplayer</translation>
     </message>
     <message>
-        <source>Allowed range is 50 milliseconds up to 2 seconds.
+        <source>Allowed range is 50 milliseconds up to 2 seconds. 
 Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</source>
-        <oldsource>Allowed range is 50 milliseconds up to 2 seconds. 
-Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.</oldsource>
-        <translation type="obsolete">O alcance permitido é de 50 milissegundos até 2 segundos.
+        <translation type="vanished">O alcance permitido é de 50 milissegundos até 2 segundos.
 O Little Navconnect obtém dados do Flight Simulator e os envia para todos os clientes (ou seja, Little Navmap) usando este intervalo de tempo.</translation>
     </message>
     <message>
@@ -333,6 +334,11 @@ O Little Navconnect obtém dados do Flight Simulator e os envia para todos os cl
         <location filename="optionsdialog.ui" line="31"/>
         <source> ms</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="optionsdialog.ui" line="66"/>
+        <source>Fetch AI or &amp;multiplayer aircraft</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="76"/>
@@ -358,24 +364,34 @@ Isso pode ser útil para sessões de transmissão onde outros podem ver seu comp
         <translation>&amp;Porta de rede:</translation>
     </message>
     <message>
+        <location filename="optionsdialog.ui" line="90"/>
+        <source>This can normally be left at default.
+Change this value only if another application occupies this port and
+you get an error message like &quot;The bound address is already in use&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="optionsdialog.ui" line="111"/>
+        <source>&amp;AI fetch radius (not used for X-Plane):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="optionsdialog.ui" line="127"/>
+        <source>Fetch AI or multiplayer &amp;ships</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="optionsdialog.ui" line="137"/>
         <source>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1.852 km).
 FSX, P3D and MSFS allow a maxium of 105 NM.</source>
-        <oldsource>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
-Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
-The unit is always nautical miles (1 NM equals to 1852 km).
-FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
-        <translation>Altere o raio ao redor da aeronave do usuário que é usado para incluir AI ou aeronaves multiplayer.
-Usar valores mais altos com muito AI ou aeronaves multiplayer pode induzir a &quot;lags&quot; no simulador.
-A unidade é sempre milhas náuticas (1 NM é igual a 1,852 km).
-FSX, P3D e MSFS permitem um máximo de 105 NM.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="143"/>
         <source> NM</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="162"/>
@@ -383,37 +399,17 @@ FSX, P3D e MSFS permitem um máximo de 105 NM.</translation>
         <translation>&amp;Intervalo de tempo para atualização:</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="90"/>
         <source>This can normally be left at default.
-Change this value only if another application occupies this port and
-you get an error message like &quot;The bound address is already in use&quot;.</source>
-        <oldsource>This can normally be left at default.
 Change this value only if another application occupies this port and 
-you get an error message like &quot;The bound address is already in use&quot;.</oldsource>
-        <translation>Normalmente, isso pode ser deixado no padrão.
-Altere este valor apenas se outro aplicativo ocupar esta porta e
-se você recebe uma mensagem de erro como &quot;O endereço vinculado já está em uso&quot;.</translation>
-    </message>
-    <message>
-        <location filename="optionsdialog.ui" line="22"/>
-        <source>Allowed range is 50 up to 5000 milliseconds (5 seconds).
-Little Navconnect fetches data from Flight Simulator and sends it to all clients (i.e. Little Navmap) using this time interval.
-Lower values will result in a more fluid aircraft movement but can potentially induce stutters in the simulator.
-Use higher values (i.e. slower update rates) if you have a slow network or experience problems.</source>
-        <translation>O intervalo permitido é de 50 a 5.000 milissegundos (5 segundos).
-Little Navconnect busca dados do Flight Simulator e os envia para todos os clientes (ou seja, Little Navmap) usando este intervalo de tempo.
-Valores mais baixos resultarão em um movimento mais fluido da aeronave, mas podem potencialmente induzir lags no simulador.
-Use valores mais altos (ou seja, taxas de atualização mais lentas) se você tiver uma rede lenta ou tiver problemas.</translation>
+you get an error message like &quot;The bound address is already in use&quot;.</source>
+        <translation type="vanished">Isso normalmente pode ser deixado em padrão
+Mude esse valor somente se outro aplicativo ocupar esta porta e
+Você recebe uma mensagem de erro como &quot;O endereço já está em uso&quot;.</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="95"/>
         <source>This can normally be left at default.\nChange this value only if another application occupies this port and \nyou get an error message like &quot;The bound address is already in use&quot;.</source>
         <translation>Isso normalmente pode ser deixado em padrão.\nMude esse valor somente se outro aplicativo ocupar esta porta e \nvocê receber uma mensagem de erro como &quot;O endereço já está em uso&quot;.</translation>
-    </message>
-    <message>
-        <location filename="optionsdialog.ui" line="111"/>
-        <source>&amp;AI fetch radius (not used for X-Plane):</source>
-        <translation>&amp;Raio de busca AI (não usado para X-Plane):</translation>
     </message>
     <message>
         <location filename="optionsdialog.ui" line="121"/>
@@ -422,10 +418,8 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
         <translation>Desmarque para desativar a busca e transmissão de AI  e outros jogadores. Esta opção não se aplica ao X-Plane.</translation>
     </message>
     <message>
-        <location filename="optionsdialog.ui" line="127"/>
-        <source>Fetch AI or multiplayer &amp;ships</source>
-        <oldsource>Fetch AI or multiplayer</oldsource>
-        <translation>Buscar AI ou &amp;navios no multiplayer</translation>
+        <source>Fetch AI or multiplayer &amp;ships (not X-Plane)</source>
+        <translation type="vanished">Buscar AI ou &amp;navios no multiplayer (não funciona no X-Plane)</translation>
     </message>
 </context>
 <context>
@@ -450,15 +444,14 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
         <translation>%1 Já está funcionando.</translation>
     </message>
     <message>
-        <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
-        <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation type="vanished">&lt;p&gt;Server Flight Simulator Network para Little Navmap.&lt;/p&gt;&lt;p&gt;Este software está licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt; GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte para este aplicativo está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <source>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2018 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
+        <oldsource>&lt;p&gt;is the Fligh Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2017 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
+        <translation type="vanished">&lt;p&gt;Flight Simulator Network para Little Navmap.&lt;/p&gt;&lt;p&gt;Este software está licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt; GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte para este aplicativo está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://albar965.github.io&quot;&gt;albar965.github.io&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2018 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="68"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2024 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
-        <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
-        <translation>&lt;p style=&apos;white-space:pre&apos;&gt;é o agente da Rede de Simulação de Voo para o Little Navmap.&lt;/p&gt;&lt;p&gt;Este software é licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte desta aplicação está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Direitos autorais 2015-2024 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="134"/>
@@ -490,17 +483,17 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
     <message>
         <location filename="src/mainwindow.cpp" line="143"/>
         <source>Update whazzup file &lt;file&gt; using VATSIM format during replay.</source>
-        <translation>Atualize o arquivo whazzup &lt;arquivo&gt; usando o formato VATSIM durante a reprodução.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="147"/>
         <source>Update whazzup file every &lt;seconds&gt; during replay.</source>
-        <translation>Atualize o arquivo whazzup a cada &lt;segundos&gt; durante o replay.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="148"/>
         <source>seconds</source>
-        <translation>segundos</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="151"/>
