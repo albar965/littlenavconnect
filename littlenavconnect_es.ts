@@ -328,7 +328,7 @@ Use higher values (i.e. slower update rates) if you have a slow network or exper
         <source>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1.852 km).
-FSX, P3D and MSFS allow a maxium of 105 NM.</source>
+FSX, P3D and MSFS allow a maximum of 105 NM.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

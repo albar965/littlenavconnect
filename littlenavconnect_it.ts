@@ -365,11 +365,11 @@ Può essere utile per le sessioni in streming dove altri possono vedere il tuo d
         <source>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1.852 km).
-FSX, P3D and MSFS allow a maxium of 105 NM.</source>
+FSX, P3D and MSFS allow a maximum of 105 NM.</source>
         <oldsource>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
 The unit is always nautical miles (1 NM equals to 1852 km).
-FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
+FSX, P3D and MSFS allow a maximum of 105 NM.</oldsource>
         <translation>Modifica il raggio attorno al velivolo utente per includere aerei AI o multiplayer.
 L&apos;utilizzo di valori più alti con molti AI o velivoli multiplayer potrebbe indurre scatti nel simulatore.
 L&apos;unità è sempre in miglia nautiche (1 NM equivale a 1,852 km).
