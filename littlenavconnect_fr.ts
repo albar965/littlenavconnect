@@ -364,8 +364,8 @@ The unit is always nautical miles (1 NM equals to 1.852 km).
 FSX, P3D and MSFS allow a maximum of 105 NM.</source>
         <oldsource>Changes the radius around the user aircraft that is used to include AI or multiplayer aircraft.
 Using higher values with a lot of AI or multiplayer aircraft might induce stutters in the simulator.
-The unit is always nautical miles (1 NM equals to 1852 km).
-FSX, P3D and MSFS allow a maximum of 105 NM.</oldsource>
+The unit is always nautical miles (1 NM equals to 1.852 km).
+FSX, P3D and MSFS allow a maxium of 105 NM.</oldsource>
         <translation type="unfinished">Modifie le rayon autour de l&apos;avion utilisateur qui est utilisé pour inclure l&apos;IA ou les avions multijoueurs.
 L&apos;utilisation de valeurs plus élevées avec beaucoup d&apos;avions AI ou multijoueurs peut provoquer des bégaiements dans le simulateur.
 L&apos;unité est toujours le mille nautique (1 NM équivaut à 1,852 km).
