@@ -47,7 +47,7 @@
 # =============================================================================
 
 # Define program version here VERSION_NUMBER_TODO
-VERSION_NUMBER=3.0.4
+VERSION_NUMBER=3.0.5
 
 QT += core gui xml network svg
 
@@ -214,11 +214,12 @@ ICON = resources/icons/littlenavconnect.icns
 TRANSLATIONS = \
   littlenavconnect_fr.ts \
   littlenavconnect_it.ts \
-  littlenavconnect_nl.ts \
   littlenavconnect_de.ts \
-  littlenavconnect_es.ts \
-  littlenavconnect_zh.ts \
   littlenavconnect_pt_BR.ts
+
+# littlenavconnect_nl.ts
+# littlenavconnect_zh.ts
+# littlenavconnect_es.ts
 
 OTHER_FILES += \
   $$files(desktop/*, true) \
