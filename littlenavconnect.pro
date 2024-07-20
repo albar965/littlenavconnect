@@ -88,6 +88,10 @@ isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
 
 QMAKE_CXXFLAGS += -Wno-pragmas -Wno-unknown-warning -Wno-unknown-warning-option
 
+# No crash handler on Linux and macOS
+unix : ATOOLS_DISABLE_CRASHHANDLER = true
+isEqual(ATOOLS_NO_CRASHHANDLER, "true") : ATOOLS_DISABLE_CRASHHANDLER = true
+
 unix:!macx {
   isEmpty(GIT_PATH) : GIT_PATH=git
 
@@ -107,6 +111,7 @@ win32 {
       INCLUDEPATH += $$SIMCONNECT_PATH_WIN32"\inc"
       LIBS += $$SIMCONNECT_PATH_WIN32"\lib\SimConnect.lib"
     }
+    ATOOLS_DISABLE_CRASHHANDLER = true
   } else {
   # MSFS
     WINARCH = win64
@@ -138,6 +143,17 @@ isEmpty(GIT_PATH) {
 }
 
 LIBS += -L$$ATOOLS_LIB_PATH -latools
+
+# Cpptrace ==========================
+!isEqual(ATOOLS_DISABLE_CRASHHANDLER, "true") {
+  DEFINES += CPPTRACE_STATIC_DEFINE
+  win32 : LIBS += -L$$PWD/../cpptrace-$$CONF_TYPE-$$WINARCH/lib -lcpptrace -ldbghelp -ldwarf -lz -lzstd
+  unix:!macx : LIBS += -L$$PWD/../cpptrace-$$CONF_TYPE/lib -lcpptrace -ldwarf -lz -lzstd
+  CONFIG += force_debug_info
+} else {
+  DEFINES += DISABLE_CRASHHANDLER
+}
+
 PRE_TARGETDEPS += $$ATOOLS_LIB_PATH/libatools.a
 DEPENDPATH += $$ATOOLS_INC_PATH
 INCLUDEPATH += $$PWD/src $$ATOOLS_INC_PATH
@@ -304,7 +320,8 @@ unix:!macx {
   deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Widgets.so*  $$DEPLOY_DIR_LIB &&
   deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5X11Extras.so*  $$DEPLOY_DIR_LIB &&
   deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5XcbQpa.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Xml.so* $$DEPLOY_DIR_LIB
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Xml.so* $$DEPLOY_DIR_LIB &&
+  deploy.commands += rm -fv $$DEPLOY_DIR_LIB/lib*.so.*.debug $$DEPLOY_DIR_LIB/*/lib*.so.*.debug
 }
 
 # Mac specific deploy target
