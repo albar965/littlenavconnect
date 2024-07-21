@@ -66,6 +66,8 @@ TARGET_NAME=Little Navconnect
 
 ATOOLS_INC_PATH=$$(ATOOLS_INC_PATH)
 ATOOLS_LIB_PATH=$$(ATOOLS_LIB_PATH)
+ATOOLS_NO_CRASHHANDLER=$$(ATOOLS_NO_CRASHHANDLER)
+
 GIT_PATH=$$(ATOOLS_GIT_PATH)
 SIMCONNECT_PATH_WIN32=$$(ATOOLS_SIMCONNECT_PATH_WIN32)
 SIMCONNECT_PATH_WIN64=$$(ATOOLS_SIMCONNECT_PATH_WIN64)
@@ -89,8 +91,7 @@ isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
 QMAKE_CXXFLAGS += -Wno-pragmas -Wno-unknown-warning -Wno-unknown-warning-option
 
 # No crash handler on Linux and macOS
-unix : ATOOLS_DISABLE_CRASHHANDLER = true
-isEqual(ATOOLS_NO_CRASHHANDLER, "true") : ATOOLS_DISABLE_CRASHHANDLER = true
+unix : ATOOLS_NO_CRASHHANDLER = true
 
 unix:!macx {
   isEmpty(GIT_PATH) : GIT_PATH=git
@@ -111,7 +112,7 @@ win32 {
       INCLUDEPATH += $$SIMCONNECT_PATH_WIN32"\inc"
       LIBS += $$SIMCONNECT_PATH_WIN32"\lib\SimConnect.lib"
     }
-    ATOOLS_DISABLE_CRASHHANDLER = true
+    ATOOLS_NO_CRASHHANDLER = true
   } else {
   # MSFS
     WINARCH = win64
@@ -145,7 +146,7 @@ isEmpty(GIT_PATH) {
 LIBS += -L$$ATOOLS_LIB_PATH -latools
 
 # Cpptrace ==========================
-!isEqual(ATOOLS_DISABLE_CRASHHANDLER, "true") {
+!isEqual(ATOOLS_NO_CRASHHANDLER, "true") {
   DEFINES += CPPTRACE_STATIC_DEFINE
   win32 : LIBS += -L$$PWD/../cpptrace-$$CONF_TYPE-$$WINARCH/lib -lcpptrace -ldbghelp -ldwarf -lz -lzstd
   unix:!macx : LIBS += -L$$PWD/../cpptrace-$$CONF_TYPE/lib -lcpptrace -ldwarf -lz -lzstd
