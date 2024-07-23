@@ -90,9 +90,6 @@ isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
 
 QMAKE_CXXFLAGS += -Wno-pragmas -Wno-unknown-warning -Wno-unknown-warning-option
 
-# No crash handler on Linux and macOS
-unix : ATOOLS_NO_CRASHHANDLER = true
-
 unix:!macx {
   isEmpty(GIT_PATH) : GIT_PATH=git
 
@@ -112,7 +109,6 @@ win32 {
       INCLUDEPATH += $$SIMCONNECT_PATH_WIN32"\inc"
       LIBS += $$SIMCONNECT_PATH_WIN32"\lib\SimConnect.lib"
     }
-    ATOOLS_NO_CRASHHANDLER = true
   } else {
   # MSFS
     WINARCH = win64
@@ -192,6 +188,7 @@ message(ATOOLS_INC_PATH: $$ATOOLS_INC_PATH)
 message(ATOOLS_LIB_PATH: $$ATOOLS_LIB_PATH)
 message(SIMCONNECT_PATH_WIN32: $$SIMCONNECT_PATH_WIN32)
 message(SIMCONNECT_PATH_WIN64: $$SIMCONNECT_PATH_WIN64)
+message(ATOOLS_NO_CRASHHANDLER: $$ATOOLS_NO_CRASHHANDLER)
 message(DEPLOY_BASE: $$DEPLOY_BASE)
 message(DEFINES: $$DEFINES)
 message(INCLUDEPATH: $$INCLUDEPATH)
