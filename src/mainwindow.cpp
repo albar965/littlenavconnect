@@ -27,6 +27,7 @@
 #include "geo/calculations.h"
 #include "gui/desktopservices.h"
 #include "gui/dialog.h"
+#include "gui/application.h"
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
 #include "logging/loggingguiabort.h"
@@ -35,6 +36,7 @@
 #include "settings/settings.h"
 #include "ui_mainwindow.h"
 #include "util/htmlbuilder.h"
+#include "util/properties.h"
 #include "util/signalhandler.h"
 #include "util/version.h"
 
@@ -50,6 +52,9 @@ using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
 using atools::fs::sc::SimConnectReply;
 using atools::gui::HelpHandler;
+using atools::gui::Application;
+
+atools::gui::DataExchange *MainWindow::dataExchange = nullptr;
 
 // "master" or "release/1.4" VERSION_NUMBER_TODO
 const QString HELP_BRANCH = "release/3.0";
@@ -127,40 +132,15 @@ MainWindow::MainWindow()
   else
     supportedLanguageOnlineHelp = "en";
 
-  QCommandLineParser parser;
-  parser.addHelpOption();
-  parser.addVersionOption();
-
-  QCommandLineOption saveReplayOpt({"s", "save-replay"}, QObject::tr("Save replay data to <file>."), QObject::tr("file"));
-  parser.addOption(saveReplayOpt);
-
-  QCommandLineOption loadReplayOpt({"l", "load-replay"}, QObject::tr("Load replay data from <file>."), QObject::tr("file"));
-  parser.addOption(loadReplayOpt);
-
-  QCommandLineOption replaySpeedOpt({"r", "replay-speed"}, QObject::tr("Use speed factor <speed> for replay."), QObject::tr("speed"));
-  parser.addOption(replaySpeedOpt);
-
-  QCommandLineOption replayWhazzupOpt({"w", "write-whazzup"}, QObject::tr("Update whazzup file <file> using VATSIM format during replay."),
-                                      QObject::tr("file"));
-  parser.addOption(replayWhazzupOpt);
-
-  QCommandLineOption replayWhazzupUpdateOpt({"z", "write-whazzup-speed"}, QObject::tr("Update whazzup file every <seconds> during replay."),
-                                            QObject::tr("seconds"));
-  parser.addOption(replayWhazzupUpdateOpt);
-
-  QCommandLineOption showReplay({"g", "replay-gui"}, QObject::tr("Show replay menu items."));
-  parser.addOption(showReplay);
-
   // Process the actual command line arguments given by the user
-  parser.process(*QCoreApplication::instance());
-  saveReplayFile = parser.value(saveReplayOpt);
-  loadReplayFile = parser.value(loadReplayOpt);
-  replaySpeed = parser.value(replaySpeedOpt).toInt();
-  replayWhazzupUpdateSpeed = parser.value(replayWhazzupUpdateOpt).toInt();
-  writeReplayWhazzupFile = parser.value(replayWhazzupOpt);
+  saveReplayFile = Application::getStartupOptionStr(lnc::STARTUP_COMMAND_SAVE_REPLAY);
+  loadReplayFile = Application::getStartupOptionStr(lnc::STARTUP_COMMAND_LOAD_REPLAY);
+  replaySpeed = Application::getStartupOptionStr(lnc::STARTUP_COMMAND_REPLAY_SPEED).toInt();
+  replayWhazzupUpdateSpeed = Application::getStartupOptionStr(lnc::STARTUP_COMMAND_WRITE_WHAZZUP_SPEED).toInt();
+  writeReplayWhazzupFile = Application::getStartupOptionStr(lnc::STARTUP_COMMAND_WRITE_WHAZZUP);
 
   // Add replay menu items if requested
-  if(parser.isSet(showReplay))
+  if(Application::hasStartupOption(lnc::STARTUP_COMMAND_REPLAY_GUI))
   {
     ui->menuTools->insertActions(ui->actionResetMessages, {ui->actionReplayFileLoad, ui->actionReplayFileSave, ui->actionReplayStop});
     ui->menuTools->insertSeparator(ui->actionResetMessages);
@@ -208,7 +188,7 @@ MainWindow::MainWindow()
   connect(ui->actionConnectXplane, &QAction::triggered, this, &MainWindow::simulatorSelectionTriggered);
   connect(ui->actionQuit, &QAction::triggered, this, &MainWindow::closeFromTrayOrAction);
 
-  if(parser.isSet(showReplay))
+  if(Application::hasStartupOption(lnc::STARTUP_COMMAND_REPLAY_GUI))
   {
     connect(ui->actionReplayFileLoad, &QAction::triggered, this, &MainWindow::loadReplayFileTriggered);
     connect(ui->actionReplayFileSave, &QAction::triggered, this, &MainWindow::saveReplayFileTriggered);
@@ -275,6 +255,45 @@ MainWindow::~MainWindow()
 #endif
 
   atools::logging::LoggingGuiAbortHandler::resetGuiAbortFunction();
+}
+
+void MainWindow::dataExchangeDataFetched(atools::util::Properties properties)
+{
+  // Check for message from other instance
+  if(!properties.isEmpty())
+  {
+    // Found message
+    qDebug() << Q_FUNC_INFO << properties;
+
+    if(properties.contains(lnc::STARTUP_COMMAND_QUIT))
+      // Quit without activate =====================================================
+      closeFromTrayOrAction();
+    else
+    {
+      // Activate window - always sent by other instance =====================================================
+      if(properties.getPropertyBool(lnc::STARTUP_COMMAND_ACTIVATE))
+      {
+        setVisible(true);
+        activateWindow();
+        raise();
+      }
+    }
+  }
+  else
+    qDebug() << Q_FUNC_INFO << "properties empty";
+}
+
+bool MainWindow::initDataExchange()
+{
+  if(dataExchange == nullptr)
+    dataExchange = new atools::gui::DataExchange(false, lnc::PROGRAM_GUID);
+
+  return dataExchange->isExit();
+}
+
+void MainWindow::deInitDataExchange()
+{
+  ATOOLS_DELETE_LOG(dataExchange);
 }
 
 void MainWindow::showOnlineHelp()
@@ -512,6 +531,12 @@ void MainWindow::showInitial()
     hide();
   else
     show();
+
+  if(dataExchange != nullptr)
+  {
+    dataExchange->startTimer();
+    connect(dataExchange, &atools::gui::DataExchange::dataFetched, this, &MainWindow::dataExchangeDataFetched);
+  }
 
   QTimer::singleShot(0, this, &MainWindow::mainWindowShownDelayed);
 }

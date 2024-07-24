@@ -18,6 +18,8 @@
 #ifndef LITTLENAVCONNECT_CONSTANTS_H
 #define LITTLENAVCONNECT_CONSTANTS_H
 
+#include "gui/dataexchange.h"
+
 #include <QLatin1String>
 
 namespace lnc {
@@ -41,6 +43,21 @@ const QLatin1String OPTIONS_APPLICATION("Little Navconnect");
 const QLatin1String OPTIONS_APPLICATION_ORGANIZATION("ABarthel");
 const QLatin1String OPTIONS_APPLICATION_DOMAIN("littlenavmap.org");
 
+const QLatin1String STACKTRACE_SUFFIX("_stacktrace.txt");
+const QLatin1String CRASHREPORTS_DIR("crashreports");
+const QLatin1String CRASHREPORT_SUFFIX("_crashreport.zip");
+
+const QLatin1String PROGRAM_GUID("919a3676-a86c-46cb-bafc-e78439fd0906");
+
+const QLatin1String STARTUP_COMMAND_ACTIVATE(atools::gui::DataExchange::STARTUP_COMMAND_ACTIVATE); /* Bring window to front */
+const QLatin1String STARTUP_COMMAND_QUIT(atools::gui::DataExchange::STARTUP_COMMAND_QUIT); /* Exit application */
+
+const QLatin1String STARTUP_COMMAND_SAVE_REPLAY("save-replay");
+const QLatin1String STARTUP_COMMAND_LOAD_REPLAY("load-replay");
+const QLatin1String STARTUP_COMMAND_REPLAY_SPEED("replay-speed");
+const QLatin1String STARTUP_COMMAND_WRITE_WHAZZUP("write-whazzup");
+const QLatin1String STARTUP_COMMAND_WRITE_WHAZZUP_SPEED("write-whazzup-speed");
+const QLatin1String STARTUP_COMMAND_REPLAY_GUI("replay-gui");
 } // namespace lnc
 
 #endif // LITTLENAVCONNECT_CONSTANTS_H

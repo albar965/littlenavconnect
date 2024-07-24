@@ -26,7 +26,13 @@ class MainWindow;
 }
 
 namespace atools {
+
+namespace util {
+class Properties;
+}
 namespace gui {
+
+class DataExchange;
 class HelpHandler;
 }
 namespace fs {
@@ -60,6 +66,10 @@ public:
   /* Shows or hides the window initally and calls mainWindowShownDelayed() later */
   void showInitial();
 
+  /* Returns true if application should exit */
+  static bool initDataExchange();
+  static void deInitDataExchange();
+
 signals:
   /* Append a log message to the gui log. */
   void appendLogMessage(const QString& message);
@@ -84,6 +94,9 @@ private:
 
   /* Options dialog */
   void options();
+
+  /* Received command line options from another instance */
+  void dataExchangeDataFetched(atools::util::Properties properties);
 
   /* Methods calles from actions */
   void saveReplayFileTriggered();
@@ -141,6 +154,9 @@ private:
 
   QString saveReplayFile, loadReplayFile;
   int replaySpeed = 1, replayWhazzupUpdateSpeed = 15;
+
+  static atools::gui::DataExchange *dataExchange;
+
 };
 
 #endif // LITTLENAVCONNECT_MAINWINDOW_H
