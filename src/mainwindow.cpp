@@ -288,6 +288,9 @@ bool MainWindow::initDataExchange()
   if(dataExchange == nullptr)
     dataExchange = new atools::gui::DataExchange(false, lnc::PROGRAM_GUID);
 
+  // Start timer early to update timestamp and avoid double instances
+  dataExchange->startTimer();
+
   return dataExchange->isExit();
 }
 
@@ -533,10 +536,7 @@ void MainWindow::showInitial()
     show();
 
   if(dataExchange != nullptr)
-  {
-    dataExchange->startTimer();
     connect(dataExchange, &atools::gui::DataExchange::dataFetched, this, &MainWindow::dataExchangeDataFetched);
-  }
 
   QTimer::singleShot(0, this, &MainWindow::mainWindowShownDelayed);
 }
