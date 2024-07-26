@@ -60,6 +60,14 @@ int main(int argc, char *argv[])
   {
     Application app(argc, argv);
 
+    Application::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"));
+    Application::setApplicationName(lnc::OPTIONS_APPLICATION);
+    Application::setOrganizationName(lnc::OPTIONS_APPLICATION_ORGANIZATION);
+    Application::setOrganizationDomain(lnc::OPTIONS_APPLICATION_DOMAIN);
+
+    Application::setApplicationVersion(VERSION_NUMBER_LITTLENAVCONNECT);
+    Application::setEmailAddresses({"alex@littlenavmap.org"});
+
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
@@ -105,14 +113,6 @@ int main(int argc, char *argv[])
 
     if(!MainWindow::initDataExchange())
     {
-      Application::setWindowIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"));
-      Application::setApplicationName(lnc::OPTIONS_APPLICATION);
-      Application::setOrganizationName(lnc::OPTIONS_APPLICATION_ORGANIZATION);
-      Application::setOrganizationDomain(lnc::OPTIONS_APPLICATION_DOMAIN);
-
-      Application::setApplicationVersion(VERSION_NUMBER_LITTLENAVCONNECT);
-      Application::setEmailAddresses({"alex@littlenavmap.org"});
-
       // Initialize logging and force logfiles into the system or user temp directory
       LoggingHandler::initializeForTemp(atools::settings::Settings::getOverloadedPath(":/littlenavconnect/resources/config/logging.cfg"));
 
