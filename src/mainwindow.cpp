@@ -665,6 +665,9 @@ void MainWindow::mainWindowShownDelayed()
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Server running.");
   qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::mainWindowShown exit";
+
+  // Log startup time
+  Application::startupFinished(Q_FUNC_INFO);
 }
 
 void MainWindow::showEvent(QShowEvent *)
