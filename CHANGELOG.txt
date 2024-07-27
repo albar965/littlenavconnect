@@ -1,6 +1,22 @@
-Numbers (#) refer to GitHub issues in project `littlenavmap`.
+﻿Numbers (#) refer to GitHub issues in project `littlenavmap`.
 For example: #3 is https://github.com/albar965/littlenavmap/issues/3.
 This text is partially Markdown, hence sometimes strange formatting.
+
+===============================================================================
+
+# Version 3.0.6
+
+* Added handler to get more detailed stack trace on crashes. Note that this is only enabled on
+  Windows 64-bit versions now. A file
+  `C:\Users\YOURUSERNAME\AppData\Roaming\ABarthel\little_navmap_stacktrace.txt` with detailed
+  location information is created on crash. Send this besides the log file
+  `C:\Users\YOURUSERNAME\AppData\Local\Temp\abarthel-little_navmap.log` to me if you see a crash
+  of *Little Navconnect*.
+* Removed `Little Navconnect is already running` dialog. Starting the program with an already
+  running instance simply activates the program and shows the main window now.
+* New command line option `-q` / `--quit` to terminate an already running instance.
+* Fixed issue where program could be started more than once.
+* Updated user manual with command line options.
 
 ===============================================================================
 
