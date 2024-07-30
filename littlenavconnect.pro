@@ -356,8 +356,10 @@ win32 {
   deploy.commands += echo $$WINARCH-$$VERSION_NUMBER > $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/version.txt) &&
   deploy.commands += echo $$GIT_REVISION_FULL > $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/revision.txt) &&
   deploy.commands += xcopy /F $$p($$OUT_PWD/$${TARGET}.exe) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
-  exists($$OUT_PWD/$${TARGET}.debug) {
-    deploy.commands += xcopy $$p($$OUT_PWD/$${TARGET}.debug) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  !isEqual(ATOOLS_NO_CRASHHANDLER, "true") {
+    isEqual(CONF_TYPE, "release") {
+      deploy.commands += xcopy $$p($$OUT_PWD/$${TARGET}.debug) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+    }
   }
   deploy.commands += xcopy /F $$p($$PWD/CHANGELOG.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
   deploy.commands += xcopy /F $$p($$PWD/README.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
