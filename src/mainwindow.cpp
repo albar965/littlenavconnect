@@ -88,9 +88,9 @@ MainWindow::MainWindow()
 #if defined(Q_OS_LINUX)
   // Catch Ctrl+C and other signals to avoid data loss on Linux/Unix systems
   const atools::util::SignalHandler& signalHandler = atools::util::SignalHandler::instance();
-  connect(&signalHandler, &atools::util::SignalHandler::sigHupReceived, this, &MainWindow::close, Qt::QueuedConnection);
-  connect(&signalHandler, &atools::util::SignalHandler::sigTermReceived, this, &MainWindow::close, Qt::QueuedConnection);
-  connect(&signalHandler, &atools::util::SignalHandler::sigIntReceived, this, &MainWindow::close, Qt::QueuedConnection);
+  connect(&signalHandler, &atools::util::SignalHandler::sigHupReceived, this, &MainWindow::closeFromSignal, Qt::QueuedConnection);
+  connect(&signalHandler, &atools::util::SignalHandler::sigTermReceived, this, &MainWindow::closeFromSignal, Qt::QueuedConnection);
+  connect(&signalHandler, &atools::util::SignalHandler::sigIntReceived, this, &MainWindow::closeFromSignal, Qt::QueuedConnection);
 #endif
 
   restoreState();
@@ -727,6 +727,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
   windowCloseButtonClicked = true;
   saveState();
+}
+
+void MainWindow::closeFromSignal()
+{
+  if(askCloseApplication())
+    QApplication::quit();
 }
 
 void MainWindow::closeFromTrayOrAction()

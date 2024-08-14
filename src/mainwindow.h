@@ -70,6 +70,9 @@ public:
   static bool initDataExchange();
   static void deInitDataExchange();
 
+  /* Ctrl+C or others from SignalHandler */
+  void closeFromSignal();
+
 signals:
   /* Append a log message to the gui log. */
   void appendLogMessage(const QString& message);
