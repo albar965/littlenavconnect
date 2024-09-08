@@ -234,7 +234,7 @@ Cambiare veramente la Porta di Rete?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="442"/>
         <location filename="src/mainwindow.cpp" line="705"/>
-        <location filename="src/mainwindow.cpp" line="747"/>
+        <location filename="src/mainwindow.cpp" line="753"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Non &amp;mostrare nuovamente questa finestra di dialogo.</translation>
     </message>
@@ -251,24 +251,24 @@ Select &quot;Quit&quot; in the context menu of the system tray entry to terminat
 Selezionare &quot;Esci&quot; nel menu contestuale della voce della barra delle applicazioni per terminare il programma.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="745"/>
+        <location filename="src/mainwindow.cpp" line="751"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Ci sono ancora applicazioni connesse.
 Uscire veramente?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="759"/>
+        <location filename="src/mainwindow.cpp" line="765"/>
         <source>&amp;Hide Window</source>
         <translation>&amp;Nascondi Finestra</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="759"/>
+        <location filename="src/mainwindow.cpp" line="765"/>
         <source>&amp;Restore Window</source>
         <translation>&amp;Ripristina Finestra</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="789"/>
+        <location filename="src/mainwindow.cpp" line="795"/>
         <source>&amp;Restore</source>
         <translation>&amp;Ripristina</translation>
     </message>

@@ -234,7 +234,7 @@ Changer vraiment le port réseau?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="442"/>
         <location filename="src/mainwindow.cpp" line="705"/>
-        <location filename="src/mainwindow.cpp" line="747"/>
+        <location filename="src/mainwindow.cpp" line="753"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Ne plu&amp;s afficher cette boîte de dialogue.</translation>
     </message>
@@ -251,24 +251,24 @@ Select &quot;Quit&quot; in the context menu of the system tray entry to terminat
 Sélectionnez &quot;Quitter&quot; dans le menu contextuel de l&apos;entrée de la barre d&apos;état système pour mettre fin au programme.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="745"/>
+        <location filename="src/mainwindow.cpp" line="751"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Il y a encore des applications connectées.
 Vraiment arrêter?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="759"/>
+        <location filename="src/mainwindow.cpp" line="765"/>
         <source>&amp;Hide Window</source>
         <translation type="unfinished">&amp;Masquer la fenêtre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="759"/>
+        <location filename="src/mainwindow.cpp" line="765"/>
         <source>&amp;Restore Window</source>
         <translation type="unfinished">&amp;Restaurer la fenêtre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="789"/>
+        <location filename="src/mainwindow.cpp" line="795"/>
         <source>&amp;Restore</source>
         <translation type="unfinished">&amp;Restaurer</translation>
     </message>

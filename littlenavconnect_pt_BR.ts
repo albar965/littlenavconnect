@@ -234,7 +234,7 @@ Você deseja realmente muda a porta da rede?</translation>
     <message>
         <location filename="src/mainwindow.cpp" line="442"/>
         <location filename="src/mainwindow.cpp" line="705"/>
-        <location filename="src/mainwindow.cpp" line="747"/>
+        <location filename="src/mainwindow.cpp" line="753"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Não &amp;mostrar esse diálogo novamente.</translation>
     </message>
@@ -251,24 +251,24 @@ Select &quot;Quit&quot; in the context menu of the system tray entry to terminat
 Selecione “Sair” no menu de contexto da entrada da bandeja do sistema para terminar o programa.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="745"/>
+        <location filename="src/mainwindow.cpp" line="751"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>O programa ainda está conectado.
 Você deseja sair?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="759"/>
+        <location filename="src/mainwindow.cpp" line="765"/>
         <source>&amp;Hide Window</source>
         <translation>&amp;Esconder Janela</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="759"/>
+        <location filename="src/mainwindow.cpp" line="765"/>
         <source>&amp;Restore Window</source>
         <translation>&amp;Restaurar Janela</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="789"/>
+        <location filename="src/mainwindow.cpp" line="795"/>
         <source>&amp;Restore</source>
         <translation>&amp;Restaurar</translation>
     </message>
