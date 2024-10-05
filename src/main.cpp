@@ -183,9 +183,6 @@ int main(int argc, char *argv[])
       }
       crashReportFiles.removeAll(QString());
 
-      Application::recordStartAndDetectCrash(nullptr, Settings::getConfigFilename(".running"), reportFilename, crashReportFiles,
-                                             QString(), QString(), QString());
-
       if(Application::isSafeMode())
         Settings::clearSettings();
 #endif
@@ -195,10 +192,8 @@ int main(int argc, char *argv[])
 
       mainWindow.showInitial();
       retval = Application::exec();
+      mainWindow.deInit();
     }
-    else
-      // Got quit command from other instance
-      atools::gui::Application::recordExit();
   }
   catch(atools::Exception& e)
   {

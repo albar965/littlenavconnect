@@ -73,6 +73,9 @@ public:
   /* Ctrl+C or others from SignalHandler */
   void closeFromSignal();
 
+  /* Close and free all */
+  void deInit();
+
 signals:
   /* Append a log message to the gui log. */
   void appendLogMessage(const QString& message);
@@ -130,7 +133,8 @@ private:
   void closeFromTrayOrAction();
 
   bool trayHintShown = false, /* Show hint only once per session */
-       windowCloseButtonClicked = true; /* Avoid close to tray notification in closeEvent */
+       windowCloseButtonClicked = true, /* Avoid close to tray notification in closeEvent */
+       deInitCalled = false; /* Avoid double call */
 
   Ui::MainWindow *ui = nullptr;
 
@@ -143,7 +147,7 @@ private:
   atools::fs::ns::NavServer *navServer = nullptr;
 
   // Runs in background and fetches data from simulator - signals are sent to NavServerWorker threads
-  atools::fs::sc::DataReaderThread *dataReader = nullptr;
+  atools::fs::sc::DataReaderThread *dataReaderThread = nullptr;
   atools::fs::sc::SimConnectHandler *fsxConnectHandler = nullptr;
   atools::fs::sc::XpConnectHandler *xpConnectHandler = nullptr;
   QActionGroup *simulatorActionGroup = nullptr;

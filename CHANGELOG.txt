@@ -4,6 +4,13 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.0.7
+
+* Disabled crash detection which resulted in wrong crashes found when running
+  program in system tray on Windows.
+
+===============================================================================
+
 # Version 3.0.6
 
 * Added handler to get more detailed stack trace on crashes. Note that this is only enabled on

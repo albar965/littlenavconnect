@@ -57,12 +57,12 @@ using atools::gui::Application;
 atools::gui::DataExchange *MainWindow::dataExchange = nullptr;
 
 // "master" or "release/1.4" VERSION_NUMBER_TODO
-const QString HELP_BRANCH = "release/3.0";
+const static QString HELP_BRANCH = "release/3.0";
 
 /* Important: keep slash at the end. Otherwise browser might not display the page properly */
-const QString HELP_ONLINE_URL("https://www.littlenavmap.org/manuals/littlenavconnect/" + HELP_BRANCH + "/${LANG}/");
+const static QString HELP_ONLINE_URL("https://www.littlenavmap.org/manuals/littlenavconnect/" + HELP_BRANCH + "/${LANG}/");
 
-const QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
+const static QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
 
 MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
@@ -209,6 +209,8 @@ MainWindow::MainWindow()
   // a thread context different than main
   connect(this, &MainWindow::appendLogMessage, ui->textEdit, &QTextEdit::append, Qt::QueuedConnection);
 
+  connect(atools::gui::Application::applicationInstance(), &atools::gui::Application::applicationAboutToQuit, this, &MainWindow::deInit);
+
   if(QSystemTrayIcon::isSystemTrayAvailable())
   {
     if(ui->actionMinimizeTray->isChecked() || ui->actionStartMinimizeTray->isChecked())
@@ -227,34 +229,51 @@ MainWindow::MainWindow()
 MainWindow::~MainWindow()
 {
   qDebug() << Q_FUNC_INFO;
+  deInit();
+}
 
-  deleteTrayIcon();
+void MainWindow::deInit()
+{
+  qDebug() << Q_FUNC_INFO << "Enter deInitCalled" << deInitCalled;
 
-  qDebug() << Q_FUNC_INFO << "navServer stopped";
-  navServer->stopServer();
+  if(!deInitCalled)
+  {
+    deInitCalled = true;
+    deleteTrayIcon();
 
-  ATOOLS_DELETE_LOG(navServer);
+    if(navServer != nullptr)
+    {
+      qDebug() << Q_FUNC_INFO << "Stopping NavServer";
+      navServer->stopServer();
+      ATOOLS_DELETE_LATER_LOG(navServer);
+    }
 
-  qDebug() << Q_FUNC_INFO << "dataReader terminate";
-  dataReader->terminateThread();
+    if(dataReaderThread != nullptr)
+    {
+      qDebug() << Q_FUNC_INFO << "Terminating DataReaderThread";
+      dataReaderThread->terminateThread();
+      ATOOLS_DELETE_LATER_LOG(dataReaderThread);
+    }
 
-  ATOOLS_DELETE_LOG(dataReader);
-  ATOOLS_DELETE_LOG(fsxConnectHandler);
-  ATOOLS_DELETE_LOG(xpConnectHandler);
+    ATOOLS_DELETE_LOG(fsxConnectHandler);
+    ATOOLS_DELETE_LOG(xpConnectHandler);
 
-  qDebug() << Q_FUNC_INFO << "reset logging";
-  atools::logging::LoggingHandler::setLogFunction(nullptr);
+    qDebug() << Q_FUNC_INFO << "reset logging";
+    atools::logging::LoggingHandler::setLogFunction(nullptr);
 
-  ATOOLS_DELETE_LOG(helpHandler);
-  ATOOLS_DELETE_LOG(simulatorActionGroup);
-  ATOOLS_DELETE_LOG(ui);
+    ATOOLS_DELETE_LOG(helpHandler);
+    ATOOLS_DELETE_LOG(simulatorActionGroup);
+    ATOOLS_DELETE_LOG(ui);
 
 #if defined(Q_OS_LINUX)
-  // Remove signal handler
-  atools::util::SignalHandler::deleteInstance();
+    // Remove signal handler
+    atools::util::SignalHandler::deleteInstance();
 #endif
 
-  atools::logging::LoggingGuiAbortHandler::resetGuiAbortFunction();
+    atools::logging::LoggingGuiAbortHandler::resetGuiAbortFunction();
+  }
+
+  qDebug() << Q_FUNC_INFO << "Exit";
 }
 
 void MainWindow::dataExchangeDataFetched(atools::util::Properties properties)
@@ -341,9 +360,9 @@ void MainWindow::handlerChanged()
 void MainWindow::simulatorSelectionTriggered()
 {
   // Update rate changed - restart data readers
-  dataReader->terminateThread();
-  dataReader->setHandler(handlerForSelection());
-  dataReader->start();
+  dataReaderThread->terminateThread();
+  dataReaderThread->setHandler(handlerForSelection());
+  dataReaderThread->start();
   handlerChanged();
 }
 
@@ -354,10 +373,10 @@ void MainWindow::saveReplayFileTriggered()
 
   if(!filepath.isEmpty())
   {
-    dataReader->terminateThread();
-    dataReader->setSaveReplayFilepath(filepath);
-    dataReader->setLoadReplayFilepath(QString());
-    dataReader->start();
+    dataReaderThread->terminateThread();
+    dataReaderThread->setSaveReplayFilepath(filepath);
+    dataReaderThread->setLoadReplayFilepath(QString());
+    dataReaderThread->start();
   }
 }
 
@@ -368,19 +387,19 @@ void MainWindow::loadReplayFileTriggered()
 
   if(!filepath.isEmpty())
   {
-    dataReader->terminateThread();
-    dataReader->setSaveReplayFilepath(QString());
-    dataReader->setLoadReplayFilepath(filepath);
-    dataReader->start();
+    dataReaderThread->terminateThread();
+    dataReaderThread->setSaveReplayFilepath(QString());
+    dataReaderThread->setLoadReplayFilepath(filepath);
+    dataReaderThread->start();
   }
 }
 
 void MainWindow::stopReplay()
 {
-  dataReader->terminateThread();
-  dataReader->setSaveReplayFilepath(QString());
-  dataReader->setLoadReplayFilepath(QString());
-  dataReader->start();
+  dataReaderThread->terminateThread();
+  dataReaderThread->setSaveReplayFilepath(QString());
+  dataReaderThread->setLoadReplayFilepath(QString());
+  dataReaderThread->start();
 }
 
 void MainWindow::options()
@@ -418,15 +437,15 @@ void MainWindow::options()
     options.setFlag(atools::fs::sc::FETCH_AI_AIRCRAFT, dialog.isFetchAiAircraft());
     options.setFlag(atools::fs::sc::FETCH_AI_BOAT, dialog.isFetchAiShip());
 
-    dataReader->setSimconnectOptions(options);
-    dataReader->setAiFetchRadius(atools::geo::nmToKm(dialog.getAiFetchRadiusNm()));
+    dataReaderThread->setSimconnectOptions(options);
+    dataReaderThread->setAiFetchRadius(atools::geo::nmToKm(dialog.getAiFetchRadiusNm()));
 
     if(dialog.getUpdateRate() != updateRateMs)
     {
       // Update rate changed - restart data readers
-      dataReader->terminateThread();
-      dataReader->setUpdateRate(dialog.getUpdateRate());
-      dataReader->start();
+      dataReaderThread->terminateThread();
+      dataReaderThread->setUpdateRate(dialog.getUpdateRate());
+      dataReaderThread->start();
     }
 
     if(dialog.getPort() != port)
@@ -447,7 +466,7 @@ void MainWindow::options()
       {
         navServer->stopServer();
         navServer->setPort(dialog.getPort());
-        navServer->startServer(dataReader);
+        navServer->startServer(dataReaderThread);
       }
     }
   }
@@ -629,27 +648,27 @@ void MainWindow::mainWindowShownDelayed()
   ui->menuWindow->addAction(ui->toolBar->toggleViewAction());
 
   // Build the thread which will read the data from the interfaces
-  dataReader = new atools::fs::sc::DataReaderThread(this, verbose);
-  dataReader->setHandler(handlerForSelection());
+  dataReaderThread = new atools::fs::sc::DataReaderThread(this, verbose);
+  dataReaderThread->setHandler(handlerForSelection());
   handlerChanged();
 
-  dataReader->setReconnectRateSec(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_RECONNECT_RATE, 15).toInt());
-  dataReader->setUpdateRate(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
-  dataReader->setLoadReplayFilepath(loadReplayFile);
-  dataReader->setSaveReplayFilepath(saveReplayFile);
-  dataReader->setReplayWhazzupFile(writeReplayWhazzupFile);
-  dataReader->setWhazzupUpdateSeconds(replayWhazzupUpdateSpeed);
-  dataReader->setReplaySpeed(replaySpeed);
+  dataReaderThread->setReconnectRateSec(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_RECONNECT_RATE, 15).toInt());
+  dataReaderThread->setUpdateRate(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt());
+  dataReaderThread->setLoadReplayFilepath(loadReplayFile);
+  dataReaderThread->setSaveReplayFilepath(saveReplayFile);
+  dataReaderThread->setReplayWhazzupFile(writeReplayWhazzupFile);
+  dataReaderThread->setWhazzupUpdateSeconds(replayWhazzupUpdateSpeed);
+  dataReaderThread->setReplaySpeed(replaySpeed);
 
   atools::fs::sc::Options options = atools::fs::sc::NO_OPTION;
   if(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, true).toBool())
     options |= atools::fs::sc::FETCH_AI_AIRCRAFT;
   if(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, true).toBool())
     options |= atools::fs::sc::FETCH_AI_BOAT;
-  dataReader->setSimconnectOptions(options);
-  dataReader->setAiFetchRadius(atools::geo::nmToKm(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, 105).toInt()));
+  dataReaderThread->setSimconnectOptions(options);
+  dataReaderThread->setAiFetchRadius(atools::geo::nmToKm(settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_FETCH_AI_RADIUS, 105).toInt()));
 
-  connect(dataReader, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
+  connect(dataReaderThread, &atools::fs::sc::DataReaderThread::postLogMessage, this, &MainWindow::postLogMessage);
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Starting server. This can take some time ...");
 
@@ -657,9 +676,9 @@ void MainWindow::mainWindowShownDelayed()
 
   QGuiApplication::setOverrideCursor(Qt::WaitCursor);
 
-  dataReader->start();
+  dataReaderThread->start();
 
-  navServer->startServer(dataReader);
+  navServer->startServer(dataReaderThread);
 
   QGuiApplication::restoreOverrideCursor();
 
@@ -680,6 +699,7 @@ void MainWindow::hideEvent(QHideEvent *)
   // Use minimize to hide to tray
   if(isMinimized() && ui->actionMinimizeTray->isChecked() && trayIcon != nullptr)
     hide();
+
   updateTrayActions();
 }
 
@@ -719,9 +739,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
   if(askClose)
   {
     if(askCloseApplication())
+    {
       // Required here since QApplication::quitOnLastWindowClosed() is set to false
+      saveState();
+      deInit();
       QApplication::quit();
+    }
     else
+      // Do not quit
       event->ignore();
   }
 

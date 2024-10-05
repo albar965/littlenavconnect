@@ -47,7 +47,7 @@
 # =============================================================================
 
 # Define program version here VERSION_NUMBER_TODO
-VERSION_NUMBER=3.0.6
+VERSION_NUMBER=3.0.7
 
 QT += core gui xml network svg
 
