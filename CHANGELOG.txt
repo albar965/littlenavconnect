@@ -8,6 +8,8 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 * Disabled crash detection which resulted in wrong crashes found when running
   program in system tray on Windows.
+* Now always exiting program if command line options `--quit` / `-q` was set, even if no other
+  instance was found.
 
 ===============================================================================
 
