@@ -307,9 +307,6 @@ bool MainWindow::initDataExchange()
   if(dataExchange == nullptr)
     dataExchange = new atools::gui::DataExchange(false, lnc::PROGRAM_GUID);
 
-  // Start timer early to update timestamp and avoid double instances
-  dataExchange->startTimer();
-
   return dataExchange->isExit();
 }
 
@@ -549,6 +546,9 @@ void MainWindow::postLogMessage(QString message, bool warning, bool error)
 
 void MainWindow::showInitial()
 {
+  // Start timer early to update timestamp and avoid double instances
+  dataExchange->startTimer();
+
   if(ui->actionStartMinimizeTray->isChecked() && trayIcon != nullptr)
     hide();
   else
