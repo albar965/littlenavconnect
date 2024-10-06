@@ -6,10 +6,11 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 # Version 3.0.7
 
-* Disabled crash detection which resulted in wrong crashes found when running
+* Disabled crash detection since it resulted in wrong crashes found when running
   program in system tray on Windows.
 * Now always exiting program if command line options `--quit` / `-q` was set, even if no other
   instance was found.
+* Translations for French, Italian and Brazilian Portuguese updated. Thanks to Flavio, Patrick and Ricardo!
 
 ===============================================================================
 

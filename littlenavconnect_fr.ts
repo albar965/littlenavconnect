@@ -163,13 +163,13 @@
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="112"/>
-        <location filename="src/mainwindow.cpp" line="574"/>
+        <location filename="src/mainwindow.cpp" line="593"/>
         <source> 64-bit</source>
         <translation type="unfinished"> 64-bit</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="114"/>
-        <location filename="src/mainwindow.cpp" line="576"/>
+        <location filename="src/mainwindow.cpp" line="595"/>
         <source> 32-bit</source>
         <translation type="unfinished"> 32-bit</translation>
     </message>
@@ -194,96 +194,96 @@
         <translation type="unfinished">Connectez-vous à FSX ou Prepar3D en utilisant SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="326"/>
+        <location filename="src/mainwindow.cpp" line="345"/>
         <source>Connecting to MSFS using SimConnect.</source>
         <translation type="unfinished">Connexion à MSFS à l&apos;aide de SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="328"/>
+        <location filename="src/mainwindow.cpp" line="347"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Connexion à FSX ou Prepar3D à l&apos;aide de SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="335"/>
+        <location filename="src/mainwindow.cpp" line="354"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Connexion à X-Plane à l&apos;aide du plugin Little Xpconnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="352"/>
+        <location filename="src/mainwindow.cpp" line="371"/>
         <source>Save Replay</source>
         <translation>Sauver la lecture</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="352"/>
-        <location filename="src/mainwindow.cpp" line="367"/>
+        <location filename="src/mainwindow.cpp" line="371"/>
+        <location filename="src/mainwindow.cpp" line="386"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Lecture des fichiers (*.replay);;Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="367"/>
+        <location filename="src/mainwindow.cpp" line="386"/>
         <source>Open Replay</source>
         <translation>Lecture libre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="440"/>
+        <location filename="src/mainwindow.cpp" line="459"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Il y a encore des applications connectées.
 Changer vraiment le port réseau?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="442"/>
-        <location filename="src/mainwindow.cpp" line="705"/>
-        <location filename="src/mainwindow.cpp" line="753"/>
+        <location filename="src/mainwindow.cpp" line="461"/>
+        <location filename="src/mainwindow.cpp" line="725"/>
+        <location filename="src/mainwindow.cpp" line="778"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Ne plu&amp;s afficher cette boîte de dialogue.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="510"/>
+        <location filename="src/mainwindow.cpp" line="529"/>
         <source>- %1</source>
         <translation type="unfinished">- %1</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="703"/>
+        <location filename="src/mainwindow.cpp" line="723"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
         <translation type="unfinished">Le programme continuera à s&apos;exécuter dans la barre d&apos;état système.
 Sélectionnez &quot;Quitter&quot; dans le menu contextuel de l&apos;entrée de la barre d&apos;état système pour mettre fin au programme.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="751"/>
+        <location filename="src/mainwindow.cpp" line="776"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Il y a encore des applications connectées.
 Vraiment arrêter?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="765"/>
+        <location filename="src/mainwindow.cpp" line="790"/>
         <source>&amp;Hide Window</source>
         <translation type="unfinished">&amp;Masquer la fenêtre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="765"/>
+        <location filename="src/mainwindow.cpp" line="790"/>
         <source>&amp;Restore Window</source>
         <translation type="unfinished">&amp;Restaurer la fenêtre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="795"/>
+        <location filename="src/mainwindow.cpp" line="820"/>
         <source>&amp;Restore</source>
         <translation type="unfinished">&amp;Restaurer</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="582"/>
+        <location filename="src/mainwindow.cpp" line="601"/>
         <source>Version %1 (revision %2).</source>
         <translation>Version %1 (révision %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="586"/>
+        <location filename="src/mainwindow.cpp" line="605"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Données Version %1. Réponse Version %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="654"/>
+        <location filename="src/mainwindow.cpp" line="673"/>
         <source>Starting server. This can take some time ...</source>
         <translation type="unfinished">Démarrage du serveur. Cela peut prendre un certain temps ...</translation>
     </message>
@@ -292,7 +292,7 @@ Vraiment arrêter?</translation>
         <translation type="vanished">Serveur de démarrage. Cela peut prendre jusqu&apos; à une minute....</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="666"/>
+        <location filename="src/mainwindow.cpp" line="685"/>
         <source>Server running.</source>
         <translation>Serveur en marche.</translation>
     </message>
@@ -508,7 +508,7 @@ Utilisez des valeurs plus élevées (c&apos;est-à-dire des taux de mise à jour
     <message>
         <location filename="src/main.cpp" line="103"/>
         <source>Quit an already running instance.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quitter une instance en cours d&apos;exécution.</translation>
     </message>
 </context>
 </TS>
