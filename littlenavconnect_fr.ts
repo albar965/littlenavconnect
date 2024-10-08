@@ -194,52 +194,52 @@
         <translation type="unfinished">Connectez-vous à FSX ou Prepar3D en utilisant SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="345"/>
+        <location filename="src/mainwindow.cpp" line="342"/>
         <source>Connecting to MSFS using SimConnect.</source>
         <translation type="unfinished">Connexion à MSFS à l&apos;aide de SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="347"/>
+        <location filename="src/mainwindow.cpp" line="344"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Connexion à FSX ou Prepar3D à l&apos;aide de SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="354"/>
+        <location filename="src/mainwindow.cpp" line="351"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Connexion à X-Plane à l&apos;aide du plugin Little Xpconnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="371"/>
+        <location filename="src/mainwindow.cpp" line="368"/>
         <source>Save Replay</source>
         <translation>Sauver la lecture</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="371"/>
-        <location filename="src/mainwindow.cpp" line="386"/>
+        <location filename="src/mainwindow.cpp" line="368"/>
+        <location filename="src/mainwindow.cpp" line="383"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Lecture des fichiers (*.replay);;Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="386"/>
+        <location filename="src/mainwindow.cpp" line="383"/>
         <source>Open Replay</source>
         <translation>Lecture libre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="459"/>
+        <location filename="src/mainwindow.cpp" line="456"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>Il y a encore des applications connectées.
 Changer vraiment le port réseau?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="461"/>
+        <location filename="src/mainwindow.cpp" line="458"/>
         <location filename="src/mainwindow.cpp" line="725"/>
         <location filename="src/mainwindow.cpp" line="778"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Ne plu&amp;s afficher cette boîte de dialogue.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="529"/>
+        <location filename="src/mainwindow.cpp" line="526"/>
         <source>- %1</source>
         <translation type="unfinished">- %1</translation>
     </message>
