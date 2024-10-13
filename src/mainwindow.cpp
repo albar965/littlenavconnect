@@ -577,9 +577,12 @@ void MainWindow::saveState() const
 {
   qDebug() << Q_FUNC_INFO;
 
-  atools::gui::WidgetState widgetState(lnc::SETTINGS_MAINWINDOW_WIDGET);
-  widgetState.save({this, ui->actionMinimizeTray, ui->actionStartMinimizeTray});
-  widgetState.syncSettings();
+  if(ui != nullptr)
+  {
+    atools::gui::WidgetState widgetState(lnc::SETTINGS_MAINWINDOW_WIDGET);
+    widgetState.save({this, ui->actionMinimizeTray, ui->actionStartMinimizeTray});
+    widgetState.syncSettings();
+  }
 }
 
 void MainWindow::mainWindowShownDelayed()
