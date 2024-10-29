@@ -163,13 +163,13 @@
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="112"/>
-        <location filename="src/mainwindow.cpp" line="593"/>
+        <location filename="src/mainwindow.cpp" line="596"/>
         <source> 64-bit</source>
         <translation type="unfinished"> 64-bit</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="114"/>
-        <location filename="src/mainwindow.cpp" line="595"/>
+        <location filename="src/mainwindow.cpp" line="598"/>
         <source> 32-bit</source>
         <translation type="unfinished"> 32-bit</translation>
     </message>
@@ -233,8 +233,8 @@ Changer vraiment le port réseau?</translation>
     </message>
     <message>
         <location filename="src/mainwindow.cpp" line="458"/>
-        <location filename="src/mainwindow.cpp" line="725"/>
-        <location filename="src/mainwindow.cpp" line="778"/>
+        <location filename="src/mainwindow.cpp" line="728"/>
+        <location filename="src/mainwindow.cpp" line="781"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Ne plu&amp;s afficher cette boîte de dialogue.</translation>
     </message>
@@ -244,46 +244,46 @@ Changer vraiment le port réseau?</translation>
         <translation type="unfinished">- %1</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="723"/>
+        <location filename="src/mainwindow.cpp" line="726"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
         <translation type="unfinished">Le programme continuera à s&apos;exécuter dans la barre d&apos;état système.
 Sélectionnez &quot;Quitter&quot; dans le menu contextuel de l&apos;entrée de la barre d&apos;état système pour mettre fin au programme.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="776"/>
+        <location filename="src/mainwindow.cpp" line="779"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>Il y a encore des applications connectées.
 Vraiment arrêter?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="790"/>
+        <location filename="src/mainwindow.cpp" line="793"/>
         <source>&amp;Hide Window</source>
         <translation type="unfinished">&amp;Masquer la fenêtre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="790"/>
+        <location filename="src/mainwindow.cpp" line="793"/>
         <source>&amp;Restore Window</source>
         <translation type="unfinished">&amp;Restaurer la fenêtre</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="820"/>
+        <location filename="src/mainwindow.cpp" line="823"/>
         <source>&amp;Restore</source>
         <translation type="unfinished">&amp;Restaurer</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="601"/>
+        <location filename="src/mainwindow.cpp" line="604"/>
         <source>Version %1 (revision %2).</source>
         <translation>Version %1 (révision %2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="605"/>
+        <location filename="src/mainwindow.cpp" line="608"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Données Version %1. Réponse Version %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="673"/>
+        <location filename="src/mainwindow.cpp" line="676"/>
         <source>Starting server. This can take some time ...</source>
         <translation type="unfinished">Démarrage du serveur. Cela peut prendre un certain temps ...</translation>
     </message>
@@ -292,7 +292,7 @@ Vraiment arrêter?</translation>
         <translation type="vanished">Serveur de démarrage. Cela peut prendre jusqu&apos; à une minute....</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="685"/>
+        <location filename="src/mainwindow.cpp" line="688"/>
         <source>Server running.</source>
         <translation>Serveur en marche.</translation>
     </message>
