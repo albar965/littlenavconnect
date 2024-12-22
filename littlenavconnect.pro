@@ -47,7 +47,7 @@
 # =============================================================================
 
 # Define program version here VERSION_NUMBER_TODO
-VERSION_NUMBER=3.0.7
+VERSION_NUMBER=3.0.8.beta1
 
 QT += core gui xml network svg
 
@@ -70,7 +70,8 @@ ATOOLS_NO_CRASHHANDLER=$$(ATOOLS_NO_CRASHHANDLER)
 
 GIT_PATH=$$(ATOOLS_GIT_PATH)
 SIMCONNECT_PATH_WIN32=$$(ATOOLS_SIMCONNECT_PATH_WIN32)
-SIMCONNECT_PATH_WIN64=$$(ATOOLS_SIMCONNECT_PATH_WIN64)
+SIMCONNECT_PATH_WIN64_MSFS_2020=$$(ATOOLS_SIMCONNECT_PATH_WIN64_MSFS_2020)
+SIMCONNECT_PATH_WIN64_MSFS_2024=$$(ATOOLS_SIMCONNECT_PATH_WIN64_MSFS_2024)
 DEPLOY_BASE=$$(DEPLOY_BASE)
 QUIET=$$(ATOOLS_QUIET)
 
@@ -104,18 +105,20 @@ win32 {
   contains(QT_ARCH, i386) {
   # FSX or P3D
     WINARCH = win32
+    DEFINES += WINARCH32
     !isEmpty(SIMCONNECT_PATH_WIN32) {
-      DEFINES += SIMCONNECT_BUILD_WIN32 WINARCH32
+      DEFINES += SIMCONNECT_BUILD_WIN32
       INCLUDEPATH += $$SIMCONNECT_PATH_WIN32"\inc"
       LIBS += $$SIMCONNECT_PATH_WIN32"\lib\SimConnect.lib"
     }
   } else {
   # MSFS
     WINARCH = win64
-    !isEmpty(SIMCONNECT_PATH_WIN64) {
-      DEFINES += SIMCONNECT_BUILD_WIN64 WINARCH64
-      INCLUDEPATH += $$SIMCONNECT_PATH_WIN64"\include"
-      LIBS += $$SIMCONNECT_PATH_WIN64"\lib\SimConnect.lib"
+    DEFINES += WINARCH64
+    !isEmpty(SIMCONNECT_PATH_WIN64_MSFS_2024) {
+      DEFINES += SIMCONNECT_BUILD_WIN64
+      INCLUDEPATH += $$SIMCONNECT_PATH_WIN64_MSFS_2024"\include"
+      LIBS += $$SIMCONNECT_PATH_WIN64_MSFS_2024"\lib\SimConnect.lib"
     }
   }
 
@@ -187,7 +190,8 @@ message(WINARCH: $$WINARCH)
 message(ATOOLS_INC_PATH: $$ATOOLS_INC_PATH)
 message(ATOOLS_LIB_PATH: $$ATOOLS_LIB_PATH)
 message(SIMCONNECT_PATH_WIN32: $$SIMCONNECT_PATH_WIN32)
-message(SIMCONNECT_PATH_WIN64: $$SIMCONNECT_PATH_WIN64)
+message(SIMCONNECT_PATH_WIN64_MSFS_2020: $$SIMCONNECT_PATH_WIN64_MSFS_2020)
+message(SIMCONNECT_PATH_WIN64_MSFS_2024: $$SIMCONNECT_PATH_WIN64_MSFS_2024)
 message(ATOOLS_NO_CRASHHANDLER: $$ATOOLS_NO_CRASHHANDLER)
 message(DEPLOY_BASE: $$DEPLOY_BASE)
 message(DEFINES: $$DEFINES)
@@ -372,7 +376,8 @@ win32 {
   } else { # 64 Bit build
     deploy.commands += del /f /q $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect/SimConnect.dll) &&
     deploy.commands += del /f /q $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect/simconnect.manifest) &&
-    deploy.commands += xcopy /F $$p($$SIMCONNECT_PATH_WIN64/lib/SimConnect.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+    deploy.commands += copy /Y $$p($$SIMCONNECT_PATH_WIN64_MSFS_2024/lib/SimConnect.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/SimConnect_msfs_2024.dll) &&
+    deploy.commands += copy /Y $$p($$SIMCONNECT_PATH_WIN64_MSFS_2020/lib/SimConnect.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/SimConnect_msfs_2020.dll) &&
   }
   deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/libgcc*.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
   deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/libstdc*.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
