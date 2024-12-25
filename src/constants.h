@@ -60,7 +60,7 @@ const QLatin1String STARTUP_COMMAND_WRITE_WHAZZUP_SPEED("write-whazzup-speed");
 const QLatin1String STARTUP_COMMAND_REPLAY_GUI("replay-gui");
 
 // "master" or "release/1.4" VERSION_NUMBER_TODO
-const static QString HELP_BRANCH = "release/3.0";
+const static QLatin1String HELP_BRANCH("release/3.0");
 
 #if defined(WINARCH64)
 const QLatin1String SIMCONNECT_DLL_NAME("SimConnect_msfs_2020.dll");
