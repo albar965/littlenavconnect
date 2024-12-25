@@ -27,6 +27,10 @@ class MainWindow;
 
 namespace atools {
 
+namespace win {
+class ActivationContext;
+}
+
 namespace util {
 class Properties;
 }
@@ -148,10 +152,12 @@ private:
 
   // Runs in background and fetches data from simulator - signals are sent to NavServerWorker threads
   atools::fs::sc::DataReaderThread *dataReaderThread = nullptr;
-  atools::fs::sc::SimConnectHandler *fsxConnectHandler = nullptr;
+  atools::fs::sc::SimConnectHandler *simConnectHandler = nullptr;
   atools::fs::sc::XpConnectHandler *xpConnectHandler = nullptr;
   QActionGroup *simulatorActionGroup = nullptr;
   atools::fs::sc::ConnectHandler *handlerForSelection();
+
+  atools::win::ActivationContext *activationContext = nullptr;
 
   atools::gui::HelpHandler *helpHandler = nullptr;
   bool firstStart = true; // Used to emit the first windowShown signal

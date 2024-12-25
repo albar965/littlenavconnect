@@ -39,6 +39,7 @@
 #include "util/properties.h"
 #include "util/signalhandler.h"
 #include "util/version.h"
+#include "win/activationcontext.h"
 
 #include <QCloseEvent>
 #include <QCommandLineParser>
@@ -47,6 +48,7 @@
 #include <QSystemTrayIcon>
 #include <QTextDocumentFragment>
 #include <QTimer>
+#include <QStringBuilder>
 
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
@@ -56,11 +58,8 @@ using atools::gui::Application;
 
 atools::gui::DataExchange *MainWindow::dataExchange = nullptr;
 
-// "master" or "release/1.4" VERSION_NUMBER_TODO
-const static QString HELP_BRANCH = "release/3.0";
-
 /* Important: keep slash at the end. Otherwise browser might not display the page properly */
-const static QString HELP_ONLINE_URL("https://www.littlenavmap.org/manuals/littlenavconnect/" + HELP_BRANCH + "/${LANG}/");
+const static QString HELP_ONLINE_URL("https://www.littlenavmap.org/manuals/littlenavconnect/" + lnc::HELP_BRANCH + "/${LANG}/");
 
 const static QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
 
@@ -68,6 +67,8 @@ MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
 {
   qDebug() << Q_FUNC_INFO;
+
+  activationContext = new atools::win::ActivationContext;
 
   aboutMessage =
     QObject::tr("<p style='white-space:pre'>is the Flight Simulator Network agent for Little Navmap.</p>"
@@ -255,7 +256,13 @@ void MainWindow::deInit()
       ATOOLS_DELETE_LATER_LOG(dataReaderThread);
     }
 
-    ATOOLS_DELETE_LOG(fsxConnectHandler);
+    if(simConnectHandler != nullptr)
+    {
+      simConnectHandler->close();
+      simConnectHandler->releaseSimConnect();
+    }
+
+    ATOOLS_DELETE_LOG(simConnectHandler);
     ATOOLS_DELETE_LOG(xpConnectHandler);
 
     qDebug() << Q_FUNC_INFO << "reset logging";
@@ -264,6 +271,7 @@ void MainWindow::deInit()
     ATOOLS_DELETE_LOG(helpHandler);
     ATOOLS_DELETE_LOG(simulatorActionGroup);
     ATOOLS_DELETE_LOG(ui);
+    ATOOLS_DELETE_LOG(activationContext);
 
 #if defined(Q_OS_LINUX)
     // Remove signal handler
@@ -329,7 +337,7 @@ void MainWindow::showOfflineHelp()
 atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()
 {
   if(ui->actionConnectFsx->isChecked())
-    return fsxConnectHandler;
+    return simConnectHandler;
   else
     return xpConnectHandler;
 }
@@ -608,9 +616,9 @@ void MainWindow::mainWindowShownDelayed()
     << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(SimConnectReply::getReplyVersion());
 
   // Build the handler classes which are an abstraction to SimConnect and the Little Xpconnect shared memory
-  fsxConnectHandler = new atools::fs::sc::SimConnectHandler(verbose);
-  fsxConnectHandler->loadSimConnect(QApplication::applicationDirPath() +
-                                    atools::SEP + "simconnect" + atools::SEP + "simconnect.manifest");
+  simConnectHandler = new atools::fs::sc::SimConnectHandler(verbose);
+
+  simConnectHandler->loadSimConnect(activationContext, lnc::SIMCONNECT_DLL_NAME);
   xpConnectHandler = new atools::fs::sc::XpConnectHandler();
 
 #ifdef Q_OS_WIN32
@@ -619,15 +627,15 @@ void MainWindow::mainWindowShownDelayed()
 
   // Check the first time if SimConnect is available - if yes use FSX settings
   // Otherwise fall back to stored value or X-Plane
-  fsx = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, fsxConnectHandler->isLoaded()).toBool();
+  fsx = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_SIMULATOR_FSX, simConnectHandler->isLoaded()).toBool();
 
-  if(!fsxConnectHandler->isLoaded())
+  if(!simConnectHandler->isLoaded())
     // No SimConnect switch to X-Plane
     fsx = false;
 
   qDebug() << "FSX status" << fsx;
 
-  if(fsxConnectHandler->isLoaded())
+  if(simConnectHandler->isLoaded())
   {
     ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectFsx);
     ui->toolBar->insertAction(ui->actionOptions, ui->actionConnectXplane);

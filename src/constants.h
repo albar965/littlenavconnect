@@ -58,6 +58,16 @@ const QLatin1String STARTUP_COMMAND_REPLAY_SPEED("replay-speed");
 const QLatin1String STARTUP_COMMAND_WRITE_WHAZZUP("write-whazzup");
 const QLatin1String STARTUP_COMMAND_WRITE_WHAZZUP_SPEED("write-whazzup-speed");
 const QLatin1String STARTUP_COMMAND_REPLAY_GUI("replay-gui");
+
+// "master" or "release/1.4" VERSION_NUMBER_TODO
+const static QString HELP_BRANCH = "release/3.0";
+
+#if defined(WINARCH64)
+const QLatin1String SIMCONNECT_DLL_NAME("SimConnect_msfs_2020.dll");
+#else
+const QLatin1String SIMCONNECT_DLL_NAME("SimConnect.dll");
+#endif
+
 } // namespace lnc
 
 #endif // LITTLENAVCONNECT_CONSTANTS_H
