@@ -235,6 +235,7 @@ TRANSLATIONS = \
   littlenavconnect_fr.ts \
   littlenavconnect_it.ts \
   littlenavconnect_de.ts \
+  littlenavconnect_zh.ts \
   littlenavconnect_pt_BR.ts
 
 # littlenavconnect_nl.ts

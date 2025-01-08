@@ -128,7 +128,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="215"/>
-        <location filename="src/mainwindow.cpp" line="198"/>
+        <location filename="src/mainwindow.cpp" line="179"/>
         <source>FSX, Prepar3D or MSFS</source>
         <oldsource>FSX or Prepar3D</oldsource>
         <translation>FSX、Prepar3D 或 MSFS</translation>
@@ -136,7 +136,7 @@
     <message>
         <location filename="mainwindow.ui" line="218"/>
         <location filename="mainwindow.ui" line="221"/>
-        <location filename="src/mainwindow.cpp" line="199"/>
+        <location filename="src/mainwindow.cpp" line="180"/>
         <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
         <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
         <translation>使用 SimConnect 连接到 FSX、Prepar3D 或者微软飞信模拟器 2020。</translation>
@@ -162,127 +162,127 @@
         <translation>Ctrl+Shift+X</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="107"/>
-        <location filename="src/mainwindow.cpp" line="549"/>
+        <location filename="src/mainwindow.cpp" line="113"/>
+        <location filename="src/mainwindow.cpp" line="604"/>
         <source> 64-bit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="109"/>
-        <location filename="src/mainwindow.cpp" line="551"/>
+        <location filename="src/mainwindow.cpp" line="115"/>
+        <location filename="src/mainwindow.cpp" line="606"/>
         <source> 32-bit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="192"/>
+        <location filename="src/mainwindow.cpp" line="173"/>
         <source>MSFS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="193"/>
+        <location filename="src/mainwindow.cpp" line="174"/>
         <source>Connect to Microsoft Flight Simulator 2020 using SimConnect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="195"/>
+        <location filename="src/mainwindow.cpp" line="176"/>
         <source>FSX or Prepar3D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="196"/>
+        <location filename="src/mainwindow.cpp" line="177"/>
         <source>Connect to FSX or Prepar3D using SimConnect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="304"/>
+        <location filename="src/mainwindow.cpp" line="350"/>
         <source>Connecting to MSFS using SimConnect.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="306"/>
+        <location filename="src/mainwindow.cpp" line="352"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>正在使用 SimConnect 连接到 FSX 或 Prepar3D。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="313"/>
+        <location filename="src/mainwindow.cpp" line="359"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>正在使用 Xpconnect 插件连接到X-Plane。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="330"/>
+        <location filename="src/mainwindow.cpp" line="376"/>
         <source>Save Replay</source>
         <translation>保存回放</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="330"/>
-        <location filename="src/mainwindow.cpp" line="345"/>
+        <location filename="src/mainwindow.cpp" line="376"/>
+        <location filename="src/mainwindow.cpp" line="391"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>回放文件（*.replay）;;所有文件 (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="345"/>
+        <location filename="src/mainwindow.cpp" line="391"/>
         <source>Open Replay</source>
         <translation>打开回放</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="418"/>
+        <location filename="src/mainwindow.cpp" line="464"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>有程序还在连接中。
 真的要改变网络端口号吗？</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="420"/>
-        <location filename="src/mainwindow.cpp" line="677"/>
-        <location filename="src/mainwindow.cpp" line="719"/>
+        <location filename="src/mainwindow.cpp" line="466"/>
+        <location filename="src/mainwindow.cpp" line="736"/>
+        <location filename="src/mainwindow.cpp" line="789"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>不要再显示这个对话框(&amp;S)。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="488"/>
+        <location filename="src/mainwindow.cpp" line="534"/>
         <source>- %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="675"/>
+        <location filename="src/mainwindow.cpp" line="734"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="717"/>
+        <location filename="src/mainwindow.cpp" line="787"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>有程序还在连接中。
 真的要退出？</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="731"/>
+        <location filename="src/mainwindow.cpp" line="801"/>
         <source>&amp;Hide Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="731"/>
+        <location filename="src/mainwindow.cpp" line="801"/>
         <source>&amp;Restore Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="761"/>
+        <location filename="src/mainwindow.cpp" line="831"/>
         <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="557"/>
+        <location filename="src/mainwindow.cpp" line="612"/>
         <source>Version %1 (revision %2).</source>
         <translation>版本 %1（修点版本 %2）。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="561"/>
+        <location filename="src/mainwindow.cpp" line="616"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>数据版本 %1。回放版本 %2。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="629"/>
+        <location filename="src/mainwindow.cpp" line="684"/>
         <source>Starting server. This can take some time ...</source>
         <translation>正在启动服务器。这可能需要一些时间 ...</translation>
     </message>
@@ -291,7 +291,7 @@ Really Quit?</source>
         <translation type="vanished">正在启动服务器。这可能需要最多一分钟 ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="641"/>
+        <location filename="src/mainwindow.cpp" line="696"/>
         <source>Server running.</source>
         <translation>服务器已在运行。</translation>
     </message>
@@ -428,12 +428,12 @@ Little Navconnect 使用该时间间隔从飞行模拟器提取数据并将其�
 <context>
     <name>QObject</name>
     <message>
-        <location filename="src/main.cpp" line="73"/>
+        <location filename="src/main.cpp" line="122"/>
         <source>Log files:</source>
         <translation>日志文件：</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="75"/>
+        <location filename="src/main.cpp" line="124"/>
         <source>Configuration:</source>
         <translation>配置：</translation>
     </message>
@@ -442,62 +442,66 @@ Little Navconnect 使用该时间间隔从飞行模拟器提取数据并将其�
         <translation type="vanished">%1 - 错误</translation>
     </message>
     <message>
-        <location filename="src/main.cpp" line="114"/>
         <source>%1 is already running.</source>
-        <translation>%1 已在运行。</translation>
+        <translation type="vanished">%1 已在运行。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="68"/>
+        <location filename="src/mainwindow.cpp" line="74"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2024 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
         <translation type="unfinished">&lt;p&gt;是 Little Navmap 的飞行模拟器网络代理&lt;/p&gt;&lt;p&gt;这个软件由 &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; 或更新版本授权。&lt;/p&gt;&lt;p&gt;此程序的源代码在 &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;更多关于我的项目：&lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;。&lt;/p&gt;&lt;p&gt;&lt;b&gt;版权所有 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="134"/>
+        <location filename="src/main.cpp" line="78"/>
         <source>Save replay data to &lt;file&gt;.</source>
         <translation>保存回放到 &lt;file&gt;。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="134"/>
-        <location filename="src/mainwindow.cpp" line="137"/>
-        <location filename="src/mainwindow.cpp" line="144"/>
+        <location filename="src/main.cpp" line="79"/>
+        <location filename="src/main.cpp" line="83"/>
+        <location filename="src/main.cpp" line="92"/>
         <source>file</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="137"/>
+        <location filename="src/main.cpp" line="82"/>
         <source>Load replay data from &lt;file&gt;.</source>
         <translation>自 &lt;file&gt; 载入回放。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="140"/>
+        <location filename="src/main.cpp" line="86"/>
         <source>Use speed factor &lt;speed&gt; for replay.</source>
         <translation>以 &lt;speed&gt; 倍速回放。</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="140"/>
+        <location filename="src/main.cpp" line="87"/>
         <source>speed</source>
         <translation>速度</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="143"/>
+        <location filename="src/main.cpp" line="91"/>
         <source>Update whazzup file &lt;file&gt; using VATSIM format during replay.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="147"/>
+        <location filename="src/main.cpp" line="96"/>
         <source>Update whazzup file every &lt;seconds&gt; during replay.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="148"/>
+        <location filename="src/main.cpp" line="97"/>
         <source>seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="151"/>
+        <location filename="src/main.cpp" line="100"/>
         <source>Show replay menu items.</source>
         <translation>显示回放目录项。</translation>
+    </message>
+    <message>
+        <location filename="src/main.cpp" line="103"/>
+        <source>Quit an already running instance.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -128,7 +128,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="215"/>
-        <location filename="src/mainwindow.cpp" line="178"/>
+        <location filename="src/mainwindow.cpp" line="179"/>
         <source>FSX, Prepar3D or MSFS</source>
         <oldsource>FSX or Prepar3D</oldsource>
         <translation>FSX, Prepar3D ou MSFS</translation>
@@ -136,7 +136,7 @@
     <message>
         <location filename="mainwindow.ui" line="218"/>
         <location filename="mainwindow.ui" line="221"/>
-        <location filename="src/mainwindow.cpp" line="179"/>
+        <location filename="src/mainwindow.cpp" line="180"/>
         <source>Connect to FSX, Prepar3D or Microsoft Flight Simulator 2020 using SimConnect.</source>
         <oldsource>Connect to FSX or Prepar3D using SimConnect.</oldsource>
         <translation>Conectar ao FSX Prepar3D ou Microsoft Flight Simulator 2020 usando SimConnect.</translation>
@@ -162,128 +162,128 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="112"/>
-        <location filename="src/mainwindow.cpp" line="596"/>
+        <location filename="src/mainwindow.cpp" line="113"/>
+        <location filename="src/mainwindow.cpp" line="604"/>
         <source> 64-bit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="114"/>
-        <location filename="src/mainwindow.cpp" line="598"/>
+        <location filename="src/mainwindow.cpp" line="115"/>
+        <location filename="src/mainwindow.cpp" line="606"/>
         <source> 32-bit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="172"/>
+        <location filename="src/mainwindow.cpp" line="173"/>
         <source>MSFS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="173"/>
+        <location filename="src/mainwindow.cpp" line="174"/>
         <source>Connect to Microsoft Flight Simulator 2020 using SimConnect.</source>
         <translation>Conecte-se ao Microsoft Flight Simulator 2020 usando o SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="175"/>
+        <location filename="src/mainwindow.cpp" line="176"/>
         <source>FSX or Prepar3D</source>
         <translation>FSX ou Prepar3D</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="176"/>
+        <location filename="src/mainwindow.cpp" line="177"/>
         <source>Connect to FSX or Prepar3D using SimConnect.</source>
         <translation>Conecte-se ao FSX ou Prepar3D usando o SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="342"/>
+        <location filename="src/mainwindow.cpp" line="350"/>
         <source>Connecting to MSFS using SimConnect.</source>
         <translation>Conectando-se ao MSFS usando o SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="344"/>
+        <location filename="src/mainwindow.cpp" line="352"/>
         <source>Connecting to FSX or Prepar3D using SimConnect.</source>
         <translation>Conectando com o FSX ou Prepar3D usando SimConnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="351"/>
+        <location filename="src/mainwindow.cpp" line="359"/>
         <source>Connecting to X-Plane using the Little Xpconnect plugin.</source>
         <translation>Conectando com o X-Plane usando o pluguin Xpconnect.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="368"/>
+        <location filename="src/mainwindow.cpp" line="376"/>
         <source>Save Replay</source>
         <translation>Salvar Repetição</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="368"/>
-        <location filename="src/mainwindow.cpp" line="383"/>
+        <location filename="src/mainwindow.cpp" line="376"/>
+        <location filename="src/mainwindow.cpp" line="391"/>
         <source>Replay Files (*.replay);;All Files (*)</source>
         <translation>Arquivo de Repetição (*.replay);;Todos os Arquivos (*)</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="383"/>
+        <location filename="src/mainwindow.cpp" line="391"/>
         <source>Open Replay</source>
         <translation>Abrir Repetição</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="456"/>
+        <location filename="src/mainwindow.cpp" line="464"/>
         <source>There are still applications connected.
 Really change the Network Port?</source>
         <translation>O programa ainda está conectado.
 Você deseja realmente muda a porta da rede?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="458"/>
-        <location filename="src/mainwindow.cpp" line="728"/>
-        <location filename="src/mainwindow.cpp" line="781"/>
+        <location filename="src/mainwindow.cpp" line="466"/>
+        <location filename="src/mainwindow.cpp" line="736"/>
+        <location filename="src/mainwindow.cpp" line="789"/>
         <source>Do not &amp;show this dialog again.</source>
         <translation>Não &amp;mostrar esse diálogo novamente.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="526"/>
+        <location filename="src/mainwindow.cpp" line="534"/>
         <source>- %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="726"/>
+        <location filename="src/mainwindow.cpp" line="734"/>
         <source>The program will keep running in the system tray.
 Select &quot;Quit&quot; in the context menu of the system tray entry to terminate the program.</source>
         <translation>O programa continuará rodando na bandeja do sistema.
 Selecione “Sair” no menu de contexto da entrada da bandeja do sistema para terminar o programa.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="779"/>
+        <location filename="src/mainwindow.cpp" line="787"/>
         <source>There are still applications connected.
 Really Quit?</source>
         <translation>O programa ainda está conectado.
 Você deseja sair?</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="793"/>
+        <location filename="src/mainwindow.cpp" line="801"/>
         <source>&amp;Hide Window</source>
         <translation>&amp;Esconder Janela</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="793"/>
+        <location filename="src/mainwindow.cpp" line="801"/>
         <source>&amp;Restore Window</source>
         <translation>&amp;Restaurar Janela</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="823"/>
+        <location filename="src/mainwindow.cpp" line="831"/>
         <source>&amp;Restore</source>
         <translation>&amp;Restaurar</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="604"/>
+        <location filename="src/mainwindow.cpp" line="612"/>
         <source>Version %1 (revision %2).</source>
         <translation>Versão %1 (revisão%2).</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="608"/>
+        <location filename="src/mainwindow.cpp" line="616"/>
         <source>Data Version %1. Reply Version %2.</source>
         <translation>Data da Versão %1. Versão repitida %2.</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="676"/>
+        <location filename="src/mainwindow.cpp" line="684"/>
         <source>Starting server. This can take some time ...</source>
         <translation>Inicializando servidor. Isso pode levar um tempo ...</translation>
     </message>
@@ -292,7 +292,7 @@ Você deseja sair?</translation>
         <translation type="vanished">Iniciando o servidor. Isso pode demorar até um minuto ...</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="688"/>
+        <location filename="src/mainwindow.cpp" line="696"/>
         <source>Server running.</source>
         <translation>Servidor em funcionamento.</translation>
     </message>
@@ -454,7 +454,7 @@ Use valores mais altos (ou seja, taxas de atualização mais lentas) se você ti
         <translation type="vanished">&lt;p&gt;Server Flight Simulator Network para Little Navmap.&lt;/p&gt;&lt;p&gt;Este software está licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt; GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte para este aplicativo está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2021 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="src/mainwindow.cpp" line="73"/>
+        <location filename="src/mainwindow.cpp" line="74"/>
         <source>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2024 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</source>
         <oldsource>&lt;p style=&apos;white-space:pre&apos;&gt;is the Flight Simulator Network agent for Little Navmap.&lt;/p&gt;&lt;p&gt;This software is licensed under &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; or any later version.&lt;/p&gt;&lt;p&gt;The source code for this application is available at &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;More about my projects at &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Copyright 2015-2023 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</oldsource>
         <translation>&lt;p style=&apos;white-space:pre&apos;&gt;é o agente da Rede de Simulação de Voo para o Little Navmap.&lt;/p&gt;&lt;p&gt;Este software é licenciado sob &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0&quot;&gt;GPL3&lt;/a&gt; ou qualquer versão posterior.&lt;/p&gt;&lt;p&gt;O código-fonte desta aplicação está disponível em &lt;a href=&quot;https://github.com/albar965&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Mais sobre meus projetos em &lt;a href=&quot;https://www.littlenavmap.org&quot;&gt;www.littlenavmap.org&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;b&gt;Direitos autorais 2015-2024 Alexander Barthel&lt;/b&gt;&lt;/p&gt;</translation>
