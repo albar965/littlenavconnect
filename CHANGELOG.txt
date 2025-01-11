@@ -4,6 +4,13 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.0.8.beta1
+
+* Adapted to MSFS 2024. The program will connect to MSFS 2020 or MSFS 2024 depending on which simulator is running. #1198
+* Updated translation files and added Chinese language back again.
+
+===============================================================================
+
 # Version 3.0.7
 
 * Disabled crash detection since it resulted in wrong crashes found when running
