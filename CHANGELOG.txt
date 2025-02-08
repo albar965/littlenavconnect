@@ -4,10 +4,15 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
-# Version 3.0.8.beta1
+# Version 3.0.14
 
-* Adapted to MSFS 2024. The program will connect to MSFS 2020 or MSFS 2024 depending on which simulator is running. #1198
+* Version 3.0.14 to be in sync with Little Navmap.
+* Adapted to MSFS 2024. The program will connect to MSFS 2020 or MSFS 2024 depending on which
+  simulator is running. #1198
 * Updated translation files and added Chinese language back again.
+* Updated Brazilian Portuguese translation by Ricardo.
+* Updated Italian translation by Flavio.
+* Updated German translation.
 
 ===============================================================================
 
