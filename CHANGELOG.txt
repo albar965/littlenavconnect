@@ -12,7 +12,8 @@ This text is partially Markdown, hence sometimes strange formatting.
 * Updated translation files and added Chinese language back again.
 * Updated Brazilian Portuguese translation by Ricardo.
 * Updated Italian translation by Flavio.
-* Updated German translation.
+* Updated French translation by Patrick.
+Updated German translation.
 
 ===============================================================================
 
