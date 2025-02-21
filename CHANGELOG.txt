@@ -4,6 +4,16 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.0.15.rc1
+
+* Reworked SimConnect code. This helps to fix problems with disappearing AI traffic, multiplayer
+  aircraft or similar issues.
+* Updated Chinese translation by Eyderoe.
+* Updated German translation.
+* Updated Brazilian Portuguese translation by Ricardo.
+
+===============================================================================
+
 # Version 3.0.14
 
 * Version 3.0.14 to be in sync with Little Navmap.

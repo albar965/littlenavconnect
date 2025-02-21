@@ -344,7 +344,7 @@ atools::fs::sc::ConnectHandler *MainWindow::handlerForSelection()
 
 void MainWindow::handlerChanged()
 {
-  if(ui->actionConnectFsx->isChecked())
+  if(ui != nullptr && ui->actionConnectFsx->isChecked())
   {
 #if defined(SIMCONNECT_BUILD_WIN64)
     qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Connecting to MSFS using SimConnect.");
@@ -708,7 +708,7 @@ void MainWindow::showEvent(QShowEvent *)
 void MainWindow::hideEvent(QHideEvent *)
 {
   // Use minimize to hide to tray
-  if(isMinimized() && ui->actionMinimizeTray->isChecked() && trayIcon != nullptr)
+  if(ui != nullptr && isMinimized() && ui->actionMinimizeTray->isChecked() && trayIcon != nullptr)
     hide();
 
   updateTrayActions();
