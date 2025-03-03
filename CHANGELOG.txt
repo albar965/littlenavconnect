@@ -4,6 +4,13 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.0.16
+
+* Updated all translations.
+* Improved error handling in SimConnect loader.
+
+===============================================================================
+
 # Version 3.0.15.rc1
 
 * Reworked SimConnect code. This helps to fix problems with disappearing AI traffic, multiplayer
