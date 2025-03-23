@@ -59,7 +59,7 @@ const QLatin1String STARTUP_COMMAND_WRITE_WHAZZUP("write-whazzup");
 const QLatin1String STARTUP_COMMAND_WRITE_WHAZZUP_SPEED("write-whazzup-speed");
 const QLatin1String STARTUP_COMMAND_REPLAY_GUI("replay-gui");
 
-// "master" or "release/1.4" VERSION_NUMBER_TODO
+// "master" or "release/1.4" VERSION_NUMBER_TODO update branch
 const static QLatin1String HELP_BRANCH("release/3.0");
 
 #if defined(WINARCH64)
