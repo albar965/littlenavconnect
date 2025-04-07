@@ -4,6 +4,14 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.0.17
+
+* More filtering to get rid of wrong MSFS aircraft indications before starting a flight in the
+  simulator. These resulted in an aircraft trail crossing all over the world causing display issues
+  and crashes.
+
+===============================================================================
+
 # Version 3.0.16
 
 * Updated all translations.
