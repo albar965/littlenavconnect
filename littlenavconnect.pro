@@ -51,7 +51,7 @@ VERSION_NUMBER=3.1.0.develop
 
 QT += core gui xml network svg
 
-CONFIG += build_all c++14
+CONFIG += build_all c++17
 CONFIG -= debug_and_release debug_and_release_target
 
 TARGET = littlenavconnect
