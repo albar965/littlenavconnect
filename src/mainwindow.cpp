@@ -49,6 +49,7 @@
 #include <QTextDocumentFragment>
 #include <QTimer>
 #include <QStringBuilder>
+#include <QActionGroup>
 
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
@@ -67,6 +68,8 @@ MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
 {
   qDebug() << Q_FUNC_INFO;
+
+  setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 
   activationContext = new atools::win::ActivationContext;
 
@@ -490,7 +493,7 @@ void MainWindow::resetMessages()
 
 void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context, const QString& message)
 {
-  const static QString MESSAGEPATTERN("[%1] %2<br/>");
+  const static QString MESSAGEPATTERN("[%1] %2");
 
   if(type == QtFatalMsg)
     // Fatal is a crash anyway - bail out to avoid follow up errors

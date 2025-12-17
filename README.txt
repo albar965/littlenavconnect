@@ -48,7 +48,7 @@ The source code for this application is available at Github:
 https://github.com/albar965/atools
 https://github.com/albar965/littlenavconnect
 
-Copyright 2015-2023 Alexander Barthel (https://www.littlenavmap.org/contact.html).
+Copyright 2015-2025 Alexander Barthel (https://www.littlenavmap.org/contact.html).
 
 -------------------------------------------------------------------------------
 French translation copyright 2017 Patrick JUNG alias Patbest (patrickjung@laposte.net).

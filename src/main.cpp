@@ -1,5 +1,5 @@
 /*****************************************************************************
-* Copyright 2015-2024 Alexander Barthel alex@littlenavmap.org
+* Copyright 2015-2025 Alexander Barthel alex@littlenavmap.org
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@
 #include "exception.h"
 #include "fs/fspaths.h"
 #include "fs/sc/simconnecttypes.h"
-#include "geo/calculations.h"
 #include "gui/application.h"
 #include "gui/translator.h"
 #include "logging/logginghandler.h"
@@ -52,7 +51,6 @@ int main(int argc, char *argv[])
 
   // Needed to send SimConnectData through queued connections
   atools::fs::sc::registerMetaTypes();
-  atools::geo::registerMetaTypes();
   atools::fs::FsPaths::intitialize();
   int retval = 0;
 
@@ -129,10 +127,6 @@ int main(int argc, char *argv[])
 
       // Avoid closing if options dialog is closed with main window hidden to tray
       QApplication::setQuitOnLastWindowClosed(false);
-
-#if QT_VERSION > QT_VERSION_CHECK(5, 10, 0)
-      QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
-#endif
 
       // Print some information which can be useful for debugging
       Settings::logMessages();
@@ -214,8 +208,6 @@ int main(int argc, char *argv[])
   MainWindow::deInitDataExchange();
 
   qDebug() << "app.exec() done, retval is" << retval << (retval == 0 ? "(ok)" : "(error)");
-  qInfo() << "About to shut down logging";
-  atools::logging::LoggingHandler::shutdown();
 
   return retval;
 }

@@ -1,5 +1,5 @@
 #*****************************************************************************
-# Copyright 2015-2020 Alexander Barthel alex@littlenavmap.org
+# Copyright 2015-2025 Alexander Barthel alex@littlenavmap.org
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -49,10 +49,11 @@
 # Define program version here VERSION_NUMBER_TODO
 VERSION_NUMBER=3.1.0.develop
 
-QT += core gui xml network svg
+QT += core gui xml network svg widgets
 
 CONFIG += build_all c++17
 CONFIG -= debug_and_release debug_and_release_target
+
 
 TARGET = littlenavconnect
 TEMPLATE = app
@@ -67,6 +68,7 @@ TARGET_NAME=Little Navconnect
 ATOOLS_INC_PATH=$$(ATOOLS_INC_PATH)
 ATOOLS_LIB_PATH=$$(ATOOLS_LIB_PATH)
 ATOOLS_NO_CRASHHANDLER=$$(ATOOLS_NO_CRASHHANDLER)
+ATOOLS_NO_QT5COMPAT=$$(ATOOLS_NO_QT5COMPAT)
 
 GIT_PATH=$$(ATOOLS_GIT_PATH)
 SIMCONNECT_PATH_WIN32=$$(ATOOLS_SIMCONNECT_PATH_WIN32)
@@ -130,6 +132,8 @@ win32 {
   LIBS += -L$$ATOOLS_LIB_PATH -latools -lz
 }
 
+DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
+
 macx {
   isEmpty(GIT_PATH) : GIT_PATH=git
 }
@@ -153,6 +157,9 @@ LIBS += -L$$ATOOLS_LIB_PATH -latools
 } else {
   DEFINES += DISABLE_CRASHHANDLER
 }
+
+# https://doc.qt.io/qt-6.5/qtcore5-index.html - needed for QTextCodec
+!isEqual(ATOOLS_NO_QT5COMPAT, "true"): QT += core5compat
 
 PRE_TARGETDEPS += $$ATOOLS_LIB_PATH/libatools.a
 DEPENDPATH += $$ATOOLS_INC_PATH
@@ -193,6 +200,7 @@ message(SIMCONNECT_PATH_WIN32: $$SIMCONNECT_PATH_WIN32)
 message(SIMCONNECT_PATH_WIN64_MSFS_2020: $$SIMCONNECT_PATH_WIN64_MSFS_2020)
 message(SIMCONNECT_PATH_WIN64_MSFS_2024: $$SIMCONNECT_PATH_WIN64_MSFS_2024)
 message(ATOOLS_NO_CRASHHANDLER: $$ATOOLS_NO_CRASHHANDLER)
+message(ATOOLS_NO_QT5COMPAT: $$ATOOLS_NO_QT5COMPAT)
 message(DEPLOY_BASE: $$DEPLOY_BASE)
 message(DEFINES: $$DEFINES)
 message(INCLUDEPATH: $$INCLUDEPATH)
@@ -317,16 +325,18 @@ unix:!macx {
   deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libicudata.so*  $$DEPLOY_DIR_LIB &&
   deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libicui18n.so*  $$DEPLOY_DIR_LIB &&
   deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libicuuc.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Core.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5DBus.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Gui.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Network.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Svg.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Widgets.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5X11Extras.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5XcbQpa.so*  $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5Xml.so* $$DEPLOY_DIR_LIB &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt5WaylandClient.so* $$DEPLOY_DIR_LIB &&
+  !isEqual(ATOOLS_NO_QT5COMPAT, "true") {
+    deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6Core5Compat.so*  $$DEPLOY_DIR_LIB &&
+  }
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6Core.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6DBus.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6Gui.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6Network.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6Svg.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6Widgets.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6XcbQpa.so*  $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6Xml.so* $$DEPLOY_DIR_LIB &&
+  deploy.commands += cp -vfa $$[QT_INSTALL_LIBS]/libQt6WaylandClient.so* $$DEPLOY_DIR_LIB &&
   deploy.commands += rm -fv $$DEPLOY_DIR_LIB/lib*.so.*.debug $$DEPLOY_DIR_LIB/*/lib*.so.*.debug
 }
 
