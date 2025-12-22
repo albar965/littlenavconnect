@@ -6,6 +6,6 @@ CONF=release
 
 cd ${APROJECTS}/build-littlenavconnect-${CONF}
 
-export LD_LIBRARY_PATH=~/Qt/6.5.3/gcc_64/lib:${APROJECTS}/build-littlenavconnect-${CONF}
+export LD_LIBRARY_PATH=~/Qt/${QT_VERSION}/gcc_64/lib:${APROJECTS}/build-littlenavconnect-${CONF}
 
 ${APROJECTS}/build-littlenavconnect-${CONF}/littlenavconnect "$@"
