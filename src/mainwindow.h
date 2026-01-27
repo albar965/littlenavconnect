@@ -102,7 +102,7 @@ private:
   /* Reset all "do not show again" messages */
   void resetMessages();
 
-  /* Options dialog */
+  /* Options dialog from menu or trayOptionsAction */
   void options();
 
   /* Received command line options from another instance */
@@ -112,7 +112,10 @@ private:
   void saveReplayFileTriggered();
   void loadReplayFileTriggered();
   void stopReplay();
+
+  /* Menu, button or trayHelpAction */
   void showOnlineHelp();
+
   void showOfflineHelp();
   void simulatorSelectionTriggered();
 
@@ -122,7 +125,7 @@ private:
   void createTrayIcon();
   void deleteTrayIcon();
 
-  /* Clicked */
+  /* Clicked on tray icon */
   void trayActivated(QSystemTrayIcon::ActivationReason reason);
 
   /* One of the minimize to tray changed */
@@ -133,8 +136,12 @@ private:
 
   /* Either from action quit or tray menu quit */
   void updateTrayActions();
-  void showHideFromTray();
-  void closeFromTrayOrAction();
+
+  /* trayRestoreHideAction */
+  void showHideFromTrayAction();
+
+  /* trayQuitAction */
+  void quitFromTrayOrAction();
 
   bool trayHintShown = false, /* Show hint only once per session */
        windowCloseButtonClicked = true, /* Avoid close to tray notification in closeEvent */
@@ -167,6 +174,9 @@ private:
 
   QString saveReplayFile, loadReplayFile;
   int replaySpeed = 1, replayWhazzupUpdateSpeed = 15;
+
+  // Need to remember main window position after restoring state
+  QPoint windowPosition;
 
   static atools::gui::DataExchange *dataExchange;
 

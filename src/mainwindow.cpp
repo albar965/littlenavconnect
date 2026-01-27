@@ -25,11 +25,12 @@
 #include "fs/sc/simconnectreply.h"
 #include "fs/sc/xpconnecthandler.h"
 #include "geo/calculations.h"
+#include "gui/application.h"
 #include "gui/desktopservices.h"
 #include "gui/dialog.h"
-#include "gui/application.h"
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
+#include "gui/widgetutil.h"
 #include "logging/loggingguiabort.h"
 #include "logging/logginghandler.h"
 #include "optionsdialog.h"
@@ -190,7 +191,7 @@ MainWindow::MainWindow()
 
   connect(ui->actionConnectFsx, &QAction::triggered, this, &MainWindow::simulatorSelectionTriggered);
   connect(ui->actionConnectXplane, &QAction::triggered, this, &MainWindow::simulatorSelectionTriggered);
-  connect(ui->actionQuit, &QAction::triggered, this, &MainWindow::closeFromTrayOrAction);
+  connect(ui->actionQuit, &QAction::triggered, this, &MainWindow::quitFromTrayOrAction);
 
   if(Application::hasStartupOption(lnc::STARTUP_COMMAND_REPLAY_GUI))
   {
@@ -297,7 +298,7 @@ void MainWindow::dataExchangeDataFetched(atools::util::Properties properties)
 
     if(properties.contains(lnc::STARTUP_COMMAND_QUIT))
       // Quit without activate =====================================================
-      closeFromTrayOrAction();
+      quitFromTrayOrAction();
     else
     {
       // Activate window - always sent by other instance =====================================================
@@ -412,7 +413,7 @@ void MainWindow::stopReplay()
 
 void MainWindow::options()
 {
-  qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options";
+  qDebug(atools::fs::ns::gui) << Q_FUNC_INFO;
 
   OptionsDialog dialog(this);
 
@@ -431,7 +432,7 @@ void MainWindow::options()
 
   if(result == QDialog::Accepted)
   {
-    qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options accepted";
+    qDebug(atools::fs::ns::gui) << Q_FUNC_INFO << "options accepted";
     settings.setValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, static_cast<int>(dialog.isHideHostname()));
     settings.setValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
     settings.setValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
@@ -479,9 +480,9 @@ void MainWindow::options()
     }
   }
   else
-    qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options not accepted";
+    qDebug(atools::fs::ns::gui) << Q_FUNC_INFO << "options not accepted";
 
-  qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::options exit";
+  qDebug(atools::fs::ns::gui) << Q_FUNC_INFO << "options exit";
 }
 
 void MainWindow::resetMessages()
@@ -568,7 +569,7 @@ void MainWindow::showInitial()
   if(dataExchange != nullptr)
     connect(dataExchange, &atools::gui::DataExchange::dataFetched, this, &MainWindow::dataExchangeDataFetched);
 
-  QTimer::singleShot(0, this, &MainWindow::mainWindowShownDelayed);
+  QTimer::singleShot(10, this, &MainWindow::mainWindowShownDelayed);
 }
 
 void MainWindow::restoreState()
@@ -579,6 +580,7 @@ void MainWindow::restoreState()
 
   atools::gui::WidgetState widgetState(lnc::SETTINGS_MAINWINDOW_WIDGET);
   widgetState.restore(this);
+  windowPosition = pos(); // Remember position to set in mainWindowShownDelayed()
 
   widgetState.setBlockSignals(true);
   widgetState.restore({ui->actionMinimizeTray, ui->actionStartMinimizeTray});
@@ -599,7 +601,7 @@ void MainWindow::saveState() const
 void MainWindow::mainWindowShownDelayed()
 {
   qDebug() << Q_FUNC_INFO;
-  qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::mainWindowShown";
+  qDebug(atools::fs::ns::gui) << Q_FUNC_INFO;
 
   atools::settings::Settings& settings = Settings::instance();
 
@@ -686,7 +688,10 @@ void MainWindow::mainWindowShownDelayed()
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Starting server. This can take some time ...");
 
-  QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+  // Set remembered position and make sure that it is visible on screen
+  atools::gui::Application::processEventsExtended();
+  move(windowPosition);
+  atools::gui::util::ensureVisibility(this);
 
   QGuiApplication::setOverrideCursor(Qt::WaitCursor);
 
@@ -697,7 +702,7 @@ void MainWindow::mainWindowShownDelayed()
   QGuiApplication::restoreOverrideCursor();
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Server running.");
-  qDebug(atools::fs::ns::gui).noquote().nospace() << "MainWindow::mainWindowShown exit";
+  qDebug(atools::fs::ns::gui) << Q_FUNC_INFO << "exit";
 
   // Log startup time
   Application::startupFinished(Q_FUNC_INFO);
@@ -710,10 +715,7 @@ void MainWindow::showEvent(QShowEvent *)
 
 void MainWindow::hideEvent(QHideEvent *)
 {
-  // Use minimize to hide to tray
-  if(ui != nullptr && isMinimized() && ui->actionMinimizeTray->isChecked() && trayIcon != nullptr)
-    hide();
-
+  windowPosition = pos();
   updateTrayActions();
 }
 
@@ -774,14 +776,6 @@ void MainWindow::closeFromSignal()
     QApplication::quit();
 }
 
-void MainWindow::closeFromTrayOrAction()
-{
-  // Signal for close event
-  windowCloseButtonClicked = false;
-
-  close();
-}
-
 bool MainWindow::askCloseApplication()
 {
   if(navServer->hasConnections())
@@ -804,9 +798,30 @@ void MainWindow::updateTrayActions()
     trayRestoreHideAction->setText(isVisible() ? tr("&Hide Window") : tr("&Restore Window"));
 }
 
-void MainWindow::showHideFromTray()
+void MainWindow::quitFromTrayOrAction()
 {
+  // Signal for close event
+  windowCloseButtonClicked = false;
+
+  if(askCloseApplication())
+    QApplication::quit();
+}
+
+void MainWindow::showHideFromTrayAction()
+{
+  qDebug() << Q_FUNC_INFO;
+
   setVisible(!isVisible());
+
+  QTimer::singleShot(10, [this]()->void {
+    if(isVisible())
+    {
+      // Set remembered position and make sure that it is visible on screen
+      atools::gui::Application::processEventsExtended();
+      move(windowPosition);
+      atools::gui::util::ensureVisibility(this);
+    }
+  });
 }
 
 void MainWindow::deleteTrayIcon()
@@ -828,7 +843,7 @@ void MainWindow::createTrayIcon()
     // Copy text and icon from main but not shortcuts
     QAction *trayOptionsAction = new QAction(ui->actionOptions->icon(), ui->actionOptions->text(), trayIconMenu);
     QAction *trayHelpAction = new QAction(ui->actionHelp->icon(), ui->actionHelp->text(), trayIconMenu);
-    QAction *tryQuitAction = new QAction(ui->actionQuit->icon(), ui->actionQuit->text(), trayIconMenu);
+    QAction *trayQuitAction = new QAction(ui->actionQuit->icon(), ui->actionQuit->text(), trayIconMenu);
 
     // Use member variable to allow changing text
     trayRestoreHideAction = new QAction(tr("&Restore"), trayIconMenu); // Text toggles depending on window state
@@ -839,17 +854,17 @@ void MainWindow::createTrayIcon()
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(trayHelpAction);
     trayIconMenu->addSeparator();
-    trayIconMenu->addAction(tryQuitAction);
+    trayIconMenu->addAction(trayQuitAction);
 
     // Create tray
     trayIcon = new QSystemTrayIcon(QIcon(":/littlenavconnect/resources/icons/navconnect.svg"), this);
     trayIcon->setContextMenu(trayIconMenu); // trayIcon does not take ownership
 
     connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::trayActivated);
-    connect(trayRestoreHideAction, &QAction::triggered, this, &MainWindow::showHideFromTray);
+    connect(trayRestoreHideAction, &QAction::triggered, this, &MainWindow::showHideFromTrayAction);
     connect(trayOptionsAction, &QAction::triggered, this, &MainWindow::options);
     connect(trayHelpAction, &QAction::triggered, this, &MainWindow::showOnlineHelp);
-    connect(tryQuitAction, &QAction::triggered, this, &MainWindow::closeFromTrayOrAction);
+    connect(trayQuitAction, &QAction::triggered, this, &MainWindow::quitFromTrayOrAction);
 
     trayIcon->show();
   }
@@ -857,9 +872,11 @@ void MainWindow::createTrayIcon()
 
 void MainWindow::trayActivated(QSystemTrayIcon::ActivationReason reason)
 {
+  qDebug() << Q_FUNC_INFO;
+
   // Toggle main window visibility on click
   if(reason == QSystemTrayIcon::Trigger)
-    setVisible(!isVisible());
+    showHideFromTrayAction();
 }
 
 void MainWindow::actionTrayToggled(bool)
