@@ -705,7 +705,7 @@ void MainWindow::mainWindowShownDelayed()
   qDebug(atools::fs::ns::gui) << Q_FUNC_INFO << "exit";
 
   // Log startup time
-  Application::startupFinished(Q_FUNC_INFO);
+  Application::setStartupFinished(Q_FUNC_INFO);
 }
 
 void MainWindow::showEvent(QShowEvent *)
