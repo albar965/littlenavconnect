@@ -418,7 +418,7 @@ void MainWindow::options()
   OptionsDialog dialog(this);
 
   Settings& settings = Settings::instance();
-  unsigned int updateRateMs = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toUInt();
+  int updateRateMs = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, 500).toInt();
   int port = settings.getAndStoreValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, 51968).toInt();
 
   dialog.setUpdateRate(updateRateMs);
@@ -433,8 +433,8 @@ void MainWindow::options()
   if(result == QDialog::Accepted)
   {
     qDebug(atools::fs::ns::gui) << Q_FUNC_INFO << "options accepted";
-    settings.setValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, static_cast<int>(dialog.isHideHostname()));
-    settings.setValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, static_cast<int>(dialog.getUpdateRate()));
+    settings.setValue(lnc::SETTINGS_OPTIONS_HIDE_HOSTNAME, dialog.isHideHostname());
+    settings.setValue(lnc::SETTINGS_OPTIONS_UPDATE_RATE, dialog.getUpdateRate());
     settings.setValue(lnc::SETTINGS_OPTIONS_DEFAULT_PORT, dialog.getPort());
     settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_AIRCRAFT, dialog.isFetchAiAircraft());
     settings.setValue(lnc::SETTINGS_OPTIONS_FETCH_AI_SHIP, dialog.isFetchAiShip());

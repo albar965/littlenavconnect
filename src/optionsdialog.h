@@ -40,14 +40,14 @@ public:
   OptionsDialog& operator=(const OptionsDialog& other) = delete;
 
   int getPort() const;
-  unsigned int getUpdateRate() const;
+  int getUpdateRate() const;
   bool isHideHostname() const;
   bool isFetchAiAircraft() const;
   bool isFetchAiShip() const;
   int getAiFetchRadiusNm() const;
 
   void setPort(int port);
-  void setUpdateRate(unsigned int ms);
+  void setUpdateRate(int ms);
   void setHideHostname(bool hide);
   void setFetchAiAircraft(bool value);
   void setFetchAiShip(bool value);

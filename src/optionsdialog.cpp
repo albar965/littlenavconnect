@@ -44,9 +44,9 @@ int OptionsDialog::getAiFetchRadiusNm() const
   return ui->spinBoxOptionsAiFetchRadius->value();
 }
 
-unsigned int OptionsDialog::getUpdateRate() const
+int OptionsDialog::getUpdateRate() const
 {
-  return static_cast<unsigned int>(ui->spinBoxOptionsUpdateRate->value());
+  return ui->spinBoxOptionsUpdateRate->value();
 }
 
 bool OptionsDialog::isHideHostname() const
@@ -89,7 +89,7 @@ void OptionsDialog::setPort(int port)
   ui->spinBoxOptionsPort->setValue(port);
 }
 
-void OptionsDialog::setUpdateRate(unsigned int ms)
+void OptionsDialog::setUpdateRate(int ms)
 {
-  ui->spinBoxOptionsUpdateRate->setValue(static_cast<int>(ms));
+  ui->spinBoxOptionsUpdateRate->setValue(ms);
 }
