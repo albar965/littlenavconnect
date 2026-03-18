@@ -302,7 +302,7 @@ void MainWindow::dataExchangeDataFetched(atools::util::Properties properties)
     else
     {
       // Activate window - always sent by other instance =====================================================
-      if(properties.getPropertyBool(lnc::STARTUP_COMMAND_ACTIVATE))
+      if(properties.contains(lnc::STARTUP_COMMAND_ACTIVATE))
       {
         setVisible(true);
         activateWindow();
