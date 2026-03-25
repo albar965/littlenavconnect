@@ -30,7 +30,7 @@
 #include "gui/dialog.h"
 #include "gui/helphandler.h"
 #include "gui/widgetstate.h"
-#include "gui/widgetutil.h"
+#include "gui/tools.h"
 #include "logging/loggingguiabort.h"
 #include "logging/logginghandler.h"
 #include "optionsdialog.h"
@@ -691,7 +691,7 @@ void MainWindow::mainWindowShownDelayed()
   // Set remembered position and make sure that it is visible on screen
   atools::gui::Application::processEventsExtended();
   move(windowPosition);
-  atools::gui::util::ensureVisibility(this);
+  atools::gui::ensureVisibility(this);
 
   QGuiApplication::setOverrideCursor(Qt::WaitCursor);
 
@@ -819,7 +819,7 @@ void MainWindow::showHideFromTrayAction()
       // Set remembered position and make sure that it is visible on screen
       atools::gui::Application::processEventsExtended();
       move(windowPosition);
-      atools::gui::util::ensureVisibility(this);
+      atools::gui::ensureVisibility(this);
     }
   });
 }
