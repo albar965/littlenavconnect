@@ -235,6 +235,7 @@ MainWindow::~MainWindow()
 {
   qDebug() << Q_FUNC_INFO;
   deInit();
+  delete ui;
 }
 
 void MainWindow::deInit()
