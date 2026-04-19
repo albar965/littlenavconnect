@@ -18,7 +18,7 @@
 #ifndef LITTLENAVCONNECT_CONSTANTS_H
 #define LITTLENAVCONNECT_CONSTANTS_H
 
-#include "gui/dataexchange.h"
+#include "gui/dataexchangeflags.h"
 
 #include <QLatin1String>
 
@@ -49,8 +49,8 @@ const QLatin1String CRASHREPORT_SUFFIX("_crashreport.zip");
 
 const QLatin1String PROGRAM_GUID("919a3676-a86c-46cb-bafc-e78439fd0906");
 
-const QLatin1String STARTUP_COMMAND_ACTIVATE(atools::gui::DataExchange::STARTUP_COMMAND_ACTIVATE); /* Bring window to front */
-const QLatin1String STARTUP_COMMAND_QUIT(atools::gui::DataExchange::STARTUP_COMMAND_QUIT); /* Exit application */
+const QLatin1String STARTUP_COMMAND_ACTIVATE(atools::gui::dataexchange::STARTUP_COMMAND_ACTIVATE); /* Bring window to front */
+const QLatin1String STARTUP_COMMAND_QUIT(atools::gui::dataexchange::STARTUP_COMMAND_QUIT); /* Exit application */
 
 const QLatin1String STARTUP_COMMAND_SAVE_REPLAY("save-replay");
 const QLatin1String STARTUP_COMMAND_LOAD_REPLAY("load-replay");

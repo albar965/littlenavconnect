@@ -26,11 +26,12 @@
 #include "fs/sc/xpconnecthandler.h"
 #include "geo/calculations.h"
 #include "gui/application.h"
+#include "gui/dataexchange.h"
 #include "gui/desktopservices.h"
 #include "gui/dialog.h"
 #include "gui/helphandler.h"
-#include "gui/widgetstate.h"
 #include "gui/tools.h"
+#include "gui/widgetstate.h"
 #include "logging/loggingguiabort.h"
 #include "logging/logginghandler.h"
 #include "optionsdialog.h"
@@ -318,7 +319,7 @@ void MainWindow::dataExchangeDataFetched(atools::util::Properties properties)
 bool MainWindow::initDataExchange()
 {
   if(dataExchange == nullptr)
-    dataExchange = new atools::gui::DataExchange(false, lnc::PROGRAM_GUID);
+    dataExchange = new atools::gui::DataExchange(lnc::PROGRAM_GUID, false /* noDataExchange */, false /* verboseParam */);
 
   return dataExchange->isExit();
 }
