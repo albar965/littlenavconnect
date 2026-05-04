@@ -815,7 +815,7 @@ void MainWindow::showHideFromTrayAction()
 
   setVisible(!isVisible());
 
-  QTimer::singleShot(10, [this]()->void {
+  QTimer::singleShot(10, [this]() -> void {
     if(isVisible())
     {
       // Set remembered position and make sure that it is visible on screen

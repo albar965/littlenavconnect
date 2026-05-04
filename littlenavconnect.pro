@@ -96,7 +96,8 @@ isEmpty(ATOOLS_LIB_PATH) : ATOOLS_LIB_PATH=$$PWD/../build-atools-$$CONF_TYPE
 # =======================================================================
 # Set compiler flags and paths
 
-QMAKE_CXXFLAGS += -Wno-pragmas -Wno-unknown-warning -Wno-unknown-warning-option
+QMAKE_CXXFLAGS += -Wall -Wextra -Wpedantic -Wno-pragmas
+# -Wno-unknown-warning -Wno-unknown-warning-option
 
 unix:!macx {
   isEmpty(GIT_PATH) : GIT_PATH=git
