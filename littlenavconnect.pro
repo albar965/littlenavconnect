@@ -247,11 +247,13 @@ RESOURCES += \
 ICON = resources/icons/littlenavconnect.icns
 
 TRANSLATIONS = \
-  littlenavconnect_fr.ts \
-  littlenavconnect_it.ts \
-  littlenavconnect_de.ts \
-  littlenavconnect_zh.ts \
-  littlenavconnect_pt_BR.ts
+  translations/littlenavconnect_fr.ts \
+  translations/littlenavconnect_it.ts \
+  translations/littlenavconnect_de.ts \
+  translations/littlenavconnect_zh.ts \
+  translations/littlenavconnect_pt_BR.ts
+
+TRANSLATION_LANGUAGES = fr it de zh zh_CN pt pt_BR
 
 # littlenavconnect_nl.ts
 # littlenavconnect_es.ts
@@ -276,8 +278,8 @@ OTHER_FILES += \
 unix:!macx {
   copydata.commands = cp -avfu $$PWD/help $$OUT_PWD &&
   copydata.commands += mkdir -p $$OUT_PWD/translations &&
-  copydata.commands += cp -avfu $$PWD/*.qm $$OUT_PWD/translations &&
-  copydata.commands += cp -avfu $$ATOOLS_INC_PATH/../*.qm $$OUT_PWD/translations &&
+  copydata.commands += cp -avfu $$PWD/translations/*.qm $$OUT_PWD/translations &&
+  copydata.commands += cp -avfu $$ATOOLS_INC_PATH/../translations/*.qm $$OUT_PWD/translations &&
   copydata.commands += cp -vf $$PWD/desktop/littlenavconnect*.sh $$OUT_PWD &&
   copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
 }
@@ -285,8 +287,8 @@ unix:!macx {
 # Mac OS X - Copy help and Marble plugins and data
 macx {
   copydata.commands += cp -Rv $$PWD/help $$OUT_PWD/littlenavconnect.app/Contents/MacOS &&
-  copydata.commands += cp -vf $$PWD/*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS &&
-  copydata.commands += cp -vf $$ATOOLS_INC_PATH/../*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS
+  copydata.commands += cp -vf $$PWD/translations/*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS &&
+  copydata.commands += cp -vf $$ATOOLS_INC_PATH/../translations/*.qm $$OUT_PWD/littlenavconnect.app/Contents/MacOS
 }
 
 # =====================================================================
@@ -298,7 +300,7 @@ unix:!macx {
   DEPLOY_DIR_LIB=\"$$DEPLOY_BASE/$$TARGET_NAME/lib\"
 
   deploy.commands = rm -Rfv $$DEPLOY_DIR &&
-  deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB &&
+  deploy.commands += mkdir -pv $$DEPLOY_DIR &&
   deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB/iconengines &&
   deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB/imageformats &&
   deploy.commands += mkdir -pv $$DEPLOY_DIR_LIB/platforms &&
@@ -314,9 +316,14 @@ unix:!macx {
   deploy.commands += cp -vf $$PWD/LICENSE.txt $$DEPLOY_DIR &&
   deploy.commands += cp -vf $$PWD/resources/icons/navconnect.svg $$DEPLOY_DIR/littlenavconnect.svg &&
   deploy.commands += cp -vf \"$$PWD/desktop/Little Navconnect.desktop\" $$DEPLOY_DIR &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_DIR/translations &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_DIR/translations &&
-  deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_DIR/translations &&
+  for(TL, TRANSLATION_LANGUAGES) {
+    exists($$[QT_INSTALL_TRANSLATIONS]/qt_$${TL}.qm) {
+      deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_$${TL}.qm  $$DEPLOY_DIR/translations &&
+    }
+    exists($$[QT_INSTALL_TRANSLATIONS]/qt_$${TL}.qm) {
+      deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qtbase_$${TL}.qm  $$DEPLOY_DIR/translations &&
+    }
+  } &&
   deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/iconengines/libqsvgicon.so*  $$DEPLOY_DIR_LIB/iconengines &&
   deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/imageformats/libqgif.so*  $$DEPLOY_DIR_LIB/imageformats &&
   deploy.commands += cp -vfa $$[QT_INSTALL_PLUGINS]/imageformats/libqjpeg.so*  $$DEPLOY_DIR_LIB/imageformats &&
@@ -355,9 +362,14 @@ macx {
   deploy.commands = rm -Rfv $$DEPLOY_APP &&
   deploy.commands += $$[QT_INSTALL_BINS]/macdeployqt littlenavconnect.app -always-overwrite &&
   deploy.commands += cp -rfv $$OUT_PWD/littlenavconnect.app $$DEPLOY_APP &&
-  deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qt_??.qm  $$DEPLOY_APP/Contents/MacOS &&
-  deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qt_??_??.qm  $$DEPLOY_APP/Contents/MacOS &&
-  deploy.commands += cp -fv $$[QT_INSTALL_TRANSLATIONS]/qtbase*.qm  $$DEPLOY_APP/Contents/MacOS &&
+  for(TL, TRANSLATION_LANGUAGES) {
+    exists($$[QT_INSTALL_TRANSLATIONS]/qt_$${TL}.qm) {
+      deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qt_$${TL}.qm  $$DEPLOY_APP/Contents/MacOS &&
+    }
+    exists($$[QT_INSTALL_TRANSLATIONS]/qt_$${TL}.qm) {
+      deploy.commands += cp -vfa $$[QT_INSTALL_TRANSLATIONS]/qtbase_$${TL}.qm  $$DEPLOY_APP/Contents/MacOS &&
+    }
+  } &&
   deploy.commands += cp -fv $$PWD/build/mac/Info.plist $$DEPLOY_APP/Contents &&
   deploy.commands += echo $$VERSION_NUMBER > $$DEPLOY_DIR/version-LittleNavconnect.txt &&
   deploy.commands += echo $$GIT_REVISION_FULL > $$DEPLOY_DIR/revision-LittleNavconnect.txt &&
@@ -387,8 +399,9 @@ win32 {
   deploy.commands += xcopy /F $$p($$PWD/CHANGELOG.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
   deploy.commands += xcopy /F $$p($$PWD/README.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
   deploy.commands += xcopy /F $$p($$PWD/LICENSE.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
-  deploy.commands += xcopy /F $$p($$PWD/*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
-  deploy.commands += xcopy /F $$p($$ATOOLS_INC_PATH/../*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
+  deploy.commands += xcopy /F $$p($$PWD/translations/*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
+  deploy.commands += xcopy /F $$p($$ATOOLS_INC_PATH/../translations/*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
+  deploy.commands += xcopy /F $$p($$MARBLE_INC_PATH/../translations/*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
   deploy.commands += xcopy /I /S /E /F /Y $$p($$PWD/simconnect) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect) &&
   contains(QT_ARCH, i386) { # 32 Bit build
     deploy.commands += move /Y $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect/SimConnect.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
