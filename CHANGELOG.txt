@@ -4,6 +4,44 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.2.1.beta
+
+* Updated translation files
+* Compacted SVG files
+* Help branch reference updated
+* Version 3.2.0.beta
+* Reduce spacer size in options
+* Moved translations to sub-folder
+* Removed warnings
+  Made formatting for lambdas more consistent
+* Adapted to changes in DataExchange
+* Deleting Ui objects now late to avoid crashes
+* Adapted to atools changes
+* Adapted to changes in startup properties
+* Removed unneeded type conversions for update rate
+* Adapted to atools Application change
+* Fixed deprecated time functions from Qt 6.10
+* Updated translation files
+* Fixed user interface issues
+  Fixed closing when minimized to tray Window position now restored on startup Now ensuring that
+  main window is not hidden off-screen when restoring
+* More Qt 6 porting
+  Disabled all deprecated before qt 6.5 Added version check for Qt version
+* Optimisations
+  Partly added QString with QStringLiteral Removed 32-bit build scripts Updated copyright year
+* Updated to c++20 to allow compilation with Qt 6.10
+* Fixes for build on macOS and cleared warnings. Minmum OS is now 11. Now building Intel and Arm
+  architectures.
+* Added QT_VERSION variable to startup scripts
+* Adapted to Qt 6
+* Updated to C++17 standard
+* Added Wayland libraries
+* Merge branch 'release/3.0'
+* Updated Git ignore for new Qt Creator files
+* Version 3.1.0.develop
+
+===============================================================================
+
 # Version 3.0.17
 
 * More filtering to get rid of wrong MSFS aircraft indications before starting a flight in the
