@@ -276,10 +276,10 @@ OTHER_FILES += \
 
 # Create additional makefile targets to copy help files
 unix:!macx {
-  copydata.commands = cp -avfu $$PWD/help $$OUT_PWD &&
+  copydata.commands = cp -avf $$PWD/help $$OUT_PWD &&
   copydata.commands += mkdir -p $$OUT_PWD/translations &&
-  copydata.commands += cp -avfu $$PWD/translations/*.qm $$OUT_PWD/translations &&
-  copydata.commands += cp -avfu $$ATOOLS_INC_PATH/../translations/*.qm $$OUT_PWD/translations &&
+  copydata.commands += cp -avf $$PWD/translations/*.qm $$OUT_PWD/translations &&
+  copydata.commands += cp -avf $$ATOOLS_INC_PATH/../translations/*.qm $$OUT_PWD/translations &&
   copydata.commands += cp -vf $$PWD/desktop/littlenavconnect*.sh $$OUT_PWD &&
   copydata.commands += chmod -v a+x $$OUT_PWD/littlenavconnect*.sh
 }
@@ -437,7 +437,7 @@ QMAKE_EXTRA_TARGETS += deploy copydata all
       QMAKE_POST_LINK = copy $$p($$OUT_PWD/$${TARGET}.exe) $$p($$OUT_PWD/$${TARGET}.debug) && \
                         strip $$p($$OUT_PWD/$${TARGET}.exe)
     } else {
-      QMAKE_POST_LINK = cp -avfu $$OUT_PWD/$${TARGET} $$OUT_PWD/$${TARGET}.debug && strip $$OUT_PWD/$${TARGET}
+      QMAKE_POST_LINK = cp -avf $$OUT_PWD/$${TARGET} $$OUT_PWD/$${TARGET}.debug && strip $$OUT_PWD/$${TARGET}
     }
   }
 }
