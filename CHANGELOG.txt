@@ -4,16 +4,23 @@ This text is partially Markdown, hence sometimes strange formatting.
 
 ===============================================================================
 
+# Version 3.2.3.beta
+
+* Support to transfer historical weather of X-Plane 12.
+* Synchronized version number with Little Navmap.
+
+===============================================================================
+
 # Version 3.2.1.beta
 
-* Fixed user interface issues. Fixed closing when minimized to tray. Window position is now 
-  restored on startup. 
+* Fixed user interface issues. Fixed closing when minimized to tray. Window position is now
+  restored on startup.
 * Now ensuring that main window is not hidden off-screen when restoring.
 * Fixed potential crashes.
 * Omitting hostname for the listening display now if it is equal to the IP address.
 * Ported to Qt 6. Currently using 6.5 but all up to 6.11 should compile as well.
 * Updated to standard C++20 to allow compilation with Qt 6.10.
-* Minimum macOS is now 11. Now building Intel and Arm architectures into universal binary. 
+* Minimum macOS is now 11. Now building Intel and Arm architectures into universal binary.
   Rosetta is not needed anymore.
 * Added Wayland libraries for Linux.
 * Moved translations to sub-folder.
