@@ -47,7 +47,7 @@
 # =============================================================================
 
 # Define program version here VERSION_NUMBER_TODO
-VERSION_NUMBER=3.2.1.beta
+VERSION_NUMBER=3.2.3.beta
 
 QT += core gui xml network svg widgets
 
