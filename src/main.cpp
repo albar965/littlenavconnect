@@ -177,6 +177,9 @@ int main(int argc, char *argv[])
       }
       crashReportFiles.removeAll(QString());
 
+      Application::recordStartAndDetectCrash(nullptr, Settings::getConfigFilename(".running"), reportFilename, crashReportFiles,
+                                             lnc::HELP_ONLINE_URL, "CRASHREPORT.html");
+
       if(Application::isSafeMode())
         Settings::clearSettings();
 #endif
@@ -206,6 +209,8 @@ int main(int argc, char *argv[])
 
   atools::util::crashhandler::clearStackTrace(Settings::getConfigFilename(lnc::STACKTRACE_SUFFIX, lnc::CRASHREPORTS_DIR));
   MainWindow::deInitDataExchange();
+
+  atools::gui::Application::recordExit();
 
   qDebug() << "app.exec() done, retval is" << retval << (retval == 0 ? "(ok)" : "(error)");
 

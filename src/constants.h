@@ -68,6 +68,11 @@ const QLatin1String SIMCONNECT_DLL_NAME("SimConnect_msfs_2020.dll");
 const QLatin1String SIMCONNECT_DLL_NAME("SimConnect.dll");
 #endif
 
+/* Important: keep slash at the end. Otherwise browser might not display the page properly */
+const QString HELP_ONLINE_URL("https://www.littlenavmap.org/manuals/littlenavconnect/" + lnc::HELP_BRANCH + "/${LANG}/");
+
+const QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
+
 } // namespace lnc
 
 #endif // LITTLENAVCONNECT_CONSTANTS_H

@@ -61,11 +61,6 @@ using atools::gui::Application;
 
 atools::gui::DataExchange *MainWindow::dataExchange = nullptr;
 
-/* Important: keep slash at the end. Otherwise browser might not display the page properly */
-const static QString HELP_ONLINE_URL("https://www.littlenavmap.org/manuals/littlenavconnect/" + lnc::HELP_BRANCH + "/${LANG}/");
-
-const static QString HELP_OFFLINE_FILE("help/little-navconnect-user-manual-${LANG}.pdf");
-
 MainWindow::MainWindow()
   : ui(new Ui::MainWindow)
 {
@@ -331,12 +326,12 @@ void MainWindow::deInitDataExchange()
 
 void MainWindow::showOnlineHelp()
 {
-  HelpHandler::openHelpUrlWeb(this, HELP_ONLINE_URL, supportedLanguageOnlineHelp);
+  HelpHandler::openHelpUrlWeb(this, lnc::HELP_ONLINE_URL, supportedLanguageOnlineHelp);
 }
 
 void MainWindow::showOfflineHelp()
 {
-  atools::gui::DesktopServices::openFile(this, HelpHandler::getHelpFile(HELP_OFFLINE_FILE, QLocale().name()),
+  atools::gui::DesktopServices::openFile(this, HelpHandler::getHelpFile(lnc::HELP_OFFLINE_FILE, QLocale().name()),
                                          false /* showInFileManager */);
 }
 
