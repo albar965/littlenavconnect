@@ -130,9 +130,6 @@ win32 {
     }
   }
 
-  WINDEPLOY_FLAGS = --compiler-runtime
-  CONFIG(debug, debug|release) : WINDEPLOY_FLAGS += --debug
-
   DEFINES += _USE_MATH_DEFINES
 
   LIBS += -L$$ATOOLS_LIB_PATH -latools -lz
@@ -401,6 +398,7 @@ win32 {
   deploy.commands += xcopy /F $$p($$PWD/LICENSE.txt) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
   deploy.commands += xcopy /F $$p($$PWD/translations/*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
   deploy.commands += xcopy /F $$p($$ATOOLS_INC_PATH/../translations/*.qm) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/translations) &&
+  deploy.commands += xcopy /I /S /E /F /Y $$p($$PWD/help) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/help) &&
   deploy.commands += xcopy /I /S /E /F /Y $$p($$PWD/simconnect) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect) &&
   contains(QT_ARCH, i386) { # 32 Bit build
     deploy.commands += move /Y $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/simconnect/SimConnect.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
@@ -413,8 +411,22 @@ win32 {
   deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/libgcc*.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
   deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/libstdc*.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
   deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/libwinpthread*.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
-  deploy.commands += xcopy /I /S /E /F /Y $$p($$PWD/help) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/help) &&
-  deploy.commands += $$p($$[QT_INSTALL_BINS]/windeployqt) $$WINDEPLOY_FLAGS $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME)
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/Qt6Core.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/Qt6Core5Compat.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/Qt6Widgets.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/Qt6Gui.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/Qt6Network.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/Qt6Xml.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_BINS]/Qt6Svg.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME) &&
+  deploy.commands += mkdir $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/iconengines) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_PLUGINS]/iconengines/qsvgicon.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/iconengines) &&
+  deploy.commands += mkdir $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/imageformats) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_PLUGINS]/imageformats/qgif.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/imageformats) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_PLUGINS]/imageformats/qico.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/imageformats) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_PLUGINS]/imageformats/qjpeg.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/imageformats) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_PLUGINS]/imageformats/qsvg.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/imageformats) &&
+  deploy.commands += mkdir $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/platforms) &&
+  deploy.commands += xcopy /F $$p($$[QT_INSTALL_PLUGINS]/platforms/qwindows.dll) $$p($$DEPLOY_BASE/$$WIN_TARGET_NAME/platforms)
 }
 
 # =====================================================================
