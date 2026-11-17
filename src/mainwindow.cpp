@@ -52,6 +52,7 @@
 #include <QTimer>
 #include <QStringBuilder>
 #include <QActionGroup>
+#include <QToolTip>
 
 using atools::settings::Settings;
 using atools::fs::sc::SimConnectData;
@@ -243,6 +244,10 @@ void MainWindow::deInit()
     deInitCalled = true;
     deleteTrayIcon();
 
+    QToolTip::hideText();
+    hide();
+    Application::processEventsExtended();
+
     if(navServer != nullptr)
     {
       qDebug() << Q_FUNC_INFO << "Stopping NavServer";
@@ -271,8 +276,8 @@ void MainWindow::deInit()
 
     ATOOLS_DELETE_LOG(helpHandler);
     ATOOLS_DELETE_LOG(simulatorActionGroup);
-    ATOOLS_DELETE_LOG(ui);
     ATOOLS_DELETE_LOG(activationContext);
+    ATOOLS_DELETE_LOG(ui);
 
 #if defined(Q_OS_LINUX)
     // Remove signal handler
