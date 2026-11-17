@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Script for internal debugging/startup
+if [ -f ~/.projects ]; then
+  source ~/.projects
+fi
 
 CONF=debug
 
