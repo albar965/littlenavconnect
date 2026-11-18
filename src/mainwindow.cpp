@@ -108,7 +108,7 @@ MainWindow::MainWindow()
   if(version.isStable() || version.isReleaseCandidate() || version.isBeta())
     newTitle += QStringLiteral(" %1").arg(version.getVersionString());
   else
-    newTitle += QStringLiteral(" %1 (%2)").arg(version.getVersionString()).arg(GIT_REVISION_LITTLENAVCONNECT);
+    newTitle += QStringLiteral(" %1 (%2)").arg(version.getVersionString(), GIT_REVISION_LITTLENAVCONNECT);
 
 #if defined(WINARCH64)
   newTitle += tr(" 64-bit");
@@ -544,7 +544,7 @@ void MainWindow::logGuiMessage(QtMsgType type, const QMessageLogContext& context
     }
 
     // Use a signal to update the text edit in the main thread context
-    emit appendLogMessage(MESSAGEPATTERN.arg(QDateTime::currentDateTime().toString("yyyy-MM-dd h:mm:ss")).arg(htmlMessage));
+    emit appendLogMessage(MESSAGEPATTERN.arg(QDateTime::currentDateTime().toString("yyyy-MM-dd h:mm:ss"), htmlMessage));
   }
 }
 
@@ -617,7 +617,7 @@ void MainWindow::mainWindowShownDelayed()
 
   qInfo(atools::fs::ns::gui).noquote().nospace() << QCoreApplication::applicationName();
   qInfo(atools::fs::ns::gui).noquote().nospace() << tr("Version %1 (revision %2).").
-    arg(applicationVersion).arg(GIT_REVISION_LITTLENAVCONNECT);
+    arg(applicationVersion, GIT_REVISION_LITTLENAVCONNECT);
 
   qInfo(atools::fs::ns::gui).noquote().nospace()
     << tr("Data Version %1. Reply Version %2.").arg(SimConnectData::getDataVersion()).arg(SimConnectReply::getReplyVersion());
